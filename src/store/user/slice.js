@@ -10,6 +10,7 @@ const initialState = {
   status: 'Inactivo',
   statusUser: 'Inactivo',
   statusAuth: 'Inactivo',
+  statusSign: 'Inactivo',
   statusDelete: 'Inactivo',
   statusUpdate: 'Inactivo',
   error: null,

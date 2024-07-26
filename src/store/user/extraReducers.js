@@ -1,7 +1,9 @@
 import {
   getUsers,
+  loginUserWithEmail,
   loginUserWithGoogle,
   logoutUser,
+  registerUser,
   verifyLoggedUser,
 } from './thunks';
 
@@ -21,14 +23,40 @@ export const userExtraReducers = (builder) => {
 
   builder
     .addCase(loginUserWithGoogle.pending, (state) => {
-      state.statusAuth = 'Cargando';
+      state.statusSign = 'Cargando';
     })
     .addCase(loginUserWithGoogle.fulfilled, (state, action) => {
-      state.statusAuth = 'Exitoso';
+      state.statusSign = 'Exitoso';
       state.loggedUser = action.payload;
     })
     .addCase(loginUserWithGoogle.rejected, (state, action) => {
-      state.statusAuth = 'Fallido';
+      state.statusSign = 'Fallido';
+      state.error = action.payload;
+    });
+
+  builder
+    .addCase(loginUserWithEmail.pending, (state) => {
+      state.statusSign = 'Cargando';
+    })
+    .addCase(loginUserWithEmail.fulfilled, (state, action) => {
+      state.statusSign = 'Exitoso';
+      state.loggedUser = action.payload;
+    })
+    .addCase(loginUserWithEmail.rejected, (state, action) => {
+      state.statusSign = 'Fallido';
+      state.error = action.payload;
+    });
+
+  builder
+    .addCase(registerUser.pending, (state) => {
+      state.statusSign = 'Cargando';
+    })
+    .addCase(registerUser.fulfilled, (state, action) => {
+      state.statusSign = 'Exitoso';
+      state.loggedUser = action.payload;
+    })
+    .addCase(registerUser.rejected, (state, action) => {
+      state.statusSign = 'Fallido';
       state.error = action.payload;
     });
 
