@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { userExtraReducers } from './extraReducers';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../services/firebase';
 
 const initialState = {
   users: [],
@@ -7,8 +9,7 @@ const initialState = {
   loggedUser: null,
   status: 'Inactivo',
   statusUser: 'Inactivo',
-  statusLogin: 'Inactivo',
-  statusRegister: 'Inactivo',
+  statusAuth: 'Inactivo',
   statusDelete: 'Inactivo',
   statusUpdate: 'Inactivo',
   error: null,
