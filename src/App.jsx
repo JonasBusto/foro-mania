@@ -4,11 +4,11 @@ import { Main } from './components/structure/Main';
 import './styles/app.css';
 
 export function App() {
-  return (
-    <>
-      <Header />
-      <Main />
-      <Footer />
-    </>
-  );
+	return (
+		<>
+			<Header />
+			<Main />
+			<Footer />
+		</>
+	);
 }

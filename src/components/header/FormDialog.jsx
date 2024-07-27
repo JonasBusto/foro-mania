@@ -53,14 +53,14 @@ export function FormDialog({
 			// titulo de encabezado multicolor
 			header={
 				<div className='flex items-center justify-start'>
-					<span className='title-multicolor font-bold text-4xl'>
+					<h1 className='title-multicolor font-bold text-4xl'>
 						ForoMania
-					</span>
+					</h1>
 				</div>
 			}>
 			<div className='flex flex-col px-3 py-5 gap-4 items-center justify-center b'>
 				<p className='font-bold text-3xl'>{title}</p>
-				<img src='/handlogin.png' alt='handlogin' width={50} />
+				<img src='/img/handlogin.png' alt='handlogin' width={50} />
 				<p className='font-semibold mb-3'>{subtitle}</p>
 				{/* formulario reutilizable para login y register */}
 				<form onSubmit={handleSubmit(onSubmit)} className='w-full'>
@@ -83,7 +83,7 @@ export function FormDialog({
 										{...register(field.name, field.validation)}
 									/>
 									{field.type === 'password' && (
-										<button
+										<Button
 											type='button'
 											onClick={toggleShowPassword}
 											className='absolute right-2 top-1/2 transform -translate-y-1/2 border-none bg-transparent cursor-pointer'>
@@ -93,7 +93,7 @@ export function FormDialog({
 														? 'pi pi-eye-slash'
 														: 'pi pi-eye'
 												}`}></i>
-										</button>
+										</Button>
 									)}
 								</div>
 								<label>{field.label}</label>

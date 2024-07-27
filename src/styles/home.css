@@ -1,25 +1,6 @@
 .custom-dialog .p-dialog-header {
-	background-color: #f0f0f0; /* Color tipo tiza para el encabezado */
-	border-radius: 20px 20px 0 0; /* Bordes redondeados en la parte superior */
-}
-
-.custom-dialog .p-dialog-header .p-dialog-header-icon {
-	color: #333; /* Color del icono de cerrar */
-}
-
-.custom-dialog .p-dialog-header .p-dialog-title {
-	font-size: 1.5rem; /* Tamaño del título, opcional */
-	color: #333; /* Color del texto del título */
-}
-
-.custom-dialog .p-dialog .p-dialog-header .p-dialog-header-close {
-	color: #333; /* Color del icono de cerrar */
-}
-
-.custom-dialog .p-dialog-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	background-color: #f0f0f0;
+	border-radius: 20px 20px 0 0; /* Bordes redondeados en la parte superior del encabezado de dialog*/
 }
 
 .title-multicolor {
@@ -37,17 +18,17 @@
 	color: transparent;
 }
 
-.custom-menu-item {
-   color: red; /* Estilo de color para el texto */
-   background-color: transparent; /* Fondo transparente */
+.custom-nav-menu .p-menu {
+	position: relative;
+	z-index: 1000;
 }
 
-.custom-menu-item:hover {
-   background-color: #f0f0f0; /* Color de fondo al pasar el cursor */
+.p-button:focus {
+	outline: none;
+	box-shadow: none;
 }
-
-.custom-icon {
-   color: red; /* Estilo de color para el icono */
+.p-dropdown:focus {
+	outline: none;
+	box-shadow: none;
+	border: none;
 }
-
-

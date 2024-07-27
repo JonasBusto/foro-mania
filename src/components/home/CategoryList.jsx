@@ -23,7 +23,7 @@ export const CategoryList = () => {
 										<p className='ml-2 font-semibold text-xl'>
 											{category.category}
 										</p>
-										<p className='ml-2'>category description</p>
+										<p className='ml-2'>{category.description}</p>
 									</div>
 
 									<div className='flex flex-col'>
