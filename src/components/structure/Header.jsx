@@ -43,11 +43,11 @@ export function Header() {
 	};
 
 	return (
-		<header className='relative bg-slate-100 rounded-b-2xl'>
+		<header className='relative bg-neutral-900 '>
 			<section className='flex flex-row flex-wrap items-center justify-between'>
 				<div className='flex items-center justify-center md:justify-start w-full md:w-fit'>
 					<a href='/home'>
-						<h1 className='title-multicolor font-bold text-4xl ml-4'>
+						<h1 className='title-multicolor font-bold text-4xl ml-4 hover:opacity-70'>
 							ForoMania
 						</h1>
 					</a>
@@ -55,7 +55,7 @@ export function Header() {
 				<div className='flex flex-row flex-wrap items-center justify-center md:justify-end mr-3 font-semibold w-full md:w-fit'>
 					<Button
 						onClick={handleSignUp}
-						className='p-2 m-2 bg-blue-800 text-blue-50 rounded-xl text-center hover:bg-blue-600 flex items-center'>
+						className='p-2 m-2 bg-blue-800 text-blue-50 rounded-md text-center border-2 border-blue-50 hover:bg-blue-600 flex items-center'>
 						<i className='pi pi-user-plus text-xl mx-2 '></i>
 						Registrarse
 					</Button>
@@ -66,7 +66,7 @@ export function Header() {
 
 					<Button
 						onClick={handleSignIn}
-						className='p-2 m-2 bg-blue-800 text-blue-50 rounded-xl hover:bg-blue-600 flex items-center'>
+						className='p-2 m-2 bg-blue-800 text-blue-50 rounded-md border-2 border-blue-50 hover:bg-blue-600 flex items-center'>
 						<i className='pi pi-sign-in text-xl mx-2'></i>
 						Iniciar Sesion
 					</Button>
@@ -74,23 +74,23 @@ export function Header() {
 						visible={openSignIn}
 						onHide={() => setOpenSignIn(false)}
 					/>
-					<div className='flex flex-row items-center'>
+					<div className='flex flex-row items-center '>
 						<div className='relative hidden sm:flex'>
 							<Button onClick={handleSearch} className='relative'>
-								<i className='pi pi-search text-2xl p-2 mx-2 hover:bg-blue-800 rounded-xl hover:text-white'></i>
+								<i className='pi pi-search text-2xl p-2 mx-2 hover:bg-blue-800 rounded-md hover:border-2 hover:border-blue-50 text-white'></i>
 							</Button>
 							{openSearch && (
-								<div className='absolute right-0 top-full mt-2 p-4 bg-white border border-gray-500 rounded-lg shadow-lg w-[400px] flex'>
+								<div className='absolute bg-neutral-800 right-0 top-full mt-2 p-3 border border-white rounded-md shadow-lg w-[400px] flex'>
 									<InputText
 										type='text'
 										placeholder='Buscar...'
-										className='w-full px-2 border-transparent focus:border-transparent rounded-xl'
+										className='w-full px-2  rounded-md '
 										value={searchQuery}
 										onChange={(e) => setSearchQuery(e.target.value)}
 									/>
 									<Button
 										onClick={handleSearchSubmit}
-										className='m-2 p-4 flex items-center justify-center bg-blue-800 text-blue-50 rounded-xl text-center hover:bg-blue-600 '>
+										className='m-2 p-4 flex items-center justify-center bg-blue-800 text-blue-50 rounded-md text-center hover:bg-blue-600 '>
 										<i className='pi pi-search'></i>
 									</Button>
 								</div>
@@ -99,10 +99,10 @@ export function Header() {
 
 						<div className='relative'>
 							<Button onClick={handleMenu} className='relative'>
-								<i className='pi pi-bars text-2xl p-2 mx-2 hover:bg-blue-800 rounded-xl hover:text-white'></i>
+								<i className='pi pi-bars text-2xl p-2 mx-2 hover:bg-blue-800 rounded-md text-white hover:border-2 hover:border-blue-50'></i>
 							</Button>
 							{openMenu && (
-								<div className='absolute  z-10 right-0 top-full mt-3  bg-white border-4 border-blue-500 rounded-lg shadow-lg w-44 flex items-center justify-start '>
+								<div className='absolute  z-10 right-0 top-full mt-3 border-4 border-blue-500 rounded-md shadow-lg w-44 flex items-center justify-start '>
 									<NavMenu />
 								</div>
 							)}
