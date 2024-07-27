@@ -1,14 +1,23 @@
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
-export function UserProfile() {
+export function MyAccount() {
   const { loggedUser, logout } = useAuth();
 
   return (
     <div className='p-4 md:p-8 bg-gray-50 dark:bg-gray-900'>
       <div className='w-full max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6'>
-        <h2 className='text-3xl font-bold text-gray-900 dark:text-gray-100'>
-          Perfil Público
-        </h2>
+        <div className='flex justify-between'>
+          <h2 className='text-3xl font-bold text-gray-900 dark:text-gray-100'>
+            Mi perfil
+          </h2>
+          <Link
+            to='/account/edit'
+            className='w-8 h-8 bg-gray-300 p-2 rounded-full cursor-pointer hover:bg-gray-400 transition flex justify-center items-center'
+          >
+            <i className='pi pi-pencil'></i>
+          </Link>
+        </div>
 
         <div className='mt-6 flex flex-col items-center sm:flex-row sm:items-start sm:space-x-8'>
           <img
@@ -58,6 +67,19 @@ export function UserProfile() {
           >
             Cerrar Sesión
           </button>
+        </div>
+        <div>
+          <p>Datos a agregar probablemente:</p>
+          <ul>
+            <li>
+              - Un nombre de usuario, una biografia, o numero de celular, etc
+              etc
+            </li>
+            <li>- Publicaciones que hice</li>
+            <li>- Publicaciones que comente</li>
+            <li>- Publicaciones que di like</li>
+            <li>- Publicaciones que guarde</li>
+          </ul>
         </div>
       </div>
     </div>
