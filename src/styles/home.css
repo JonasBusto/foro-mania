@@ -1,6 +1,9 @@
 .custom-dialog .p-dialog-header {
-	background-color: #f0f0f0;
-	border-radius: 20px 20px 0 0; /* Bordes redondeados en la parte superior del encabezado de dialog*/
+	background-color: #262626;
+	border-radius: 10px 10px 0 0; 
+}
+.p-dialog-header-icon {
+	color:white
 }
 
 .title-multicolor {
@@ -31,4 +34,37 @@
 	outline: none;
 	box-shadow: none;
 	border: none;
+}
+.custom-dropdown {
+	background-color: #404040 !important;
+}
+
+.p-dropdown-panel {
+	background-color: #404040 !important;
+}
+
+.p-dropdown-header {
+	background-color: #404040 !important;
+}
+
+.p-dropdown-item {
+	background-color: #404040 !important;
+}
+
+.p-dropdown-item.p-highlight {
+	background-color: #404040 !important;
+}
+.p-dropdown-label {
+	color: white;
+}
+.p-dropdown-trigger {
+	color: white;
+}
+.p-dropdown-filter {
+	background-color: white !important;
+	color: #404040;
+}
+.p-dropdown-empty-message {
+	background-color: #404040 !important;
+	color: white;
 }

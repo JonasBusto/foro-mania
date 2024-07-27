@@ -5,11 +5,11 @@ import { TagsList } from '../components/home/TagsList';
 
 export const Home = () => {
 	return (
-		<section>
+		<section className='bg-neutral-800'>
 			<Banner />
 			<CategoryMenu />
 			<hr className='m-2 h-[2px] bg-slate-300' />
-			<div className='flex flex-row flex-wrap items-start justify-around w-full mb-5'>
+			<div className='flex flex-row flex-wrap items-start justify-around w-full pb-5'>
 				<CategoryList />
 				<TagsList />
 			</div>

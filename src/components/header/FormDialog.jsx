@@ -46,7 +46,7 @@ export function FormDialog({
 			contentStyle={{
 				width: '100%',
 				border: 'rounded',
-				backgroundColor: '#f0f0f0',
+				backgroundColor: '#262626',
 				borderRadius: '0 0 20px 20px',
 				padding: 20,
 			}}
@@ -58,18 +58,18 @@ export function FormDialog({
 					</h1>
 				</div>
 			}>
-			<div className='flex flex-col px-3 py-5 gap-4 items-center justify-center b'>
+			<div className='flex flex-col px-3 py-5 gap-4 items-center justify-center text-white'>
 				<p className='font-bold text-3xl'>{title}</p>
 				<img src='/img/handlogin.png' alt='handlogin' width={50} />
 				<p className='font-semibold mb-3'>{subtitle}</p>
 				{/* formulario reutilizable para login y register */}
-				<form onSubmit={handleSubmit(onSubmit)} className='w-full'>
+				<form onSubmit={handleSubmit(onSubmit)} className='w-full '>
 					{fields.map((field) => (
 						<div
 							key={field.name}
 							className='flex flex-col items-center justify-center gap-2 w-full mt-7'>
 							<FloatLabel>
-								<div className='relative'>
+								<div className='relative text-neutral-50'>
 									<InputText
 										id={field.name}
 										type={
@@ -119,14 +119,14 @@ export function FormDialog({
 							type='submit'
 							text
 							icon='pi pi-lock-open'
-							className='p-3 bg-blue-700 rounded-xl font-semibold text-white border-1 border-white-alpha-30 hover:bg-green-800'
+							className='p-3 bg-blue-700 rounded-xl font-semibold text-white border-2 border-white hover:bg-green-800'
 						/>
 						<Button
 							label='Ingresar con Google'
 							type='button'
 							text
 							icon='pi pi-google'
-							className='p-3 bg-blue-700 rounded-xl font-semibold text-white border-1 border-white-alpha-30 hover:bg-green-800'
+							className='p-3 bg-blue-700 rounded-xl font-semibold text-white border-2 border-white hover:bg-green-800'
 							onClick={() => {
 								handleGoogle;
 							}}

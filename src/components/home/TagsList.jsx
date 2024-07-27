@@ -3,7 +3,7 @@ import { Tags } from '../../helpers/Tags';
 
 export const TagsList = () => {
 	return (
-		<section className='flex flex-col flex-wrap items-start justify-start w-full sm:w-[48%] mt-3 ml-3'>
+		<section className='flex flex-col flex-wrap items-start text-neutral-50 justify-start w-full sm:w-[48%] mt-3 ml-3'>
 			<div>
 				<h1 className='text-2xl font-bold mb-5 '>Últimos Tags</h1>
 			</div>
@@ -14,7 +14,7 @@ export const TagsList = () => {
 							<Link
 								to=''
 								key={index}
-								className='flex flex-row flex-wrap items-center justify-between w-11/12 my-2'>
+								className='flex flex-row flex-wrap items-center justify-between w-11/12 my-2 hover:text-neutral-400'>
 								<div className='flex flex-row flex-wrap items-center justify-center'>
 									{tag.img && (
 										<img

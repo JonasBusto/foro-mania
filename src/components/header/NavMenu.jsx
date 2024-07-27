@@ -14,18 +14,18 @@ export function NavMenu() {
 
 	const itemTemplate = (item) => {
 		return (
-			<div className='flex items-center p-2  cursor-pointer'>
-				<i className={`${item.icon} mr-2`}></i>
+			<div className='flex items-center p-2  cursor-pointer text-white'>
+				<i className={`${item.icon} text-white mr-2`}></i>
 				<p>{item.label}</p>
 			</div>
 		);
 	};
 
 	return (
-		<div className='card flex justify-center items-center'>
+		<div className='card flex justify-center items-center '>
 			<Menu
 				model={items}
-				className='w-full md:w-14rem custom-nav-menu'
+				className='w-full md:w-14rem custom-nav-menu bg-neutral-50 text-white'
 				itemTemplate={itemTemplate}
 			/>
 		</div>
