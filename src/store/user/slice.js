@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { userExtraReducers } from './extraReducers';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../services/firebase';
 
 const initialState = {
   users: [],
