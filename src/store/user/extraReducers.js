@@ -1,4 +1,5 @@
 import {
+  getUserById,
   getUsers,
   loginUserWithEmail,
   loginUserWithGoogle,
@@ -18,6 +19,19 @@ export const userExtraReducers = (builder) => {
     })
     .addCase(getUsers.rejected, (state, action) => {
       state.status = 'Fallido';
+      state.error = action.payload;
+    });
+
+  builder
+    .addCase(getUserById.pending, (state) => {
+      state.statusUser = 'Cargando';
+    })
+    .addCase(getUserById.fulfilled, (state, action) => {
+      state.statusUser = 'Exitoso';
+      state.user = action.payload;
+    })
+    .addCase(getUserById.rejected, (state, action) => {
+      state.statusUser = 'Fallido';
       state.error = action.payload;
     });
 

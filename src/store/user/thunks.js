@@ -1,6 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { auth, db } from '../../services/firebase';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import {
+  doc,
+  setDoc,
+  getDoc,
+  getDocs,
+  query,
+  collection,
+} from 'firebase/firestore';
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
@@ -11,9 +18,35 @@ import {
   updateProfile,
 } from 'firebase/auth';
 
-export const getUsers = createAsyncThunk('user/getAll', async () => {});
+export const getUsers = createAsyncThunk('user/getAll', async () => {
+  const arrayAux = [];
 
-export const getUserById = createAsyncThunk('user/getById', async () => {});
+  try {
+    const querySnapshot = await getDocs(query(collection(db, 'users')));
+
+    querySnapshot.forEach((doc) => {
+      arrayAux.push({ uid: doc.id, ...doc.data() });
+    });
+
+    return arrayAux;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const getUserById = createAsyncThunk('user/getById', async ({ id }) => {
+  try {
+    const querySnapshot = await getDoc(doc(db, 'users', id));
+
+    if (querySnapshot.exists()) {
+      return { uid: querySnapshot.id, ...querySnapshot.data() };
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 export const registerUser = createAsyncThunk(
   'user/register',
