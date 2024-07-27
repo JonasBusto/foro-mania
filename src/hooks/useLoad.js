@@ -16,7 +16,7 @@ export function useLoad() {
     } else {
       setIsLoading(true);
     }
-  }, [statusAuth]);
+  }, [statusAuth, statusGetUsers]);
 
   return { isLoading };
 }

@@ -5,6 +5,7 @@ import {
   loginUserWithGoogle,
   logoutUser,
   registerUser,
+  updateUser,
   verifyLoggedUser,
 } from './thunks';
 
@@ -97,6 +98,19 @@ export const userExtraReducers = (builder) => {
     })
     .addCase(logoutUser.rejected, (state, action) => {
       state.statusLoggedUser = 'Fallido';
+      state.error = action.payload;
+    });
+
+  builder
+    .addCase(updateUser.pending, (state) => {
+      state.statusUpdate = 'Cargando';
+    })
+    .addCase(updateUser.fulfilled, (state, action) => {
+      state.statusUpdate = 'Exitoso';
+      state.loggedUser = action.payload;
+    })
+    .addCase(updateUser.rejected, (state, action) => {
+      state.statusUpdate = 'Fallido';
       state.error = action.payload;
     });
 };
