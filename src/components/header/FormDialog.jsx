@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import '../../styles/home.css';
 
-// recibe props de login o register
 export function FormDialog({
 	visible,
 	onHide,
@@ -19,22 +18,24 @@ export function FormDialog({
 	linkText,
 	linkTo,
 	fields,
+	disabled,
+	handleGoogle,
 }) {
 	const [showPassword, setShowPassword] = useState(false);
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset, // Añadir reset
 	} = useForm();
 
-	// maneja el estado de visibilidad del password
 	const toggleShowPassword = () => {
 		setShowPassword(!showPassword);
 	};
 
-	const handleGoogle = () => {
-		console.log('Google');
-		// logica para iniciar sesion o registrarse con Google
+	const handleOnHide = () => {
+		reset(); 
+		onHide();
 	};
 
 	return (
@@ -42,7 +43,7 @@ export function FormDialog({
 			className='custom-dialog'
 			visible={visible}
 			modal
-			onHide={onHide}
+			onHide={handleOnHide} 
 			contentStyle={{
 				width: '100%',
 				border: 'rounded',
@@ -50,7 +51,6 @@ export function FormDialog({
 				borderRadius: '0 0 20px 20px',
 				padding: 20,
 			}}
-			// titulo de encabezado multicolor
 			header={
 				<div className='flex items-center justify-start'>
 					<h1 className='title-multicolor font-bold text-4xl'>
@@ -62,14 +62,15 @@ export function FormDialog({
 				<p className='font-bold text-3xl'>{title}</p>
 				<img src='/img/handlogin.png' alt='handlogin' width={50} />
 				<p className='font-semibold mb-3'>{subtitle}</p>
-				{/* formulario reutilizable para login y register */}
-				<form onSubmit={handleSubmit(onSubmit)} className='w-full '>
+				<form
+					onSubmit={handleSubmit((data) => onSubmit(data, reset))}
+					className='w-full '>
 					{fields.map((field) => (
 						<div
 							key={field.name}
 							className='flex flex-col items-center justify-center gap-2 w-full mt-7'>
 							<FloatLabel>
-								<div className='relative text-neutral-50'>
+								<div className='relative text-black '>
 									<InputText
 										id={field.name}
 										type={
@@ -98,7 +99,6 @@ export function FormDialog({
 								</div>
 								<label>{field.label}</label>
 							</FloatLabel>
-							{/* maneja los errores de cada input */}
 							{errors[field.name] && (
 								<span className='text-red-700 text-center w-full'>
 									{errors[field.name].message}
@@ -106,31 +106,31 @@ export function FormDialog({
 							)}
 						</div>
 					))}
-					{/* link p iniciar sesion o recuperar contraseña */}
 					<Link to={linkTo}>
 						<p className='text-[12px] py-4 text-start hover:underline-offset-2 hover:text-blue-700 hover:underline'>
 							{linkText}
 						</p>
 					</Link>
-					{/* boton para iniciar sesion o registrar usuario */}
 					<div className='mt-4 flex flex-wrap items-center justify-around gap-2 w-full'>
 						<Button
 							label={buttonLabel}
 							type='submit'
 							text
+							disabled={disabled}
 							icon='pi pi-lock-open'
 							className='p-3 bg-blue-700 rounded-xl font-semibold text-white border-2 border-white hover:bg-green-800'
 						/>
 						<Button
-							label='Ingresar con Google'
-							type='button'
-							text
-							icon='pi pi-google'
-							className='p-3 bg-blue-700 rounded-xl font-semibold text-white border-2 border-white hover:bg-green-800'
-							onClick={() => {
-								handleGoogle;
-							}}
-						/>
+							className=' px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg hover:bg-neutral-50 text-slate-200 hover:border-slate-400  hover:text-slate-900 '
+							onClick={handleGoogle}
+							disabled={disabled}
+							type='button'>
+							<img
+								className='w-6 h-6'
+								src='https://www.svgrepo.com/show/475656/google-color.svg'
+								alt='google logo'></img>
+							Iniciar Sesión con Google
+						</Button>
 					</div>
 				</form>
 			</div>

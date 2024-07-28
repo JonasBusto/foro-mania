@@ -1,10 +1,21 @@
 /* eslint-disable react/prop-types */
 import { FormDialog } from '../header/FormDialog';
+import { useAuth } from '../../hooks/useAuth';
 
 export function Login({ visible, onHide }) {
-	const onSubmit = async (values) => {
+	const { loginGoogle, loginEmail, statusSign } = useAuth();
+
+	const onSubmit = async (values, reset) => {
 		console.log(values);
-		// logica para iniciar sesion
+		const { email, password } = values;
+		await loginEmail({ email, password });
+		reset();
+		onHide();
+	};
+
+	const handleGoogle = async () => {
+		await loginGoogle();
+		onHide();
 	};
 
 	return (
@@ -12,6 +23,8 @@ export function Login({ visible, onHide }) {
 			visible={visible}
 			onHide={onHide}
 			onSubmit={onSubmit}
+			handleGoogle={handleGoogle}
+			disabled={statusSign === 'Cargando'}
 			title='Bienvenido nuevamente!'
 			subtitle='Logueate para acceder a tu cuenta'
 			buttonLabel='Ïngresar'
@@ -30,8 +43,8 @@ export function Login({ visible, onHide }) {
 					validation: {
 						required: 'La contraseña es requerida',
 						minLength: {
-							value: 7,
-							message: 'La contraseña debe contener al menos 7 dígitos',
+							value: 6,
+							message: 'La contraseña debe contener al menos 6 dígitos',
 						},
 					},
 				},

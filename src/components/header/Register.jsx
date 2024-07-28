@@ -1,21 +1,37 @@
 /* eslint-disable react/prop-types */
 import { FormDialog } from './FormDialog';
+import { useAuth } from '../../hooks/useAuth';
 
 export function Register({ visible, onHide }) {
-	const onSubmit = async (values) => {
+	const { loginGoogle, register, statusSign } = useAuth();
+
+	const onSubmit = async (values, reset) => {
 		console.log(values);
-		// logica para registrar usuario
+		const success = await register(values);
+		if (success) {
+			reset();
+			onHide();
+		}
+	};
+
+	const handleGoogle = async () => {
+		const success = await loginGoogle();
+		if (success) {
+			onHide();
+		}
 	};
 
 	return (
 		<FormDialog
 			visible={visible}
 			onHide={onHide}
+			disabled={statusSign === 'Cargando'}
 			onSubmit={onSubmit}
+			handleGoogle={handleGoogle}
 			title='Bienvenido!'
 			subtitle='Ingresa estos datos para crear tu cuenta'
 			buttonLabel='Registrarse'
-			linkText='Ya tienes una cuenta? Inicia sesión'
+			linkText='¿Ya tienes una cuenta? Inicia sesión'
 			linkTo='/login'
 			fields={[
 				{

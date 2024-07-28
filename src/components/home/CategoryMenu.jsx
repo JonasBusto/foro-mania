@@ -1,18 +1,23 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
-import { Categories } from '../../helpers/Categories';
 import { Tags } from '../../helpers/Tags';
 import { Button } from 'primereact/button';
+import { useCategoryAction } from '../../hooks/useCategoryAction';
 
 export const CategoryMenu = () => {
+	const { categories } = useCategoryAction();
+
 	const [selectedCategory, setSelectedCategory] = useState(null);
 	const [selectedTag, setSelectedTag] = useState(null);
 
 	const categoryTemplate = (option) => {
 		return (
 			<div className='flex items-center bg-neutral-700 text-neutral-50 p-2'>
-				<div className={`w-2 h-8 rounded-full mr-2 ${option.color}`}></div>
+				<hr
+					className='flex flex-col flex-wrap items-center justify-between h-[8vh] pl-2'
+					style={{ backgroundColor: option.color }}
+				/>{' '}
 				<div>
 					<div>{option.category}</div>
 					<p className='text-neutral-50 text-[13px]'>
@@ -37,7 +42,7 @@ export const CategoryMenu = () => {
 				<Dropdown
 					value={selectedCategory}
 					onChange={(e) => setSelectedCategory(e.value)}
-					options={Categories}
+					options={categories}
 					optionLabel='category'
 					placeholder='Categorias'
 					filter

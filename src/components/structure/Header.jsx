@@ -4,8 +4,11 @@ import { Login } from '../header/Login';
 import { Register } from '../header/Register';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import { useAuth } from '../../hooks/useAuth';
 
 export function Header() {
+	const { loggedUser, logout } = useAuth();
+
 	const [openRegister, setOpenRegister] = useState(false);
 	const [openSignIn, setOpenSignIn] = useState(false);
 	const [openSearch, setOpenSearch] = useState(false);
@@ -53,30 +56,44 @@ export function Header() {
 					</a>
 				</div>
 				<div className='flex flex-row flex-wrap items-center justify-center md:justify-end mr-3 font-semibold w-full md:w-fit'>
-					<Button
-						onClick={handleSignUp}
-						className='p-2 m-2 bg-blue-800 text-blue-50 rounded-md text-center border-2 border-blue-50 hover:bg-blue-600 flex items-center'>
-						<i className='pi pi-user-plus text-xl mx-2 '></i>
-						Registrarse
-					</Button>
-					<Register
-						visible={openRegister}
-						onHide={() => setOpenRegister(false)}
-					/>
-
-					<Button
-						onClick={handleSignIn}
-						className='p-2 m-2 bg-blue-800 text-blue-50 rounded-md border-2 border-blue-50 hover:bg-blue-600 flex items-center'>
-						<i className='pi pi-sign-in text-xl mx-2'></i>
-						Iniciar Sesion
-					</Button>
-					<Login
-						visible={openSignIn}
-						onHide={() => setOpenSignIn(false)}
-					/>
+					{loggedUser ? null : (
+						<>
+							<Button
+								onClick={handleSignUp}
+								className='p-2 m-2 bg-blue-800 text-blue-50 rounded-md text-center border-2 border-blue-50 hover:bg-blue-600 flex items-center'>
+								<i className='pi pi-user-plus text-xl mx-2 '></i>
+								Registrarse
+							</Button>
+							<Register
+								visible={openRegister}
+								onHide={() => setOpenRegister(false)}
+							/>
+						</>
+					)}
+					{loggedUser ? (
+						<Button
+							onClick={logout}
+							className='p-2 m-2 bg-red-800 text-blue-50 rounded-md border-2 border-blue-50 hover:bg-blue-600 flex items-center'>
+							<i className='pi pi-sign-in text-xl mx-2'></i>
+							Cerrar Sesion
+						</Button>
+					) : (
+						<>
+							<Button
+								onClick={handleSignIn}
+								className='p-2 m-2 bg-blue-800 text-blue-50 rounded-md border-2 border-blue-50 hover:bg-blue-600 flex items-center'>
+								<i className='pi pi-sign-in text-xl mx-2'></i>
+								Iniciar Sesion
+							</Button>
+							<Login
+								visible={openSignIn}
+								onHide={() => setOpenSignIn(false)}
+							/>
+						</>
+					)}
 					<div className='flex flex-row items-center '>
 						<div className='relative hidden sm:flex'>
-							<Button onClick={handleSearch} className='relative'>
+							<Button onClick={handleSearch} className='relative bg-transparent'>
 								<i className='pi pi-search text-2xl p-2 mx-2 hover:bg-blue-800 rounded-md hover:border-2 hover:border-blue-50 text-white'></i>
 							</Button>
 							{openSearch && (
@@ -98,7 +115,7 @@ export function Header() {
 						</div>
 
 						<div className='relative'>
-							<Button onClick={handleMenu} className='relative'>
+							<Button onClick={handleMenu} className='relative bg-transparent'>
 								<i className='pi pi-bars text-2xl p-2 mx-2 hover:bg-blue-800 rounded-md text-white hover:border-2 hover:border-blue-50'></i>
 							</Button>
 							{openMenu && (

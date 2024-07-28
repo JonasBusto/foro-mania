@@ -1,9 +1,9 @@
 .custom-dialog .p-dialog-header {
 	background-color: #262626;
-	border-radius: 10px 10px 0 0; 
+	border-radius: 10px 10px 0 0;
 }
 .p-dialog-header-icon {
-	color:white
+	color: white;
 }
 
 .title-multicolor {
@@ -67,4 +67,27 @@
 .p-dropdown-empty-message {
 	background-color: #404040 !important;
 	color: white;
+}
+.p-menuitem {
+	background-color: #404040;
+	color: white;
+}
+.p-menuitem-link:hover {
+	background-color: white;
+	color: #404040;
+}
+.p-menuitem-text {
+	color: white;
+}
+.p-menuitem-text:hover {
+	color: #404040;
+}
+.p-menuitem-icon {
+	color: white;
+}
+.p-menuitem-icon:hover {
+	color: #404040;
+}
+.p-component {
+	background-color: #404040;
 }
