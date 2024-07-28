@@ -10,6 +10,7 @@ import { FormUser } from '../pages/users/FormUser';
 import { EditProfile } from '../pages/auth/EditProfile';
 import { FormCategory } from '../pages/categories/FormCategory';
 import { Categories } from '../pages/categories/Categories';
+import Topic from '../pages/Topic';
 
 export function AppRoutes() {
   return (
@@ -19,6 +20,7 @@ export function AppRoutes() {
       <Route element={<PublicRoute />}>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/topic' element={<Topic />} />
       </Route>
       <Route element={<PrivateRoute allowedRoles={['admin']} />}>
         <Route path='/users' element={<Users />} />
