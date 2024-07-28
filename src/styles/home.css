@@ -1,70 +1,114 @@
 .custom-dialog .p-dialog-header {
-	background-color: #262626;
-	border-radius: 10px 10px 0 0; 
+  background-color: #191414;
+  border-radius: 10px 10px 0 0;
 }
+
+.p-dialog-header {
+  padding: 0.5rem 1rem;
+}
+
+.custom-dialog .p-dialog-content {
+  scrollbar-width: thin;
+  scrollbar-color: #1db954 #191414;
+}
+
+.custom-dialog .p-dialog-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-dialog .p-dialog-content::-webkit-scrollbar-track {
+  background: #191414;
+}
+
+.custom-dialog .p-dialog-content::-webkit-scrollbar-thumb {
+  background-color: #1db954;
+  border-radius: 10px;
+  border: 3px solid #191414;
+}
+
+.custom-dialog .p-dialog-content::-webkit-scrollbar-thumb:hover {
+  background-color: #17a858;
+}
+
+.custom-dialog .p-dialog-content::-webkit-scrollbar-thumb:active {
+  background-color: #0e8c3a;
+}
+
+.custom-dialog .p-dialog-header-close {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.custom-dialog .p-dialog-header-close:hover {
+  color: #1db954;
+}
+
 .p-dialog-header-icon {
-	color:white
+  color: white;
 }
 
 .title-multicolor {
-	background: linear-gradient(
-		to right,
-		red,
-		orange,
-		yellow,
-		green,
-		blue,
-		indigo,
-		violet
-	);
-	-webkit-background-clip: text;
-	color: transparent;
+  background: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .custom-nav-menu .p-menu {
-	position: relative;
-	z-index: 1000;
+  position: relative;
+  z-index: 1000;
 }
 
 .p-button:focus {
-	outline: none;
-	box-shadow: none;
+  outline: none;
+  box-shadow: none;
 }
 .p-dropdown:focus {
-	outline: none;
-	box-shadow: none;
-	border: none;
+  outline: none;
+  box-shadow: none;
+  border: none;
 }
 .custom-dropdown {
-	background-color: #404040 !important;
+  background-color: #404040 !important;
 }
 
 .p-dropdown-panel {
-	background-color: #404040 !important;
+  background-color: #404040 !important;
 }
 
 .p-dropdown-header {
-	background-color: #404040 !important;
+  background-color: #404040 !important;
 }
 
 .p-dropdown-item {
-	background-color: #404040 !important;
+  background-color: #404040 !important;
 }
 
 .p-dropdown-item.p-highlight {
-	background-color: #404040 !important;
+  background-color: #404040 !important;
 }
 .p-dropdown-label {
-	color: white;
+  color: white;
 }
 .p-dropdown-trigger {
-	color: white;
+  color: white;
 }
 .p-dropdown-filter {
-	background-color: white !important;
-	color: #404040;
+  background-color: white !important;
+  color: #404040;
 }
 .p-dropdown-empty-message {
-	background-color: #404040 !important;
-	color: white;
+  background-color: #404040 !important;
+  color: white;
 }
