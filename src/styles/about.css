@@ -1,27 +1,4 @@
-.tituloproy {
-	color: #01fff4;
-	font-size: 36px;
-	font-weight: 800;
-	margin-top: 15px;
-}
-.subtitituloproy {
-	font-size: 20px;
-}
-.pproy {
-	margin-left: 20px;
-	margin-right: 20px;
-	display: flex;
-	text-wrap: wrap;
-	align-items: center;
-}
-.icoproy {
-	font-size: 30px;
-	color: #f4f4f7;
-}
-.containerproy{
-max-width: 800px ;
-margin: 0px 10px 
-}
+
 .cardproy {
 	display: flex;
 	justify-content: center;
@@ -50,17 +27,7 @@ margin: 0px 10px
 	color: #01fff4 !important;
 	text-shadow: 7px 7px 5px rgba(6, 6, 6, 0.6);
 }
-.langproy {
-	background-color: #020041;
-	color: white;
-	font-size: 12px;
-	text-wrap: wrap;
-	border-radius: 10px;
-	border-color: #01fff4;
-	padding: 5px 10px;
-	margin-left: 5px;
-	margin: 7px 7px;
-}
+
 .btnproy {
 	font-weight: 600;
 	font-size: 14px;
