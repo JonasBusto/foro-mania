@@ -12,6 +12,7 @@ import { FormCategory } from '../pages/categories/FormCategory';
 import { Categories } from '../pages/categories/Categories';
 import Topic from '../pages/Topic';
 import { About } from '../pages/About';
+import { UsersView } from '../pages/UsersView';
 
 export function AppRoutes() {
 	return (
@@ -23,6 +24,7 @@ export function AppRoutes() {
 				<Route path='/register' element={<Register />} />
 				<Route path='/topic' element={<Topic />} />
 				<Route path='/about' element={<About />} />
+				<Route path='/users-view' element={<UsersView />} />
 			</Route>
 			<Route element={<PrivateRoute allowedRoles={['admin']} />}>
 				<Route path='/users' element={<Users />} />
