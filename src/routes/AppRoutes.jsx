@@ -16,6 +16,8 @@ export function AppRoutes() {
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/topic' element={<Topic />} />
+      <Route path='/about' element={<About />} />
+      <Route path='/users-view' element={<UsersView />} />
       <Route element={<PrivateRoute allowedRoles={['admin']} />}>
         <Route path='/users' element={<Users />} />
         <Route path='/users/upload' element={<FormUser />} />
