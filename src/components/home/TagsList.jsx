@@ -22,18 +22,18 @@ export const TagsList = () => {
                     src={tag.img}
                     alt='Tag'
                     width={40}
-                    className='mr-4 rounded-full'
+                    className='mr-4 rounded-full w-14 h-14 object-cover'
                   />
                 )}
                 <div className='flex flex-col flex-grow'>
-                  <h3 className='text-xl font-semibold text-white'>
-                    {tag.tag}
+                  <h3 className='m-0 text-xl font-semibold text-white'>
+                    {'Nombre del usuario'}
                   </h3>
+                  <p className='text-gray-400 uppercase text-[9px]'>
+                    email@email.com
+                  </p>
                   <div className='flex items-center mt-2 text-gray-400'>
-                    <div
-                      className='w-3 h-3 rounded-full'
-                      style={{ backgroundColor: tag.color }}
-                    ></div>
+                    <div className={'w-3 h-3 rounded-full ' + tag.color}></div>
                     <p className='text-sm ml-2'>{tag.category}</p>
                   </div>
                 </div>
