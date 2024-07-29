@@ -1,7 +1,15 @@
+/* eslint-disable react/prop-types */
 import { Button } from 'primereact/button';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FormContact } from '../home/FormContact';
 
 export function Footer() {
+	const [formContact, setFormContact] = useState(false);
+
+	const handleFormContact = () => {
+		setFormContact(true);
+	};
 	return (
 		<footer>
 			<section className='flex flex-col flex-wrap items-center justify-center w-full bg-neutral-900 py-3'>
@@ -13,12 +21,16 @@ export function Footer() {
 					</a>
 				</div>
 				<div className='flex flex-row items-center justify-around w-full my-5'>
-					<Button className='p-2 border-2 border-white rounded-md bg-blue-800 text-white hover:bg-blue-600 font-semibold'>
+					<Button
+						onClick={handleFormContact}
+						className='p-2 border-2 border-white rounded-md bg-blue-800 text-white hover:bg-blue-600 font-semibold'>
 						Contacto
 					</Button>
-					<Button className='p-2 border-2 border-white rounded-md bg-blue-800 text-white hover:bg-blue-600 font-semibold'>
+					<Link
+						to='/about'
+						className='p-2 border-2 border-white rounded-md bg-blue-800 text-white hover:bg-blue-600 font-semibold'>
 						Sobre Nosotros
-					</Button>
+					</Link>
 				</div>
 				<div className='flex flex-row flex-wrap items-center justify-around my-2 w-full'>
 					<Link
@@ -37,6 +49,12 @@ export function Footer() {
 					@ 2024. ForoMania - Derechos reservados
 				</p>
 			</section>
+			{formContact && (
+				<FormContact
+					visible={formContact}
+					onHide={() => setFormContact(false)}
+				/>
+			)}
 		</footer>
 	);
 }

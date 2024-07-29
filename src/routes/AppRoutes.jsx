@@ -8,6 +8,8 @@ import { EditProfile } from '../pages/auth/EditProfile';
 import { FormCategory } from '../pages/categories/FormCategory';
 import { Categories } from '../pages/categories/Categories';
 import Topic from '../pages/Topic';
+import { About } from '../pages/About';
+import { UsersView } from '../pages/UsersView';
 
 export function AppRoutes() {
   return (
