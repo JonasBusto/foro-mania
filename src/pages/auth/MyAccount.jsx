@@ -19,7 +19,7 @@ export function MyAccount() {
 
         <div className='mt-6 flex flex-col items-center sm:flex-row sm:items-start sm:space-x-8'>
           <img
-            className='object-cover w-32 h-32 p-1 rounded-full ring-2 ring-[#1db954]'
+            className='object-cover w-32 h-32 p-1 rounded-full ring-2 ring-[#61dafb]'
             src={loggedUser.photoProfile}
             alt='Foto perfil'
           />
@@ -51,7 +51,7 @@ export function MyAccount() {
           <button
             type='button'
             onClick={logout}
-            className='py-2 px-5 text-sm font-medium text-[#1db954] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#1db954] focus:ring-4 focus:ring-[#1db954]'
+            className='py-2 px-5 text-sm font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb] focus:ring-4 focus:ring-[#61dafb]'
           >
             Cerrar Sesión
           </button>

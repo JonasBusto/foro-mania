@@ -4,7 +4,6 @@ import { Login } from '../header/Login';
 import { Register } from '../header/Register';
 import { useAuth } from '../../hooks/useAuth';
 import { useLoad } from '../../hooks/useLoad';
-import { Image } from 'primereact/image';
 import { Link } from 'react-router-dom';
 
 export function Header() {
@@ -53,12 +52,12 @@ export function Header() {
     <header className='relative bg-black text-white'>
       <section className='flex items-center justify-between p-4'>
         <div className='flex items-center'>
-          <a
-            href='/'
+          <Link
+            to='/'
             className='text-white text-3xl font-bold hover:opacity-80'
           >
             ForoMania
-          </a>
+          </Link>
         </div>
 
         <div className='flex items-center space-x-4'>
@@ -66,7 +65,7 @@ export function Header() {
             <>
               <button
                 onClick={handleSignUp}
-                className='text-white bg-green-600 hover:bg-green-500 px-4 py-2 rounded'
+                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
               >
                 Registrarse
               </button>
@@ -78,7 +77,7 @@ export function Header() {
 
               <button
                 onClick={handleSignIn}
-                className='text-white bg-green-600 hover:bg-green-500 px-4 py-2 rounded'
+                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
               >
                 Iniciar Sesión
               </button>
@@ -93,9 +92,9 @@ export function Header() {
           {loggedUser && (
             <Link
               to='/account'
-              className='relative w-10 h-10 rounded-full ring-2 ring-[#1db954] overflow-hidden'
+              className='relative w-10 h-10 rounded-full ring-2 ring-[#61dafb] overflow-hidden'
             >
-              <Image
+              <img
                 className='object-cover w-full h-full'
                 src={loggedUser.photoProfile}
                 alt='Foto de perfil'
@@ -114,13 +113,13 @@ export function Header() {
                 <input
                   type='text'
                   placeholder='Buscar...'
-                  className='w-full px-2 py-1 bg-gray-700 text-white rounded-md'
+                  className='w-full px-2 py-1 bg-[#1b1b1b] text-white placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button
                   onClick={handleSearchSubmit}
-                  className='ml-2 bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-md'
+                  className='ml-2 bg-[#157ab8] hover:bg-[#106ba1] text-white px-4 py-2 rounded-md focus:outline-none'
                 >
                   <i className='pi pi-search'></i>
                 </button>
@@ -136,7 +135,7 @@ export function Header() {
               <i className='pi pi-bars text-2xl'></i>
             </button>
             {openMenu && (
-              <div className='absolute z-10 right-0 top-full mt-3 border-2 border-green-600 rounded-md shadow-lg w-44 bg-gray-800'>
+              <div className='absolute z-10 right-0 top-full mt-3 border-2 border-[#61dafb] rounded-md shadow-lg w-44 bg-gray-800'>
                 <NavMenu />
               </div>
             )}

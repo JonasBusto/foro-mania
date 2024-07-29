@@ -33,7 +33,7 @@ export const EditProfile = () => {
         <div className='flex flex-col items-center mt-8'>
           <div className='relative'>
             <img
-              className='object-cover w-40 h-40 p-1 rounded-full ring-2 ring-[#1db954]'
+              className='object-cover w-40 h-40 p-1 rounded-full ring-2 ring-[#61dafb]'
               src={photoProfile}
               alt={'Foto de perfil de ' + loggedUser.fullName}
             />
@@ -47,7 +47,7 @@ export const EditProfile = () => {
             />
             <label
               htmlFor='profilePic'
-              className='absolute bottom-0 right-0 w-8 h-8 bg-[#1db954] p-2 rounded-full cursor-pointer hover:bg-[#1aa34b] transition flex justify-center items-center'
+              className='absolute bottom-0 right-0 w-8 h-8 bg-[#61dafb] p-2 rounded-full cursor-pointer hover:bg-[#4db1e8] transition flex justify-center items-center'
             >
               <i className='pi pi-pencil text-white'></i>
             </label>
@@ -64,7 +64,7 @@ export const EditProfile = () => {
                 id='fullName'
                 type='text'
                 disabled={userStatusUpdate === 'Cargando'}
-                className='w-full p-2 border rounded-md bg-[#121212] text-white border-[#1db954]'
+                className='w-full p-2 border rounded-md bg-[#121212] text-white border-[#61dafb]'
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
               />
@@ -72,15 +72,16 @@ export const EditProfile = () => {
 
             <div className='flex justify-between'>
               <Link
+                disabled={userStatusUpdate === 'Cargando'}
                 to='/account'
-                className='py-2 px-5 text-sm font-medium text-[#1db954] bg-[#2a2a2a] border border-[#1db954] hover:bg-[#1aa34b] focus:outline-none rounded-lg'
+                className='py-2 px-5 text-sm font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb] focus:ring-4 focus:ring-[#61dafb]'
               >
                 Cancelar
               </Link>
               <button
                 type='button'
                 disabled={userStatusUpdate === 'Cargando'}
-                className='rounded-lg bg-[#1db954] px-4 py-2 text-white hover:bg-[#1aa34b] focus:outline-none'
+                className='rounded-lg bg-[#1b95d2] px-4 py-2 text-white hover:bg-[#157ab8] focus:outline-none'
                 onClick={() => updateProfile({ fullName, fileImage })}
               >
                 {userStatusUpdate === 'Cargando' ? (

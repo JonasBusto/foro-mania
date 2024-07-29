@@ -18,7 +18,6 @@ export function Register({ visible, onHide, setOpenRegister }) {
         contentStyle={{
           width: '100%',
           backgroundColor: '#191414',
-          borderRadius: '0 0 20px 20px',
           padding: 20,
           overflowX: 'hidden',
           overflowY: 'auto',
@@ -107,7 +106,7 @@ export function Register({ visible, onHide, setOpenRegister }) {
                       Nombre completo
                     </label>
                     <InputText
-                      className='border p-2 w-full bg-gray-800 text-white'
+                      className='border p-2 w-full bg-[#1b1b1b] text-white placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
                       type='text'
                       id='fullName'
                       name='fullName'
@@ -130,7 +129,7 @@ export function Register({ visible, onHide, setOpenRegister }) {
                       Email
                     </label>
                     <InputText
-                      className='border p-2 w-full bg-gray-800 text-white'
+                      className='border p-2 w-full bg-[#1b1b1b] text-white placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
                       type='text'
                       id='email'
                       name='email'
@@ -153,7 +152,7 @@ export function Register({ visible, onHide, setOpenRegister }) {
                       Contraseña
                     </label>
                     <InputText
-                      className='border p-2 w-full bg-gray-800 text-white'
+                      className='border p-2 w-full bg-[#1b1b1b] text-white placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
                       type='password'
                       id='password'
                       name='password'
@@ -176,7 +175,7 @@ export function Register({ visible, onHide, setOpenRegister }) {
                       Confirmar contraseña
                     </label>
                     <InputText
-                      className='border p-2 w-full bg-gray-800 text-white'
+                      className='border p-2 w-full bg-[#1b1b1b] text-white placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
                       type='password'
                       id='checkPassword'
                       name='checkPassword'
@@ -195,7 +194,7 @@ export function Register({ visible, onHide, setOpenRegister }) {
                 </div>
                 <div className='flex flex-col items-center justify-between'>
                   <button
-                    className='w-full mb-2 bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                    className='w-full mb-2 bg-[#1b95d2] hover:bg-[#157ab8] text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline'
                     type='submit'
                     disabled={statusSign === 'Cargando'}
                   >
@@ -220,7 +219,7 @@ export function Register({ visible, onHide, setOpenRegister }) {
                   <p className='text-sm font-semibold text-white'>
                     O inicia sesión{' '}
                     <Link
-                      className='text-green-500 hover:underline'
+                      className='text-[#1b95d2] hover:underline'
                       to='/login'
                     >
                       aquí
