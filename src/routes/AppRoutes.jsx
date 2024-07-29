@@ -1,9 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Home } from '../pages/Home';
-import { Login } from '../pages/auth/Login';
-import { Register } from '../pages/auth/Register';
 import { Users } from '../pages/users/Users';
-import { PublicRoute } from './PublicRoutes';
 import { MyAccount } from '../pages/auth/MyAccount';
 import { PrivateRoute } from './PrivateRoutes';
 import { FormUser } from '../pages/users/FormUser';
@@ -15,29 +12,24 @@ import { About } from '../pages/About';
 import { UsersView } from '../pages/UsersView';
 
 export function AppRoutes() {
-	return (
-		<Routes>
-			<Route path='/' element={<Home />} />
-			<Route path='/home' element={<Home />} />
-			<Route element={<PublicRoute />}>
-				<Route path='/login' element={<Login />} />
-				<Route path='/register' element={<Register />} />
-				<Route path='/topic' element={<Topic />} />
-				<Route path='/about' element={<About />} />
-				<Route path='/users-view' element={<UsersView />} />
-			</Route>
-			<Route element={<PrivateRoute allowedRoles={['admin']} />}>
-				<Route path='/users' element={<Users />} />
-				<Route path='/users/upload' element={<FormUser />} />
-				<Route path='/users/upload/:id' element={<FormUser />} />
-				<Route path='/categories' element={<Categories />} />
-				<Route path='/categories/upload/' element={<FormCategory />} />
-				<Route path='/categories/upload/:id' element={<FormCategory />} />
-			</Route>
-			<Route element={<PrivateRoute allowedRoles={['admin', 'user']} />}>
-				<Route path='/account' element={<MyAccount />} />
-				<Route path='/account/edit' element={<EditProfile />} />
-			</Route>
-		</Routes>
-	);
+  return (
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/topic' element={<Topic />} />
+      <Route path='/about' element={<About />} />
+      <Route path='/users-view' element={<UsersView />} />
+      <Route element={<PrivateRoute allowedRoles={['admin']} />}>
+        <Route path='/users' element={<Users />} />
+        <Route path='/users/upload' element={<FormUser />} />
+        <Route path='/users/upload/:id' element={<FormUser />} />
+        <Route path='/categories' element={<Categories />} />
+        <Route path='/categories/upload/' element={<FormCategory />} />
+        <Route path='/categories/upload/:id' element={<FormCategory />} />
+      </Route>
+      <Route element={<PrivateRoute allowedRoles={['admin', 'user']} />}>
+        <Route path='/account' element={<MyAccount />} />
+        <Route path='/account/edit' element={<EditProfile />} />
+      </Route>
+    </Routes>
+  );
 }
