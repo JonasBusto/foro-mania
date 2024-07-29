@@ -4,11 +4,11 @@ import { Main } from './components/structure/Main';
 import './styles/app.css';
 
 export function App() {
-	return (
-		<>
-			<Header />
-			<Main />
-			<Footer />
-		</>
-	);
+  return (
+    <div className='bg-[#121212] flex flex-col min-h-screen'>
+      <Header />
+      <Main />
+      <Footer />
+    </div>
+  );
 }

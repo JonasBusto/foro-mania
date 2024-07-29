@@ -50,7 +50,10 @@ export function Header() {
 
   return (
     <header className='relative bg-black text-white'>
-      <section className='flex items-center justify-between p-4'>
+      <section
+        className='flex items-center justify-between p-4 mx-auto'
+        style={{ maxWidth: '1300px' }}
+      >
         <div className='flex items-center'>
           <Link
             to='/'
