@@ -1,0 +1,31 @@
+.p-datatable{
+    width: 100%;
+}
+.p-datatable-header {
+    background-color: black;
+}
+
+.column-header{
+    font-size: 16px;
+    font-weight: 700;
+    position: 'relative';
+    background-color: black;
+    color: rgb(205, 205, 205);
+}
+
+.column-header:focus{
+    color: white;
+}
+
+.column-header span{
+    text-align: center;
+
+}
+
+.column-row {
+    font-size: 18px;
+    width: 25%;
+    color: rgb(205, 205, 205);
+    background-color: black;
+    border-top: 2px solid rgba(128, 128, 128, .3);
+}
