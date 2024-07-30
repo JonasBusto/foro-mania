@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { Tags } from '../../helpers/Tags';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
+import { Link } from 'react-router-dom';
 
 export const CategoryMenu = () => {
   const { categories } = useCategoryAction();
@@ -15,7 +16,7 @@ export const CategoryMenu = () => {
         style={{ backgroundColor: option.color }}
       ></div>
       <div className='ml-3 w-full'>
-        <div className='text-md font-medium text-white'>{option.category}</div>
+        <div className='text-md font-medium text-white'>{option.title}</div>
         <p className='text-sm text-gray-400'>{option.description}</p>
       </div>
     </div>
@@ -34,7 +35,7 @@ export const CategoryMenu = () => {
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.value)}
           options={categories}
-          optionLabel='category'
+          optionLabel='title'
           placeholder='Categorías'
           filter
           className='dropdown-category-select bg-[#282828] border-[#61dafb] text-white border-2 rounded-md w-full sm:w-1/4 flex-1'
@@ -52,15 +53,24 @@ export const CategoryMenu = () => {
           itemTemplate={tagTemplate}
           filterInputAutoFocus
         />
-        <button className='bg-[#1b95d2] text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'>
+        <Link
+          to='/'
+          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+        >
           Categorías
-        </button>
-        <button className='bg-[#1b95d2] text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'>
+        </Link>
+        <Link
+          to='/'
+          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+        >
           Últimos
-        </button>
-        <button className='bg-[#1b95d2] text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'>
+        </Link>
+        <Link
+          to='/'
+          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+        >
           Top
-        </button>
+        </Link>
       </div>
     </section>
   );

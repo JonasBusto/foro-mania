@@ -26,12 +26,12 @@ export const TagsList = () => {
                   />
                 )}
                 <div className='flex flex-col flex-grow'>
-                  <h3 className='m-0 text-xl font-semibold text-white'>
-                    {'Nombre del usuario'}
-                  </h3>
-                  <p className='text-gray-400 uppercase text-[9px]'>
-                    email@email.com
+                  <p className='text-gray-400 text-[9px] leading-tight'>
+                    {'Pedrito (email@email.com)'}
                   </p>
+                  <h3 className='m-0 text-xl font-semibold text-white'>
+                    {'Titulo de la publicación'}
+                  </h3>
                   <div className='flex items-center mt-2 text-gray-400'>
                     <div className={'w-3 h-3 rounded-full ' + tag.color}></div>
                     <p className='text-sm ml-2'>{tag.category}</p>
@@ -44,6 +44,14 @@ export const TagsList = () => {
               </div>
             </Link>
           ))}
+      </div>
+      <div className='mt-10 flex justify-end'>
+        <Link
+          to='/topics'
+          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+        >
+          Ver mas
+        </Link>
       </div>
     </section>
   );

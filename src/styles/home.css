@@ -136,3 +136,7 @@
 .p-component {
   background-color: #404040;
 }
+
+.form-contact .p-float-label {
+  width: 100%;
+}
