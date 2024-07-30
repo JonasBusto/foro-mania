@@ -1,6 +1,9 @@
 .p-datatable{
     width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
 }
+
 .p-datatable-header {
     background-color: black;
 }
@@ -29,3 +32,19 @@
     background-color: black;
     border-top: 2px solid rgba(128, 128, 128, .3);
 }
+
+.p-datatable-emptymessage {
+    color: rgb(205, 205, 205);
+    background-color: black;
+    text-align: center;
+    padding: 10px;
+}
+
+
+/* .p-datatable-wrapper {
+    background-color: black;
+}
+
+.p-datatable-tbody {
+    background-color: black;
+} */
