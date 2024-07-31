@@ -12,7 +12,9 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.6",
     "axios": "^1.7.2",
+    "date-fns": "^3.6.0",
     "emailjs-com": "^3.2.0",
+    "emoji-picker-react": "^4.11.1",
     "firebase": "^10.12.4",
     "formik": "^2.4.6",
     "primeicons": "^7.0.0",
