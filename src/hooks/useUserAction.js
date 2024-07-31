@@ -7,6 +7,7 @@ export function useUserAction() {
   const users = useAppSelector((state) => state.user.users);
   const user = useAppSelector((state) => state.user.user);
   const userStatusUpdate = useAppSelector((state) => state.user.statusUpdate);
+  const userStatus = useAppSelector((state) => state.user.statusUser)
 
   const dispatch = useAppDisptach();
 
@@ -34,5 +35,6 @@ export function useUserAction() {
     clearStateUser,
     updateProfile,
     userStatusUpdate,
+    userStatus
   };
 }

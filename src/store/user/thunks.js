@@ -152,7 +152,7 @@ export const verifyLoggedUser = createAsyncThunk(
       onAuthStateChanged(auth, async (currentUser) => {
         if (currentUser) {
           const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
-          resolve(userDoc.data());
+          resolve({uid: userDoc.id, ...userDoc.data()});
         } else {
           resolve(null);
         }
@@ -161,7 +161,7 @@ export const verifyLoggedUser = createAsyncThunk(
   }
 );
 
-export const deleteUserById = createAsyncThunk('user/delete', async () => {});
+export const deleteUserById = createAsyncThunk('user/delete', async () => { });
 
 export const updateUser = createAsyncThunk(
   'user/update',

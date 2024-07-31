@@ -1,10 +1,31 @@
-import { Badge } from 'primereact/badge'
-import React from 'react'
 
-const ReactionButton = ({ reaction = '👍', value = 0 }) => {
+import React, { useState } from 'react'
+
+const ReactionButton = ({ }) => {
+    const [reactionBox, setReactionBox] = useState('')
+
+
+    const reactionLike = () => {
+        reactionBox === 'like' ? setReactionBox('') : setReactionBox('like')
+    }
+
+
+    const reactionUnlike = () => {
+        reactionBox === 'unlike' ? setReactionBox('') : setReactionBox('unlike')
+    }
+
+
+
     return (
-        <div>
-            <button className='text-2xl hover:scale-125 duration-200 p-overlay-badge'>{value > 0 && <Badge value={value}></Badge>} {reaction}</button>
+        <div className='flex items-center gap-3'>
+            <div className='flex items-center gap-2'>
+                <p className='text-sm'>354</p>
+                <i onClick={reactionLike} className={`pi ${reactionBox === 'like' ? 'pi-thumbs-up-fill' : 'pi-thumbs-up'} cursor-pointer active:scale-125 duration-200 `}></i>
+            </div>
+            <div className='flex items-center gap-2'>
+                <i onClick={reactionUnlike} className={`pi ${reactionBox === 'unlike' ? 'pi-thumbs-down-fill' : 'pi-thumbs-down'} cursor-pointer active:scale-125 duration-200 `}></i>
+                <p className='text-sm'>35</p>
+            </div>
         </div>
     )
 }
