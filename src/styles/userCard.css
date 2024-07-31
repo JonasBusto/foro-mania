@@ -1,0 +1,35 @@
+.myFigure{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.myFigure img{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    top: -40%;
+    cursor: pointer;
+}
+
+.myFigure::before {
+    content: '';
+    position: absolute;
+    top: -40%; /* Ajusta la posición según necesites */
+    left: 8px;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(90deg, #d4d4d4 25%, #e0e0e0 50%, #d4d4d4 75%);
+    /* background: linear-gradient(90deg, #4a4a4a 25%, #5c5c5c 50%, #4a4a4a 75%); */
+    border-radius: 50%;
+    animation: shine 2s linear forwards;
+}
+
+@keyframes shine {
+    0% {
+        background-position: -150px 0;
+    }
+    100% {
+        background-position: 150px 0;
+    }
+}

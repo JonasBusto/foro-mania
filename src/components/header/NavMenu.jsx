@@ -7,7 +7,7 @@ export function NavMenu() {
 	const items = [
 		{ label: 'Ultimos', icon: 'pi pi-fw pi-clock' },
 		{ label: 'Top', icon: 'pi pi-fw pi-star' },
-		{ label: 'Usuarios', icon: 'pi pi-fw pi-users' },
+		{ label: 'Usuarios', icon: 'pi pi-fw pi-users', url:'/users-view' },
 		{ label: 'Categorias', icon: 'pi pi-fw pi-list' },
 	];
 
@@ -25,7 +25,6 @@ export function NavMenu() {
 			<Menu
 				model={items}
 				className='w-full md:w-14rem custom-nav-menu '
-				itemTemplate={itemTemplate}
 			/>
 		</div>
 	);
