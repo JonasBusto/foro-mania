@@ -1,4 +1,5 @@
 import React from "react"
+import '../../styles/userCard.css'
 
 const UserCard = ({user}) => {
 
@@ -7,10 +8,9 @@ const UserCard = ({user}) => {
   return (
     <div className="flex flex-col px-2 bg-black shadow-md rounded-md relative">
         <div className="flex">
-            <figure className="flex items-center justify-center">
-                <img src={user.photoProfile} 
-                    alt="foto de perfil del usuario" className="rounded-full ring-2 relative cursor-pointer"
-                    style={{ width: '100px', height: '100px' , top: '-40%' }} 
+            <figure className="myFigure">
+                <img src={user.photoProfile}
+                    alt="foto de perfil del usuario" className="rounded-full ring-2"
                 />
             </figure>
 
