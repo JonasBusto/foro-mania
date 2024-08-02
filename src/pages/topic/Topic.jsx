@@ -10,13 +10,14 @@ import { useAuth } from '../../hooks/useAuth'
 import { formatDistanceToNow, parseISO } from 'date-fns'
 import { es } from 'date-fns/locale'
 import { useUserAction } from '../../hooks/useUserAction'
+import { useCommentAction } from '../../hooks/useCommentAction'
 
 const Topic = () => {
-    const [reactionBox, setReactionBox] = useState(false)
     const { id } = useParams()
     const { getTopic, topic, statusTopic } = useTopicAction()
     const { user, getUser, userStatus } = useUserAction();
     const { loggedUser } = useAuth();
+    const { fetchComments, allComments } = useCommentAction();
 
 
     const TimeToNow = (fecha) => {
@@ -29,21 +30,23 @@ const Topic = () => {
         if (id) {
             getTopic(id)
         }
+
+        fetchComments(id)
     }, [])
 
+
     useEffect(() => {
-        console.log(topic);
         if (topic) {
             getUser({ id: topic.userId })
         }
     }, [topic])
-   
+
 
     if (statusTopic === 'Inactivo' || statusTopic === 'Cargando' || userStatus === 'Inactivo' || userStatus === 'Cargando') {
         return <h1 className='text-white'>Cargando...</h1>
     }
 
-       // const contenido = <> esto es un auto img auto         <img className="object-cover w-full h-full" src="https://firebasestorage.googleapis.com/v0/b/foromania.appspot.com/o/photoProfileUsers%2FZssxCKU5hxOCeBgyRUWKjl9m7UX2?alt=media&amp;token=fe877e69-aa42-4cc4-bd85-a67a7259a31a" alt="Foto de perfil" />             esto es una moto     img.moto </>
+    // const contenido = <> esto es un auto img auto         <img className="object-cover w-full h-full" src="https://firebasestorage.googleapis.com/v0/b/foromania.appspot.com/o/photoProfileUsers%2FZssxCKU5hxOCeBgyRUWKjl9m7UX2?alt=media&amp;token=fe877e69-aa42-4cc4-bd85-a67a7259a31a" alt="Foto de perfil" />             esto es una moto     img.moto </>
 
 
     return (
@@ -93,7 +96,7 @@ const Topic = () => {
                     </div>
                     <div className='py-4 '>
 
-                        {comentarios.map((item, i) => (
+                        {allComments.map((item, i) => (
                             <TopicComment data={item} key={i} />
                         ))}
 

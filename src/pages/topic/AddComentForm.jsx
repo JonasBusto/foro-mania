@@ -1,28 +1,18 @@
 import React, { useState, useRef } from 'react';
-import EmojiPicker from 'emoji-picker-react';
 import { Formik } from 'formik';
 import { format } from 'date-fns';
+import { useCommentAction } from '../../hooks/useCommentAction';
 
 const AddCommentForm = ({ loggedUser, topic }) => {
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const { addComment } = useCommentAction();
+
 
 
 
   const errorStyle = 'text-red-300 italic text-sm mt-1'
 
 
-  const handleEmojiClick = (event, emojiObject) => {
-    const cursorPosition = textAreaRef.current.selectionStart;
-    const textBeforeCursor = comment.substring(0, cursorPosition);
-    const textAfterCursor = comment.substring(cursorPosition);
-    setComment(textBeforeCursor + emojiObject.emoji + textAfterCursor);
-    setShowEmojiPicker(false);
-    textAreaRef.current.focus();
-  };
 
-  const toggleEmojiPicker = () => {
-    setShowEmojiPicker(!showEmojiPicker);
-  };
 
   return (
     <div className='border border-neutral-700'>
@@ -38,14 +28,9 @@ const AddCommentForm = ({ loggedUser, topic }) => {
         <button
           type='button'
           title='Agrega un emoji'
-          onClick={toggleEmojiPicker}
           className='pi pi-face-smile text-lg hover:bg-neutral-600 py-2 px-3 duration-200'
         ></button>
-        {showEmojiPicker && (
-          <div className='absolute bottom-12 left-12'>
-            <EmojiPicker onEmojiClick={handleEmojiClick} />
-          </div>
-        )}
+
       </div>
       <Formik
         initialValues={{
@@ -53,7 +38,6 @@ const AddCommentForm = ({ loggedUser, topic }) => {
           content: '',
           userId: loggedUser.uid,
           createdAt: format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSX"),
-
         }}
         validate={(values) => {
           let errors = {};
@@ -64,8 +48,9 @@ const AddCommentForm = ({ loggedUser, topic }) => {
           return errors
         }}
 
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={(values, { resetForm }) => {
+          addComment(values)
+          resetForm()
         }
         }
       >
