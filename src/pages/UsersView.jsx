@@ -6,11 +6,13 @@ import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
 import { useUserAction } from '../hooks/useUserAction';
 import UserCard from '../components/users/UserCard';
+import { ProgressSpinner } from 'primereact/progressspinner';
+import { Link } from 'react-router-dom';
 import '../styles/usersView.css'
 
 export const UsersView = () => {
 
-    const { users } = useUserAction()
+    const { users, allUsersStatus } = useUserAction()
 
     const [modalSwitch, setModalSwitch] = useState(false)
     const [globalFilter, setGlobalFilter] = useState('')
@@ -50,8 +52,8 @@ export const UsersView = () => {
 
         setCurrentUserSelected(user)
 
-        const adjustedLeft = event.clientX + 50
-        const adjustedTop = event.clientY - 20
+        const adjustedLeft = event.clientX + window.scrollX + 50;
+        const adjustedTop = event.clientY + window.scrollY - 20;
 
         setModalPosition({ top: `${adjustedTop}px`, left: `${adjustedLeft}px` })
         return setModalSwitch(true)
@@ -61,9 +63,9 @@ export const UsersView = () => {
         return (
             <div className="flex items-center gap-2 cursor-pointer" onClick={(event) => selectionChange(rowData, event)}>
                 <img alt={`imagen de perfil de usuario ${rowData.fullName}`} src={rowData.photoProfile} 
-                style={{ width: '36px', height: '36px' }} 
+                style={{ width: '56px', height: '56px' }} 
                 className='rounded-full ring-2'/>
-                <span className='pl-1 text-[16px]'>{rowData.fullName}</span>
+                <span className='pl-3 text-[17px]'>{rowData.fullName}</span>
             </div>
         )
     }
@@ -87,36 +89,51 @@ export const UsersView = () => {
 
 
   return (
-    <div className='flex flex-col items-center justify-center w-full bg-neutral-700 p-10'>
+    <div className='flex flex-col items-center justify-center w-full bg-[#121212] p-10'>
 
-    <DataTable value={users} 
-        paginator
-        rows={10} 
-        paginatorClassName='bg-neutral-800 text-white'
-        header={header}
-        globalFilterFields={['fullName']}
-        filters={{ 'global': { value: globalFilter, matchMode: 'contains' } }}
-        selectionMode="single" 
-        dataKey="uid"
-        stateStorage="session" 
-        stateKey="dt-state-demo-local"
-        emptyMessage={emptyMessage ?? ' '}
-    >
-        <Column headerClassName='column-header' header="Usuario" body={representativeBodyTemplate} sortable sortField='fullName' className='column-row'></Column>
-        <Column headerClassName='column-header' field='topicosCreados' header="Tópicos Creados" sortable className='column-row'></Column>
-        <Column headerClassName='column-header' field='recibidos' header="🩷 Recibidos" sortable className='column-row'></Column>
-        <Column headerClassName='column-header' field='dados' header="🩷 Dados" sortable className='column-row' ></Column>
+        {
+            allUsersStatus === 'Cargando' &&
+            <div className="min-h-[50vh] flex items-center">
+                <ProgressSpinner />
+            </div>
+        }
+        {
+            allUsersStatus === 'Exitoso' &&
+            <DataTable value={users} 
+                paginator
+                rows={10} 
+                paginatorClassName='bg-[#2a2a2a] text-white'
+                header={header}
+                globalFilterFields={['fullName']}
+                filters={{ 'global': { value: globalFilter, matchMode: 'contains' } }}
+                selectionMode="single" 
+                dataKey="uid"
+                stateStorage="session" 
+                stateKey="dt-state-demo-local"
+                emptyMessage={emptyMessage ?? ' '}
+            >
+                <Column headerClassName='column-header' header="Usuario" body={representativeBodyTemplate} sortable sortField='fullName' className='column-row'></Column>
+                <Column headerClassName='column-header' field='topicosCreados' header="Tópicos Creados" sortable className='column-row'></Column>
+                <Column headerClassName='column-header' field='recibidos' header="🩷 Recibidos" sortable className='column-row'></Column>
+                <Column headerClassName='column-header' field='dados' header="🩷 Dados" sortable className='column-row' ></Column>
 
-    </DataTable>
+            </DataTable>        
+        }
+        {
+            allUsersStatus === 'Fallido' &&
+            <div className="card flex justify-content-center">
+                <p>Parece que algo nos falta.</p>
+                <Link to={'/'}>Volver a home</Link>
+            </div>
+        }
 
-    {
-        modalSwitch && 
-        <article ref={modalRef} style={{ position: 'absolute', top: modalPosition.top, left: modalPosition.left }}>
-            <UserCard userProps={currentUserSelected}/>
-        </article>
-    }
 
-
+        {
+            modalSwitch && 
+            <article ref={modalRef} style={{ position: 'absolute', top: modalPosition.top, left: modalPosition.left }}>
+                <UserCard userProps={currentUserSelected}/>
+            </article>
+        }
     </div>
   )
 }

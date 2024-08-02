@@ -5,6 +5,7 @@ import { clearUser } from '../store/user/slice';
 
 export function useUserAction() {
   const users = useAppSelector((state) => state.user.users);
+  const allUsersStatus = useAppSelector((state) => state.user.status);
   const user = useAppSelector((state) => state.user.user);
   const userStatusUpdate = useAppSelector((state) => state.user.statusUpdate);
   const userStatus = useAppSelector((state) => state.user.statusUser)
@@ -35,6 +36,7 @@ export function useUserAction() {
     clearStateUser,
     updateProfile,
     userStatusUpdate,
-    userStatus
+    userStatus,
+    allUsersStatus
   };
 }
