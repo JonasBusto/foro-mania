@@ -1,6 +1,5 @@
-import React, {useEffect} from "react"
+import React from "react"
 import { useNavigate } from "react-router-dom";
-import { useUserAction } from "../../hooks/useUserAction";
 import '../../styles/userCard.css'
 
 
@@ -9,34 +8,28 @@ const UserCard = ({userProps}) => {
     const { photoProfile, email, uid, fullName } = userProps
     const username = fullName.split(' ')[0].toLowerCase()
 
-    const { getUser, user } = useUserAction()
     const navigate = useNavigate()
 
-    const navigateToUserSummary = (name, id) => {
+    const navigateToUserSummary = (id) => {
 
-        getUser({id: id})
         navigate(`/users-view/${id}/summary`)
     }
-    
-
-    useEffect(() => {
-        console.log(user);
-    }, [user])
 
 
   return (
-    <div className="flex flex-col px-2 bg-black shadow-md rounded-md relative">
+    <div className="flex flex-col px-4 relative rounded-md"
+        style={{backgroundColor: 'rgba(0,0,0,.9)',filter: 'drop-shadow(0 0 6px #61dafb)'}}>
         <div className="flex">
             <figure className="myFigure">
                 <img src={photoProfile}
-                    onClick={() => navigateToUserSummary(username, uid)}
+                    onClick={() => navigateToUserSummary(uid)}
                     alt="foto de perfil del usuario" className="rounded-full ring-2 cursor-pointer"
                 />
             </figure>
 
             <div className='flex flex-col ml-3 '>
                 <h2 className="text-3xl text-white cursor-pointer"
-                    onClick={() => navigateToUserSummary(username, uid)} 
+                    onClick={() => navigateToUserSummary(uid)} 
                 >
                     @{username}
                 </h2>
