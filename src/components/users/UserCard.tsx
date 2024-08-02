@@ -18,12 +18,12 @@ const UserCard = ({userProps}) => {
 
   return (
     <div className="flex flex-col px-4 relative rounded-md"
-        style={{backgroundColor: 'rgba(0,0,0,.9)',filter: 'drop-shadow(0 0 6px #61dafb)'}}>
+        style={{backgroundColor: 'rgba(15,15,15,.7)',filter: 'drop-shadow(0 0 6px #61dafb)'}}>
         <div className="flex">
             <figure className="myFigure">
                 <img src={photoProfile}
                     onClick={() => navigateToUserSummary(uid)}
-                    alt="foto de perfil del usuario" className="rounded-full ring-2 cursor-pointer"
+                    alt="foto de perfil del usuario" className="rounded-full ring-1 cursor-pointer"
                 />
             </figure>
 
