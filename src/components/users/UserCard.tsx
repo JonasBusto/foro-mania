@@ -12,11 +12,10 @@ const UserCard = ({userProps}) => {
     const { getUser, user } = useUserAction()
     const navigate = useNavigate()
 
-
     const navigateToUserSummary = (name, id) => {
 
-        getUser(id)
-        // navigate(`/users-view/${name}/summary`)
+        getUser({id: id})
+        navigate(`/users-view/${id}/summary`)
     }
     
 
