@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { topicExtraReducers } from "./extraReducers"; // Importa tu extraReducers
-
+import { topicExtraReducers } from "./extraReducers"; 
 const initialState = {
     topics: [],
     topic: null,

@@ -20,7 +20,7 @@ export const getTopicById = createAsyncThunk(
     async (id) => { 
         try {
             const querySnapshot = await getDoc(doc(db, 'topics', id ))
-            console.log(querySnapshot.data());
+            
             if(querySnapshot.exists()) {
                 return {uid: querySnapshot.id, ...querySnapshot.data()}
             }else {

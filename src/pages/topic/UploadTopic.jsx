@@ -9,7 +9,6 @@ const UploadTopic = () => {
     const { loggedUser } = useAuth();
 
 
-    console.log(loggedUser);
 
     const labelStyle = 'text-white font-semibold mb-2'
     const inputStyle = 'h-8 px-3 outline-none '
@@ -41,7 +40,6 @@ const UploadTopic = () => {
                 }}
 
                 onSubmit={(values) => {
-                    console.log(values);
                     addTopic(values)
                 }
                 }
@@ -61,6 +59,7 @@ const UploadTopic = () => {
                                 <select className={inputStyle} id="" name='category' value={values.category} onChange={handleChange} onBlur={handleBlur}>
                                     <option value="">Seleccionar</option>
                                     <option value="humor">humor</option>
+                                    <option value="ciencia">ciencia</option>
                                 </select>
                                 {touched.category && errors.category && <p className={errorStyle}>{errors.category}</p>}
                             </div>
