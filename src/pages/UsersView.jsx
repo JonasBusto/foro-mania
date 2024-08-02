@@ -5,8 +5,8 @@ import { InputText } from 'primereact/inputtext';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
 import { useUserAction } from '../hooks/useUserAction';
-import '../styles/usersView.css'
 import UserCard from '../components/users/UserCard';
+import '../styles/usersView.css'
 
 export const UsersView = () => {
 
@@ -49,7 +49,11 @@ export const UsersView = () => {
         modalSwitchOff()
 
         setCurrentUserSelected(user)
-        setModalPosition({ top: `${event.clientY}px`, left: `${event.clientX}px` });
+
+        const adjustedLeft = event.clientX + 50
+        const adjustedTop = event.clientY - 20
+
+        setModalPosition({ top: `${adjustedTop}px`, left: `${adjustedLeft}px` })
         return setModalSwitch(true)
     }
 
@@ -108,7 +112,7 @@ export const UsersView = () => {
     {
         modalSwitch && 
         <article ref={modalRef} style={{ position: 'absolute', top: modalPosition.top, left: modalPosition.left }}>
-            <UserCard user={currentUserSelected}/>
+            <UserCard userProps={currentUserSelected}/>
         </article>
     }
 

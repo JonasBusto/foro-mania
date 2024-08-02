@@ -11,6 +11,8 @@ import { About } from '../pages/About';
 import { UsersView } from '../pages/UsersView';
 import Topic from '../pages/topic/Topic';
 import UploadTopic from '../pages/topic/UploadTopic';
+import { UsersSummary } from '../pages/UsersSummary';
+
 
 export function AppRoutes() {
   return (
@@ -20,6 +22,7 @@ export function AppRoutes() {
       <Route path='/topic' element={<Topic />} />
       <Route path='/about' element={<About />} />
       <Route path='/users-view' element={<UsersView />} />
+      <Route path='/users-view/:username/summary' element={<UsersSummary />} />
       <Route element={<PrivateRoute allowedRoles={['admin']} />}>
         <Route path='/users' element={<Users />} />
         <Route path='/users/upload' element={<FormUser />} />
