@@ -4,7 +4,14 @@ import { es } from 'date-fns/locale';
 import ReactionButton from '../../components/buttons/ReactionButton';
 import { useUserAction } from '../../hooks/useUserAction';
 
-const TopicComment = ({ data }) => {
+const TopicComment = ({
+  data,
+  reactions,
+  addReaction,
+  updateReaction,
+  deleteReaction,
+  loggedUser,
+}) => {
   const { users } = useUserAction();
 
   const TimeToNow = (fecha) => {
@@ -37,7 +44,14 @@ const TopicComment = ({ data }) => {
       </div>
       <div className='flex flex-col md:flex-row justify-between border-b border-neutral-600 px-4 py-2 md:items-center my-8'>
         <div className='ms-auto border-s border-neutral-500 ps-3'>
-          <ReactionButton />
+          <ReactionButton
+            reactions={reactions}
+            addReaction={addReaction}
+            updateReaction={updateReaction}
+            deleteReaction={deleteReaction}
+            loggedUser={loggedUser}
+            content={data}
+          />
         </div>
       </div>
     </div>

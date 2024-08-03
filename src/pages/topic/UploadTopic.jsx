@@ -3,9 +3,11 @@ import React from 'react';
 import { useTopicAction } from '../../hooks/useTopicAction';
 import { useAuth } from '../../hooks/useAuth';
 import { format } from 'date-fns';
+import { useCategoryAction } from '../../hooks/useCategoryAction';
 
 const UploadTopic = () => {
   const { addTopic, statusCreateTopic } = useTopicAction();
+  const { categories } = useCategoryAction();
   const { loggedUser } = useAuth();
 
   const labelStyle = 'text-white font-semibold mb-2';
@@ -17,7 +19,7 @@ const UploadTopic = () => {
       <Formik
         initialValues={{
           title: '',
-          category: '',
+          categoryId: '',
           content: '',
           userId: loggedUser.uid,
           createdAt: format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSX"),
@@ -29,8 +31,8 @@ const UploadTopic = () => {
             errors.title = 'Requerido';
           }
 
-          if (values.category === '') {
-            errors.category = 'Requerido';
+          if (values.categoryId === '') {
+            errors.categoryId = 'Requerido';
           }
 
           if (values.content === '') {
@@ -80,18 +82,20 @@ const UploadTopic = () => {
               </label>
               <select
                 className={inputStyle}
-                id=''
-                name='category'
-                value={values.category}
+                name='categoryId'
+                value={values.categoryId}
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
                 <option value=''>Seleccionar</option>
-                <option value='humor'>humor</option>
-                <option value='ciencia'>ciencia</option>
+                {categories.map((category) => (
+                  <option key={category.uid} value={category.uid}>
+                    {category.title}
+                  </option>
+                ))}
               </select>
-              {touched.category && errors.category && (
-                <p className={errorStyle}>{errors.category}</p>
+              {touched.categoryId && errors.categoryId && (
+                <p className={errorStyle}>{errors.categoryId}</p>
               )}
             </div>
             <div className='flex flex-col'>

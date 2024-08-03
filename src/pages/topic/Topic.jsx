@@ -9,6 +9,8 @@ import { formatDistanceToNow, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { useUserAction } from '../../hooks/useUserAction';
 import { useCommentAction } from '../../hooks/useCommentAction';
+import { useReactionAction } from '../../hooks/useReactionAction';
+import { useCategoryAction } from '../../hooks/useCategoryAction';
 
 const Topic = () => {
   const { id } = useParams();
@@ -16,6 +18,9 @@ const Topic = () => {
   const { user, getUser, userStatus } = useUserAction();
   const { loggedUser } = useAuth();
   const { fetchComments, allComments } = useCommentAction();
+  const { reactions, addReaction, updateReaction, deleteReaction } =
+    useReactionAction();
+  const { getCategory, statusCategory, category } = useCategoryAction();
 
   const TimeToNow = (fecha) => {
     const fechaISO = parseISO(fecha);
@@ -33,6 +38,7 @@ const Topic = () => {
   useEffect(() => {
     if (topic) {
       getUser({ id: topic.userId });
+      getCategory({ id: topic.categoryId });
     }
   }, [topic]);
 
@@ -40,7 +46,9 @@ const Topic = () => {
     statusTopic === 'Inactivo' ||
     statusTopic === 'Cargando' ||
     userStatus === 'Inactivo' ||
-    userStatus === 'Cargando'
+    userStatus === 'Cargando' ||
+    statusCategory === 'Inactivo' ||
+    statusCategory === 'Cargando'
   ) {
     return <h1 className='text-white'>Cargando...</h1>;
   }
@@ -54,7 +62,7 @@ const Topic = () => {
         <div>
           <div className='border-b border-neutral-700 py-4'>
             <h2 className='text-3xl font-semibold'>{topic.title}</h2>
-            <p className='text-neutral-400'>{topic.category}</p>
+            <p className='text-neutral-400'>{category.title}</p>
           </div>
           <div className='py-3 flex justify-between'>
             <div className='flex gap-4'>
@@ -87,12 +95,33 @@ const Topic = () => {
               </div>
             </div>
             <div className='flex gap-3 ms-auto'>
-              <ReactionButton />
+              <ReactionButton
+                reactions={reactions.filter(
+                  (reaction) => reaction.contentId === topic.uid
+                )}
+                addReaction={addReaction}
+                updateReaction={updateReaction}
+                deleteReaction={deleteReaction}
+                loggedUser={loggedUser}
+                content={topic}
+              />
             </div>
           </div>
           <div className='py-4 '>
             {allComments.length > 0 ? (
-              allComments.map((item, i) => <TopicComment data={item} key={i} />)
+              allComments.map((item, i) => (
+                <TopicComment
+                  data={item}
+                  reactions={reactions.filter(
+                    (reaction) => reaction.contentId === item.uid
+                  )}
+                  addReaction={addReaction}
+                  updateReaction={updateReaction}
+                  deleteReaction={deleteReaction}
+                  loggedUser={loggedUser}
+                  key={i}
+                />
+              ))
             ) : (
               <div className=' italic border rounded-md py-6 px-4'>
                 <p>

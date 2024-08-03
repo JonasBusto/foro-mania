@@ -16,7 +16,7 @@ export const getComments = createAsyncThunk(
       const querySnapshot = await getDocs(query(collection(db, 'comments')));
 
       const filteredComments = querySnapshot.docs
-        .map((doc) => ({ id: doc.id, ...doc.data() }))
+        .map((doc) => ({ uid: doc.id, ...doc.data() }))
         .filter((comment) => comment.topicId === id);
 
       return filteredComments;
@@ -35,7 +35,7 @@ export const createComment = createAsyncThunk(
       const createdComment = await getDoc(doc(db, 'comments', res.id));
 
       if (createdComment.exists()) {
-        return { uid: createComment.id, ...createdComment.data() };
+        return { uid: createdComment.id, ...createdComment.data() };
       } else {
         return null;
       }
