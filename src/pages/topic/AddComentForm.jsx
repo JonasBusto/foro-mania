@@ -6,18 +6,14 @@ import { useCommentAction } from '../../hooks/useCommentAction';
 const AddCommentForm = ({ loggedUser, topic }) => {
   const { addComment } = useCommentAction();
 
-
-
-
-  const errorStyle = 'text-red-300 italic text-sm mt-1'
-
-
-
+  const errorStyle = 'text-red-300 italic text-sm mt-1';
 
   return (
     <div className='border border-neutral-700'>
       <div className=''>
-        <h3 className='text-lg my-4 ms-4 font-semibold'>Agrega un comentario:</h3>
+        <h3 className='text-lg my-4 ms-4 font-semibold'>
+          Agrega un comentario:
+        </h3>
       </div>
       <div className='bg-neutral-700 relative'>
         <button
@@ -30,7 +26,6 @@ const AddCommentForm = ({ loggedUser, topic }) => {
           title='Agrega un emoji'
           className='pi pi-face-smile text-lg hover:bg-neutral-600 py-2 px-3 duration-200'
         ></button>
-
       </div>
       <Formik
         initialValues={{
@@ -43,19 +38,24 @@ const AddCommentForm = ({ loggedUser, topic }) => {
           let errors = {};
 
           if (values.content === '') {
-            errors.content = 'No se ingresó conenido'
+            errors.content = 'Requerido';
           }
-          return errors
+
+          return errors;
         }}
-
         onSubmit={(values, { resetForm }) => {
-          addComment(values)
-          resetForm()
-        }
-        }
+          addComment(values);
+          resetForm();
+        }}
       >
-
-        {({ handleSubmit, errors, touched, values, handleChange, handleBlur }) => (
+        {({
+          handleSubmit,
+          errors,
+          touched,
+          values,
+          handleChange,
+          handleBlur,
+        }) => (
           <form onSubmit={handleSubmit}>
             <textarea
               value={values.content}
@@ -64,16 +64,19 @@ const AddCommentForm = ({ loggedUser, topic }) => {
               onBlur={handleBlur}
               className='w-full h-60 resize-none text-neutral-900 p-3 outline-none'
             ></textarea>
-            {touched.content && errors.content && <p className={errorStyle}>{errors.content}</p>}
+            {touched.content && errors.content && (
+              <p className={errorStyle}>{errors.content}</p>
+            )}
             <div className='text-end p-2'>
-              <button type='submit' className='bg-blue-900 hover:bg-blue-800 duration-200 py-2 px-3'>
-                Agregar comentario:
+              <button
+                type='submit'
+                className='bg-blue-900 hover:bg-blue-800 duration-200 py-2 px-3'
+              >
+                Agregar comentario
               </button>
             </div>
           </form>
-
         )}
-
       </Formik>
     </div>
   );
