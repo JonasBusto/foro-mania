@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '~react-quill/dist/quill.snow.css';
+
 html {
   scrollbar-width: thin;
   scrollbar-color: #1b95d2 #191414;
@@ -27,4 +29,25 @@ html {
 
 ::-webkit-scrollbar-thumb:active {
   background-color: #1b95d2;
+}
+
+.ql-container {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.ql-toolbar {
+  background-color: #f0f0f0;
+}
+
+.ql-container.ql-snow {
+  border: 1px solid #ddd;
+}
+
+.ql-toolbar .ql-picker {
+  color: #000;
+}
+
+.ql-toolbar button {
+  color: #000;
 }

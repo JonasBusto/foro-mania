@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import ReactionButton from '../../components/buttons/ReactionButton';
 import { useUserAction } from '../../hooks/useUserAction';
+import { TextEditor } from '../../components/topic/TextEditor';
 
 const TopicComment = ({
   data,
@@ -40,7 +41,7 @@ const TopicComment = ({
         </div>
       </div>
       <div className='leading-loose'>
-        <p>{data.content}</p>
+        <TextEditor value={data.content} readOnly={true} />
       </div>
       <div className='flex flex-col md:flex-row justify-between border-b border-neutral-600 px-4 py-2 md:items-center my-8'>
         <div className='ms-auto border-s border-neutral-500 ps-3'>

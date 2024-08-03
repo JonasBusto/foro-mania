@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { db } from '../../services/firebase';
+import { db, storage } from '../../services/firebase';
 import {
   addDoc,
   collection,
@@ -8,6 +8,7 @@ import {
   getDocs,
   query,
 } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 export const getComments = createAsyncThunk(
   'comment/getAll',
@@ -30,7 +31,37 @@ export const createComment = createAsyncThunk(
   'comment/create',
   async (comment, { rejectWithValue }) => {
     try {
-      const res = await addDoc(collection(db, 'comments'), comment);
+      const imageRegex = /<img[^>]+src="([^">]+)"/g;
+      const imageUrls = [];
+      let match;
+
+      while ((match = imageRegex.exec(comment.content)) !== null) {
+        imageUrls.push(match[1]);
+      }
+
+      let updatedContent = comment.content;
+
+      for (const url of imageUrls) {
+        const response = await fetch(url);
+        const blob = await response.blob();
+
+        const imageRef = ref(
+          storage,
+          `images/${Date.now()}_${url.split('/').pop()}`
+        );
+        await uploadBytes(imageRef, blob);
+
+        const newUrl = await getDownloadURL(imageRef);
+
+        updatedContent = updatedContent.replace(url, newUrl);
+      }
+
+      const commentData = {
+        ...comment,
+        content: updatedContent,
+      };
+
+      const res = await addDoc(collection(db, 'comments'), commentData);
 
       const createdComment = await getDoc(doc(db, 'comments', res.id));
 

@@ -4,6 +4,7 @@ import { useTopicAction } from '../../hooks/useTopicAction';
 import { useAuth } from '../../hooks/useAuth';
 import { format } from 'date-fns';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
+import { TextEditor } from '../../components/topic/TextEditor';
 
 const UploadTopic = () => {
   const { addTopic, statusCreateTopic } = useTopicAction();
@@ -52,6 +53,7 @@ const UploadTopic = () => {
           values,
           handleChange,
           handleBlur,
+          setFieldValue,
         }) => (
           <form
             onSubmit={handleSubmit}
@@ -102,14 +104,10 @@ const UploadTopic = () => {
               <label htmlFor='' className={labelStyle}>
                 Contenido:
               </label>
-              <textarea
-                className='resize-none h-60 outline-none p-3'
-                id=''
-                name='content'
+              <TextEditor
                 value={values.content}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              ></textarea>
+                onChange={(content) => setFieldValue('content', content)}
+              />
               {touched.content && errors.content && (
                 <p className={errorStyle}>{errors.content}</p>
               )}
