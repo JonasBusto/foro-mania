@@ -14,36 +14,31 @@ const UserCard = ({userProps}) => {
 
         navigate(`/users-view/${id}/summary`)
     }
-
+    
 
   return (
-    <div className="flex flex-col px-4 relative rounded-md"
-        style={{backgroundColor: 'rgba(15,15,15,.7)',filter: 'drop-shadow(0 0 6px #61dafb)'}}>
-        <div className="flex">
-            <figure className="myFigure">
+    <div className="userCardContainer">
+        <div className="brandContainer">
+            <figure >
                 <img src={photoProfile}
                     onClick={() => navigateToUserSummary(uid)}
-                    alt="foto de perfil del usuario" className="rounded-full ring-1 cursor-pointer"
+                    alt="foto de perfil del usuario" className="rounded-full cursor-pointer"
                 />
             </figure>
 
-            <div className='flex flex-col ml-3 '>
-                <h2 className="text-3xl text-white cursor-pointer"
-                    onClick={() => navigateToUserSummary(uid)} 
-                >
+            <section>
+                <h2 onClick={() => navigateToUserSummary(uid)}>
                     @{username}
                 </h2>
                 <span className="text-white">
                     {email}
                 </span>
-            </div>
+            </section>
         </div>
 
-        <div style={{position: 'absolute', bottom: '4px', left: '16px', width: '90%'}}
-            className="flex justify-between"
-        >
-            <p className="text-white z-10">userdata</p>
-            <p className="text-white z-10">i</p>
+        <div className="userInfo">
+            <p>userdata</p>
+            <p>i</p>
         </div>
     </div>
 

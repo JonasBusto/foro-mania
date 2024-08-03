@@ -9,6 +9,7 @@ import UserCard from '../components/users/UserCard';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Link } from 'react-router-dom';
 import '../styles/usersView.css'
+import { Banner } from '../components/home/Banner';
 
 export const UsersView = () => {
 
@@ -48,12 +49,17 @@ export const UsersView = () => {
     }
 
     const selectionChange = (user, event) => {
-        modalSwitchOff()
 
+        modalSwitchOff()
         setCurrentUserSelected(user)
 
+        if (window.innerWidth < 768) {
+            setModalPosition({ top: '10%', left: '10%' })
+            return setModalSwitch(true)
+        }        
+
         const adjustedLeft = event.clientX + window.scrollX + 50;
-        const adjustedTop = event.clientY + window.scrollY - 20;
+        const adjustedTop = event.clientY + window.scrollY - 100;
 
         setModalPosition({ top: `${adjustedTop}px`, left: `${adjustedLeft}px` })
         return setModalSwitch(true)
@@ -89,7 +95,8 @@ export const UsersView = () => {
 
 
   return (
-    <div className='flex flex-col items-center justify-center w-full bg-[#121212] p-10'>
+    <main className='bg-[#121212]'>
+        <Banner />
 
         {
             allUsersStatus === 'Cargando' &&
@@ -134,6 +141,6 @@ export const UsersView = () => {
                 <UserCard userProps={currentUserSelected}/>
             </article>
         }
-    </div>
+    </main>
   )
 }
