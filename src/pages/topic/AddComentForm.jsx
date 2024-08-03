@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
 import { format } from 'date-fns';
 import { useCommentAction } from '../../hooks/useCommentAction';
+import { TextEditor } from '../../components/topic/TextEditor';
 
 const AddCommentForm = ({ loggedUser, topic }) => {
   const { addComment } = useCommentAction();
@@ -48,22 +49,12 @@ const AddCommentForm = ({ loggedUser, topic }) => {
           resetForm();
         }}
       >
-        {({
-          handleSubmit,
-          errors,
-          touched,
-          values,
-          handleChange,
-          handleBlur,
-        }) => (
+        {({ handleSubmit, errors, touched, values, setFieldValue }) => (
           <form onSubmit={handleSubmit}>
-            <textarea
+            <TextEditor
               value={values.content}
-              name='content'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className='w-full h-60 resize-none text-neutral-900 p-3 outline-none'
-            ></textarea>
+              onChange={(content) => setFieldValue('content', content)}
+            />
             {touched.content && errors.content && (
               <p className={errorStyle}>{errors.content}</p>
             )}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import TopicComment from './TopicComment';
 import AddCommentForm from './AddComentForm';
 import ReactionButton from '../../components/buttons/ReactionButton';
@@ -11,6 +11,7 @@ import { useUserAction } from '../../hooks/useUserAction';
 import { useCommentAction } from '../../hooks/useCommentAction';
 import { useReactionAction } from '../../hooks/useReactionAction';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
+import { TextEditor } from '../../components/topic/TextEditor';
 
 const Topic = () => {
   const { id } = useParams();
@@ -81,7 +82,7 @@ const Topic = () => {
             </div>
           </div>
           <div className='leading-loose'>
-            <div>{topic.content}</div>
+            <TextEditor value={topic.content} readOnly={true} />
           </div>
           <div className='flex flex-col md:flex-row justify-between border border-neutral-600 bg-neutral-700 px-4 py-2 md:items-center my-8'>
             <div className='flex gap-4 mb-4 md:mb-0'>
