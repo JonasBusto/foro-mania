@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import usuario1 from '/img/avatar_168725.png';
-import { comentarios } from './comentariosData';
 import TopicComment from './TopicComment';
 import AddCommentForm from './AddComentForm';
 import ReactionButton from '../../components/buttons/ReactionButton';
@@ -30,7 +28,7 @@ const Topic = () => {
     }
 
     fetchComments(id);
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (topic) {
@@ -84,7 +82,7 @@ const Topic = () => {
                 <p className='text-sm'>creado</p>
               </div>
               <div className='text-center'>
-                <p className='text-lg'>3</p>
+                <p className='text-lg'>{allComments.length}</p>
                 <p className='text-sm'>respuestas</p>
               </div>
             </div>
@@ -93,15 +91,21 @@ const Topic = () => {
             </div>
           </div>
           <div className='py-4 '>
-            {allComments.map((item, i) => (
-              <TopicComment data={item} key={i} />
-            ))}
-
-            {/* <div className=' italic border rounded-md py-6 px-4'>
-                            <p>Todavía nadie ha hecho un comentario, puedes ser el primero...</p>
-                        </div> */}
+            {allComments.length > 0 ? (
+              allComments.map((item, i) => <TopicComment data={item} key={i} />)
+            ) : (
+              <div className=' italic border rounded-md py-6 px-4'>
+                <p>
+                  Todavía nadie ha hecho un comentario, puedes ser el primero...
+                </p>
+              </div>
+            )}
           </div>
-          <AddCommentForm loggedUser={loggedUser} topic={topic} />
+          {loggedUser ? (
+            <AddCommentForm loggedUser={loggedUser} topic={topic} />
+          ) : (
+            <p>Debes autenticarte para comentar</p>
+          )}
         </div>
       </div>
     </div>
