@@ -1,28 +1,74 @@
-.myFigure{
+.userCardContainer{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    padding-bottom: 12px;
+    position: relative;
+    background: linear-gradient(90deg, rgba(89, 89, 89) -20%, rgba(32, 32, 32) 80%);
+    filter: drop-shadow(0 0 4px rgb(255, 255, 255, .9));
+    min-width: 450px;
+    border-radius: 45px 45px 45px 0;
+    gap: 16px;
+}
+
+.brandContainer{
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.brandContainer figure{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.myFigure img{
-    width: 100px;
-    height: 100px;
+.brandContainer figure img{
+    width: 120px;
+    height: 120px;
     position: relative;
-    top: -40%;
     cursor: pointer;
+    /* filter: drop-shadow(0 0 5px #61dafb); */
+
 }
 
-.myFigure::before {
+.brandContainer figure::before {
     content: '';
     position: absolute;
-    top: -40%; /* Ajusta la posición según necesites */
+    top: 16px; /* Ajusta la posición según necesites */
     left: 16px;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     background: linear-gradient(90deg, #d4d4d4 25%, #e0e0e0 50%, #d4d4d4 75%);
     /* background: linear-gradient(90deg, #4a4a4a 25%, #5c5c5c 50%, #4a4a4a 75%); */
     border-radius: 50%;
     animation: shine 2s linear forwards;
+}
+
+.brandContainer section{
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+}
+
+.brandContainer section h2{
+    color: rgba(255, 255, 255, .9);
+    cursor: pointer;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.userInfo{
+    display: flex;
+    gap: 16px;
+}
+
+.userInfo p{
+    color: white;
+    background-color: rgb(0, 0, 0, .9);
+    padding: 0 8px 2px;
+    border-radius: 3px;
 }
 
 @keyframes shine {
@@ -32,4 +78,23 @@
     100% {
         background-position: 150px 0;
     }
+}
+
+
+@media (max-width: 768px) {
+
+    .userCardContainer{
+        min-width: 290px;
+        width: 100%;
+    }
+
+    .brandContainer{
+        flex-direction: column;
+    }
+
+    .brandContainer section h2{
+        font-size: 32px;
+    }
+
+
 }
