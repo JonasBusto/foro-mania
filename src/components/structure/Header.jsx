@@ -15,21 +15,20 @@ export function Header() {
 
   const { loggedUser } = useAuth();
   const { isLoading } = useLoad();
-  const menuRef = useRef()
+  const menuRef = useRef();
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setOpenMenu(false);
+      setOpenMenu(false);
     }
   };
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
 
   const handleSignUp = () => {
     setOpenRegister((prevState) => !prevState);
@@ -153,7 +152,10 @@ export function Header() {
               <i className='pi pi-bars text-2xl'></i>
             </button>
             {openMenu && (
-              <div ref={menuRef} className='absolute z-10 right-0 top-full mt-3 border-2 border-[#61dafb] rounded-md shadow-lg w-44 bg-gray-800'>
+              <div
+                ref={menuRef}
+                className='absolute z-10 right-0 top-full mt-3 border-2 border-[#61dafb] rounded-md shadow-lg w-44 bg-gray-800'
+              >
                 <NavMenu />
               </div>
             )}

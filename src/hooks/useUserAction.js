@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useAppDisptach, useAppSelector } from './store';
 import { getUserById, updateUser } from '../store/user/thunks';
 import { clearUser } from '../store/user/slice';
@@ -8,7 +7,7 @@ export function useUserAction() {
   const allUsersStatus = useAppSelector((state) => state.user.status);
   const user = useAppSelector((state) => state.user.user);
   const userStatusUpdate = useAppSelector((state) => state.user.statusUpdate);
-  const userStatus = useAppSelector((state) => state.user.statusUser)
+  const userStatus = useAppSelector((state) => state.user.statusUser);
 
   const dispatch = useAppDisptach();
 
@@ -37,6 +36,6 @@ export function useUserAction() {
     updateProfile,
     userStatusUpdate,
     userStatus,
-    allUsersStatus
+    allUsersStatus,
   };
 }
