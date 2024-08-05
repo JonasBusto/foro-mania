@@ -74,13 +74,13 @@ export const CategoryMenu = () => {
           Categorías
         </Link>
         <Link
-          to='/'
+          to='/topic-list?orderBy=last'
           className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
         >
           Últimos
         </Link>
         <Link
-          to='/'
+          to='/topic-list?orderBy=top'
           className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
         >
           Top

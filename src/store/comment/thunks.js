@@ -15,12 +15,14 @@ export const getComments = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const querySnapshot = await getDocs(query(collection(db, 'comments')));
+      const allComments = querySnapshot.docs.map((doc) => ({ uid: doc.id, ...doc.data() }));
 
-      const filteredComments = querySnapshot.docs
-        .map((doc) => ({ uid: doc.id, ...doc.data() }))
-        .filter((comment) => comment.topicId === id);
+      if (id) {
+        const filteredComments = allComments.filter((comment) => comment.topicId === id);
+        return filteredComments;
+      }
 
-      return filteredComments;
+      return allComments;
     } catch (error) {
       return rejectWithValue(error.message);
     }

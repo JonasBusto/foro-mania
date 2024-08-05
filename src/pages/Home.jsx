@@ -11,11 +11,11 @@ export const Home = () => {
   return (
     <section className='bg-[#121212] text-[#e5e5e5]'>
       <Banner />
-      <div className='flex items-center'>
+      <div className='flex flex-col lg:flex-row items-center'>
         {
           loggedUser !== null && <Link
             to='/upload-topic'
-            className='bg-red-600 text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-red-700 duration-200 w-52 '
+            className='bg-red-600 text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-red-700 duration-200 w-[94%] sm:w-52 '
           >
             Nueva Publicación
           </Link>

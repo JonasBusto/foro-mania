@@ -60,7 +60,6 @@ export function Header() {
   };
 
   const handleSearchSubmit = () => {
-    // console.log('Buscando:', searchQuery);
     navigate(`/topic-list?search=${searchQuery}`)
   };
 
