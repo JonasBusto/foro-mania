@@ -1,0 +1,142 @@
+.custom-dialog .p-dialog-header {
+  background-color: #191414;
+}
+
+.p-dialog-header {
+  padding: 0.5rem 1rem;
+}
+
+.custom-dialog .p-dialog-content,
+.p-dropdown-items-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: #1b95d2 #191414;
+}
+
+.custom-dialog .p-dialog-header-close {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.custom-dialog .p-dialog-header-close:hover {
+  color: #1b95d2;
+}
+
+.p-dropdown-item > .p-dropdown-item-label {
+  width: 100% !important;
+}
+
+.p-dropdown-filter-container input {
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #333333;
+  border: 1px solid #444444;
+  color: #e0e0e0;
+  border-radius: 4px;
+  outline: none;
+  font-size: 14px;
+}
+
+.p-dropdown-filter-container input::placeholder {
+  color: #aaaaaa;
+}
+
+.p-dropdown-filter-container input:focus {
+  border-color: #555555;
+  box-shadow: 0 0 0 2px rgba(85, 85, 85, 0.5);
+}
+
+.p-dialog-header-icon {
+  color: white;
+}
+
+.title-multicolor {
+  background: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+  color: transparent;
+}
+
+.custom-nav-menu .p-menu {
+  position: relative;
+  z-index: 1000;
+}
+
+.p-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.p-dropdown:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+.custom-dropdown {
+  background-color: #404040 !important;
+}
+
+.p-dropdown-panel {
+  background-color: #404040 !important;
+}
+
+.p-dropdown-header {
+  background-color: #404040 !important;
+}
+
+.p-dropdown-item {
+  background-color: #404040 !important;
+}
+
+.p-dropdown-item.p-highlight {
+  background-color: #404040 !important;
+}
+.p-dropdown-label {
+  color: white;
+}
+.p-dropdown-trigger {
+  color: white;
+}
+.p-dropdown-filter {
+  background-color: white !important;
+  color: #404040;
+}
+.p-dropdown-empty-message {
+  background-color: #404040 !important;
+  color: white;
+}
+.p-menuitem {
+  background-color: #404040;
+  color: white;
+}
+.p-menuitem-link:hover {
+  background-color: white;
+  color: #404040;
+}
+.p-menuitem-text {
+  color: white;
+}
+.p-menuitem-text:hover {
+  color: #404040;
+}
+.p-menuitem-icon {
+  color: white;
+}
+.p-menuitem-icon:hover {
+  color: #404040;
+}
+.p-component {
+  background-color: #404040;
+}
+
+.form-contact .p-float-label {
+  width: 100%;
+}

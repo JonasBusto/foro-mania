@@ -7,8 +7,8 @@ const initialState = {
   loggedUser: null,
   status: 'Inactivo',
   statusUser: 'Inactivo',
-  statusLogin: 'Inactivo',
-  statusRegister: 'Inactivo',
+  statusAuth: 'Inactivo',
+  statusSign: 'Inactivo',
   statusDelete: 'Inactivo',
   statusUpdate: 'Inactivo',
   error: null,
@@ -17,8 +17,13 @@ const initialState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    clearUser(state) {
+      state.user = null;
+    },
+  },
   extraReducers: userExtraReducers,
 });
 
 export default userSlice.reducer;
+export const { clearUser } = userSlice.actions;

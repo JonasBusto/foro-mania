@@ -1,0 +1,50 @@
+.p-datatable{
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.p-datatable-header {
+    background-color: #2a2a2a;
+}
+
+.column-header{
+    font-size: 17px;
+    font-weight: 700;
+    position: 'relative';
+    background-color: #2a2a2a;
+    color: rgb(205, 205, 205);
+}
+
+.column-header:focus{
+    color: white;
+}
+
+.column-header span{
+    text-align: center;
+
+}
+
+.column-row {
+    font-size: 18px;
+    width: 25%;
+    color: white;
+    background-color: #2a2a2a;
+    border-top: 2px solid rgba(128, 128, 128, .3);
+}
+
+.p-datatable-emptymessage {
+    color: white;
+    background-color: #2a2a2a;
+    text-align: center;
+    padding: 10px;
+}
+
+
+/* .p-datatable-wrapper {
+    background-color: black;
+}
+
+.p-datatable-tbody {
+    background-color: black;
+} */
