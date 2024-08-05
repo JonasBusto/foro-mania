@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import '~react-quill/dist/quill.snow.css';
-
 html {
   scrollbar-width: thin;
   scrollbar-color: #1b95d2 #191414;
@@ -32,22 +30,20 @@ html {
 }
 
 .ql-container {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #191414;
+  color: #fff;
+  border: 0 !important;
 }
 
-.ql-toolbar {
-  background-color: #f0f0f0;
+.ql-editor {
+  background-color: #121212;
+  color: #fff;
 }
 
-.ql-container.ql-snow {
-  border: 1px solid #ddd;
+.ql-selection {
+  background-color: #282828;
 }
 
-.ql-toolbar .ql-picker {
-  color: #000;
-}
-
-.ql-toolbar button {
-  color: #000;
+.form-comment .ql-snow {
+  border: 2px solid #ffffff85 !important;
 }

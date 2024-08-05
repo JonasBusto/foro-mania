@@ -55,37 +55,41 @@ const Topic = () => {
   }
 
   return (
-    <div className='bg-neutral-800 py-10 text-neutral-200 px-3 '>
-      <div className='max-w-[75rem] mx-auto'>
-        <div className='bg-white w-full h-28'>
-          <img src='#' alt='img-adversiting' />
+    <div className=' text-white min-h-screen py-10 px-4'>
+      <div className='max-w-4xl mx-auto'>
+        <div className='bg-gray-800 rounded-lg overflow-hidden'>
+          <img
+            src='#'
+            alt='img-adversiting'
+            className='w-full h-32 object-cover'
+          />
         </div>
-        <div>
-          <div className='border-b border-neutral-700 py-4'>
-            <h2 className='text-3xl font-semibold'>{topic.title}</h2>
-            <p className='text-neutral-400'>{category.title}</p>
+        <div className='mt-6'>
+          <div className='border-b border-gray-700 pb-4'>
+            <h2 className='text-4xl font-bold'>{topic.title}</h2>
+            <p className='text-gray-400'>{category.title}</p>
           </div>
-          <div className='py-3 flex justify-between'>
-            <div className='flex gap-4'>
+          <div className='mt-4 flex items-center justify-between'>
+            <div className='flex items-center space-x-4'>
               <img
                 src={user.photoProfile}
                 alt='Imagen de usuario'
-                className='w-12 h-12 object-cover rounded-full'
+                className='w-14 h-14 object-cover rounded-full border-2 border-gray-600'
               />
               <div>
-                <h3 className='font-semibold text-lg'>{user.fullName}</h3>
-                <p className='text-sm text-neutral-400'>{user.email}</p>
+                <h3 className='text-xl font-semibold'>{user.fullName}</h3>
+                <p className='text-sm text-gray-400'>{user.email}</p>
               </div>
             </div>
-            <div>
-              <p>{TimeToNow(topic.createdAt)}</p>
-            </div>
+            <p className='text-sm text-gray-400'>
+              {TimeToNow(topic.createdAt)}
+            </p>
           </div>
-          <div className='leading-loose'>
+          <div className='mt-4'>
             <TextEditor value={topic.content} readOnly={true} />
           </div>
-          <div className='flex flex-col md:flex-row justify-between border border-neutral-600 bg-neutral-700 px-4 py-2 md:items-center my-8'>
-            <div className='flex gap-4 mb-4 md:mb-0'>
+          <div className='mt-8 flex flex-col md:flex-row justify-between border border-gray-600 bg-gray-800 rounded-lg px-6 py-4'>
+            <div className='flex space-x-8'>
               <div className='text-center'>
                 <p className='text-lg'>{TimeToNow(topic.createdAt)}</p>
                 <p className='text-sm'>creado</p>
@@ -95,7 +99,7 @@ const Topic = () => {
                 <p className='text-sm'>respuestas</p>
               </div>
             </div>
-            <div className='flex gap-3 ms-auto'>
+            <div className='flex space-x-4'>
               <ReactionButton
                 reactions={reactions.filter(
                   (reaction) => reaction.contentId === topic.uid
@@ -108,7 +112,8 @@ const Topic = () => {
               />
             </div>
           </div>
-          <div className='py-4 '>
+          <div className='mt-6'>
+            <h4 className='text-[2rem] font-bold mt-10'>Comentarios: </h4>
             {allComments.length > 0 ? (
               allComments.map((item, i) => (
                 <TopicComment
@@ -124,17 +129,17 @@ const Topic = () => {
                 />
               ))
             ) : (
-              <div className=' italic border rounded-md py-6 px-4'>
-                <p>
-                  Todavía nadie ha hecho un comentario, puedes ser el primero...
-                </p>
+              <div className='italic border rounded-md py-6 px-4 text-center'>
+                <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
               </div>
             )}
           </div>
           {loggedUser ? (
             <AddCommentForm loggedUser={loggedUser} topic={topic} />
           ) : (
-            <p>Debes autenticarte para comentar</p>
+            <p className='mt-4 text-gray-400'>
+              Debes autenticarte para comentar
+            </p>
           )}
         </div>
       </div>

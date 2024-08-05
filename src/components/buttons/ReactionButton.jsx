@@ -8,9 +8,9 @@ const ReactionButton = ({
   loggedUser,
   content,
 }) => {
-  let [isLoadingReaction, setIsLoadingReaction] = useState(false);
+  const [isLoadingReaction, setIsLoadingReaction] = useState(false);
 
-  let reactionLoggedUser = reactions.find(
+  const reactionLoggedUser = reactions.find(
     (reaction) => reaction.userId === loggedUser?.uid
   );
 
@@ -19,10 +19,10 @@ const ReactionButton = ({
   };
 
   return (
-    <div className='flex items-center gap-3'>
-      <div className='flex items-center gap-2'>
-        {isLoadingReaction && <p>Cargando</p>}
-        <p className='text-sm'>
+    <div className='flex items-center space-x-4'>
+      <div className='flex items-center space-x-2'>
+        {isLoadingReaction && <p className='text-gray-400'>Cargando</p>}
+        <p className='text-sm text-gray-200'>
           {reactions.filter((reaction) => reaction.type === 'like').length}
         </p>
         {loggedUser ? (
@@ -61,17 +61,17 @@ const ReactionButton = ({
               reactionLoggedUser &&
               reactionLoggedUser.type === 'like' &&
               reactionLoggedUser.userId === loggedUser.uid
-                ? 'pi-thumbs-up-fill'
-                : 'pi-thumbs-up'
-            } cursor-pointer active:scale-125 duration-200 ${
+                ? 'pi-thumbs-up-fill text-[#1b95d2]'
+                : 'pi-thumbs-up text-gray-400'
+            } cursor-pointer transform transition-transform duration-200 ${
               isLoadingReaction ? 'pointer-events-none' : ''
             }`}
           ></i>
         ) : (
-          <p>like</p>
+          <p className='text-gray-400'>Like</p>
         )}
       </div>
-      <div className='flex items-center gap-2'>
+      <div className='flex items-center space-x-2'>
         {loggedUser ? (
           <i
             onClick={
@@ -106,16 +106,16 @@ const ReactionButton = ({
               reactionLoggedUser &&
               reactionLoggedUser.type === 'unlike' &&
               reactionLoggedUser.userId === loggedUser.uid
-                ? 'pi-thumbs-down-fill'
-                : 'pi-thumbs-down'
-            } cursor-pointer active:scale-125 duration-200 ${
+                ? 'pi-thumbs-down-fill text-red-500'
+                : 'pi-thumbs-down text-gray-400'
+            } cursor-pointer transform transition-transform duration-200 ${
               isLoadingReaction ? 'pointer-events-none' : ''
             }`}
           ></i>
         ) : (
-          <p>unlike</p>
+          <p className='text-gray-400'>Dislike</p>
         )}
-        <p className='text-sm'>
+        <p className='text-sm text-gray-200'>
           {reactions.filter((reaction) => reaction.type === 'unlike').length}
         </p>
       </div>
