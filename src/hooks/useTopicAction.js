@@ -6,10 +6,13 @@ import { useEffect } from "react"
 
 export function useTopicAction() {
     const navigate = useNavigate()
+    const topics = useAppSelector((state) => state.topic.topics);
     const topic = useAppSelector((state) => state.topic.topic)
     const statusCreateTopic = useAppSelector((state) => state.topic.statusCreate)
     const statusTopic = useAppSelector((state) => state.topic.statusTopic)
     const dispatch = useAppDisptach()
+
+
     const addTopic = async (topic) => {
         const res = await dispatch(createTopic(topic))
         if (res.error) {
@@ -24,11 +27,8 @@ export function useTopicAction() {
         await dispatch(getTopicById(id))
     }
 
-    // useEffect(() => {
-    //  console.log(statusTopic, 'statusTopic');
-    // }, [statusTopic])
-    
-    return { addTopic, statusCreateTopic, getTopic, topic, statusTopic }
+
+    return { addTopic, statusCreateTopic, getTopic, topic, statusTopic, topics }
 
 
 }

@@ -1,4 +1,4 @@
-import { createTopic, getTopicById } from './thunks';
+import { createTopic, getTopicById, getTopics } from './thunks';
 
 export const topicExtraReducers = (builder) => {
   builder
@@ -24,6 +24,18 @@ export const topicExtraReducers = (builder) => {
     })
     .addCase(getTopicById.rejected, (state, action) => {
       state.statusTopic = 'Fallido';
+      state.error = action.payload;
+    });
+  builder
+    .addCase(getTopics.pending, (state) => {
+      state.status = 'Cargando';
+    })
+    .addCase(getTopics.fulfilled, (state, action) => {
+      state.status = 'Exitoso';
+      state.topics = action.payload;
+    })
+    .addCase(getTopics.rejected, (state, action) => {
+      state.status = 'Fallido';
       state.error = action.payload;
     });
 };

@@ -13,6 +13,10 @@ import { db, storage } from '../../services/firebase';
 export const getTopics = createAsyncThunk('topic/getAll', async () => {
   try {
     const querySnapshot = await getDocs(query(collection(db, 'topics')));
+    const topicData = querySnapshot.docs.map((doc) => ({
+      id: doc.id, ...doc.data(),
+    }));
+    return topicData;
   } catch (error) {
     console.log(error);
   }

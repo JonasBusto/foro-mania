@@ -12,6 +12,7 @@ import { UsersView } from '../pages/UsersView';
 import Topic from '../pages/topic/Topic';
 import UploadTopic from '../pages/topic/UploadTopic';
 import { UsersSummary } from '../pages/UsersSummary';
+import TopicList from '../pages/topic/TopicList';
 
 
 export function AppRoutes() {
@@ -20,6 +21,7 @@ export function AppRoutes() {
       <Route path='/' element={<Home />} />
       <Route path='/topic/:id' element={<Topic />} />
       <Route path='/topic' element={<Topic />} />
+      <Route path='/topic-list' element={<TopicList />} />
       <Route path='/about' element={<About />} />
       <Route path='/users-view' element={<UsersView />} />
       <Route path='/users-view/:id/summary' element={<UsersSummary />} />

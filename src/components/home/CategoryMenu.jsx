@@ -1,23 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { Tags } from '../../helpers/Tags';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const CategoryMenu = () => {
   const { categories } = useCategoryAction();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedTag, setSelectedTag] = useState(null);
 
+  const navigate = useNavigate();
+  // console.log(selectedCategory.title);
+
+
+  useEffect(() => {
+    const handleNavigate = () => {
+      navigate(`/topic-list?category=${selectedCategory.uid}`)
+    }
+    if (selectedCategory !== null) {
+      handleNavigate()
+    }
+  }, [selectedCategory])
+
+
   const categoryTemplate = (option) => (
-    <div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-full'>
+    <div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-60'>
       <div
         className='w-3 h-3 rounded-full'
         style={{ backgroundColor: option.color }}
       ></div>
       <div className='ml-3 w-full'>
         <div className='text-md font-medium text-white'>{option.title}</div>
-        <p className='text-sm text-gray-400'>{option.description}</p>
+        {/* <p className='text-sm text-gray-400'>{option.description}</p> */}
       </div>
     </div>
   );
