@@ -4,7 +4,7 @@ import { Login } from '../header/Login';
 import { Register } from '../header/Register';
 import { useAuth } from '../../hooks/useAuth';
 import { useLoad } from '../../hooks/useLoad';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export function Header() {
   const [openRegister, setOpenRegister] = useState(false);
@@ -16,6 +16,7 @@ export function Header() {
   const { loggedUser } = useAuth();
   const { isLoading } = useLoad();
   const menuRef = useRef();
+  const navigate = useNavigate();
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -59,7 +60,7 @@ export function Header() {
   };
 
   const handleSearchSubmit = () => {
-    console.log('Buscando:', searchQuery);
+    navigate(`/topic-list?search=${searchQuery}`)
   };
 
   return (
