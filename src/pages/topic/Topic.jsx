@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TopicComment from './TopicComment';
-import AddCommentForm from './AddComentForm';
+import UploadComentForm from './UploadComentForm';
 import ReactionButton from '../../components/buttons/ReactionButton';
 import { Link, useParams } from 'react-router-dom';
 import { useTopicAction } from '../../hooks/useTopicAction';
@@ -201,7 +201,7 @@ const Topic = () => {
             )}
           </div>
           {loggedUser ? (
-            <AddCommentForm
+            <UploadComentForm
               action='create'
               loggedUser={loggedUser}
               topic={topic}

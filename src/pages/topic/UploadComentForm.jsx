@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { useCommentAction } from '../../hooks/useCommentAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 
-const AddCommentForm = ({ loggedUser, action, topic, data, setVisible }) => {
+const UploadComentForm = ({ loggedUser, action, topic, data, setVisible }) => {
   const {
     addComment,
     updateComment,
@@ -94,4 +94,4 @@ const AddCommentForm = ({ loggedUser, action, topic, data, setVisible }) => {
   );
 };
 
-export default AddCommentForm;
+export default UploadComentForm;
