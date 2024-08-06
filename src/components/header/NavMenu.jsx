@@ -7,7 +7,7 @@ export function NavMenu() {
 	const items = [
 		{ label: 'Ultimos', icon: 'pi pi-fw pi-clock' },
 		{ label: 'Top', icon: 'pi pi-fw pi-star' },
-		{ label: 'Usuarios', icon: 'pi pi-fw pi-users', url:'/users-view' },
+		{ label: 'Usuarios', icon: 'pi pi-fw pi-users', url:'#/users-view' },
 		{ label: 'Categorias', icon: 'pi pi-fw pi-list' },
 	];
 

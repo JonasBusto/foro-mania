@@ -13,6 +13,7 @@ export function useTopicAction() {
   const navigate = useNavigate();
   const topics = useAppSelector((state) => state.topic.topics);
   const topic = useAppSelector((state) => state.topic.topic);
+  const TopicsGlobalStatus = useAppSelector((state) => state.topic.status);
   const statusCreateTopic = useAppSelector((state) => state.topic.statusCreate);
   const statusUpdateTopic = useAppSelector((state) => state.topic.statusUpdate);
   const statusDeleteTopic = useAppSelector((state) => state.topic.statusDelete);
@@ -62,6 +63,7 @@ export function useTopicAction() {
     addTopic,
     updateTopic,
     deleteTopic,
+    TopicsGlobalStatus,
     statusCreateTopic,
     statusUpdateTopic,
     statusDeleteTopic,

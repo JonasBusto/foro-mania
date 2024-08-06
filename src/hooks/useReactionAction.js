@@ -8,6 +8,9 @@ import { useAppDisptach, useAppSelector } from './store';
 export function useReactionAction() {
   const reaction = useAppSelector((state) => state.reaction.reaction);
   const reactions = useAppSelector((state) => state.reaction.reactions);
+  const statusReactions = useAppSelector(
+    (state) => state.reaction.status
+  );
   const statusCreateReaction = useAppSelector(
     (state) => state.reaction.statusCreate
   );
@@ -48,6 +51,7 @@ export function useReactionAction() {
   return {
     reaction,
     reactions,
+    statusReactions,
     statusCreateReaction,
     statusUpdateReaction,
     statusDeleteReaction,
