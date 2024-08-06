@@ -2,10 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
   query,
+  updateDoc,
+  where,
 } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../../services/firebase';
@@ -14,7 +17,8 @@ export const getTopics = createAsyncThunk('topic/getAll', async () => {
   try {
     const querySnapshot = await getDocs(query(collection(db, 'topics')));
     const topicData = querySnapshot.docs.map((doc) => ({
-      id: doc.id, ...doc.data(),
+      id: doc.id,
+      ...doc.data(),
     }));
     return topicData;
   } catch (error) {
@@ -79,6 +83,56 @@ export const createTopic = createAsyncThunk(
       } else {
         return null;
       }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateTopicById = createAsyncThunk(
+  'topic/update',
+  async ({ topic, id }, { rejectWithValue }) => {
+    try {
+      const topicDoc = doc(db, 'topics', id);
+      await updateDoc(topicDoc, topic);
+
+      const updatedTopic = await getDoc(topicDoc);
+
+      if (updatedTopic.exists()) {
+        return { uid: updatedTopic.id, ...updatedTopic.data() };
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteTopicById = createAsyncThunk(
+  'topic/delete',
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const commentsOfTopic = await getDocs(
+        query(collection(db, 'comments'), where('topicId', '==', id))
+      );
+
+      commentsOfTopic.forEach(async (comment) => {
+        const reactionsOfComment = await getDocs(
+          query(
+            collection(db, 'reactions'),
+            where('contentId', '==', comment.id)
+          )
+        );
+
+        reactionsOfComment.forEach(async (reaction) => {
+          await deleteDoc(reaction.ref);
+        });
+        await deleteDoc(comment.ref);
+      });
+
+      await deleteDoc(doc(db, 'topics', id));
+      return id;
     } catch (error) {
       return rejectWithValue(error.message);
     }
