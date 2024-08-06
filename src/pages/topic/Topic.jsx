@@ -20,7 +20,8 @@ const Topic = () => {
     useTopicAction();
   const { user, getUser, userStatus } = useUserAction();
   const { loggedUser } = useAuth();
-  const { fetchComments, allComments } = useCommentAction();
+  const { fetchComments, allComments, statusDeleteComment, deleteComment } =
+    useCommentAction();
   const { reactions, addReaction, updateReaction, deleteReaction } =
     useReactionAction();
   const { getCategory, statusCategory, category } = useCategoryAction();
@@ -91,13 +92,13 @@ const Topic = () => {
                   className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded me-10'
                   to={'/upload-topic/' + topic.uid}
                 >
-                  Editar
+                  <i className='pi pi-pencil'></i>
                 </Link>
                 <button
                   className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
                   onClick={() => setVisible(true)}
                 >
-                  Eliminar
+                  <i className='pi pi-trash'></i>
                 </button>
                 <Dialog
                   header='Eliminar publicación'
@@ -186,6 +187,8 @@ const Topic = () => {
                   addReaction={addReaction}
                   updateReaction={updateReaction}
                   deleteReaction={deleteReaction}
+                  statusDeleteComment={statusDeleteComment}
+                  deleteComment={deleteComment}
                   loggedUser={loggedUser}
                   key={i}
                 />
@@ -197,7 +200,11 @@ const Topic = () => {
             )}
           </div>
           {loggedUser ? (
-            <AddCommentForm loggedUser={loggedUser} topic={topic} />
+            <AddCommentForm
+              action='create'
+              loggedUser={loggedUser}
+              topic={topic}
+            />
           ) : (
             <p className='mt-4 text-gray-400'>
               Debes autenticarte para comentar

@@ -4,33 +4,58 @@ import { format } from 'date-fns';
 import { useCommentAction } from '../../hooks/useCommentAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 
-const AddCommentForm = ({ loggedUser, topic }) => {
-  const { addComment } = useCommentAction();
+const AddCommentForm = ({ loggedUser, action, topic, data, setVisible }) => {
+  const {
+    addComment,
+    updateComment,
+    statusUpdateComment,
+    statusCreateComment,
+  } = useCommentAction();
 
   const errorStyle = 'text-red-500 italic text-sm mt-1';
+  let initialValues;
+
+  if (action === 'create') {
+    initialValues = {
+      topicId: topic.uid,
+      content: '',
+      userId: loggedUser.uid,
+      createdAt: format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSX"),
+    };
+  } else {
+    initialValues = {
+      topicId: data.topicId,
+      content: data.content,
+      userId: data.userId,
+      createdAt: data.createdAt,
+    };
+  }
 
   return (
     <div className='p-4 rounded-lg shadow-md'>
-      <h3 className='text-white text-lg mb-4'>Agregar comentario:</h3>
+      {action === 'create' && (
+        <h3 className='text-white text-lg mb-4'>Agregar comentario:</h3>
+      )}
       <Formik
-        initialValues={{
-          topicId: topic.uid,
-          content: '',
-          userId: loggedUser.uid,
-          createdAt: format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSX"),
-        }}
+        initialValues={initialValues}
         validate={(values) => {
           let errors = {};
 
-          if (values.content === '') {
+          if (values.content === '' || values.content === '<p><br></p>') {
             errors.content = 'Requerido';
           }
 
           return errors;
         }}
         onSubmit={(values, { resetForm }) => {
-          addComment(values);
-          resetForm();
+          if (action === 'create') {
+            addComment(values, { resetForm });
+          } else {
+            updateComment(
+              { comment: values, id: data.uid },
+              { resetForm, setVisible }
+            );
+          }
         }}
       >
         {({ handleSubmit, errors, touched, values, setFieldValue }) => (
@@ -45,10 +70,21 @@ const AddCommentForm = ({ loggedUser, topic }) => {
             )}
             <div className='text-end mt-4'>
               <button
+                disabled={
+                  action === 'update'
+                    ? statusUpdateComment === 'Cargando'
+                    : statusCreateComment === 'Cargando'
+                }
                 type='submit'
                 className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
               >
-                Agregar comentario
+                {action === 'update'
+                  ? statusUpdateComment === 'Cargando'
+                    ? 'Cargando'
+                    : 'Cargar'
+                  : statusCreateComment === 'Cargando'
+                  ? 'Cargando'
+                  : 'Cargar'}
               </button>
             </div>
           </form>
