@@ -15,8 +15,13 @@ const initialState = {
 export const topicSlice = createSlice({
   name: 'topic',
   initialState,
-  reducers: {},
+  reducers: {
+    clearTopic(state) {
+      state.topic = null;
+    },
+  },
   extraReducers: topicExtraReducers,
 });
 
 export default topicSlice.reducer;
+export const { clearTopic } = topicSlice.actions;

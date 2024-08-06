@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TopicComment from './TopicComment';
 import AddCommentForm from './AddComentForm';
 import ReactionButton from '../../components/buttons/ReactionButton';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useTopicAction } from '../../hooks/useTopicAction';
 import { useAuth } from '../../hooks/useAuth';
 import { formatDistanceToNow, parseISO } from 'date-fns';
@@ -12,16 +12,21 @@ import { useCommentAction } from '../../hooks/useCommentAction';
 import { useReactionAction } from '../../hooks/useReactionAction';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { TextEditor } from '../../components/topic/TextEditor';
+import { Dialog } from 'primereact/dialog';
 
 const Topic = () => {
   const { id } = useParams();
-  const { getTopic, topic, statusTopic } = useTopicAction();
+  const { getTopic, topic, deleteTopic, statusDeleteTopic, statusTopic } =
+    useTopicAction();
   const { user, getUser, userStatus } = useUserAction();
   const { loggedUser } = useAuth();
   const { fetchComments, allComments } = useCommentAction();
   const { reactions, addReaction, updateReaction, deleteReaction } =
     useReactionAction();
   const { getCategory, statusCategory, category } = useCategoryAction();
+
+  const [showEditTopic, setShowEditTopic] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const TimeToNow = (fecha) => {
     const fechaISO = parseISO(fecha);
@@ -43,13 +48,23 @@ const Topic = () => {
     }
   }, [topic]);
 
+  useEffect(() => {
+    if (loggedUser) {
+      setShowEditTopic(true);
+    } else {
+      setShowEditTopic(false);
+    }
+  }, [loggedUser]);
+
   if (
     statusTopic === 'Inactivo' ||
     statusTopic === 'Cargando' ||
     userStatus === 'Inactivo' ||
     userStatus === 'Cargando' ||
     statusCategory === 'Inactivo' ||
-    statusCategory === 'Cargando'
+    statusCategory === 'Cargando' ||
+    !topic ||
+    !category
   ) {
     return <h1 className='text-white'>Cargando...</h1>;
   }
@@ -65,9 +80,56 @@ const Topic = () => {
           />
         </div>
         <div className='mt-6'>
-          <div className='border-b border-gray-700 pb-4'>
-            <h2 className='text-4xl font-bold'>{topic.title}</h2>
-            <p className='text-gray-400'>{category.title}</p>
+          <div className='flex justify-between items-center border-b border-gray-700 pb-4'>
+            <div>
+              <h2 className='text-4xl font-bold'>{topic.title}</h2>
+              <p className='text-gray-400'>{category.title}</p>
+            </div>
+            {showEditTopic && topic.userId === loggedUser.uid && (
+              <div>
+                <Link
+                  className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded me-10'
+                  to={'/upload-topic/' + topic.uid}
+                >
+                  Editar
+                </Link>
+                <button
+                  className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
+                  onClick={() => setVisible(true)}
+                >
+                  Eliminar
+                </button>
+                <Dialog
+                  header='Eliminar publicación'
+                  visible={visible}
+                  style={{ width: '50vw' }}
+                  onHide={() => {
+                    if (!visible) return;
+                    setVisible(false);
+                  }}
+                >
+                  <p>Esta seguro que desea eliminar la publicación?</p>
+                  <div className='flex justify-between mt-10'>
+                    <button
+                      disabled={statusDeleteTopic === 'Cargando'}
+                      className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
+                      onClick={() => setVisible(false)}
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      disabled={statusDeleteTopic === 'Cargando'}
+                      className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
+                      onClick={() => deleteTopic({ id: topic.uid })}
+                    >
+                      {statusDeleteTopic === 'Cargando'
+                        ? 'Cargando'
+                        : 'Confirmar'}
+                    </button>
+                  </div>
+                </Dialog>
+              </div>
+            )}
           </div>
           <div className='mt-4 flex items-center justify-between'>
             <div className='flex items-center space-x-4'>

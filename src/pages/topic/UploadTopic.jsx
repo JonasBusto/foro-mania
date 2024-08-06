@@ -1,13 +1,25 @@
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTopicAction } from '../../hooks/useTopicAction';
 import { useAuth } from '../../hooks/useAuth';
 import { format } from 'date-fns';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { TextEditor } from '../../components/topic/TextEditor';
+import { useParams } from 'react-router-dom';
 
 const UploadTopic = () => {
-  const { addTopic, statusCreateTopic } = useTopicAction();
+  const { id } = useParams();
+
+  const {
+    topic,
+    addTopic,
+    updateTopic,
+    statusTopic,
+    getTopic,
+    clearStateCategory,
+    statusCreateTopic,
+    statusUpdateTopic,
+  } = useTopicAction();
   const { categories } = useCategoryAction();
   const { loggedUser } = useAuth();
 
@@ -15,16 +27,40 @@ const UploadTopic = () => {
   const inputStyle = 'h-8 px-3 outline-none ';
   const errorStyle = 'text-red-300 italic text-sm mt-1';
 
+  let initialValues = {
+    title: '',
+    categoryId: '',
+    content: '',
+    userId: loggedUser.uid,
+    createdAt: format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSX"),
+  };
+
+  useEffect(() => {
+    if (id) {
+      getTopic(id);
+    } else {
+      clearStateCategory();
+    }
+  }, []);
+
+  if (id && topic) {
+    initialValues = {
+      title: topic.title,
+      categoryId: topic.categoryId,
+      content: topic.content,
+      userId: topic.userId,
+      createdAt: topic.createdAt,
+    };
+  }
+
+  if (statusTopic === 'Cargando') {
+    return <h1>Cargando...</h1>;
+  }
+
   return (
     <div className='bg-neutral-800 px-2 max-w-[80rem] mx-auto py-20'>
       <Formik
-        initialValues={{
-          title: '',
-          categoryId: '',
-          content: '',
-          userId: loggedUser.uid,
-          createdAt: format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSX"),
-        }}
+        initialValues={initialValues}
         validate={(values) => {
           let errors = {};
 
@@ -43,7 +79,11 @@ const UploadTopic = () => {
           return errors;
         }}
         onSubmit={(values) => {
-          addTopic(values);
+          if (id && topic) {
+            updateTopic({ topic: values, id });
+          } else {
+            addTopic(values);
+          }
         }}
       >
         {({
@@ -115,10 +155,19 @@ const UploadTopic = () => {
             <div className='text-end'>
               <button
                 type='submit'
-                disabled={statusCreateTopic === 'Cargando'}
+                disabled={
+                  statusCreateTopic === 'Cargando' ||
+                  statusUpdateTopic === 'Cargando'
+                }
                 className='bg-blue-900 hover:bg-blue-800 text-white font-semibold duration-200 py-2 px-3 w-40'
               >
-                {statusCreateTopic === 'Cargando' ? 'Cargando...' : 'Cargar'}
+                {id
+                  ? statusUpdateTopic === 'Cargando'
+                    ? 'Cargando'
+                    : 'Cargar'
+                  : statusCreateTopic === 'Cargando'
+                  ? 'Cargando'
+                  : 'Cargar'}
               </button>
             </div>
           </form>

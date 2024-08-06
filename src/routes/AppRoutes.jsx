@@ -14,7 +14,6 @@ import UploadTopic from '../pages/topic/UploadTopic';
 import { UsersSummary } from '../pages/UsersSummary';
 import TopicList from '../pages/topic/TopicList';
 
-
 export function AppRoutes() {
   return (
     <Routes>
@@ -35,6 +34,7 @@ export function AppRoutes() {
       </Route>
       <Route element={<PrivateRoute allowedRoles={['admin', 'user']} />}>
         <Route path='/upload-topic' element={<UploadTopic />} />
+        <Route path='/upload-topic/:id' element={<UploadTopic />} />
         <Route path='/account' element={<MyAccount />} />
         <Route path='/account/edit' element={<EditProfile />} />
       </Route>
