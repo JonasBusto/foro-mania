@@ -1,33 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Column } from 'primereact/column'
-import { DataTable } from 'primereact/datatable'
-import { InputText } from 'primereact/inputtext';
-import { IconField } from 'primereact/iconfield';
-import { InputIcon } from 'primereact/inputicon';
 import { useUserAction } from '../hooks/useUserAction';
+import { useTopicAction } from '../hooks/useTopicAction';
 import UserCard from '../components/users/UserCard';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Link } from 'react-router-dom';
-import '../styles/usersView.css'
 import { Banner } from '../components/home/Banner';
+import { TablaDeUsuarios } from '../components/users/tabla-de-usuarios';
+import '../styles/usersView.css'
+
 
 export const UsersView = () => {
 
     const { users, allUsersStatus } = useUserAction()
+    const { TopicsGlobalStatus, topics } = useTopicAction()
 
     const [modalSwitch, setModalSwitch] = useState(false)
-    const [globalFilter, setGlobalFilter] = useState('')
-    const [emptyMessage, setEmptyMessage] = useState(null)
     const [currentUserSelected, setCurrentUserSelected] = useState(null)
     const [modalPosition, setModalPosition] = useState({ top: '0px', left: '0px' });
 
     const modalRef = useRef(null);
 
     useEffect(() => {
-        if (users.length > 0) {
-            setEmptyMessage('No se encontraron resultados')
-        }
-    }, [users])
+        console.log(topics);
+        
+    }, [topics])
+
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -65,67 +62,37 @@ export const UsersView = () => {
         return setModalSwitch(true)
     }
 
-    const representativeBodyTemplate = (rowData) => {
-        return (
-            <div className="flex items-center gap-2 cursor-pointer" onClick={(event) => selectionChange(rowData, event)}>
-                <img alt={`imagen de perfil de usuario ${rowData.fullName}`} src={rowData.photoProfile} 
-                style={{ width: '56px', height: '56px' }} 
-                className='rounded-full ring-2'/>
-                <span className='pl-3 text-[17px]'>{rowData.fullName}</span>
-            </div>
-        )
-    }
-
-    const onGlobalFilterChange = (event) => {
-        setGlobalFilter(event.target.value)
-    }
-
-    const renderHeader = () => {
-        const value = globalFilter ? globalFilter : ''
-
-        return (
-            <IconField iconPosition="left">
-                <InputIcon className="pi pi-search" />
-                <InputText className='p-2 pl-10 bg-[#282828] border-[#61dafb] border-2 text-neutral-200 rounded-md' type="search" value={globalFilter} onChange={onGlobalFilterChange} placeholder="Buscar Usuarios" />
-            </IconField>
-        )
-    }
-
-    const header = renderHeader()
-
 
   return (
-    <main className='bg-[#121212]'>
+    <main className='bg-[#121212] mb-12'>
         <Banner />
-
         {
             allUsersStatus === 'Cargando' &&
             <div className="min-h-[50vh] flex items-center">
                 <ProgressSpinner />
             </div>
         }
+
         {
             allUsersStatus === 'Exitoso' &&
-            <DataTable value={users} 
-                paginator
-                rows={10} 
-                paginatorClassName='bg-[#2a2a2a] text-white'
-                header={header}
-                globalFilterFields={['fullName']}
-                filters={{ 'global': { value: globalFilter, matchMode: 'contains' } }}
-                selectionMode="single" 
-                dataKey="uid"
-                stateStorage="session" 
-                stateKey="dt-state-demo-local"
-                emptyMessage={emptyMessage ?? ' '}
-            >
-                <Column headerClassName='column-header' header="Usuario" body={representativeBodyTemplate} sortable sortField='fullName' className='column-row'></Column>
-                <Column headerClassName='column-header' field='topicosCreados' header="Tópicos Creados" sortable className='column-row'></Column>
-                <Column headerClassName='column-header' field='recibidos' header="🩷 Recibidos" sortable className='column-row'></Column>
-                <Column headerClassName='column-header' field='dados' header="🩷 Dados" sortable className='column-row' ></Column>
-
-            </DataTable>        
+            <div className='p-6'>
+                <TablaDeUsuarios 
+                    users={users}
+                    allUsersStatus={allUsersStatus}
+                    topics={topics}
+                    TopicsGlobalStatus={TopicsGlobalStatus}
+                    selectionChange={selectionChange}
+                />
+            </div>
         }
+
+        {
+            modalSwitch && 
+            <article ref={modalRef} style={{ position: 'absolute', top: modalPosition.top, left: modalPosition.left }}>
+                <UserCard userProps={currentUserSelected}/>
+            </article>
+        }
+
         {
             allUsersStatus === 'Fallido' &&
             <div className="card flex justify-content-center">
@@ -134,13 +101,6 @@ export const UsersView = () => {
             </div>
         }
 
-
-        {
-            modalSwitch && 
-            <article ref={modalRef} style={{ position: 'absolute', top: modalPosition.top, left: modalPosition.left }}>
-                <UserCard userProps={currentUserSelected}/>
-            </article>
-        }
     </main>
   )
 }
