@@ -18,10 +18,18 @@ export const getComments = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const querySnapshot = await getDocs(query(collection(db, 'comments')));
-      const allComments = querySnapshot.docs.map((doc) => ({
-        uid: doc.id,
-        ...doc.data(),
-      }));
+      const allComments = querySnapshot.docs
+        .map((doc) => ({
+          uid: doc.id,
+          ...doc.data(),
+        }))
+        .sort((a, b) => {
+          if (a.createdAt > b.createdAt) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
 
       if (id) {
         const filteredComments = allComments.filter(
