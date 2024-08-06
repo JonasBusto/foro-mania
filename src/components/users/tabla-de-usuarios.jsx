@@ -5,6 +5,7 @@ import { InputText } from 'primereact/inputtext';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
 import { useReactionAction } from '../../hooks/useReactionAction';
+import { userFullDataExtract } from '../../helpers/Actions';
 
 
 export const TablaDeUsuarios = ({users, allUsersStatus, selectionChange, topics, TopicsGlobalStatus}) => {
@@ -14,50 +15,14 @@ export const TablaDeUsuarios = ({users, allUsersStatus, selectionChange, topics,
     const [emptyMessage, setEmptyMessage] = useState(null)
     const [globalFilter, setGlobalFilter] = useState('')
 
-
     // useEffect(() => {
     //     if (statusReactions === 'Exitoso' ) {
     //         console.log(reactions[0].uid)
     //     }
     // }, [reactions])
 
-
-    const fullUsersData = users.map(user => {
-
-        if (statusReactions === 'Exitoso' && TopicsGlobalStatus === 'Exitoso' ) {
-
-            const userReactions = reactions.filter(reaction =>
-               reaction.userId === user.uid                
-            )
-            const userTopics = topics.filter(topic =>
-                topic.userId === user.uid                
-            )
-
-
-            const likesCount = userReactions.filter(reaction => 
-                reaction.type === 'like').length
-            const unlikesCount = userReactions.filter(reaction => 
-                reaction.type === 'unlike').length
-            const topicsCount = userTopics.length;
-
-            return {
-                ...user,
-                likesGiven: likesCount,
-                unlikesGiven: unlikesCount,
-                topicsCount: topicsCount
-            }            
-        }
-        
-        return {
-            ...user,
-            likesGiven: '',
-            unlikesGiven: '',
-            topicsCount: ''
-
-        }
-    })
+    const fullUsersData = userFullDataExtract(users, reactions, topics, statusReactions, TopicsGlobalStatus);
       
-
     useEffect(() => {
         if (allUsersStatus !== 'Cargando') {
             setEmptyMessage('No se encontraron resultados')
@@ -118,7 +83,7 @@ export const TablaDeUsuarios = ({users, allUsersStatus, selectionChange, topics,
             stateKey="dt-state-demo-local"
             emptyMessage={emptyMessage ?? ' '}
         >
-            <Column headerClassName='column-header' header="Usuario" body={representativeBodyTemplate} sortable sortField='fullName' className='column-row' style={{width: '25%'}}></Column>
+            <Column headerClassName='column-header' header="Usuario" body={representativeBodyTemplate} sortable sortField='fullName' className='column-row hover:bg-[#1e1e1e]' style={{width: '25%'}}></Column>
 
             {/* <Column headerClassName='column-header' field='likesRecived' header={() => likeUnlikeHeader('Recibidos', true)} sortable className='column-row'></Column> */}
             <Column headerClassName='column-header' field='likesGiven' header={() => likeUnlikeHeader('Enviados', true)} sortable className='column-row' ></Column>

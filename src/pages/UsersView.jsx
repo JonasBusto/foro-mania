@@ -21,12 +21,6 @@ export const UsersView = () => {
     const modalRef = useRef(null);
 
     useEffect(() => {
-        console.log(topics);
-        
-    }, [topics])
-
-
-    useEffect(() => {
         const handleClickOutside = (event) => {
             if (modalRef.current && !modalRef.current.contains(event.target)) {
                 modalSwitchOff();
@@ -46,8 +40,14 @@ export const UsersView = () => {
     }
 
     const selectionChange = (user, event) => {
+        
+        if (currentUserSelected) {
+            if (user.uid === currentUserSelected.uid) {
+                setCurrentUserSelected(null)
+                return modalSwitchOff                
+            }
+        }
 
-        modalSwitchOff()
         setCurrentUserSelected(user)
 
         if (window.innerWidth < 768) {
@@ -56,10 +56,11 @@ export const UsersView = () => {
         }        
 
         const adjustedLeft = event.clientX + window.scrollX + 50;
-        const adjustedTop = event.clientY + window.scrollY - 100;
+        const adjustedTop = event.clientY + window.scrollY - 150;
 
         setModalPosition({ top: `${adjustedTop}px`, left: `${adjustedLeft}px` })
         return setModalSwitch(true)
+        
     }
 
 
@@ -89,7 +90,10 @@ export const UsersView = () => {
         {
             modalSwitch && 
             <article ref={modalRef} style={{ position: 'absolute', top: modalPosition.top, left: modalPosition.left }}>
-                <UserCard userProps={currentUserSelected}/>
+                <UserCard
+                    currentUser={currentUserSelected}
+                    topics={topics}
+                />
             </article>
         }
 
