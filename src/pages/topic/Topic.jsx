@@ -86,7 +86,8 @@ const Topic = () => {
               <h2 className='text-4xl font-bold'>{topic.title}</h2>
               <p className='text-gray-400'>{category.title}</p>
             </div>
-            {showEditTopic && topic.userId === loggedUser.uid && (
+            {((showEditTopic && topic.userId === loggedUser.uid) ||
+              loggedUser.role === 'admin') && (
               <div>
                 <Link
                   className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded me-10'
