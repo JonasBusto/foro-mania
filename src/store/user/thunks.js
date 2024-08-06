@@ -79,7 +79,7 @@ export const registerUser = createAsyncThunk(
 
       const userDoc = await getDoc(doc(db, 'users', currentUser.user.uid));
 
-      return userDoc.data();
+      return { uid: userDoc.id, ...userDoc.data() };
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         return rejectWithValue('Email en uso');
@@ -102,7 +102,7 @@ export const loginUserWithEmail = createAsyncThunk(
 
       const userDoc = await getDoc(doc(db, 'users', signWithEmail.user.uid));
 
-      return userDoc.data();
+      return { uid: userDoc.id, ...userDoc.data() };
     } catch (error) {
       if (
         error.code === 'auth/user-not-found' ||
@@ -137,7 +137,7 @@ export const loginUserWithGoogle = createAsyncThunk(
 
     const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
 
-    return userDoc.data();
+    return { uid: userDoc.id, ...userDoc.data() };
   }
 );
 
