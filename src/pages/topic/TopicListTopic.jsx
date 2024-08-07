@@ -44,12 +44,14 @@ const TopicListTopic = ({ topic, type = '' }) => {
   };
 
   const topicUser = users.find((user) => user.uid === topic.userId);
-  const commentsOfTopicUser = users.filter((user) =>
-    filteredComments.some(
-      (comment) =>
-        comment.userId === user.uid && comment.userId !== topicUser.uid
+  const commentsOfTopicUser = users
+    .filter((user) =>
+      filteredComments.some(
+        (comment) =>
+          comment.userId === user.uid && comment.userId !== topicUser.uid
+      )
     )
-  );
+    .slice(0, 3);
 
   return (
     <>
@@ -80,6 +82,45 @@ const TopicListTopic = ({ topic, type = '' }) => {
             </div>
           </div>
         </Link>
+      ) : type === 'account' ? (
+        <div className='flex flex-col md:flex-row text-center border-b border-neutral-500 pb-3 mb-3'>
+          <Link to={`/topic/${topic.id}`} className='md:w-9/12 text-start'>
+            <h2 className='text-lg font-semibold mb-1 text-white'>
+              {topic.title}
+            </h2>
+            <h2 className='text-sm font-semibold text-gray-400 mb-1'>
+              {categorieFiltered.title}
+            </h2>
+          </Link>
+          <div className='md:w-3/12 flex items-center relative'>
+            <Link
+              to={'/users-view/' + topicUser?.uid + '/summary'}
+              className='me-2 flex items-center absolute left-[0rem]'
+            >
+              <img
+                className='w-10 h-10 object-cover rounded-full'
+                src={topicUser?.photoProfile}
+                alt={topicUser?.fullName}
+              />
+            </Link>
+            {commentsOfTopicUser.map((user, index) => (
+              <Link
+                key={user.uid}
+                to={'/users-view/' + user?.uid + '/summary'}
+                className={`me-2 flex items-center absolute left-[${
+                  (index + 1) * 2
+                }rem]`}
+              >
+                <img
+                  className='w-10 h-10 object-cover rounded-full'
+                  src={user?.photoProfile}
+                  alt={user?.fullName}
+                />
+              </Link>
+            ))}
+          </div>
+          <div className='md:w-1/12 flex mt-3 md:mt-0 leading-3'></div>
+        </div>
       ) : (
         <div className='flex flex-col md:flex-row text-center border-b border-neutral-500 pb-3 mb-3'>
           <Link to={`/topic/${topic.id}`} className='md:w-7/12 text-start'>

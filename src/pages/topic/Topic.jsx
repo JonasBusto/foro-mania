@@ -197,7 +197,9 @@ const Topic = () => {
                 deleteReaction={deleteReaction}
                 loggedUser={loggedUser}
                 content={topic}
-                favorites={favorites}
+                favorites={favorites.filter(
+                  (favorite) => favorite.contentId === topic.uid
+                )}
                 addFavorite={addFavorite}
                 deleteFavorite={deleteFavorite}
               />
