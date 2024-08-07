@@ -60,7 +60,6 @@ export const UsersView = () => {
 
         setModalPosition({ top: `${adjustedTop}px`, left: `${adjustedLeft}px` })
         return setModalSwitch(true)
-        
     }
 
 
