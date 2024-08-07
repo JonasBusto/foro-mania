@@ -6,6 +6,7 @@ import { useUserAction } from '../../hooks/useUserAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 import { Dialog } from 'primereact/dialog';
 import UploadComentForm from './UploadComentForm';
+import { Link } from 'react-router-dom';
 
 const TopicComment = ({
   data,
@@ -32,18 +33,30 @@ const TopicComment = ({
     <div className='relative'>
       <div className='py-3 flex justify-between'>
         <div className='flex gap-4'>
-          <img
-            src={userFiltered.photoProfile}
-            alt='Imagen de usuario'
-            className='w-12 h-12 object-cover rounded-full'
-          />
+          <Link to={'/users-view/' + userFiltered?.uid + '/summary'}>
+            <img
+              src={userFiltered.photoProfile}
+              alt='Imagen de usuario'
+              className='w-12 h-12 object-cover rounded-full'
+            />
+          </Link>
           <div className='flex'>
-            <div>
-              <h3 className='font-semibold text-lg'>{userFiltered.fullName}</h3>
-              <p>{userFiltered.email}</p>
+            <div className='flex flex-col'>
+              <Link
+                to={'/users-view/' + userFiltered?.uid + '/summary'}
+                className='font-semibold text-lg'
+              >
+                {userFiltered.fullName}
+              </Link>
+              <Link
+                to={'/users-view/' + userFiltered?.uid + '/summary'}
+                className='text-sm text-gray-400'
+              >
+                {userFiltered.email}
+              </Link>
             </div>
-            {(data.userId === loggedUser.uid ||
-              loggedUser.role === 'admin') && (
+            {(data.userId === loggedUser?.uid ||
+              loggedUser?.role === 'admin') && (
               <div className='flex'>
                 <div>
                   {visible ? (

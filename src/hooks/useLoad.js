@@ -6,6 +6,7 @@ export function useLoad() {
   const statusGetUsers = useAppSelector((state) => state.user.status);
   const statusGetCategories = useAppSelector((state) => state.category.status);
   const statusGetReactions = useAppSelector((state) => state.reaction.status);
+  const statusGetFavorites = useAppSelector((state) => state.favorite.status);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -15,13 +16,20 @@ export function useLoad() {
       (statusGetUsers === 'Fallido' || statusGetUsers === 'Exitoso') &&
       (statusGetCategories === 'Fallido' ||
         statusGetCategories === 'Exitoso') &&
-      (statusGetReactions === 'Fallido' || statusGetReactions === 'Exitoso')
+      (statusGetReactions === 'Fallido' || statusGetReactions === 'Exitoso') &&
+      (statusGetFavorites === 'Fallido' || statusGetFavorites === 'Exitoso')
     ) {
       setIsLoading(false);
     } else {
       setIsLoading(true);
     }
-  }, [statusAuth, statusGetUsers, statusGetCategories, statusGetReactions]);
+  }, [
+    statusAuth,
+    statusGetUsers,
+    statusGetCategories,
+    statusGetReactions,
+    statusGetFavorites,
+  ]);
 
   return { isLoading };
 }
