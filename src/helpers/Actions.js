@@ -1,3 +1,15 @@
+import { formatDistanceToNow, parseISO } from "date-fns";
+import { es } from "date-fns/locale";
+
+export const TimeToNow = (fecha) => {
+    if (fecha) {
+        const fechaISO = parseISO(fecha);
+        return formatDistanceToNow(fechaISO, { locale: es });            
+    }
+    else{
+        return false
+    }
+};
 
 export function userFullDataExtract(users, reactions, topics, statusReactions, TopicsGlobalStatus) {
     
@@ -33,24 +45,24 @@ export function userFullDataExtract(users, reactions, topics, statusReactions, T
     });
 }
 
-
 export function lastTopicExtract(currentUser, topics) {
 
-    const userTopics = topics.filter(topic =>
-        topic.userId === currentUser.uid                
-    )
+    const userTopics = topics.filter(topic => topic.userId === currentUser.uid);
 
     if (userTopics.length > 0) {
-        const releaseTopic = userTopics.sort((a, b) => 
-            new Date(b.createdAt) - new Date(a.createdAt)
-        )[0];
 
-        console.log(releaseTopic);
+        const sortedTopics = userTopics.sort((a, b) => {
+            const dateA = parseISO(a.createdAt);
+            const dateB = parseISO(b.createdAt);
+    
+            return dateB - dateA;
+        });
+
+        const releaseTopic = sortedTopics[0];
+
         return releaseTopic;
-    }
 
-    else {
-        return false
+    } else {
+        return false;
     }
-
 }

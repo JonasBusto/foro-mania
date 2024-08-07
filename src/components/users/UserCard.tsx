@@ -1,8 +1,6 @@
 import React from "react"
 import { useNavigate } from "react-router-dom";
-import { lastTopicExtract } from "../../helpers/Actions";
-import { es } from "date-fns/locale";
-import { formatDistanceToNow, parseISO } from "date-fns";
+import { lastTopicExtract, TimeToNow } from "../../helpers/Actions";
 import '../../styles/userCard.css'
 
 
@@ -21,16 +19,6 @@ const UserCard = ({currentUser, topics}) => {
     }
 
     const lastTopic = lastTopicExtract(currentUser, topics)
-
-    const TimeToNow = (fecha) => {
-        if (fecha) {
-            const fechaISO = parseISO(fecha);
-            return formatDistanceToNow(fechaISO, { locale: es });            
-        }
-        else{
-            return false
-        }
-    };
 
     const topicDate = TimeToNow(lastTopic.createdAt)
 

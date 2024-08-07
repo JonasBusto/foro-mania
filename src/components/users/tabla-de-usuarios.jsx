@@ -14,6 +14,8 @@ export const TablaDeUsuarios = ({users, allUsersStatus, selectionChange, topics,
 
     const [emptyMessage, setEmptyMessage] = useState(null)
     const [globalFilter, setGlobalFilter] = useState('')
+    const sortOrder = 1
+    const sortField = 'fullName'
 
     // useEffect(() => {
     //     if (statusReactions === 'Exitoso' ) {
@@ -62,7 +64,7 @@ export const TablaDeUsuarios = ({users, allUsersStatus, selectionChange, topics,
         return (
             <>
                 <i className={`pi pi-thumbs-${like ? 'up' : 'down'}`}>
-                </i> <span>{textcontent}</span>
+                </i><span> {textcontent}</span>
             </>
         )
     }
@@ -82,6 +84,8 @@ export const TablaDeUsuarios = ({users, allUsersStatus, selectionChange, topics,
             stateStorage="session" 
             stateKey="dt-state-demo-local"
             emptyMessage={emptyMessage ?? ' '}
+            sortField={sortField}
+            sortOrder={sortOrder}
         >
             <Column headerClassName='column-header' header="Usuario" body={representativeBodyTemplate} sortable sortField='fullName' className='column-row hover:bg-[#1e1e1e]' style={{width: '25%'}}></Column>
 
