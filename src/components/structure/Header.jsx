@@ -34,22 +34,29 @@ export function Header() {
 		};
 	}, []);
 
-	useEffect(() => {
-		const fetchUnreadMessagesCount = async () => {
-			if (loggedUser) {
-				const counts = {};
-				const chats = await findOrCreateChat(loggedUser.uid);
-				for (const chatId of chats) {
-					const unreadCount = await checkUnreadMessages(chatId, loggedUser.uid);
-					counts[chatId] = unreadCount;
-				}
-				const totalUnread = Object.values(counts).reduce((a, b) => a + b, 0);
-				setUnreadMessagesCount(totalUnread);
-			}
-		};
+	// useEffect(() => {
+	// 	const fetchUnreadMessagesCount = async () => {
+	// 		if (loggedUser) {
+	// 			const counts = {};
+	// 			const chats = await findOrCreateChatUser(loggedUser.uid);
+	// 			for (const chatId of chats) {
+	// 				const unreadCount = await checkUnreadMessagesUser(
+	// 					chatId,
+	// 					loggedUser.uid
+	// 				);
+	// 				counts[chatId] = unreadCount;
+	// 			}
+	// 			const totalUnread = Object.values(counts).reduce(
+	// 				(a, b) => a + b,
+	// 				0
+	// 			);
+	// 			console.log(totalUnread)
+	// 			setUnreadMessagesCount(totalUnread);
+	// 		}
+	// 	};
 
-		fetchUnreadMessagesCount();
-	}, [loggedUser, findOrCreateChat, checkUnreadMessages]);
+	// 	fetchUnreadMessagesCount();
+	// }, []);
 
 	const handleSignUp = () => {
 		setOpenRegister((prevState) => !prevState);
@@ -84,15 +91,15 @@ export function Header() {
 	};
 
 	return (
-		<header className='relative bg-black text-white'>
+		<header className='relative bg-black text-white '>
 			<section
-				className='flex items-center justify-between p-4 mx-auto'
+				className='flex items-center justify-center sm:justify-between flex-wrap flex-row  p-4 mx-auto'
 				style={{ maxWidth: '1300px' }}>
 				<div className='flex items-center'>
 					<Link
 						to='/'
-						className='text-white text-3xl font-bold hover:opacity-80'>
-						<img src="/img/FOROMANIA 2.png" alt="" width={250} />
+						className='text-white text-3xl font-bold hover:opacity-80 m-5 sm:mb-0'>
+						<img src='/img/FOROMANIA3.png' alt='' width={250} />
 					</Link>
 				</div>
 

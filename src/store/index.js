@@ -7,12 +7,12 @@ import reactionReducer from './reaction/slice';
 import favoriteReducer from './favorite/slice';
 
 export const store = configureStore({
-  reducer: {
-    user: userReducer,
-    category: categoryReducer,
-    topic: topicReducer,
-    comment: commentReducer,
-    reaction: reactionReducer,
-    favorite: favoriteReducer,
-  },
+	reducer: {
+		user: userReducer,
+		category: categoryReducer,
+		topic: topicReducer,
+		comment: commentReducer,
+		reaction: reactionReducer,
+		favorite: favoriteReducer,
+	},
 });

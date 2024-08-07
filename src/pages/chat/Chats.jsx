@@ -12,17 +12,16 @@ export const Chats = () => {
 	const [displayDialog, setDisplayDialog] = useState(false);
 	const { loggedUser } = useAuth();
 	const { clearChatMessages, findOrCreateChat } = useChatAction();
-	console.log(loggedUser);
 
 	// función para abrir o crear el chat con el usuario seleccionado
-	const handleSelectUser = (user) => {
+	const handleSelectUser = async (user) => {
 		setSelectedUser(user);
 		const user1Id = loggedUser.uid;
-		findOrCreateChat(user1Id, user.uid).then((id) => {
-			setChatId(id);
+		const chatId= await findOrCreateChat(user1Id, user.uid)
+			setChatId(chatId);
 			setDisplayDialog(true);
-		});
-	};
+		};
+	
 
 	// funcion para cerrar el modal y borrar selecteduser
 	const handleHideDialog = () => {
