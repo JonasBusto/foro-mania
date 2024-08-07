@@ -7,11 +7,17 @@ const ReactionButton = ({
   deleteReaction,
   loggedUser,
   content,
+  favorites,
+  addFavorite,
+  deleteFavorite,
 }) => {
   const [isLoadingReaction, setIsLoadingReaction] = useState(false);
 
   const reactionLoggedUser = reactions.find(
     (reaction) => reaction.userId === loggedUser?.uid
+  );
+  const favoriteLoggedUser = favorites?.find(
+    (favorite) => favorite.userId === loggedUser?.uid
   );
 
   const handleChangeLoadingReaction = (value) => {
@@ -21,7 +27,42 @@ const ReactionButton = ({
   return (
     <div className='flex items-center space-x-4'>
       <div className='flex items-center space-x-2'>
-        {isLoadingReaction && <p className='text-gray-400'>Cargando</p>}
+        {isLoadingReaction && (
+          <p className='text-gray-400'>
+            <i
+              className='pi pi-spin pi-spinner'
+              style={{ fontSize: '1rem' }}
+            ></i>
+          </p>
+        )}
+        {loggedUser && favorites && (
+          <div className='flex items-center space-x-2 me-2'>
+            <i
+              className={`pi cursor-pointer transform transition-transform duration-200 ${
+                favoriteLoggedUser ? 'pi-bookmark-fill' : 'pi-bookmark'
+              }`}
+              style={{ fontSize: '1.7rem' }}
+              onClick={
+                favoriteLoggedUser
+                  ? () =>
+                      deleteFavorite(
+                        { id: favoriteLoggedUser.uid },
+                        { handleChangeLoadingReaction }
+                      )
+                  : () =>
+                      addFavorite(
+                        {
+                          userId: loggedUser.uid,
+                          contentId: content.uid,
+                        },
+                        {
+                          handleChangeLoadingReaction,
+                        }
+                      )
+              }
+            ></i>
+          </div>
+        )}
         <p className='text-sm text-gray-200'>
           {reactions.filter((reaction) => reaction.type === 'like').length}
         </p>
