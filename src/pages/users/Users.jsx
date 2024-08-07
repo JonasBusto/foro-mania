@@ -46,12 +46,6 @@ export function Users() {
       <div className='bg-blue-500 flex flex-col items-center justify-between p-3'>
         <div className='flex items-center justify-between'>
           <p>Lista de Usuarios</p>
-          <Link
-            className='flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded'
-            to='/users/upload'
-          >
-            Agregar
-          </Link>
         </div>
         <InputText
           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
@@ -86,7 +80,7 @@ export function Users() {
         <Column sortable field='fullName' header='Nombre'></Column>
         <Column sortable field='email' header='Email'></Column>
         <Column sortable field='role' header='Rol'></Column>
-        <Column header='Acciones' body={userAction}></Column>
+        {/* <Column header='Acciones' body={userAction}></Column> */}
       </DataTable>
     </div>
   );

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { auth, db } from '../../services/firebase';
+import { auth, db, storage } from '../../services/firebase';
 import {
   doc,
   setDoc,
@@ -7,6 +7,7 @@ import {
   getDocs,
   query,
   collection,
+  updateDoc,
 } from 'firebase/firestore';
 import {
   createUserWithEmailAndPassword,
@@ -17,6 +18,7 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 export const getUsers = createAsyncThunk('user/getAll', async () => {
   const arrayAux = [];
@@ -70,6 +72,9 @@ export const registerUser = createAsyncThunk(
         fullName: currentUser.user.displayName,
         photoProfile: currentUser.user.photoURL,
         role: role,
+        authMethod: currentUser.user.providerData.map(
+          (prov) => prov.providerId
+        ),
       });
 
       const userDoc = await getDoc(doc(db, 'users', currentUser.user.uid));
@@ -127,6 +132,7 @@ export const loginUserWithGoogle = createAsyncThunk(
       fullName: currentUser.displayName,
       photoProfile: currentUser.photoURL,
       role: 'user',
+      authMethod: currentUser.providerData.map((prov) => prov.providerId),
     });
 
     const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
@@ -146,7 +152,8 @@ export const verifyLoggedUser = createAsyncThunk(
       onAuthStateChanged(auth, async (currentUser) => {
         if (currentUser) {
           const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
-          resolve(userDoc.data());
+
+          resolve({ uid: userDoc.id, ...userDoc.data() });
         } else {
           resolve(null);
         }
@@ -157,4 +164,38 @@ export const verifyLoggedUser = createAsyncThunk(
 
 export const deleteUserById = createAsyncThunk('user/delete', async () => {});
 
-export const updateUser = createAsyncThunk('user/update', async () => {});
+export const updateUser = createAsyncThunk(
+  'user/update',
+  async ({ fullName, fileImage }, { rejectWithValue }) => {
+    try {
+      let url = auth.currentUser?.photoURL || '';
+
+      if (fileImage) {
+        const storageRef = ref(
+          storage,
+          `photoProfileUsers/${auth.currentUser?.uid}`
+        );
+
+        const uploadTask = await uploadBytesResumable(storageRef, fileImage);
+
+        url = await getDownloadURL(uploadTask.ref);
+      }
+
+      await updateDoc(doc(db, 'users', auth.currentUser?.uid), {
+        fullName: fullName,
+        photoProfile: url,
+      });
+
+      await updateProfile(auth.currentUser, {
+        displayName: fullName,
+        photoURL: url,
+      });
+
+      const userDoc = await getDoc(doc(db, 'users', auth.currentUser.uid));
+
+      return userDoc.data();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

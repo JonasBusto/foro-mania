@@ -1,5 +1,4 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAppSelector } from '../hooks/store';
 import { useLoad } from '../hooks/useLoad';
 import { useAuth } from '../hooks/useAuth';
 
@@ -12,7 +11,7 @@ export function PrivateRoute({ allowedRoles }) {
   }
 
   if (!loggedUser) {
-    return <Navigate to='/login' />;
+    return <Navigate to='/' />;
   }
 
   if (!allowedRoles.includes(loggedUser.role)) {

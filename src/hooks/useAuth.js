@@ -14,32 +14,35 @@ export function useAuth() {
   const dispatch = useAppDisptach();
   const navigate = useNavigate();
 
-  const loginGoogle = async () => {
+  const loginGoogle = async ({ setOpenSignIn }) => {
     const res = await dispatch(loginUserWithGoogle());
 
     if (res.error) {
       alert(res.payload);
     } else {
+      setOpenSignIn(false);
       navigate('/account');
     }
   };
 
-  const loginEmail = async ({ email, password }) => {
+  const loginEmail = async ({ email, password }, { setOpenSignIn }) => {
     const res = await dispatch(loginUserWithEmail({ email, password }));
 
     if (res.error) {
       alert(res.payload);
     } else {
+      setOpenSignIn(false);
       navigate('/account');
     }
   };
 
-  const register = async (user) => {
+  const register = async (user, { setOpenRegister }) => {
     const res = await dispatch(registerUser(user));
 
     if (res.error) {
       alert(res.payload);
     } else {
+      setOpenRegister(false);
       navigate('/account');
     }
   };

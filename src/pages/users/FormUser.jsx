@@ -70,16 +70,18 @@ export function FormUser() {
               errors.email = 'Dirección de Email invalida';
             }
 
-            if (values.password.trim() === '') {
-              errors.password = 'Requerido';
-            } else if (/\s/.test(values.password)) {
-              errors.password = 'La contraseña no puede tener espacios.';
-            } else if (
-              values.password.split('').length < 6 ||
-              values.password.split('').length > 14
-            ) {
-              errors.password =
-                'La contraseña debe tener entre 6 y 14 caracteres.';
+            if (!id && !user) {
+              if (values.password.trim() === '') {
+                errors.password = 'Requerido';
+              } else if (/\s/.test(values.password)) {
+                errors.password = 'La contraseña no puede tener espacios.';
+              } else if (
+                values.password.split('').length < 6 ||
+                values.password.split('').length > 14
+              ) {
+                errors.password =
+                  'La contraseña debe tener entre 6 y 14 caracteres.';
+              }
             }
 
             if (values.role.trim() === '') {
@@ -89,7 +91,11 @@ export function FormUser() {
             return errors;
           }}
           onSubmit={(values) => {
-            console.log(values);
+            if (id && user) {
+              console.log('mod: ', values);
+            } else {
+              console.log('alta: ', values);
+            }
           }}
         >
           {({
@@ -175,27 +181,29 @@ export function FormUser() {
                   </p>
                 )}
               </div>
-              <div className='mb-4'>
-                <label
-                  className='block text-gray-700 text-sm font-bold mb-2'
-                  htmlFor='password'
-                >
-                  Contraseña
-                </label>
-                <input
-                  className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                  type='password'
-                  name='password'
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {touched.password && errors.password && (
-                  <p className='text-xs text-red-500 font-semibold'>
-                    {errors.password}
-                  </p>
-                )}
-              </div>
+              {(!id || !user) && (
+                <div className='mb-4'>
+                  <label
+                    className='block text-gray-700 text-sm font-bold mb-2'
+                    htmlFor='password'
+                  >
+                    Contraseña
+                  </label>
+                  <input
+                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                    type='password'
+                    name='password'
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {touched.password && errors.password && (
+                    <p className='text-xs text-red-500 font-semibold'>
+                      {errors.password}
+                    </p>
+                  )}
+                </div>
+              )}
               <div className='mb-4'>
                 <label
                   className='block text-gray-700 text-sm font-bold mb-2'

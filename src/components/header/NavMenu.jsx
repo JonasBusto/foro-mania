@@ -7,14 +7,13 @@ export function NavMenu() {
 	const items = [
 		{ label: 'Ultimos', icon: 'pi pi-fw pi-clock' },
 		{ label: 'Top', icon: 'pi pi-fw pi-star' },
-		{ label: 'Usuarios', icon: 'pi pi-fw pi-users' },
-		{ label: 'Grupos', icon: 'pi pi-fw pi-th-large' },
+		{ label: 'Usuarios', icon: 'pi pi-fw pi-users', url:'/users-view' },
 		{ label: 'Categorias', icon: 'pi pi-fw pi-list' },
 	];
 
 	const itemTemplate = (item) => {
 		return (
-			<div className='flex items-center p-2  cursor-pointer'>
+			<div className='flex items-center p-2  cursor-pointer '>
 				<i className={`${item.icon} mr-2`}></i>
 				<p>{item.label}</p>
 			</div>
@@ -22,11 +21,10 @@ export function NavMenu() {
 	};
 
 	return (
-		<div className='card flex justify-center items-center'>
+		<div className='flex justify-center items-center '>
 			<Menu
 				model={items}
-				className='w-full md:w-14rem custom-nav-menu'
-				itemTemplate={itemTemplate}
+				className='w-full md:w-14rem custom-nav-menu '
 			/>
 		</div>
 	);

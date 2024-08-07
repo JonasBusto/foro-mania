@@ -1,31 +1,60 @@
 import { Button } from 'primereact/button';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FormContact } from '../home/FormContact';
 
 export function Footer() {
-	return (
-		<footer>
-			<div className='flex flex-col flex-wrap items-center justify-center w-full bg-slate-100 rounded-t-2xl my-3'>
-				<div className='flex flex-row items-center justify-around w-full my-5'>
-					<Button className='p-2 border-2 border-white rounded-xl bg-blue-800 text-white hover:bg-blue-600 font-semibold'>
-						Contacto
-					</Button>
-					<Button className='p-2 border-2 border-white rounded-xl bg-blue-800 text-white hover:bg-blue-600 font-semibold'>
-						Sobre Nosotros
-					</Button>
-				</div>
-				<div className='flex flex-row flex-wrap items-center justify-around my-2 w-full'>
-					<Link to=''>
-						<i className='pi pi-facebook text-3xl text-slate-500 hover:text-slate-800'></i>
-					</Link>
-					<Link to=''>
-						<i className='pi pi-twitter text-2xl text-slate-500 hover:text-slate-800'></i>
-					</Link>
-					<Link to=''>
-						<i className='pi pi-instagram text-2xl text-slate-500 hover:text-slate-800'></i>
-					</Link>
-				</div>
-				<p className='text-sm'>@ 2024. ForoMania - Derechos reservados</p>
-			</div>
-		</footer>
-	);
+  const [formContact, setFormContact] = useState(false);
+
+  const handleFormContact = () => {
+    setFormContact(true);
+  };
+
+  return (
+    <footer className='mt-auto w-full bg-[#1f1f1f] text-neutral-50'>
+      <section className='flex flex-col items-center justify-center w-full py-6'>
+        <div className='flex items-center mb-6'>
+          <Link to='/'>
+            <h1 className='text-4xl font-bold text-[#61dafb] hover:text-[#0fadfc]'>
+              ForoMania
+            </h1>
+          </Link>
+        </div>
+        <div className='flex flex-wrap items-center justify-center gap-4 mb-6'>
+          <button
+            onClick={handleFormContact}
+            className='w-40 text-center py-2 px-5 text-sm font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb] focus:ring-4 focus:ring-[#61dafb]'
+          >
+            Contacto
+          </button>
+          <Link
+            to='/about'
+            className='w-40 py-2 px-5 text-center text-sm font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb] focus:ring-4 focus:ring-[#61dafb]'
+          >
+            Sobre Nosotros
+          </Link>
+        </div>
+        <div className='flex flex-wrap items-center justify-center gap-6 mb-6'>
+          <Link to='https://www.facebook.com/?locale=es_LA' target='_blank'>
+            <i className='pi pi-facebook text-3xl text-[#61dafb] hover:text-[#0fadfc] transition-colors'></i>
+          </Link>
+          <Link to='https://twitter.com/?lang=es' target='_blank'>
+            <i className='pi pi-twitter text-3xl text-[#61dafb] hover:text-[#0fadfc] transition-colors'></i>
+          </Link>
+          <Link to='https://www.instagram.com/' target='_blank'>
+            <i className='pi pi-instagram text-3xl text-[#61dafb] hover:text-[#0fadfc] transition-colors'></i>
+          </Link>
+        </div>
+        <p className='text-sm text-neutral-300'>
+          @ 2024. ForoMania - Derechos reservados
+        </p>
+      </section>
+      {formContact && (
+        <FormContact
+          visible={formContact}
+          onHide={() => setFormContact(false)}
+        />
+      )}
+    </footer>
+  );
 }
