@@ -14,6 +14,7 @@ import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 import { Dialog } from 'primereact/dialog';
 import { useFavoriteAction } from '../../hooks/useFavoriteAction';
+import BannerAdversiting from '../../components/structure/BannerAdversiting';
 
 const Topic = () => {
   const { id } = useParams();
@@ -76,11 +77,7 @@ const Topic = () => {
     <div className=' text-white min-h-screen py-10 px-4'>
       <div className='max-w-4xl mx-auto'>
         <div className='bg-gray-800 rounded-lg overflow-hidden'>
-          <img
-            src='#'
-            alt='img-adversiting'
-            className='w-full h-32 object-cover'
-          />
+          <BannerAdversiting />
         </div>
         <div className='mt-6'>
           <div className='flex justify-between items-center border-b border-gray-700 pb-4'>
@@ -90,50 +87,50 @@ const Topic = () => {
             </div>
             {((showEditTopic && topic.userId === loggedUser?.uid) ||
               loggedUser?.role === 'admin') && (
-              <div>
-                <Link
-                  className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded me-10'
-                  to={'/upload-topic/' + topic.uid}
-                >
-                  <i className='pi pi-pencil'></i>
-                </Link>
-                <button
-                  className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
-                  onClick={() => setVisible(true)}
-                >
-                  <i className='pi pi-trash'></i>
-                </button>
-                <Dialog
-                  header='Eliminar publicación'
-                  visible={visible}
-                  style={{ width: '50vw' }}
-                  onHide={() => {
-                    if (!visible) return;
-                    setVisible(false);
-                  }}
-                >
-                  <p>Esta seguro que desea eliminar la publicación?</p>
-                  <div className='flex justify-between mt-10'>
-                    <button
-                      disabled={statusDeleteTopic === 'Cargando'}
-                      className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
-                      onClick={() => setVisible(false)}
-                    >
-                      Cancelar
-                    </button>
-                    <button
-                      disabled={statusDeleteTopic === 'Cargando'}
-                      className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
-                      onClick={() => deleteTopic({ id: topic.uid })}
-                    >
-                      {statusDeleteTopic === 'Cargando'
-                        ? 'Cargando'
-                        : 'Confirmar'}
-                    </button>
-                  </div>
-                </Dialog>
-              </div>
-            )}
+                <div>
+                  <Link
+                    className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded me-10'
+                    to={'/upload-topic/' + topic.uid}
+                  >
+                    <i className='pi pi-pencil'></i>
+                  </Link>
+                  <button
+                    className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
+                    onClick={() => setVisible(true)}
+                  >
+                    <i className='pi pi-trash'></i>
+                  </button>
+                  <Dialog
+                    header='Eliminar publicación'
+                    visible={visible}
+                    style={{ width: '50vw' }}
+                    onHide={() => {
+                      if (!visible) return;
+                      setVisible(false);
+                    }}
+                  >
+                    <p>Esta seguro que desea eliminar la publicación?</p>
+                    <div className='flex justify-between mt-10'>
+                      <button
+                        disabled={statusDeleteTopic === 'Cargando'}
+                        className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
+                        onClick={() => setVisible(false)}
+                      >
+                        Cancelar
+                      </button>
+                      <button
+                        disabled={statusDeleteTopic === 'Cargando'}
+                        className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
+                        onClick={() => deleteTopic({ id: topic.uid })}
+                      >
+                        {statusDeleteTopic === 'Cargando'
+                          ? 'Cargando'
+                          : 'Confirmar'}
+                      </button>
+                    </div>
+                  </Dialog>
+                </div>
+              )}
           </div>
           <div className='mt-4 flex items-center justify-between'>
             <div className='flex items-center space-x-4'>

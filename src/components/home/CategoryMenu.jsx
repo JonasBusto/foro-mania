@@ -68,7 +68,7 @@ export const CategoryMenu = () => {
           filterInputAutoFocus
         />
         <Link
-          to='/'
+          to='/all-categories'
           className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
         >
           Categorías
