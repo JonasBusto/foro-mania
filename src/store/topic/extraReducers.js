@@ -32,7 +32,6 @@ export const topicExtraReducers = (builder) => {
       state.statusTopic = 'Fallido';
       state.error = action.payload;
     });
-
   builder
     .addCase(getTopics.pending, (state) => {
       state.status = 'Cargando';

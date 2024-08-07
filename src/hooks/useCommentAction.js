@@ -55,7 +55,6 @@ export function useCommentAction() {
   const fetchComments = async (id) => {
     await dispatch(getComments(id));
   };
-
   return {
     addComment,
     fetchComments,
