@@ -13,6 +13,7 @@ import { useReactionAction } from '../../hooks/useReactionAction';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 import { Dialog } from 'primereact/dialog';
+import { useFavoriteAction } from '../../hooks/useFavoriteAction';
 
 const Topic = () => {
   const { id } = useParams();
@@ -25,6 +26,7 @@ const Topic = () => {
   const { reactions, addReaction, updateReaction, deleteReaction } =
     useReactionAction();
   const { getCategory, statusCategory, category } = useCategoryAction();
+  const { favorites, addFavorite, deleteFavorite } = useFavoriteAction();
 
   const [showEditTopic, setShowEditTopic] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -86,8 +88,8 @@ const Topic = () => {
               <h2 className='text-4xl font-bold'>{topic.title}</h2>
               <p className='text-gray-400'>{category.title}</p>
             </div>
-            {((showEditTopic && topic.userId === loggedUser.uid) ||
-              loggedUser.role === 'admin') && (
+            {((showEditTopic && topic.userId === loggedUser?.uid) ||
+              loggedUser?.role === 'admin') && (
               <div>
                 <Link
                   className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded me-10'
@@ -135,14 +137,26 @@ const Topic = () => {
           </div>
           <div className='mt-4 flex items-center justify-between'>
             <div className='flex items-center space-x-4'>
-              <img
-                src={user.photoProfile}
-                alt='Imagen de usuario'
-                className='w-14 h-14 object-cover rounded-full border-2 border-gray-600'
-              />
-              <div>
-                <h3 className='text-xl font-semibold'>{user.fullName}</h3>
-                <p className='text-sm text-gray-400'>{user.email}</p>
+              <Link to={'/users-view/' + user?.uid + '/summary'}>
+                <img
+                  src={user.photoProfile}
+                  alt='Imagen de usuario'
+                  className='w-14 h-14 object-cover rounded-full border-2 border-gray-600'
+                />
+              </Link>
+              <div className='flex flex-col'>
+                <Link
+                  to={'/users-view/' + user?.uid + '/summary'}
+                  className='text-xl font-semibold'
+                >
+                  {user.fullName}
+                </Link>
+                <Link
+                  to={'/users-view/' + user?.uid + '/summary'}
+                  className='text-sm text-gray-400'
+                >
+                  {user.email}
+                </Link>
               </div>
             </div>
             <p className='text-sm text-gray-400'>
@@ -162,6 +176,16 @@ const Topic = () => {
                 <p className='text-lg'>{allComments.length}</p>
                 <p className='text-sm'>respuestas</p>
               </div>
+              <div className='text-center'>
+                <p className='text-lg'>
+                  {
+                    favorites.filter(
+                      (favorite) => favorite.contentId === topic.uid
+                    ).length
+                  }
+                </p>
+                <p className='text-sm'>Guardados</p>
+              </div>
             </div>
             <div className='flex space-x-4'>
               <ReactionButton
@@ -173,6 +197,11 @@ const Topic = () => {
                 deleteReaction={deleteReaction}
                 loggedUser={loggedUser}
                 content={topic}
+                favorites={favorites.filter(
+                  (favorite) => favorite.contentId === topic.uid
+                )}
+                addFavorite={addFavorite}
+                deleteFavorite={deleteFavorite}
               />
             </div>
           </div>

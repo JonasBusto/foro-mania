@@ -1,8 +1,20 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { useFavoriteAction } from '../../hooks/useFavoriteAction';
+import { useTopicAction } from '../../hooks/useTopicAction';
+import TopicListTopic from '../topic/TopicListTopic';
 
 export function MyAccount() {
   const { loggedUser, logout } = useAuth();
+  const { favorites } = useFavoriteAction();
+  const { topics } = useTopicAction();
+
+  const favoritesFiltered = favorites.filter(
+    (favorite) => favorite.userId === loggedUser?.uid
+  );
+  const topicsFilteredByUser = topics.filter((topic) =>
+    favoritesFiltered.some((favorite) => favorite.contentId === topic.id)
+  );
 
   return (
     <div className='p-4 md:p-8 bg-[#121212]'>
@@ -55,6 +67,26 @@ export function MyAccount() {
           >
             Cerrar Sesión
           </button>
+        </div>
+      </div>
+      <div className='w-full max-w-2xl mt-14 mx-auto bg-[#282828] rounded-lg shadow-lg p-6'>
+        <div>
+          <h2 className='text-xl font-bold text-white'>
+            Mis publicaciones guardadas
+          </h2>
+        </div>
+        <div>
+          <div className='hidden md:flex text-center mt-5 border-b-2 border-neutral-500 align-middle leading-4 pb-4 mb-6'>
+            <p className='md:w-9/12 text-start text-white'>Titulo</p>
+            <p className='md:w-4/12 text-start text-white'>Usuarios</p>
+          </div>
+          {topicsFilteredByUser.length > 0 ? (
+            topicsFilteredByUser.map((item, i) => (
+              <TopicListTopic topic={item} key={i} type='account' />
+            ))
+          ) : (
+            <p>No guardaste ninguna publicación</p>
+          )}
         </div>
       </div>
     </div>

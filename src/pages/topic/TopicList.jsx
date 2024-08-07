@@ -5,10 +5,12 @@ import TopicListTopic from './TopicListTopic';
 import { useLocation } from 'react-router-dom';
 import banner1 from '/img/banner1.gif';
 import { useReactionAction } from '../../hooks/useReactionAction';
+import { useLoad } from '../../hooks/useLoad';
 
 const TopicList = () => {
   const { topics, clearStateCategory } = useTopicAction();
   const { reactions } = useReactionAction();
+  const { isLoading } = useLoad();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
 
@@ -56,6 +58,10 @@ const TopicList = () => {
     }
   }
 
+  if (isLoading) {
+    return <h1>cargando</h1>;
+  }
+
   return (
     <div className='bg-neutral-800 py-10 text-neutral-200 px-3'>
       <div className='max-w-[75rem] mx-auto'>
@@ -68,7 +74,8 @@ const TopicList = () => {
           </div>
           <div>
             <div className='hidden md:flex text-center border-b-2 border-neutral-500 align-middle leading-4 pb-4 mb-6'>
-              <p className='w-10/12 text-start'>Titulo</p>
+              <p className='w-7/12 text-start'>Titulo</p>
+              <p className='w-3/12 text-start'>Usuarios</p>
               <p className='w-1/12'>Respuestas</p>
               <p className='w-1/12'>Actividad</p>
             </div>
