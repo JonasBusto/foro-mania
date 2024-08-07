@@ -4,7 +4,7 @@ import { Login } from '../header/Login';
 import { Register } from '../header/Register';
 import { useAuth } from '../../hooks/useAuth';
 import { useLoad } from '../../hooks/useLoad';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export function Header() {
   const [openRegister, setOpenRegister] = useState(false);
@@ -16,20 +16,28 @@ export function Header() {
   const { loggedUser } = useAuth();
   const { isLoading } = useLoad();
   const menuRef = useRef();
+  const searchRef = useRef();
+
   const navigate = useNavigate();
+  const location = useLocation()
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setOpenMenu(false);
     }
+    if (searchRef.current && !searchRef.current.contains(event.target)) {
+      setOpenSearch(false);
+    }
   };
 
   useEffect(() => {
+    setOpenMenu(false)
+    
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [location]);
 
   const handleSignUp = () => {
     setOpenRegister((prevState) => !prevState);
@@ -119,7 +127,7 @@ export function Header() {
               />
             </Link>
           )}
-          <div className='relative hidden sm:flex'>
+          <div ref={searchRef} className='relative hidden sm:flex'>
             <button
               onClick={handleSearch}
               className='text-white hover:bg-gray-700 p-2 rounded'
