@@ -3,10 +3,13 @@ import { db, storage } from '../../services/firebase';
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
   query,
+  updateDoc,
+  where,
 } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
@@ -15,10 +18,23 @@ export const getComments = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const querySnapshot = await getDocs(query(collection(db, 'comments')));
-      const allComments = querySnapshot.docs.map((doc) => ({ uid: doc.id, ...doc.data() }));
+      const allComments = querySnapshot.docs
+        .map((doc) => ({
+          uid: doc.id,
+          ...doc.data(),
+        }))
+        .sort((a, b) => {
+          if (a.createdAt > b.createdAt) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
 
       if (id) {
-        const filteredComments = allComments.filter((comment) => comment.topicId === id);
+        const filteredComments = allComments.filter(
+          (comment) => comment.topicId === id
+        );
         return filteredComments;
       }
 
@@ -74,6 +90,46 @@ export const createComment = createAsyncThunk(
       }
     } catch (error) {
       return rejectWithValue(error);
+    }
+  }
+);
+
+export const updateCommentById = createAsyncThunk(
+  'comment/update',
+  async ({ comment, id }, { rejectWithValue }) => {
+    try {
+      const commentDoc = doc(db, 'comments', id);
+      await updateDoc(commentDoc, comment);
+
+      const updatedComment = await getDoc(commentDoc);
+
+      if (updatedComment.exists()) {
+        return { uid: updatedComment.id, ...updatedComment.data() };
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteCommentById = createAsyncThunk(
+  'comment/delete',
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const reactionsOfComment = await getDocs(
+        query(collection(db, 'reactions'), where('contentId', '==', id))
+      );
+
+      reactionsOfComment.forEach(async (reaction) => {
+        await deleteDoc(reaction.ref);
+      });
+
+      await deleteDoc(doc(db, 'comments', id));
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );

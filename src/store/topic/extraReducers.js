@@ -1,4 +1,10 @@
-import { createTopic, getTopicById, getTopics } from './thunks';
+import {
+  createTopic,
+  deleteTopicById,
+  getTopicById,
+  getTopics,
+  updateTopicById,
+} from './thunks';
 
 export const topicExtraReducers = (builder) => {
   builder
@@ -36,6 +42,36 @@ export const topicExtraReducers = (builder) => {
     })
     .addCase(getTopics.rejected, (state, action) => {
       state.status = 'Fallido';
+      state.error = action.payload;
+    });
+
+  builder
+    .addCase(updateTopicById.pending, (state) => {
+      state.statusUpdate = 'Cargando';
+    })
+    .addCase(updateTopicById.fulfilled, (state, action) => {
+      state.statusUpdate = 'Exitoso';
+      state.topics = state.topics.map((topic) =>
+        topic.uid === action.payload.uid ? action.payload : topic
+      );
+    })
+    .addCase(updateTopicById.rejected, (state, action) => {
+      state.statusUpdate = 'Fallido';
+      state.error = action.payload;
+    });
+
+  builder
+    .addCase(deleteTopicById.pending, (state) => {
+      state.statusDelete = 'Cargando';
+    })
+    .addCase(deleteTopicById.fulfilled, (state, action) => {
+      state.statusDelete = 'Exitoso';
+      state.topics = state.topics.filter(
+        (topic) => topic.uid !== action.payload
+      );
+    })
+    .addCase(deleteTopicById.rejected, (state, action) => {
+      state.statusDelete = 'Fallido';
       state.error = action.payload;
     });
 };

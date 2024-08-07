@@ -5,7 +5,7 @@
     padding-bottom: 12px;
     position: relative;
     background: linear-gradient(90deg, rgba(89, 89, 89) -20%, rgba(32, 32, 32) 80%);
-    filter: drop-shadow(0 0 4px rgb(255, 255, 255, .9));
+    filter: drop-shadow(0px 0px 4px rgb(255, 255, 255, .9));
     min-width: 450px;
     border-radius: 45px 45px 45px 0;
     gap: 16px;
@@ -22,6 +22,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
 }
 
 .brandContainer figure img{
@@ -29,8 +31,11 @@
     height: 120px;
     position: relative;
     cursor: pointer;
-    /* filter: drop-shadow(0 0 5px #61dafb); */
+    transition: transform .2s ease;
+}
 
+.brandContainer figure img:hover{
+    transform: scale(1.1);
 }
 
 .brandContainer figure::before {
@@ -59,16 +64,24 @@
     font-weight: 700;
 }
 
-.userInfo{
-    display: flex;
-    gap: 16px;
+.brandContainer section h2:hover{
+    color: white;
 }
 
-.userInfo p{
-    color: white;
-    background-color: rgb(0, 0, 0, .9);
-    padding: 0 8px 2px;
-    border-radius: 3px;
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: rgba(255, 255, 255, .9);
+
+}
+
+.userInfo span{
+    padding: 0 8px;
+}
+
+.userInfo small{
+    padding: 0 8px;
 }
 
 @keyframes shine {
@@ -90,6 +103,11 @@
 
     .brandContainer{
         flex-direction: column;
+        align-items: center;
+    }
+
+    .brandContainer figure::before{
+        position: initial;
     }
 
     .brandContainer section h2{

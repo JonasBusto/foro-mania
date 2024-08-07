@@ -34,6 +34,17 @@ const TopicListTopic = ({ topic, type = '' }) => {
     };
 
 
+
+
+    const stripHtmlTags = (html) => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        return doc.body.textContent || "";
+    };
+
+
+
+
+
     return (
         <>
             {
@@ -74,7 +85,7 @@ const TopicListTopic = ({ topic, type = '' }) => {
                     <div className='flex flex-col md:flex-row text-center border-b border-neutral-500 pb-3 mb-3'>
                         <Link to={`/topic/${topic.id}`} className='md:w-10/12 text-start'>
                             <h2 className='text-lg font-semibold mb-1'>{topic.title}</h2>
-                            <p className='leading-5'>{topic.content.slice(0, 150)}... <span className='text-neutral-500'>Leer Mas</span> </p>
+                            <p className='leading-5'>{stripHtmlTags(topic.content.slice(0, 150))} <span className='text-neutral-500'>...Leer Mas</span> </p>
                         </Link>
                         <div className='md:w-2/12 flex mt-3 md:mt-0 leading-3'>
                             <div className='w-1/2 flex items-center justify-center flex-col'>

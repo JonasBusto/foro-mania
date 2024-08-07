@@ -1,20 +1,26 @@
 import React from "react"
 import { useNavigate } from "react-router-dom";
+import { lastTopicExtract, TimeToNow } from "../../helpers/Actions";
 import '../../styles/userCard.css'
 
 
-const UserCard = ({userProps}) => {
+const UserCard = ({currentUser, topics}) => {
 
-    const { photoProfile, email, uid, fullName } = userProps
+    const { photoProfile, email, uid, fullName } = currentUser
     const username = fullName.split(' ')[0].toLowerCase()
 
     const navigate = useNavigate()
 
-    const navigateToUserSummary = (id) => {
-
+    const navigateToUserSummary = (id: string) => {
         navigate(`/users-view/${id}/summary`)
     }
-    
+    const navigateToTopic = (id: string) => {
+        navigate(`/topic/${id}`)
+    }
+
+    const lastTopic = lastTopicExtract(currentUser, topics)
+
+    const topicDate = TimeToNow(lastTopic.createdAt)
 
   return (
     <div className="userCardContainer">
@@ -37,8 +43,15 @@ const UserCard = ({userProps}) => {
         </div>
 
         <div className="userInfo">
-            <p>userdata</p>
-            <p>i</p>
+            {
+                lastTopic ? 
+                <>
+                    <span>Ultimo tópico creado: <strong className="cursor-pointer" onClick={() => navigateToTopic(lastTopic.id)}>{lastTopic.title}</strong></span>
+                    <small>Hace {topicDate}</small>
+                </>
+                :
+                <span>Todavía no ha creado ningún tópico</span>
+            }
         </div>
     </div>
 
