@@ -4,6 +4,7 @@ import { getUsers, verifyLoggedUser } from '../store/user/thunks';
 import { getCategories } from '../store/category/thunks';
 import { getReactions } from '../store/reaction/thunks';
 import { getTopics } from '../store/topic/thunks';
+import { getFavorites } from '../store/favorite/thunks';
 
 export function useGetData() {
   const dispatch = useAppDisptach();
@@ -14,7 +15,7 @@ export function useGetData() {
     dispatch(getCategories());
     dispatch(getReactions());
     dispatch(getTopics());
-
+    dispatch(getFavorites());
   }, []);
 
   return {};

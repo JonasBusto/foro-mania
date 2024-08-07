@@ -11,7 +11,7 @@ export const CategoryList = () => {
         {categories &&
           categories.map((category, index) => (
             <Link
-              to=''
+              to={`/topic-list?category=${category.uid}`}
               key={index}
               className='flex flex-col items-start p-4 bg-[#2e2e2e] border-l-4'
               style={{ borderLeft: `10px solid ${category.color}` }}

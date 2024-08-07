@@ -1,18 +1,18 @@
 .p-datatable{
     width: 100%;
-    border-radius: 10px;
+    border-radius: 3px;
     overflow: hidden;
 }
 
 .p-datatable-header {
-    background-color: #2a2a2a;
+    background-color: #1e1e1e;
 }
 
 .column-header{
     font-size: 17px;
     font-weight: 700;
     position: 'relative';
-    background-color: #2a2a2a;
+    background-color: #1e1e1e;
     color: rgb(205, 205, 205);
 }
 
@@ -20,17 +20,14 @@
     color: white;
 }
 
-.column-header span{
-    text-align: center;
-
-}
-
 .column-row {
     font-size: 18px;
-    width: 25%;
+    width: 15%;
     color: white;
     background-color: #2a2a2a;
     border-top: 2px solid rgba(128, 128, 128, .3);
+    cursor: default;
+    padding-left: 1.2rem;
 }
 
 .p-datatable-emptymessage {
@@ -39,12 +36,3 @@
     text-align: center;
     padding: 10px;
 }
-
-
-/* .p-datatable-wrapper {
-    background-color: black;
-}
-
-.p-datatable-tbody {
-    background-color: black;
-} */
