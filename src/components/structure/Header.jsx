@@ -92,7 +92,7 @@ export function Header() {
 					<Link
 						to='/'
 						className='text-white text-3xl font-bold hover:opacity-80'>
-						ForoMania
+						<img src="/img/FOROMANIA 2.png" alt="" width={250} />
 					</Link>
 				</div>
 
