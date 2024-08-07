@@ -1,3 +1,4 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
 	getDatabase,
 	ref,
@@ -11,9 +12,9 @@ import {
 	update,
 } from 'firebase/database';
 
-export function useChatAction() {
-	
-	async function findOrCreateChat(user1Id, user2Id) {
+export const findOrCreateChat = createAsyncThunk(
+	'chat/findOrCreateChat',
+	async ({ user1Id, user2Id }) => {
 		const db = getDatabase();
 		const chatKey = [user1Id, user2Id].sort().join('_');
 
@@ -40,10 +41,13 @@ export function useChatAction() {
 			});
 		}
 
-		return chatId;
+		return { chatId };
 	}
+);
 
-	async function sendMessage(chatId, senderId, content) {
+export const sendMessage = createAsyncThunk(
+	'chat/sendMessage',
+	async ({ chatId, senderId, content }) => {
 		if (!chatId || !senderId || !content) {
 			console.error('Datos invalidos para enviar:', {
 				chatId,
@@ -61,17 +65,23 @@ export function useChatAction() {
 			isRead: false,
 		});
 	}
+);
 
-	const clearChatMessages = async (chatId) => {
+export const clearChatMessages = createAsyncThunk(
+	'chat/clearChatMessages',
+	async ({ chatId }) => {
 		try {
 			const messagesRef = ref(getDatabase(), `chats/${chatId}/messages`);
 			await remove(messagesRef);
 		} catch (error) {
 			console.error('Error al vaciar los mensajes del chat:', error);
 		}
-	};
+	}
+);
 
-	const checkUnreadMessages = async (chatId, userLoggedId) => {
+export const checkUnreadMessages = createAsyncThunk(
+	'chat/checkUnreadMessages',
+	async ({ chatId, userLoggedId }) => {
 		const db = getDatabase();
 		const messagesRef = ref(db, `chats/${chatId}/messages`);
 		const messagesSnapshot = await get(messagesRef);
@@ -88,9 +98,12 @@ export function useChatAction() {
 			return unreadMessages;
 		}
 		return 0;
-	};
+	}
+);
 
-	const markMessagesAsRead = async (chatId, userId) => {
+export const markMessagesAsRead = createAsyncThunk(
+	'chat/markMessagesAsRead',
+	async ({ chatId, userId }) => {
 		const db = getDatabase();
 		const messagesRef = ref(db, `chats/${chatId}/messages`);
 		const messagesSnapshot = await get(messagesRef);
@@ -105,13 +118,13 @@ export function useChatAction() {
 			});
 			await update(messagesRef, updates);
 		}
-	};
 
-	return {
-		findOrCreateChat,
-		sendMessage,
-		clearChatMessages,
-		checkUnreadMessages,
-		markMessagesAsRead,
-	};
-}
+		return {
+			findOrCreateChat,
+			sendMessage,
+			clearChatMessages,
+			checkUnreadMessages,
+			markMessagesAsRead,
+		};
+	}
+);
