@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { NavMenu } from '../header/NavMenu';
 import { Login } from '../header/Login';
 import { Register } from '../header/Register';
 import { useAuth } from '../../hooks/useAuth';
 import { useLoad } from '../../hooks/useLoad';
 import { Link, useNavigate } from 'react-router-dom';
+import { useChatAction } from '../../hooks/useChatAction';
 
 export function Header() {
 	const [openRegister, setOpenRegister] = useState(false);
@@ -12,11 +13,13 @@ export function Header() {
 	const [openSearch, setOpenSearch] = useState(false);
 	const [openMenu, setOpenMenu] = useState(false);
 	const [searchQuery, setSearchQuery] = useState('');
+	const [unreadMessagesCount, setUnreadMessagesCount] = useState(0);
 
 	const { loggedUser } = useAuth();
 	const { isLoading } = useLoad();
 	const menuRef = useRef();
 	const navigate = useNavigate();
+	const { findOrCreateChat, checkUnreadMessages } = useChatAction();
 
 	const handleClickOutside = (event) => {
 		if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -30,6 +33,23 @@ export function Header() {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
 	}, []);
+
+	useEffect(() => {
+		const fetchUnreadMessagesCount = async () => {
+			if (loggedUser) {
+				const counts = {};
+				const chats = await findOrCreateChat(loggedUser.uid);
+				for (const chatId of chats) {
+					const unreadCount = await checkUnreadMessages(chatId, loggedUser.uid);
+					counts[chatId] = unreadCount;
+				}
+				const totalUnread = Object.values(counts).reduce((a, b) => a + b, 0);
+				setUnreadMessagesCount(totalUnread);
+			}
+		};
+
+		fetchUnreadMessagesCount();
+	}, [loggedUser, findOrCreateChat, checkUnreadMessages]);
 
 	const handleSignUp = () => {
 		setOpenRegister((prevState) => !prevState);
@@ -117,8 +137,13 @@ export function Header() {
 					{loggedUser && (
 						<Link
 							to='/chats'
-							className='text-white hover:bg-gray-700 p-2 rounded'>
+							className='relative text-white hover:bg-gray-700 p-2 rounded'>
 							<i className='pi pi-envelope text-2xl'></i>
+							{unreadMessagesCount > 0 && (
+								<span className='absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1'>
+									{unreadMessagesCount}
+								</span>
+							)}
 						</Link>
 					)}
 					<div className='relative hidden sm:flex'>

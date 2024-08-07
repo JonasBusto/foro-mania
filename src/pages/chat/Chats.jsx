@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Dialog } from 'primereact/dialog';
-import { Button } from 'primereact/button'; // Asegúrate de importar Button de PrimeReact
+import { Button } from 'primereact/button';
 import { Chat } from './Chat';
 import { useAuth } from '../../hooks/useAuth';
 import { UsersList } from './UsersList';
@@ -12,8 +12,9 @@ export const Chats = () => {
 	const [displayDialog, setDisplayDialog] = useState(false);
 	const { loggedUser } = useAuth();
 	const { clearChatMessages, findOrCreateChat } = useChatAction();
+	console.log(loggedUser);
 
-	// Función para abrir o crear el chat con el usuario seleccionado
+	// función para abrir o crear el chat con el usuario seleccionado
 	const handleSelectUser = (user) => {
 		setSelectedUser(user);
 		const user1Id = loggedUser.uid;
@@ -23,11 +24,13 @@ export const Chats = () => {
 		});
 	};
 
+	// funcion para cerrar el modal y borrar selecteduser
 	const handleHideDialog = () => {
 		setDisplayDialog(false);
 		setSelectedUser(null);
 	};
 
+	// funcion para borrar todos los mensajes del chat
 	const handleClearChat = async () => {
 		if (chatId) {
 			await clearChatMessages(chatId);

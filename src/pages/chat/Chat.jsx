@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import { ref, onValue } from 'firebase/database';
@@ -5,15 +6,18 @@ import { getDatabase } from 'firebase/database';
 import { useChatAction } from '../../hooks/useChatAction';
 import { useAuth } from '../../hooks/useAuth';
 import '../../styles/chat.css';
-// recibe prop de chats
+import Picker from 'emoji-picker-react';
+
 export function Chat({ user2, chatId }) {
 	const [messages, setMessages] = useState([]);
 	const [newMessage, setNewMessage] = useState('');
+	const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 	const { loggedUser } = useAuth();
-	const user1Id = loggedUser.uid;
 	const { fullName, photoProfile } = user2;
-	const { sendMessage } = useChatAction();
+	const { sendMessage, markMessagesAsRead } = useChatAction();
+	const user1Id = loggedUser.uid;
 
+	// carga todos los mensajes entre los usuarios
 	useEffect(() => {
 		if (chatId) {
 			const messagesRef = ref(getDatabase(), `chats/${chatId}/messages`);
@@ -24,14 +28,22 @@ export function Chat({ user2, chatId }) {
 				});
 				setMessages(msgs);
 			});
+
+			// marca todos los mensajes como leídos cuando se carga el chat
+			const markMessagesRead = async () => {
+				await markMessagesAsRead(chatId, user1Id);
+			};
+			markMessagesRead();
 		}
 	}, [chatId]);
 
+	// función para convertir fecha y hora de timestamp
 	function formatTimestamp(timestamp) {
 		const date = new Date(timestamp);
 		return date.toLocaleString();
 	}
 
+	// función para enviar mensaje (useChatActions)
 	const handleSendMessage = async () => {
 		try {
 			if (newMessage.trim()) {
@@ -40,6 +52,21 @@ export function Chat({ user2, chatId }) {
 			}
 		} catch (error) {
 			console.error('Error al enviar el mensaje:', error);
+		}
+	};
+
+	const handleEmojiClick = (event, emojiObject) => {
+		if (emojiObject && emojiObject.emoji) {
+			setNewMessage((prevMessage) => prevMessage + emojiObject.emoji);
+		}
+		setShowEmojiPicker(false);
+	};
+
+	// manejador de eventos para la tecla Enter
+	const handleKeyDown = (e) => {
+		if (e.key === 'Enter') {
+			e.preventDefault(); 
+			handleSendMessage();
 		}
 	};
 
@@ -72,16 +99,35 @@ export function Chat({ user2, chatId }) {
 				<section className='flex flex-wrap items-center justify-around my-3'>
 					<input
 						type='text'
-						className='text-black w-3/4 p-3 mt-2 rounded-md flex items-center'
+						className='text-black w-4/6 p-3 mt-2 rounded-md flex items-center'
 						value={newMessage}
 						onChange={(e) => setNewMessage(e.target.value)}
+						onKeyDown={handleKeyDown}
 						placeholder='Escribe tu mensaje...'
 					/>
+					<button
+						type='button'
+						className='text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb]'
+						onClick={() => setShowEmojiPicker((prev) => !prev)}>
+						<i className='pi pi-face-smile text-xl p-2'></i>
+					</button>
+					{showEmojiPicker && (
+						<div className='absolute z-10 bottom-12'>
+							<div className='relative'>
+								<Picker onEmojiClick={handleEmojiClick} />
+								<button
+									className='absolute top-0 right-0 p-2 text-black'
+									onClick={() => setShowEmojiPicker(false)}>
+									<i className='pi pi-times'></i>
+								</button>
+							</div>
+						</div>
+					)}
 					<div className='flex flex-wrap items-center justify-center'>
 						<button
-							className='w-30 text-center py-2 px-5 text-sm font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb]  '
+							className='w-30 flex justify-center items-center text-center p-2 text-md font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb]  '
 							onClick={handleSendMessage}>
-							<i className='pi pi-comment  mr-2'></i>
+							<i className='pi pi-comment text-xl pr-2'></i>
 							Enviar
 						</button>
 					</div>
