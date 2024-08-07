@@ -14,6 +14,7 @@ import UploadTopic from '../pages/topic/UploadTopic';
 import { UsersSummary } from '../pages/UsersSummary';
 import TopicList from '../pages/topic/TopicList';
 import { Chats } from '../pages/chat/Chats';
+import CategoriesView from '../pages/CategoriesView';
 
 export function AppRoutes() {
 	return (
@@ -22,6 +23,7 @@ export function AppRoutes() {
 
 			<Route path='/topic/:id' element={<Topic />} />
 			<Route path='/topic' element={<Topic />} />
+			<Route path='/all-categories' element={<CategoriesView />} />
 			<Route path='/topic-list' element={<TopicList />} />
 			<Route path='/about' element={<About />} />
 			<Route path='/users-view' element={<UsersView />} />
