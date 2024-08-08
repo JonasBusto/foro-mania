@@ -4,13 +4,22 @@ import { CategoryMenu } from '../components/home/CategoryMenu';
 import { TagsList } from '../components/home/TagsList';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import WelcomeBanner from '../components/home/WelcomeBanner';
+import { useState } from 'react';
 
 export const Home = () => {
   const { loggedUser } = useAuth();
+  const [showWelcome, setShowWelcome] = useState(true)
 
   return (
     <section className='bg-[#121212] text-[#e5e5e5]'>
       <Banner />
+      {showWelcome &&
+        <div className='mb-10 px-4'>
+          <WelcomeBanner setShowWelcome={setShowWelcome} />
+        </div>
+      }
+
       <div className='flex flex-col lg:flex-row items-center'>
         {
           loggedUser !== null && <Link
