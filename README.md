@@ -1,12 +1,8 @@
 # FOROMania
 
-|<img style="margin: 10px" src="/img/FOROMANIA3.png" alt=FOROMania" />|
+<img src="img/FOROMANIA3.png" alt="FOROMania" style="max-width:100%; height:auto;">
 
 FOROMania es un espacio donde puedes compartir tus ideas, aprender de los demás y crecer junto a la comunidad!.-
-
-# Build
-
-### Dependencies
 
 # Proyect summary
 
@@ -37,9 +33,38 @@ Backend desarrollado en FireBase
 
 ### Developers
 
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| **Facundo** | **Oscar Frias Viñals** | **Kevin Jonas Busto** | **Nassahel Elias** |
-| <a href="https://github.com/githubfacu" target="_blank"><img style="margin: 10px" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" /></a> | <a href="https://github.com/ofvinals" target="_blank"><img style="margin: 10px" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" /></a> | <a href="https://www.github.com/jonasbusto" target="_blank"><img style="margin: 10px" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" /></a>| <a href="https://github.com/nassahel" target="_blank"><img style="margin: 10px" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" /></a> |
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://github.com/githubfacu" target="_blank">
+        <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" />
+      </a>
+      <br />
+      **Facundo**
+    </td>
+    <td align="center">
+      <a href="https://github.com/ofvinals" target="_blank">
+        <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" />
+      </a>
+      <br />
+      **Oscar Frias Viñals**
+    </td>
+    <td align="center">
+      <a href="https://www.github.com/jonasbusto" target="_blank">
+        <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" />
+      </a>
+      <br />
+      **Kevin Jonas Busto**
+    </td>
+    <td align="center">
+      <a href="https://github.com/nassahel" target="_blank">
+        <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" />
+      </a>
+      <br />
+      **Nassahel Elias**
+    </td>
+  </tr>
+</table>
 
 ## Tests
 
@@ -47,10 +72,21 @@ Backend desarrollado en FireBase
 
 ## UI/UX
 
-<!-- [Figma Prototype](google.com) -->
+[Figma Prototype]
 
 ## Team Leader
 
-| :---------------------------------------------------------------------------------------------------------------: |
-| **Alejo Calandra** |
-|<a href="https://github.com/Azueel" target="_blank"><img style="margin: 10px" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" /></a>|
+<table>
+  <tr>
+    <td align="center">
+      <strong>Alejo Calandra</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/Azueel" target="_blank">
+        <img style="margin: 10px" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" />
+      </a>
+    </td>
+  </tr>
+</table>
