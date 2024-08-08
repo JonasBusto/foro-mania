@@ -1,5 +1,6 @@
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import CategoryBox from './CategoryBox';
+import { Link } from 'react-router-dom';
 
 export const CategoryList = () => {
 	const { categories } = useCategoryAction();
