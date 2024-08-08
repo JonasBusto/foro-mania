@@ -18,7 +18,7 @@ const UserCard = ({currentUser, topics}) => {
         navigate(`/topic/${id}`)
     }
 
-    const lastTopic = lastTopicExtract(currentUser, topics)
+    const lastTopic = lastTopicExtract(uid, topics)
 
     const topicDate = TimeToNow(lastTopic.createdAt)
 

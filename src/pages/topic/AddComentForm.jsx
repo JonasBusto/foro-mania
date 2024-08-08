@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 import { Formik } from 'formik';
 import { format } from 'date-fns';
 import { useCommentAction } from '../../hooks/useCommentAction';

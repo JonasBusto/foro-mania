@@ -45,9 +45,9 @@ export function userFullDataExtract(users, reactions, topics, statusReactions, T
     });
 }
 
-export function lastTopicExtract(currentUser, topics) {
+export function lastTopicExtract(currentUserId, topics, getAll) {
 
-    const userTopics = topics.filter(topic => topic.userId === currentUser.uid);
+    const userTopics = topics.filter(topic => topic.userId === currentUserId);
 
     if (userTopics.length > 0) {
 
@@ -57,6 +57,10 @@ export function lastTopicExtract(currentUser, topics) {
     
             return dateB - dateA;
         });
+
+        if (getAll) {
+            return sortedTopics
+        }
 
         const releaseTopic = sortedTopics[0];
 

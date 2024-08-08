@@ -5,10 +5,22 @@ import 'primeicons/primeicons.css';
 
 export function NavMenu() {
 	const items = [
-		{ label: 'Ultimos', icon: 'pi pi-fw pi-clock' },
-		{ label: 'Top', icon: 'pi pi-fw pi-star' },
-		{ label: 'Usuarios', icon: 'pi pi-fw pi-users', url:'#/users-view' },
-		{ label: 'Categorias', icon: 'pi pi-fw pi-list' },
+		{
+			label: 'Ultimos',
+			icon: 'pi pi-fw pi-clock',
+			url: '#/topic-list?orderBy=last',
+		},
+		{
+			label: 'Top',
+			icon: 'pi pi-fw pi-star',
+			url: '#/topic-list?orderBy=top',
+		},
+		{ label: 'Usuarios', icon: 'pi pi-fw pi-users', url: '#/users-view' },
+		{
+			label: 'Categorias',
+			icon: 'pi pi-fw pi-list',
+			url: '#/all-categories',
+		},
 	];
 
 	const itemTemplate = (item) => {
@@ -22,10 +34,7 @@ export function NavMenu() {
 
 	return (
 		<div className='flex justify-center items-center '>
-			<Menu
-				model={items}
-				className='w-full md:w-14rem custom-nav-menu '
-			/>
+			<Menu model={items} className='w-full md:w-14rem custom-nav-menu ' />
 		</div>
 	);
 }

@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import CategoryBox from './CategoryBox';
 
 export const CategoryList = () => {
-  const { categories } = useCategoryAction();
+	const { categories } = useCategoryAction();
 
-  const limitedCategories = categories.slice(0, 6);
+	const limitedCategories = categories.slice(0, 6);
 
   return (
     <section className='w-full md:w-1/2 p-4'>
