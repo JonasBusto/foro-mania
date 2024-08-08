@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import CategoryBox from './CategoryBox';
 
