@@ -9,10 +9,7 @@ const CategoryBox = ({ category, showFull = false }) => {
 
 	const data = topics.filter(topic => category.uid === topic.categoryId)
 	let numOfTopics = data.length
-	
 
-
-	
 	return (
 		<>
 			{
