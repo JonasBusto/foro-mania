@@ -70,7 +70,6 @@ const TopicListTopic = ({ topic, type = '' }) => {
                 {topic.title}
               </h3>
               <div className='flex items-center mt-2 text-gray-400'>
-                {/* <div className={'w-3 h-3 rounded-full ' + topic.color}></div> */}
                 <p className='text-sm ml-2'>{topic.category}</p>
               </div>
             </div>
@@ -109,8 +108,9 @@ const TopicListTopic = ({ topic, type = '' }) => {
               <Link
                 key={user.uid}
                 to={'/users-view/' + user?.uid + '/summary'}
-                className={`me-2 flex items-center absolute left-[${(index + 1) * 2
-                  }rem]`}
+                className={`me-2 flex items-center absolute left-[${
+                  (index + 1) * 2
+                }rem]`}
               >
                 <img
                   className='w-10 h-10 object-cover rounded-full'

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { Tags } from '../../helpers/Tags';
@@ -14,13 +13,12 @@ export const CategoryMenu = () => {
 
   useEffect(() => {
     const handleNavigate = () => {
-      navigate(`/topic-list?category=${selectedCategory.uid}`)
-    }
+      navigate(`/topic-list?category=${selectedCategory.uid}`);
+    };
     if (selectedCategory !== null) {
-      handleNavigate()
+      handleNavigate();
     }
-  }, [selectedCategory])
-
+  }, [selectedCategory]);
 
   const categoryTemplate = (option) => (
     <div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-60'>

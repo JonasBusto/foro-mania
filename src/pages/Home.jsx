@@ -9,26 +9,26 @@ import { useState } from 'react';
 
 export const Home = () => {
   const { loggedUser } = useAuth();
-  const [showWelcome, setShowWelcome] = useState(true)
+  const [showWelcome, setShowWelcome] = useState(true);
 
   return (
     <section className='bg-[#121212] text-[#e5e5e5]'>
       <Banner />
-      {showWelcome &&
+      {showWelcome && (
         <div className='mb-10 px-4'>
           <WelcomeBanner setShowWelcome={setShowWelcome} />
         </div>
-      }
+      )}
 
       <div className='flex flex-col lg:flex-row items-center'>
-        {
-          loggedUser !== null && <Link
+        {loggedUser !== null && (
+          <Link
             to='/upload-topic'
             className='bg-red-600 text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-red-700 duration-200 w-[94%] sm:w-52 '
           >
             Nueva Publicación
           </Link>
-        }
+        )}
         <CategoryMenu />
       </div>
       <div className='flex flex-col md:flex-row w-full pb-5'>

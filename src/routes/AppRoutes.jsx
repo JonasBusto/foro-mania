@@ -17,34 +17,30 @@ import { Chats } from '../pages/chat/Chats';
 import CategoriesView from '../pages/CategoriesView';
 
 export function AppRoutes() {
-	return (
-		<Routes>
-			<Route path='/' element={<Home />} />
-
-			<Route path='/topic/:id' element={<Topic />} />
-			<Route path='/topic' element={<Topic />} />
-			<Route path='/all-categories' element={<CategoriesView />} />
-			<Route path='/topic-list' element={<TopicList />} />
-			<Route path='/about' element={<About />} />
-			<Route path='/users-view' element={<UsersView />} />
-			<Route path='/users-view/:id/summary' element={<UsersSummary />} />
-			<Route element={<PrivateRoute allowedRoles={['admin']} />}>
-				<Route path='/users' element={<Users />} />
-				<Route path='/users/upload' element={<FormUser />} />
-				<Route path='/users/upload/:id' element={<FormUser />} />
-				<Route path='/categories' element={<Categories />} />
-				<Route path='/categories/upload/' element={<FormCategory />} />
-				<Route
-					path='/categories/upload/:id'
-					element={<FormCategory />}
-				/>{' '}
-			</Route>
-			<Route element={<PrivateRoute allowedRoles={['admin', 'user']} />}>
-				<Route path='/upload-topic' element={<UploadTopic />} />
-				<Route path='/account' element={<MyAccount />} />
-				<Route path='/account/edit' element={<EditProfile />} />{' '}
-				<Route path='/chats' element={<Chats />} />
-			</Route>
-		</Routes>
-	);
+  return (
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/topic/:id' element={<Topic />} />
+      <Route path='/topic' element={<Topic />} />
+      <Route path='/all-categories' element={<CategoriesView />} />
+      <Route path='/topic-list' element={<TopicList />} />
+      <Route path='/about' element={<About />} />
+      <Route path='/users-view' element={<UsersView />} />
+      <Route path='/users-view/:id/summary' element={<UsersSummary />} />
+      <Route element={<PrivateRoute allowedRoles={['admin']} />}>
+        <Route path='/users' element={<Users />} />
+        <Route path='/users/upload' element={<FormUser />} />
+        <Route path='/users/upload/:id' element={<FormUser />} />
+        <Route path='/categories' element={<Categories />} />
+        <Route path='/categories/upload/' element={<FormCategory />} />
+        <Route path='/categories/upload/:id' element={<FormCategory />} />{' '}
+      </Route>
+      <Route element={<PrivateRoute allowedRoles={['admin', 'user']} />}>
+        <Route path='/upload-topic' element={<UploadTopic />} />
+        <Route path='/account' element={<MyAccount />} />
+        <Route path='/account/edit' element={<EditProfile />} />{' '}
+        <Route path='/chats' element={<Chats />} />
+      </Route>
+    </Routes>
+  );
 }

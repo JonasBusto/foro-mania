@@ -9,94 +9,95 @@ import '../styles/usersView.css';
 import Loader from '../utils/Loader';
 
 export const UsersView = () => {
-	const { users, allUsersStatus } = useUserAction();
-	const { TopicsGlobalStatus, topics } = useTopicAction();
+  const { users, allUsersStatus } = useUserAction();
+  const { TopicsGlobalStatus, topics } = useTopicAction();
 
-	const [modalSwitch, setModalSwitch] = useState(false);
-	const [currentUserSelected, setCurrentUserSelected] = useState(null);
-	const [modalPosition, setModalPosition] = useState({
-		top: '0px',
-		left: '0px',
-	});
+  const [modalSwitch, setModalSwitch] = useState(false);
+  const [currentUserSelected, setCurrentUserSelected] = useState(null);
+  const [modalPosition, setModalPosition] = useState({
+    top: '0px',
+    left: '0px',
+  });
 
-	const modalRef = useRef(null);
+  const modalRef = useRef(null);
 
-	useEffect(() => {
-		const handleClickOutside = (event) => {
-			if (modalRef.current && !modalRef.current.contains(event.target)) {
-				modalSwitchOff();
-			}
-		};
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        modalSwitchOff();
+      }
+    };
 
-		document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, []);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
-	const modalSwitchOff = () => {
-		setModalSwitch(false);
-	};
+  const modalSwitchOff = () => {
+    setModalSwitch(false);
+  };
 
-	const selectionChange = (user, event) => {
-		if (currentUserSelected) {
-			if (user.uid === currentUserSelected.uid) {
-				setCurrentUserSelected(null);
-				return modalSwitchOff;
-			}
-		}
+  const selectionChange = (user, event) => {
+    if (currentUserSelected) {
+      if (user.uid === currentUserSelected.uid) {
+        setCurrentUserSelected(null);
+        return modalSwitchOff;
+      }
+    }
 
-		setCurrentUserSelected(user);
+    setCurrentUserSelected(user);
 
-		if (window.innerWidth < 768) {
-			setModalPosition({ top: '10%', left: '10%' });
-			return setModalSwitch(true);
-		}
+    if (window.innerWidth < 768) {
+      setModalPosition({ top: '10%', left: '10%' });
+      return setModalSwitch(true);
+    }
 
-		const adjustedLeft = event.clientX + window.scrollX + 50;
-		const adjustedTop = event.clientY + window.scrollY - 150;
+    const adjustedLeft = event.clientX + window.scrollX + 50;
+    const adjustedTop = event.clientY + window.scrollY - 150;
 
-		setModalPosition({ top: `${adjustedTop}px`, left: `${adjustedLeft}px` });
-		return setModalSwitch(true);
-	};
+    setModalPosition({ top: `${adjustedTop}px`, left: `${adjustedLeft}px` });
+    return setModalSwitch(true);
+  };
 
-	if (allUsersStatus === 'Cargando') {
-		return <Loader />;
-	}
+  if (allUsersStatus === 'Cargando') {
+    return <Loader />;
+  }
 
-	return (
-		<main className='bg-[#121212] mb-12'>
-			<Banner />
+  return (
+    <main className='bg-[#121212] mb-12'>
+      <Banner />
 
-			<div className='p-6'>
-				<TablaDeUsuarios
-					users={users}
-					allUsersStatus={allUsersStatus}
-					topics={topics}
-					TopicsGlobalStatus={TopicsGlobalStatus}
-					selectionChange={selectionChange}
-				/>
-			</div>
+      <div className='p-6'>
+        <TablaDeUsuarios
+          users={users}
+          allUsersStatus={allUsersStatus}
+          topics={topics}
+          TopicsGlobalStatus={TopicsGlobalStatus}
+          selectionChange={selectionChange}
+        />
+      </div>
 
-			{modalSwitch && (
-				<article
-					ref={modalRef}
-					style={{
-						position: 'absolute',
-						top: modalPosition.top,
-						left: modalPosition.left,
-					}}>
-					<UserCard currentUser={currentUserSelected} topics={topics} />
-				</article>
-			)}
+      {modalSwitch && (
+        <article
+          ref={modalRef}
+          style={{
+            position: 'absolute',
+            top: modalPosition.top,
+            left: modalPosition.left,
+          }}
+        >
+          <UserCard currentUser={currentUserSelected} topics={topics} />
+        </article>
+      )}
 
-			{allUsersStatus === 'Fallido' && (
-				<div className='card flex justify-content-center'>
-					<p>Parece que algo nos falta.</p>
-					<Link to={'/'}>Volver a home</Link>
-				</div>
-			)}
-		</main>
-	);
+      {allUsersStatus === 'Fallido' && (
+        <div className='card flex justify-content-center'>
+          <p>Parece que algo nos falta.</p>
+          <Link to={'/'}>Volver a home</Link>
+        </div>
+      )}
+    </main>
+  );
 };

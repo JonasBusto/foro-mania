@@ -7,7 +7,6 @@ export function FormCategory() {
   const { id } = useParams();
 
   const {
-    categories,
     category,
     clearStateCategory,
     getCategory,

@@ -8,19 +8,18 @@ const randomIndex = Math.floor(Math.random() * banners.length);
 const randomBanner = banners[randomIndex];
 
 export const BannerAdversiting = () => {
-	const [randomBanner, setRandomBanner] = useState(null);
+  const [randomBanner, setRandomBanner] = useState(null);
 
-	useEffect(() => {
-		const randomIndex = Math.floor(Math.random() * banners.length);
-		setRandomBanner(banners[randomIndex]);
-	}, []);
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * banners.length);
+    setRandomBanner(banners[randomIndex]);
+  }, []);
 
-
-	return (
-		<div className='bg-white w-full h-28 flex items-center justify-center'>
-			<img src={randomBanner} alt='img-adversiting' className='h-full' />
-		</div>
-	);
+  return (
+    <div className='bg-white w-full h-28 flex items-center justify-center'>
+      <img src={randomBanner} alt='img-adversiting' className='h-full' />
+    </div>
+  );
 };
 
 export default BannerAdversiting;

@@ -75,11 +75,13 @@
   outline: none;
   box-shadow: none;
 }
+
 .p-dropdown:focus {
   outline: none;
   box-shadow: none;
   border: none;
 }
+
 .custom-dropdown {
   background-color: #404040 !important;
 }
@@ -99,40 +101,51 @@
 .p-dropdown-item.p-highlight {
   background-color: #404040 !important;
 }
+
 .p-dropdown-label {
   color: white;
 }
+
 .p-dropdown-trigger {
   color: white;
 }
+
 .p-dropdown-filter {
   background-color: white !important;
   color: #404040;
 }
+
 .p-dropdown-empty-message {
   background-color: #404040 !important;
   color: white;
 }
+
 .p-menuitem {
   background-color: #404040;
   color: white;
 }
+
 .p-menuitem-link:hover {
   background-color: white;
   color: #404040;
 }
+
 .p-menuitem-text {
   color: white;
 }
+
 .p-menuitem-text:hover {
   color: #404040;
 }
+
 .p-menuitem-icon {
   color: white;
 }
+
 .p-menuitem-icon:hover {
   color: #404040;
 }
+
 .p-component {
   background-color: #404040;
 }

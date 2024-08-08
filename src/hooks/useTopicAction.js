@@ -6,7 +6,6 @@ import {
   updateTopicById,
 } from '../store/topic/thunks';
 import { useAppDisptach, useAppSelector } from './store';
-import { useEffect } from 'react';
 import { clearCategory } from '../store/category/slice';
 
 export function useTopicAction() {

@@ -2,7 +2,6 @@ import {
   createFavorite,
   deleteFavoriteById,
   getFavoriteById,
-  getFavorites,
 } from '../store/favorite/thunks';
 import { useAppDisptach, useAppSelector } from './store';
 
