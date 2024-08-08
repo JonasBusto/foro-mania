@@ -11,8 +11,6 @@ export const CategoryMenu = () => {
   const [selectedTag, setSelectedTag] = useState(null);
 
   const navigate = useNavigate();
-  // console.log(selectedCategory.title);
-
 
   useEffect(() => {
     const handleNavigate = () => {
@@ -32,7 +30,6 @@ export const CategoryMenu = () => {
       ></div>
       <div className='ml-3 w-full'>
         <div className='text-md font-medium text-white'>{option.title}</div>
-        {/* <p className='text-sm text-gray-400'>{option.description}</p> */}
       </div>
     </div>
   );

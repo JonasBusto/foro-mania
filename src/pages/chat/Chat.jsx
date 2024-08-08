@@ -20,6 +20,7 @@ export function Chat({ chatId }) {
 
 	useEffect(() => {
 		if (chatId) {
+			// carga todos los mensajes del chat
 			const messagesRef = ref(getDatabase(), `chats/${chatId}/messages`);
 			const unsubscribe = onValue(messagesRef, (snapshot) => {
 				const msgs = [];
@@ -28,7 +29,7 @@ export function Chat({ chatId }) {
 				});
 				setMessages(msgs);
 			});
-
+			// marca como leidos todos los mensajes
 			const markMessagesRead = async () => {
 				await markMessagesAsRead(chatId, user1Id);
 			};
@@ -37,10 +38,10 @@ export function Chat({ chatId }) {
 		}
 	}, [chatId, markMessagesAsRead, user1Id]);
 
+	// desplaza al último mensaje al abrir el chat
 	useEffect(() => {
 		const container = chatContainerRef.current;
 		if (container && !userScrolled) {
-			// desplaza al último mensaje al abrir el chat
 			container.scrollTop = container.scrollHeight;
 		}
 	}, [messages, userScrolled]);
@@ -67,11 +68,13 @@ export function Chat({ chatId }) {
 		};
 	}, []);
 
+	// convierte timestamp a formato dia y hora
 	function formatTimestamp(timestamp) {
 		const date = new Date(timestamp);
 		return date.toLocaleString();
 	}
 
+	// maneja el envio de mensajes por hook
 	const handleSendMessage = async () => {
 		try {
 			if (newMessage.trim()) {
@@ -83,11 +86,13 @@ export function Chat({ chatId }) {
 		}
 	};
 
+	// maneja la apertura y cierre del modal de emoji
 	const handleEmojiClick = (event, emojiObject) => {
 		setNewMessage((prevMessage) => prevMessage + emojiObject.emoji);
 		setShowEmojiPicker(false);
 	};
 
+	// controla funcion de la tecla enter
 	const handleKeyDown = (e) => {
 		if (e.key === 'Enter') {
 			e.preventDefault();
