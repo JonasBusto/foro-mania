@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const ReactionButton = ({
+export const ReactionButton = ({
   reactions,
   addReaction,
   updateReaction,
@@ -163,5 +163,3 @@ const ReactionButton = ({
     </div>
   );
 };
-
-export default ReactionButton;

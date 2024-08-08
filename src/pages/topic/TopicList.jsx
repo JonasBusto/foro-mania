@@ -5,7 +5,7 @@ import TopicListTopic from './TopicListTopic';
 import { useLocation } from 'react-router-dom';
 import { useReactionAction } from '../../hooks/useReactionAction';
 import { useLoad } from '../../hooks/useLoad';
-import BannerAdversiting from '../../components/structure/BannerAdversiting';
+import { BannerAdversiting } from '../../components/items/BannerAdversiting';
 import Loader from '../../utils/Loader';
 
 const TopicList = () => {

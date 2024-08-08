@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTopicAction } from '../../hooks/useTopicAction';
 
-const CategoryBox = ({ category, showFull = false }) => {
+export const CategoryBox = ({ category, showFull = false }) => {
   const { topics } = useTopicAction();
 
   const data = topics.filter((topic) => category.uid === topic.categoryId);
@@ -51,5 +51,3 @@ const CategoryBox = ({ category, showFull = false }) => {
     </>
   );
 };
-
-export default CategoryBox;

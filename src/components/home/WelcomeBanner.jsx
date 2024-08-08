@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { switchRegister } from '../../store/modals/slice';
 import { useAuth } from '../../hooks/useAuth';
 
-const WelcomeBanner = ({ setShowWelcome }) => {
+export const WelcomeBanner = ({ setShowWelcome }) => {
   const { loggedUser } = useAuth();
   const dispatch = useDispatch();
 
@@ -54,5 +54,3 @@ const WelcomeBanner = ({ setShowWelcome }) => {
     </div>
   );
 };
-
-export default WelcomeBanner;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
-import ReactionButton from '../../components/buttons/ReactionButton';
+import { ReactionButton } from '../../components/buttons/ReactionButton';
 import { useUserAction } from '../../hooks/useUserAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 import { Dialog } from 'primereact/dialog';

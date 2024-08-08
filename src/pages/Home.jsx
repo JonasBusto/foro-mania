@@ -4,7 +4,7 @@ import { CategoryMenu } from '../components/home/CategoryMenu';
 import { TagsList } from '../components/home/TagsList';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import WelcomeBanner from '../components/home/WelcomeBanner';
+import { WelcomeBanner } from '../components/home/WelcomeBanner';
 import { useState } from 'react';
 
 export const Home = () => {

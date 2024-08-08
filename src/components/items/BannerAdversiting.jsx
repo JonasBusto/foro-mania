@@ -21,5 +21,3 @@ export const BannerAdversiting = () => {
     </div>
   );
 };
-
-export default BannerAdversiting;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCategoryAction } from '../hooks/useCategoryAction';
-import CategoryBox from '../components/home/CategoryBox';
-import BannerAdversiting from '../components/structure/BannerAdversiting';
+import { CategoryBox } from '../components/home/CategoryBox';
+import { BannerAdversiting } from '../components/items/BannerAdversiting';
 
 const CategoriesView = () => {
   const { categories } = useCategoryAction();

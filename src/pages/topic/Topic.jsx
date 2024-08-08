@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TopicComment from './TopicComment';
 import UploadComentForm from './UploadComentForm';
-import ReactionButton from '../../components/buttons/ReactionButton';
+import { ReactionButton } from '../../components/buttons/ReactionButton';
 import { Link, useParams } from 'react-router-dom';
 import { useTopicAction } from '../../hooks/useTopicAction';
 import { useAuth } from '../../hooks/useAuth';
@@ -14,7 +14,7 @@ import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 import { Dialog } from 'primereact/dialog';
 import { useFavoriteAction } from '../../hooks/useFavoriteAction';
-import BannerAdversiting from '../../components/structure/BannerAdversiting';
+import { BannerAdversiting } from '../../components/items/BannerAdversiting';
 import Loader from '../../utils/Loader';
 
 const Topic = () => {
