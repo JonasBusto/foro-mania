@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavMenu } from '../header/NavMenu';
 import { Login } from '../header/Login';
 import { Register } from '../header/Register';
@@ -6,10 +6,10 @@ import { useAuth } from '../../hooks/useAuth';
 import { useLoad } from '../../hooks/useLoad';
 import { Link, useNavigate } from 'react-router-dom';
 import { useChatAction } from '../../hooks/useChatAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { switchLogin, switchRegister } from '../../store/modals/slice';
 
 export function Header() {
-	const [openRegister, setOpenRegister] = useState(false);
-	const [openSignIn, setOpenSignIn] = useState(false);
 	const [openSearch, setOpenSearch] = useState(false);
 	const [openMenu, setOpenMenu] = useState(false);
 	const [searchQuery, setSearchQuery] = useState('');
@@ -34,55 +34,26 @@ export function Header() {
 		};
 	}, []);
 
-	// useEffect(() => {
-	// 	const fetchUnreadMessagesCount = async () => {
-	// 		if (loggedUser) {
-	// 			const counts = {};
-	// 			const chats = await findOrCreateChatUser(loggedUser.uid);
-	// 			for (const chatId of chats) {
-	// 				const unreadCount = await checkUnreadMessagesUser(
-	// 					chatId,
-	// 					loggedUser.uid
-	// 				);
-	// 				counts[chatId] = unreadCount;
-	// 			}
-	// 			const totalUnread = Object.values(counts).reduce(
-	// 				(a, b) => a + b,
-	// 				0
-	// 			);
-	// 			console.log(totalUnread)
-	// 			setUnreadMessagesCount(totalUnread);
-	// 		}
-	// 	};
+	const registerModal = useSelector((state) => state.modal.registerModal);
+	const loginModal = useSelector((state) => state.modal.loginModal);
+	const dispatch = useDispatch();
 
-	// 	fetchUnreadMessagesCount();
-	// }, []);
 
 	const handleSignUp = () => {
-		setOpenRegister((prevState) => !prevState);
-		setOpenSignIn(false);
-		setOpenSearch(false);
-		setOpenMenu(false);
+		dispatch(switchRegister());
 	};
 
 	const handleSignIn = () => {
-		setOpenSignIn((prevState) => !prevState);
-		setOpenRegister(false);
-		setOpenSearch(false);
-		setOpenMenu(false);
+		dispatch(switchLogin());
 	};
 
 	const handleSearch = () => {
 		setOpenSearch((prevState) => !prevState);
-		setOpenRegister(false);
-		setOpenSignIn(false);
 		setOpenMenu(false);
 	};
 
 	const handleMenu = () => {
 		setOpenMenu((prevState) => !prevState);
-		setOpenRegister(false);
-		setOpenSignIn(false);
 		setOpenSearch(false);
 	};
 
@@ -91,9 +62,9 @@ export function Header() {
 	};
 
 	return (
-		<header className='relative bg-black text-white '>
+		<header className='relative bg-black text-white'>
 			<section
-				className='flex items-center justify-center sm:justify-between flex-wrap flex-row  p-4 mx-auto'
+				className='flex items-center justify-center sm:justify-between flex-wrap flex-row p-4 mx-auto'
 				style={{ maxWidth: '1300px' }}>
 				<div className='flex items-center'>
 					<Link
@@ -112,9 +83,9 @@ export function Header() {
 								Registrarse
 							</button>
 							<Register
-								visible={openRegister}
-								setOpenRegister={setOpenRegister}
-								onHide={() => setOpenRegister(false)}
+								visible={registerModal}
+								setOpenRegister={() => dispatch(switchRegister())}
+								onHide={() => dispatch(switchRegister())}
 							/>
 
 							<button
@@ -123,9 +94,9 @@ export function Header() {
 								Iniciar Sesión
 							</button>
 							<Login
-								visible={openSignIn}
-								setOpenSignIn={setOpenSignIn}
-								onHide={() => setOpenSignIn(false)}
+								visible={loginModal}
+								setOpenSignIn={() => dispatch(switchLogin())}
+								onHide={() => dispatch(switchLogin())}
 							/>
 						</>
 					)}
