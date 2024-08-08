@@ -17,7 +17,7 @@ const CategoriesView = () => {
                 <div className='flex flex-col gap-4'>
                     {categories &&
                         categories.map((category, index) => (
-                            <CategoryBox category={category} key={index} />
+                            <CategoryBox category={category} key={index} showFull />
                         ))}
                 </div>
             </div>

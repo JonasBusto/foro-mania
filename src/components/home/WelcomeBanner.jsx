@@ -1,7 +1,14 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { switchRegister } from '../../store/modals/slice';
+import { useAuth } from '../../hooks/useAuth';
 
-const WelcomeBanner = ({setShowWelcome}) => {
+const WelcomeBanner = ({ setShowWelcome }) => {
+    const { loggedUser } = useAuth();
+    const dispatch = useDispatch();
+
+   
     return (
         <div className="border-2 border-neutral-300 py-3 px-6 rounded-md relative bg-neutral-800">
             <button className="absolute top-0 right-2 text-xl" onClick={() => setShowWelcome(false)}>×</button>
@@ -13,11 +20,14 @@ const WelcomeBanner = ({setShowWelcome}) => {
                     de ser respetuoso con todos los miembros. Tu cortesía y respeto ayudan a mantener un
                     ambiente agradable para todos.
                 </p>
-                <p className='mb-1'>
-                    Si aún no te has registrado, te invitamos a registrarte para
-                    disfrutar de todas las funcionalidades de nuestro foro. ¡Únete a nuestras conversaciones
-                    y sé parte de ForoMania!
-                </p>
+                {loggedUser === null &&
+                    <p className='mb-1'>
+                        Si aún no te has registrado, te invitamos a <button className='text-neutral-400 underline' onClick={() => dispatch(switchRegister())}>registrarte aqui</button>  para
+                        disfrutar de todas las funcionalidades de nuestro foro. ¡Únete a nuestras conversaciones
+                        y sé parte de ForoMania!
+                    </p>
+                }
+
                 <p>
                     Puedes revisar nuestra <Link className='text-neutral-400 underline' to="https://docs.google.com/document/d/1hnTSg_Hp0BAaFZe77bRljGfqblmNo_T0jJMpsGtupAY/pub" target='_blank'>política de privacidad</Link> para
                     entender cómo protegemos tu información.
