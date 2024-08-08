@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-import { ProgressSpinner } from 'primereact/progressspinner';
 import { Banner } from '../../components/home/Banner';
 import { useUserAction } from '../../hooks/useUserAction';
 import { useAuth } from '../../hooks/useAuth';
 import { useChatAction } from '../../hooks/useChatAction';
+import Loader from '../../utils/Loader';
 
 export function UsersList({ onSelectUser }) {
 	const { users, allUsersStatus } = useUserAction();
@@ -55,7 +55,7 @@ export function UsersList({ onSelectUser }) {
 			</div>
 			{allUsersStatus === 'Cargando' && (
 				<div className='min-h-[50vh] flex items-center'>
-					<ProgressSpinner />
+					<Loader />
 				</div>
 			)}
 			<div className='flex flex-row flex-wrap items-center justify-around'>
