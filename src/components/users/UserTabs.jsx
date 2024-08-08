@@ -8,13 +8,13 @@ export const UserTabs = ({setTab, tab}) => {
           onClick={() => setTab('TOPICS')}
           className={`cursor-pointer text-xl font-semibold text-gray-400 ${tab === 'TOPICS' && 'text-white border-b-4 border-[#61dafb]'}`}
         >
-          Tópicos
+          Tópicos Creados
         </span>
         <span role="tab" aria-selected={tab === 'MESSAGES'} aria-controls="mensajes-panel" id="mensajes-tab" aria-label="Ver mensajes"
           onClick={() => setTab('MESSAGES')}
           className={`cursor-pointer text-xl font-semibold text-gray-400 ${tab === 'MESSAGES' && 'text-white border-b-4 border-[#61dafb]'}`}
         >
-          Mensajes
+          Tópicos Favoritos
         </span>
     </>
   )
