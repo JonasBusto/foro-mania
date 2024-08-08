@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { Tags } from '../../helpers/Tags';

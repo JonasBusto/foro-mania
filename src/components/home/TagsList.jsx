@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Tags } from '../../helpers/Tags';
 import { useTopicAction } from '../../hooks/useTopicAction';
 import TopicListTopic from '../../pages/topic/TopicListTopic';
 

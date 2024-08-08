@@ -1,4 +1,6 @@
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { Chat } from './Chat';
@@ -6,26 +8,38 @@ import { useAuth } from '../../hooks/useAuth';
 import { UsersList } from './UsersList';
 import { useChatAction } from '../../hooks/useChatAction';
 
-export const Chats = () => {
-	const [selectedUser, setSelectedUser] = useState(null);
+export const Chats = ({ user: initialUser, onClose }) => {
+	const [selectedUser, setSelectedUser] = useState(initialUser || null);
 	const [chatId, setChatId] = useState(null);
 	const [displayDialog, setDisplayDialog] = useState(false);
 	const { loggedUser } = useAuth();
 	const { clearChatMessages, findOrCreateChat } = useChatAction();
 
-	// función para abrir o crear el chat con el usuario seleccionado
+	useEffect(() => {
+		if (initialUser) {
+			setSelectedUser(initialUser);
+			const fetchChatId = async () => {
+				const user1Id = loggedUser.uid;
+				const chatId = await findOrCreateChat(user1Id, initialUser.uid);
+				setChatId(chatId);
+				setDisplayDialog(true);
+			};
+			fetchChatId();
+		}
+	}, [initialUser, findOrCreateChat]);
+
+	// Función para abrir o crear el chat con el usuario seleccionado
 	const handleSelectUser = async (user) => {
 		setSelectedUser(user);
 		const user1Id = loggedUser.uid;
-		const chatId= await findOrCreateChat(user1Id, user.uid)
-			setChatId(chatId);
-			setDisplayDialog(true);
-		};
-	
+		const chatId = await findOrCreateChat(user1Id, user.uid);
+		setChatId(chatId);
+		setDisplayDialog(true);
+	};
 
 	// funcion para cerrar el modal y borrar selecteduser
 	const handleHideDialog = () => {
-		setDisplayDialog(false);
+		if (onClose) onClose();
 		setSelectedUser(null);
 	};
 
