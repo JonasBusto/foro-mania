@@ -6,7 +6,7 @@ import {
   getCategoryById,
   updateCategoryById,
 } from '../store/category/thunks';
-import { useAppDisptach, useAppSelector } from './store';
+import { useAppDispatch, useAppSelector } from './store';
 
 export function useCategoryAction() {
   const categories = useAppSelector((state) => state.category.categories);
@@ -21,7 +21,7 @@ export function useCategoryAction() {
     (state) => state.category.statusUpdate
   );
 
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const getCategory = async ({ id }) => {

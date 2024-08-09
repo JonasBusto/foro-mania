@@ -5,7 +5,7 @@ import {
   getTopicById,
   updateTopicById,
 } from '../store/topic/thunks';
-import { useAppDisptach, useAppSelector } from './store';
+import { useAppDispatch, useAppSelector } from './store';
 import { clearCategory } from '../store/category/slice';
 
 export function useTopicAction() {
@@ -17,7 +17,7 @@ export function useTopicAction() {
   const statusUpdateTopic = useAppSelector((state) => state.topic.statusUpdate);
   const statusDeleteTopic = useAppSelector((state) => state.topic.statusDelete);
   const statusTopic = useAppSelector((state) => state.topic.statusTopic);
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
 
   const addTopic = async (topic) => {
     const res = await dispatch(createTopic(topic));

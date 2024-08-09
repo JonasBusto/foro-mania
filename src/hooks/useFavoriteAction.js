@@ -3,7 +3,7 @@ import {
   deleteFavoriteById,
   getFavoriteById,
 } from '../store/favorite/thunks';
-import { useAppDisptach, useAppSelector } from './store';
+import { useAppDispatch, useAppSelector } from './store';
 
 export function useFavoriteAction() {
   const favorite = useAppSelector((state) => state.favorite.favorite);
@@ -19,7 +19,7 @@ export function useFavoriteAction() {
     (state) => state.favorite.statusDelete
   );
 
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
 
   const getFavorite = async ({ id }) => {
     await dispatch(getFavoriteById({ id }));

@@ -1,4 +1,4 @@
-import { useAppDisptach, useAppSelector } from './store';
+import { useAppDispatch, useAppSelector } from './store';
 import { getUserById, updateUser } from '../store/user/thunks';
 import { clearUser } from '../store/user/slice';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ export function useUserAction() {
   const userStatusUpdate = useAppSelector((state) => state.user.statusUpdate);
   const userStatus = useAppSelector((state) => state.user.statusUser);
   const navigate = useNavigate();
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
 
   const getUser = async ({ id }) => {
     await dispatch(getUserById({ id }));

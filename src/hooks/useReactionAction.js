@@ -4,7 +4,7 @@ import {
   getReactionById,
   updateReactionById,
 } from '../store/reaction/thunks';
-import { useAppDisptach, useAppSelector } from './store';
+import { useAppDispatch, useAppSelector } from './store';
 
 export function useReactionAction() {
   const reaction = useAppSelector((state) => state.reaction.reaction);
@@ -20,7 +20,7 @@ export function useReactionAction() {
     (state) => state.reaction.statusDelete
   );
 
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
 
   const getReaction = async ({ id }) => {
     await dispatch(getReactionById({ id }));
