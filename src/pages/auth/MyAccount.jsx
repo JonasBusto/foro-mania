@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useFavoriteAction } from '../../hooks/useFavoriteAction';
 import { useTopicAction } from '../../hooks/useTopicAction';
-import TopicListTopic from '../topic/TopicListTopic';
+import {TopicListTopic} from '../topic/TopicListTopic';
 
 export function MyAccount() {
   const { loggedUser, logout } = useAuth();

@@ -1,118 +1,116 @@
-.userCardContainer{
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    padding-bottom: 12px;
-    position: relative;
-    background: linear-gradient(90deg, rgba(89, 89, 89) -20%, rgba(32, 32, 32) 80%);
-    filter: drop-shadow(0px 0px 4px rgb(255, 255, 255, .9));
-    min-width: 450px;
-    border-radius: 45px 45px 45px 0;
-    gap: 16px;
+.userCardContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  padding-bottom: 12px;
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    rgba(89, 89, 89) -20%,
+    rgba(32, 32, 32) 80%
+  );
+  filter: drop-shadow(0px 0px 4px rgb(255, 255, 255, 0.9));
+  min-width: 450px;
+  border-radius: 45px 45px 45px 0;
+  gap: 16px;
 }
 
-.brandContainer{
-    display: flex;
-    box-sizing: border-box;
-    width: 100%;
-    align-items: flex-start;
+.brandContainer {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  align-items: flex-start;
 }
 
-.brandContainer figure{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 50%;
+.brandContainer figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
 }
 
-.brandContainer figure img{
-    width: 120px;
-    height: 120px;
-    position: relative;
-    cursor: pointer;
-    transition: transform .2s ease;
+.brandContainer figure img {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-.brandContainer figure img:hover{
-    transform: scale(1.1);
+.brandContainer figure img:hover {
+  transform: scale(1.1);
 }
 
 .brandContainer figure::before {
-    content: '';
-    position: absolute;
-    top: 16px; /* Ajusta la posición según necesites */
-    left: 16px;
-    width: 120px;
-    height: 120px;
-    background: linear-gradient(90deg, #d4d4d4 25%, #e0e0e0 50%, #d4d4d4 75%);
-    /* background: linear-gradient(90deg, #4a4a4a 25%, #5c5c5c 50%, #4a4a4a 75%); */
-    border-radius: 50%;
-    animation: shine 2s linear forwards;
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(90deg, #d4d4d4 25%, #e0e0e0 50%, #d4d4d4 75%);
+  border-radius: 50%;
+  animation: shine 2s linear forwards;
 }
 
-.brandContainer section{
-    display: flex;
-    flex-direction: column;
-    margin-left: 16px;
+.brandContainer section {
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
 }
 
-.brandContainer section h2{
-    color: rgba(255, 255, 255, .9);
-    cursor: pointer;
-    font-size: 40px;
-    font-weight: 700;
+.brandContainer section h2 {
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  font-size: 40px;
+  font-weight: 700;
 }
 
-.brandContainer section h2:hover{
-    color: white;
+.brandContainer section h2:hover {
+  color: white;
 }
 
-.userInfo{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    color: rgba(255, 255, 255, .9);
-
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.userInfo span{
-    padding: 0 8px;
+.userInfo span {
+  padding: 0 8px;
 }
 
-.userInfo small{
-    padding: 0 8px;
+.userInfo small {
+  padding: 0 8px;
 }
 
 @keyframes shine {
-    0% {
-        background-position: -150px 0;
-    }
-    100% {
-        background-position: 150px 0;
-    }
+  0% {
+    background-position: -150px 0;
+  }
+  100% {
+    background-position: 150px 0;
+  }
 }
 
-
 @media (max-width: 768px) {
+  .userCardContainer {
+    min-width: 290px;
+    width: 100%;
+  }
 
-    .userCardContainer{
-        min-width: 290px;
-        width: 100%;
-    }
+  .brandContainer {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .brandContainer{
-        flex-direction: column;
-        align-items: center;
-    }
+  .brandContainer figure::before {
+    position: initial;
+  }
 
-    .brandContainer figure::before{
-        position: initial;
-    }
-
-    .brandContainer section h2{
-        font-size: 32px;
-    }
-
-
+  .brandContainer section h2 {
+    font-size: 32px;
+  }
 }

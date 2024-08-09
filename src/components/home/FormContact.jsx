@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Dialog } from 'primereact/dialog';
 import { useForm } from 'react-hook-form';
 import emailjs from 'emailjs-com';

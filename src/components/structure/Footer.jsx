@@ -1,13 +1,7 @@
 import { useState } from 'react';
-import { Link, useOutlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FormContact } from '../home/FormContact';
 import { format } from 'date-fns';
-
-
-
-// treminos de uso 
-// https://docs.google.com/document/d/1hnTSg_Hp0BAaFZe77bRljGfqblmNo_T0jJMpsGtupAY/pub
-
 
 export function Footer() {
   const [formContact, setFormContact] = useState(false);
@@ -16,7 +10,7 @@ export function Footer() {
     setFormContact(true);
   };
 
-  const currentYear = format(new Date, 'yyyy')
+  const currentYear = format(new Date(), 'yyyy');
 
   return (
     <footer className='mt-auto w-full bg-[#1f1f1f] text-neutral-300'>
@@ -24,8 +18,9 @@ export function Footer() {
         <div className='flex items-center'>
           <Link
             to='/'
-            className='text-white text-3xl font-bold hover:opacity-80 duration-200'>
-            <img src="/img/logo-foromania-footer.png" alt="" width={120} />
+            className='text-white text-3xl font-bold hover:opacity-80 duration-200'
+          >
+            <img src='/img/logo-foromania-footer.png' alt='' width={120} />
           </Link>
         </div>
         <div className='flex flex-col lg:flex-row items-center justify-between w-full lg:px-8'>
@@ -41,10 +36,13 @@ export function Footer() {
             </Link>
           </div>
           <p className='text-sm text-center  lg:w-1/3'>
-          © {currentYear}. ForoMania - Todos los derechos reservados.
+            © {currentYear}. ForoMania - Todos los derechos reservados.
           </p>
           <div className='flex items-center justify-end gap-2 text-sm lg:w-1/3'>
-            <Link to='/users-view' className='hover:text-neutral-50 duration-100'>
+            <Link
+              to='/users-view'
+              className='hover:text-neutral-50 duration-100'
+            >
               Usuarios
             </Link>
             <p>•</p>
@@ -54,7 +52,8 @@ export function Footer() {
             <p>•</p>
             <Link
               onClick={handleFormContact}
-              className='hover:text-neutral-50 duration-100'>
+              className='hover:text-neutral-50 duration-100'
+            >
               Contacto
             </Link>
             <p>•</p>
@@ -62,10 +61,7 @@ export function Footer() {
               Sobre Nosotros
             </Link>
           </div>
-
         </div>
-
-
       </section>
       {formContact && (
         <FormContact

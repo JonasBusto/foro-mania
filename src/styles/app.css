@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import '~react-quill/dist/quill.snow.css';
-
 html {
   scrollbar-width: thin;
   scrollbar-color: #1b95d2 #191414;

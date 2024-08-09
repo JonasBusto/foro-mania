@@ -5,13 +5,13 @@ import {
   logoutUser,
   registerUser,
 } from '../store/user/thunks';
-import { useAppDisptach, useAppSelector } from './store';
+import { useAppDispatch, useAppSelector } from './store';
 
 export function useAuth() {
   const loggedUser = useAppSelector((state) => state.user.loggedUser);
   const statusSign = useAppSelector((state) => state.user.statusSign);
 
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const loginGoogle = async ({ setOpenSignIn }) => {

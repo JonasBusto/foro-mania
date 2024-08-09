@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
-import  { useState } from 'react';
+import { useState } from 'react';
 
-const ReactionButton = ({
+export const ReactionButton = ({
   reactions,
   addReaction,
   updateReaction,
@@ -164,5 +163,3 @@ const ReactionButton = ({
     </div>
   );
 };
-
-export default ReactionButton;
