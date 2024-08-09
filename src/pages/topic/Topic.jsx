@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import TopicComment from './TopicComment';
-import UploadComentForm from './UploadComentForm';
-import ReactionButton from '../../components/buttons/ReactionButton';
+import { useEffect, useState } from 'react';
+import { TopicComment } from './TopicComment';
+import { UploadComentForm } from './UploadComentForm';
+import { ReactionButton } from '../../components/buttons/ReactionButton';
 import { Link, useParams } from 'react-router-dom';
 import { useTopicAction } from '../../hooks/useTopicAction';
 import { useAuth } from '../../hooks/useAuth';
@@ -14,8 +14,10 @@ import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 import { Dialog } from 'primereact/dialog';
 import { useFavoriteAction } from '../../hooks/useFavoriteAction';
+import { BannerAdversiting } from '../../components/items/BannerAdversiting';
+import { Loader } from '../../components/items/Loader';
 
-const Topic = () => {
+export const Topic = () => {
   const { id } = useParams();
   const { getTopic, topic, deleteTopic, statusDeleteTopic, statusTopic } =
     useTopicAction();
@@ -69,18 +71,14 @@ const Topic = () => {
     !topic ||
     !category
   ) {
-    return <h1 className='text-white'>Cargando...</h1>;
+    return <Loader />;
   }
 
   return (
     <div className=' text-white min-h-screen py-10 px-4'>
       <div className='max-w-4xl mx-auto'>
         <div className='bg-gray-800 rounded-lg overflow-hidden'>
-          <img
-            src='#'
-            alt='img-adversiting'
-            className='w-full h-32 object-cover'
-          />
+          <BannerAdversiting />
         </div>
         <div className='mt-6'>
           <div className='flex justify-between items-center border-b border-gray-700 pb-4'>
@@ -245,5 +243,3 @@ const Topic = () => {
     </div>
   );
 };
-
-export default Topic;

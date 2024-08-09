@@ -1,13 +1,21 @@
-import React from 'react';
 import { Formik } from 'formik';
 import { format } from 'date-fns';
 import { useCommentAction } from '../../hooks/useCommentAction';
 import { TextEditor } from '../../components/topic/TextEditor';
+import { Loader } from '../../components/items/Loader';
 
-const UploadComentForm = ({ loggedUser, action, topic, data, setVisible }) => {
+export const UploadComentForm = ({
+  loggedUser,
+  action,
+  topic,
+  data,
+  setVisible,
+}) => {
   const {
     addComment,
     updateComment,
+    statusComment,
+    statusComments,
     statusUpdateComment,
     statusCreateComment,
   } = useCommentAction();
@@ -29,6 +37,10 @@ const UploadComentForm = ({ loggedUser, action, topic, data, setVisible }) => {
       userId: data.userId,
       createdAt: data.createdAt,
     };
+  }
+
+  if (statusComment === 'Cargando' || statusComments === 'Cargando') {
+    return <Loader />;
   }
 
   return (
@@ -93,5 +105,3 @@ const UploadComentForm = ({ loggedUser, action, topic, data, setVisible }) => {
     </div>
   );
 };
-
-export default UploadComentForm;

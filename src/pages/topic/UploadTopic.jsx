@@ -1,13 +1,14 @@
 import { Formik } from 'formik';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTopicAction } from '../../hooks/useTopicAction';
 import { useAuth } from '../../hooks/useAuth';
 import { format } from 'date-fns';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 import { useParams } from 'react-router-dom';
+import { Loader } from '../../components/items/Loader';
 
-const UploadTopic = () => {
+export const UploadTopic = () => {
   const { id } = useParams();
 
   const {
@@ -54,7 +55,7 @@ const UploadTopic = () => {
   }
 
   if (statusTopic === 'Cargando') {
-    return <h1>Cargando...</h1>;
+    return <Loader />;
   }
 
   return (
@@ -176,5 +177,3 @@ const UploadTopic = () => {
     </div>
   );
 };
-
-export default UploadTopic;

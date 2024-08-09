@@ -4,7 +4,7 @@ import {
   getComments,
   updateCommentById,
 } from '../store/comment/thunks';
-import { useAppDisptach, useAppSelector } from './store';
+import { useAppDispatch, useAppSelector } from './store';
 
 export function useCommentAction() {
   const allComments = useAppSelector((state) => state.comment.comments);
@@ -19,7 +19,7 @@ export function useCommentAction() {
   );
   const statusComment = useAppSelector((state) => state.comment.statusComment);
 
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
 
   const addComment = async (comment, { resetForm }) => {
     const res = await dispatch(createComment(comment));
@@ -55,7 +55,6 @@ export function useCommentAction() {
   const fetchComments = async (id) => {
     await dispatch(getComments(id));
   };
-
   return {
     addComment,
     fetchComments,

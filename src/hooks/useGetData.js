@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAppDisptach } from './store';
+import { useAppDispatch } from './store';
 import { getUsers, verifyLoggedUser } from '../store/user/thunks';
 import { getCategories } from '../store/category/thunks';
 import { getReactions } from '../store/reaction/thunks';
@@ -7,7 +7,7 @@ import { getTopics } from '../store/topic/thunks';
 import { getFavorites } from '../store/favorite/thunks';
 
 export function useGetData() {
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(verifyLoggedUser());

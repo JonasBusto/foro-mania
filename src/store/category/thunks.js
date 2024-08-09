@@ -1,8 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { auth, db, storage } from '../../services/firebase';
+import { db } from '../../services/firebase';
 import {
   doc,
-  setDoc,
   getDoc,
   getDocs,
   query,
@@ -11,16 +10,6 @@ import {
   addDoc,
   deleteDoc,
 } from 'firebase/firestore';
-import {
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  signOut,
-  updateProfile,
-} from 'firebase/auth';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 export const getCategories = createAsyncThunk('category/getAll', async () => {
   const arrayAux = [];

@@ -5,9 +5,10 @@ import { InputText } from 'primereact/inputtext';
 import { useState } from 'react';
 import { FilterMatchMode } from 'primereact/api';
 import { Link } from 'react-router-dom';
+import { Loader } from '../../components/items/Loader';
 
 export function Users() {
-  const { users } = useUserAction();
+  const { users, status } = useUserAction();
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -24,6 +25,10 @@ export function Users() {
       </span>
     );
   };
+
+  if (status === 'Cargando') {
+    return <Loader />;
+  }
 
   const userAction = (user) => {
     return (

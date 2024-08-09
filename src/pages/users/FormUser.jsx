@@ -1,16 +1,15 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { Formik } from 'formik';
 import { useUserAction } from '../../hooks/useUserAction';
 import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks/store';
+import { Loader } from '../../components/items/Loader';
 
 export function FormUser() {
   const { id } = useParams();
-
   const { statusSign } = useAuth();
   const { user, getUser, clearStateUser } = useUserAction();
-
   const statusUser = useAppSelector((state) => state.user.statusUser);
 
   let initialValues = {
@@ -40,12 +39,8 @@ export function FormUser() {
     };
   }
 
-  //   FALTA VER SI TRAIGO O NO LA CONTRASEÑA
-  //  EN FUNCIÓN DE LO ANTERIOR, VERIFICAR SI EL USUARIO SE LOGUEO CON GOOGLE O NO,
-  // PORQUE AL LOGUARSE CON GOOGLE NO SE GENERA UNA CONTRASEÑA
-
   if (statusUser === 'Cargando') {
-    return <h1>Cargando...</h1>;
+    return <Loader />;
   }
 
   return (

@@ -1,7 +1,7 @@
-import { Button } from 'primereact/button';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormContact } from '../home/FormContact';
+import { format } from 'date-fns';
 
 export function Footer() {
   const [formContact, setFormContact] = useState(false);
@@ -10,44 +10,58 @@ export function Footer() {
     setFormContact(true);
   };
 
+  const currentYear = format(new Date(), 'yyyy');
+
   return (
-    <footer className='mt-auto w-full bg-[#1f1f1f] text-neutral-50'>
-      <section className='flex flex-col items-center justify-center w-full py-6'>
-        <div className='flex items-center mb-6'>
-          <Link to='/'>
-            <h1 className='text-4xl font-bold text-[#61dafb] hover:text-[#0fadfc]'>
-              ForoMania
-            </h1>
-          </Link>
-        </div>
-        <div className='flex flex-wrap items-center justify-center gap-4 mb-6'>
-          <button
-            onClick={handleFormContact}
-            className='w-40 text-center py-2 px-5 text-sm font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb] focus:ring-4 focus:ring-[#61dafb]'
-          >
-            Contacto
-          </button>
+    <footer className='mt-auto w-full bg-[#1f1f1f] text-neutral-300'>
+      <section className='flex flex-col items-center py-5 gap-2'>
+        <div className='flex items-center'>
           <Link
-            to='/about'
-            className='w-40 py-2 px-5 text-center text-sm font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb] focus:ring-4 focus:ring-[#61dafb]'
+            to='/'
+            className='text-white text-3xl font-bold hover:opacity-80 duration-200'
           >
-            Sobre Nosotros
+            <img src='/img/logo-foromania-footer.png' alt='' width={120} />
           </Link>
         </div>
-        <div className='flex flex-wrap items-center justify-center gap-6 mb-6'>
-          <Link to='https://www.facebook.com/?locale=es_LA' target='_blank'>
-            <i className='pi pi-facebook text-3xl text-[#61dafb] hover:text-[#0fadfc] transition-colors'></i>
-          </Link>
-          <Link to='https://twitter.com/?lang=es' target='_blank'>
-            <i className='pi pi-twitter text-3xl text-[#61dafb] hover:text-[#0fadfc] transition-colors'></i>
-          </Link>
-          <Link to='https://www.instagram.com/' target='_blank'>
-            <i className='pi pi-instagram text-3xl text-[#61dafb] hover:text-[#0fadfc] transition-colors'></i>
-          </Link>
+        <div className='flex flex-col lg:flex-row items-center justify-between w-full lg:px-8'>
+          <div className='flex items-center  gap-2 lg:w-1/3'>
+            <Link to='https://www.facebook.com/?locale=es_LA' target='_blank'>
+              <i className='pi pi-facebook text-lg hover:text-neutral-50 duration-100'></i>
+            </Link>
+            <Link to='https://twitter.com/?lang=es' target='_blank'>
+              <i className='pi pi-twitter text-lg hover:text-neutral-50 duration-100'></i>
+            </Link>
+            <Link to='https://www.instagram.com/' target='_blank'>
+              <i className='pi pi-instagram text-lg hover:text-neutral-50 duration-100'></i>
+            </Link>
+          </div>
+          <p className='text-sm text-center  lg:w-1/3'>
+            © {currentYear}. ForoMania - Todos los derechos reservados.
+          </p>
+          <div className='flex items-center justify-end gap-2 text-sm lg:w-1/3'>
+            <Link
+              to='/users-view'
+              className='hover:text-neutral-50 duration-100'
+            >
+              Usuarios
+            </Link>
+            <p>•</p>
+            <Link to='/about' className='hover:text-neutral-50 duration-100'>
+              Categorias
+            </Link>
+            <p>•</p>
+            <Link
+              onClick={handleFormContact}
+              className='hover:text-neutral-50 duration-100'
+            >
+              Contacto
+            </Link>
+            <p>•</p>
+            <Link to='/about' className='hover:text-neutral-50 duration-100'>
+              Sobre Nosotros
+            </Link>
+          </div>
         </div>
-        <p className='text-sm text-neutral-300'>
-          @ 2024. ForoMania - Derechos reservados
-        </p>
       </section>
       {formContact && (
         <FormContact

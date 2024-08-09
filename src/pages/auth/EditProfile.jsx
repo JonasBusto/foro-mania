@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useUserAction } from '../../hooks/useUserAction';
 import { Link } from 'react-router-dom';
-import 'primeicons/primeicons.css'; // Solo para iconos
 
 export const EditProfile = () => {
   const { loggedUser } = useAuth();

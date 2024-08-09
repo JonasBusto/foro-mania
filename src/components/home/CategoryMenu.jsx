@@ -10,18 +10,15 @@ export const CategoryMenu = () => {
   const [selectedTag, setSelectedTag] = useState(null);
 
   const navigate = useNavigate();
-  // console.log(selectedCategory.title);
-
 
   useEffect(() => {
     const handleNavigate = () => {
-      navigate(`/topic-list?category=${selectedCategory.uid}`)
-    }
+      navigate(`/topic-list?category=${selectedCategory.uid}`);
+    };
     if (selectedCategory !== null) {
-      handleNavigate()
+      handleNavigate();
     }
-  }, [selectedCategory])
-
+  }, [selectedCategory]);
 
   const categoryTemplate = (option) => (
     <div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-60'>
@@ -31,7 +28,6 @@ export const CategoryMenu = () => {
       ></div>
       <div className='ml-3 w-full'>
         <div className='text-md font-medium text-white'>{option.title}</div>
-        {/* <p className='text-sm text-gray-400'>{option.description}</p> */}
       </div>
     </div>
   );
@@ -68,7 +64,7 @@ export const CategoryMenu = () => {
           filterInputAutoFocus
         />
         <Link
-          to='/'
+          to='/all-categories'
           className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
         >
           Categorías

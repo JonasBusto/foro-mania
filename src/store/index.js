@@ -5,6 +5,7 @@ import topicReducer from './topic/slice';
 import commentReducer from './comment/slice';
 import reactionReducer from './reaction/slice';
 import favoriteReducer from './favorite/slice';
+import modalReducer from './modals/slice';
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     comment: commentReducer,
     reaction: reactionReducer,
     favorite: favoriteReducer,
+    modal: modalReducer,
   },
 });

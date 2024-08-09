@@ -4,85 +4,74 @@ import { Login } from '../header/Login';
 import { Register } from '../header/Register';
 import { useAuth } from '../../hooks/useAuth';
 import { useLoad } from '../../hooks/useLoad';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useChatAction } from '../../hooks/useChatAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { switchLogin, switchRegister } from '../../store/modals/slice';
 
 export function Header() {
-  const [openRegister, setOpenRegister] = useState(false);
-  const [openSignIn, setOpenSignIn] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [unreadMessagesCount, setUnreadMessagesCount] = useState(0);
 
   const { loggedUser } = useAuth();
   const { isLoading } = useLoad();
   const menuRef = useRef();
-  const searchRef = useRef();
-
   const navigate = useNavigate();
-  const location = useLocation()
+  const {} = useChatAction();
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setOpenMenu(false);
     }
-    if (searchRef.current && !searchRef.current.contains(event.target)) {
-      setOpenSearch(false);
-    }
   };
 
   useEffect(() => {
-    setOpenMenu(false)
-    
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [location]);
+  }, []);
+
+  const registerModal = useSelector((state) => state.modal.registerModal);
+  const loginModal = useSelector((state) => state.modal.loginModal);
+  const dispatch = useDispatch();
 
   const handleSignUp = () => {
-    setOpenRegister((prevState) => !prevState);
-    setOpenSignIn(false);
-    setOpenSearch(false);
-    setOpenMenu(false);
+    dispatch(switchRegister());
   };
 
   const handleSignIn = () => {
-    setOpenSignIn((prevState) => !prevState);
-    setOpenRegister(false);
-    setOpenSearch(false);
-    setOpenMenu(false);
+    dispatch(switchLogin());
   };
 
   const handleSearch = () => {
     setOpenSearch((prevState) => !prevState);
-    setOpenRegister(false);
-    setOpenSignIn(false);
     setOpenMenu(false);
   };
 
   const handleMenu = () => {
     setOpenMenu((prevState) => !prevState);
-    setOpenRegister(false);
-    setOpenSignIn(false);
     setOpenSearch(false);
   };
 
   const handleSearchSubmit = () => {
-    navigate(`/topic-list?search=${searchQuery}`)
+    navigate(`/topic-list?search=${searchQuery}`);
   };
 
   return (
     <header className='relative bg-black text-white'>
       <section
-        className='flex items-center justify-between p-4 mx-auto'
+        className='flex items-center justify-center sm:justify-between flex-wrap flex-row p-4 mx-auto'
         style={{ maxWidth: '1300px' }}
       >
         <div className='flex items-center'>
           <Link
             to='/'
-            className='text-white text-3xl font-bold hover:opacity-80'
+            className='text-white text-3xl font-bold hover:opacity-80 m-5 sm:mb-0'
           >
-            ForoMania
+            <img src='/img/FOROMANIA3.png' alt='' width={250} />
           </Link>
         </div>
 
@@ -96,9 +85,9 @@ export function Header() {
                 Registrarse
               </button>
               <Register
-                visible={openRegister}
-                setOpenRegister={setOpenRegister}
-                onHide={() => setOpenRegister(false)}
+                visible={registerModal}
+                setOpenRegister={() => dispatch(switchRegister())}
+                onHide={() => dispatch(switchRegister())}
               />
 
               <button
@@ -108,9 +97,9 @@ export function Header() {
                 Iniciar Sesión
               </button>
               <Login
-                visible={openSignIn}
-                setOpenSignIn={setOpenSignIn}
-                onHide={() => setOpenSignIn(false)}
+                visible={loginModal}
+                setOpenSignIn={() => dispatch(switchLogin())}
+                onHide={() => dispatch(switchLogin())}
               />
             </>
           )}
@@ -127,7 +116,20 @@ export function Header() {
               />
             </Link>
           )}
-          <div ref={searchRef} className='relative hidden sm:flex'>
+          {loggedUser && (
+            <Link
+              to='/chats'
+              className='relative text-white hover:bg-gray-700 p-2 rounded'
+            >
+              <i className='pi pi-envelope text-2xl'></i>
+              {unreadMessagesCount > 0 && (
+                <span className='absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1'>
+                  {unreadMessagesCount}
+                </span>
+              )}
+            </Link>
+          )}
+          <div className='relative hidden sm:flex'>
             <button
               onClick={handleSearch}
               className='text-white hover:bg-gray-700 p-2 rounded'

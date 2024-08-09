@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { CategoryMenu } from '../../components/home/CategoryMenu';
 import { useTopicAction } from '../../hooks/useTopicAction';
-import TopicListTopic from './TopicListTopic';
+import { TopicListTopic } from './TopicListTopic';
 import { useLocation } from 'react-router-dom';
-import banner1 from '/img/banner1.gif';
 import { useReactionAction } from '../../hooks/useReactionAction';
 import { useLoad } from '../../hooks/useLoad';
+import { BannerAdversiting } from '../../components/items/BannerAdversiting';
+import { Loader } from '../../components/items/Loader';
 
-const TopicList = () => {
+export const TopicList = () => {
   const { topics, clearStateCategory } = useTopicAction();
   const { reactions } = useReactionAction();
   const { isLoading } = useLoad();
@@ -59,15 +60,13 @@ const TopicList = () => {
   }
 
   if (isLoading) {
-    return <h1>cargando</h1>;
+    return <Loader />;
   }
 
   return (
     <div className='bg-neutral-800 py-10 text-neutral-200 px-3'>
       <div className='max-w-[75rem] mx-auto'>
-        <div className='bg-white w-full h-28 flex items-center justify-center'>
-          <img src={banner1} alt='img-adversiting' className='h-full' />
-        </div>
+        <BannerAdversiting />
         <div>
           <div className='my-6'>
             <CategoryMenu />
@@ -92,5 +91,3 @@ const TopicList = () => {
     </div>
   );
 };
-
-export default TopicList;

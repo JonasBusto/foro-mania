@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCommentAction } from '../../hooks/useCommentAction';
 import { formatDistanceToNow, parseISO } from 'date-fns';
@@ -6,7 +6,7 @@ import { es } from 'date-fns/locale';
 import { useUserAction } from '../../hooks/useUserAction';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 
-const TopicListTopic = ({ topic, type = '' }) => {
+export const TopicListTopic = ({ topic, type = '' }) => {
   const { allComments, fetchComments } = useCommentAction();
   const { users } = useUserAction();
   const { categories } = useCategoryAction();
@@ -58,7 +58,7 @@ const TopicListTopic = ({ topic, type = '' }) => {
       {type === 'home' ? (
         <Link
           to={`/topic/${topic.id}`}
-          className='flex items-start p-4 bg-[#1e1e1e] rounded-lg border-l-4'
+          className='flex items-start p-4 bg-[#1e1e1e] h-24 rounded-lg border-l-4'
           style={{ borderLeft: `10px solid ${categorieFiltered.color}` }}
         >
           <div className='flex items-center w-full'>
@@ -66,18 +66,19 @@ const TopicListTopic = ({ topic, type = '' }) => {
               <p className='text-gray-400 text-[9px] leading-tight'>
                 {`${userFiltered.fullName} (${userFiltered.email})`}
               </p>
-              <h3 className='m-0 text-xl font-semibold text-white'>
+              <h3 className='m-0 text-lg lg:text-xl font-semibold max-w-[13rem] lg:max-w-max text-white'>
                 {topic.title}
               </h3>
               <div className='flex items-center mt-2 text-gray-400'>
-                <div className={'w-3 h-3 rounded-full ' + topic.color}></div>
                 <p className='text-sm ml-2'>{topic.category}</p>
               </div>
             </div>
             <div className='flex flex-col text-right text-gray-300'>
               <p className='text-sm'>{filteredComments.length} respuestas</p>
               <p className='text-sm'>
-                Actualizado hace {TimeToNow(mostRecentComment.createdAt)}
+                <span className='hidden lg:inline'>Actualizado hace </span>
+                <span className='lg:hidden'>Hace </span>
+                {TimeToNow(mostRecentComment.createdAt)}
               </p>
             </div>
           </div>
@@ -172,5 +173,3 @@ const TopicListTopic = ({ topic, type = '' }) => {
     </>
   );
 };
-
-export default TopicListTopic;

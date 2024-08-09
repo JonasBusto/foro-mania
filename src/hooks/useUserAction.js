@@ -1,6 +1,7 @@
-import { useAppDisptach, useAppSelector } from './store';
+import { useAppDispatch, useAppSelector } from './store';
 import { getUserById, updateUser } from '../store/user/thunks';
 import { clearUser } from '../store/user/slice';
+import { useNavigate } from 'react-router-dom';
 
 export function useUserAction() {
   const users = useAppSelector((state) => state.user.users);
@@ -8,8 +9,8 @@ export function useUserAction() {
   const user = useAppSelector((state) => state.user.user);
   const userStatusUpdate = useAppSelector((state) => state.user.statusUpdate);
   const userStatus = useAppSelector((state) => state.user.statusUser);
-
-  const dispatch = useAppDisptach();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const getUser = async ({ id }) => {
     await dispatch(getUserById({ id }));
@@ -25,6 +26,7 @@ export function useUserAction() {
       alert(res.payload);
     } else {
       alert('Datos guardados exitosamente');
+      navigate('/');
     }
   };
 
