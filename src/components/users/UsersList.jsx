@@ -48,7 +48,7 @@ export const UsersList = ({
           alt={`imagen de perfil de usuario ${rowData.fullName}`}
           src={rowData.photoProfile}
           style={{ width: '56px', height: '56px' }}
-          className='rounded-full ring-2'
+          className='rounded-full ring-2 object-cover'
         />
         <span className='pl-3 text-[17px]'>{rowData.fullName}</span>
       </div>

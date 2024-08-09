@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { Chats } from '../../pages/chat/Chats';
+import { useAuth } from '../../hooks/useAuth';
 
 export const PublicProfileCard = ({ userProps }) => {
+  const { loggedUser } = useAuth();
+
   const { photoProfile, email, fullName } = userProps;
   const [displayDialog, setDisplayDialog] = useState(false);
 
@@ -28,14 +31,16 @@ export const PublicProfileCard = ({ userProps }) => {
           <span className='text-lg text-gray-300'>{email}</span>
         </section>
       </div>
-      <div>
-        <button
-          onClick={handleSelectUser}
-          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full'
-        >
-          <i className='pi pi-comments mr-2'></i>Enviar mensaje
-        </button>
-      </div>
+      {loggedUser && (
+        <div>
+          <button
+            onClick={handleSelectUser}
+            className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full'
+          >
+            <i className='pi pi-comments mr-2'></i>Enviar mensaje
+          </button>
+        </div>
+      )}
       {displayDialog && <Chats user={userProps} onClose={handleCloseDialog} />}
     </div>
   );

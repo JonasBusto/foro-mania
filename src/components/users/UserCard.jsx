@@ -28,7 +28,7 @@ export const UserCard = ({ currentUser, topics }) => {
             src={photoProfile}
             onClick={() => navigateToUserSummary(uid)}
             alt='foto de perfil del usuario'
-            className='rounded-full cursor-pointer'
+            className='rounded-full cursor-pointer object-cover'
           />
         </figure>
 
