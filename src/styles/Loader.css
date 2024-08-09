@@ -3,7 +3,7 @@
   color: #ffffff;
   margin: 100px 0px 100px;
   height: 100%;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
   width: 100%;
   display: flex;
@@ -17,8 +17,8 @@
   content: '';
   position: absolute;
   border: 4px solid rgb(50, 150, 176);
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   box-sizing: border-box;
   border-left: 2px solid rgba(50, 150, 176, 0);
@@ -40,8 +40,8 @@
   content: '';
   position: absolute;
   border: 4px solid rgba(50, 150, 176, 0.5);
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   box-sizing: border-box;
   border-left: 2px solid rgba(50, 150, 176, 0);

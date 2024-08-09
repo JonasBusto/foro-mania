@@ -21,7 +21,7 @@ export function useAuth() {
       alert(res.payload);
     } else {
       setOpenSignIn(false);
-      navigate('/account');
+      navigate('/');
     }
   };
 
@@ -32,7 +32,7 @@ export function useAuth() {
       alert(res.payload);
     } else {
       setOpenSignIn(false);
-      navigate('/account');
+      navigate('/');
     }
   };
 
