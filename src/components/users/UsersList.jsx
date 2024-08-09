@@ -6,7 +6,7 @@ import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
 import { useReactionAction } from '../../hooks/useReactionAction';
 import { userFullDataExtract } from '../../helpers/Actions';
-import Loader from '../../utils/Loader';
+import { Loader } from '../items/Loader';
 
 export const UsersList = ({
   users,

@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import { format } from 'date-fns';
 import { useCommentAction } from '../../hooks/useCommentAction';
 import { TextEditor } from '../../components/topic/TextEditor';
-import Loader from '../../utils/Loader';
+import { Loader } from '../../components/items/Loader';
 
 export const UploadComentForm = ({
   loggedUser,

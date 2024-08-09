@@ -1,12 +1,12 @@
-import  { useEffect } from 'react';
+import { useEffect } from 'react';
 import { CategoryMenu } from '../../components/home/CategoryMenu';
 import { useTopicAction } from '../../hooks/useTopicAction';
-import {TopicListTopic} from './TopicListTopic';
+import { TopicListTopic } from './TopicListTopic';
 import { useLocation } from 'react-router-dom';
 import { useReactionAction } from '../../hooks/useReactionAction';
 import { useLoad } from '../../hooks/useLoad';
 import { BannerAdversiting } from '../../components/items/BannerAdversiting';
-import Loader from '../../utils/Loader';
+import { Loader } from '../../components/items/Loader';
 
 export const TopicList = () => {
   const { topics, clearStateCategory } = useTopicAction();

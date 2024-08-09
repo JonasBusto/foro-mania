@@ -5,7 +5,7 @@ import { UserCard } from '../components/users/UserCard';
 import { Link } from 'react-router-dom';
 import { Banner } from '../components/home/Banner';
 import '../styles/usersView.css';
-import Loader from '../utils/Loader';
+import { Loader } from '../components/items/Loader';
 import { UsersList } from '../components/users/UsersList';
 
 export const UsersView = () => {

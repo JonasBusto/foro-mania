@@ -3,7 +3,7 @@ import { Banner } from '../../components/home/Banner';
 import { useUserAction } from '../../hooks/useUserAction';
 import { useAuth } from '../../hooks/useAuth';
 import { useChatAction } from '../../hooks/useChatAction';
-import Loader from '../../utils/Loader';
+import { Loader } from '../../components/items/Loader';
 
 export function UsersList({ onSelectUser }) {
   const { users, allUsersStatus } = useUserAction();

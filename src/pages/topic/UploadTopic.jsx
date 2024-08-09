@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 import { useParams } from 'react-router-dom';
-import Loader from '../../utils/Loader';
+import { Loader } from '../../components/items/Loader';
 
 export const UploadTopic = () => {
   const { id } = useParams();

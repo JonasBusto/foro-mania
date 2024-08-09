@@ -7,7 +7,7 @@ import { UserTabs } from '../components/users/UserTabs';
 import { UserTopics } from '../components/users/UserTopics';
 import { useTopicAction } from '../hooks/useTopicAction';
 import { FavTopics } from '../components/users/FavTopics';
-import Loader from '../utils/Loader';
+import { Loader } from '../components/items/Loader';
 
 export const UsersSummary = () => {
   const { id } = useParams();

@@ -15,7 +15,7 @@ import { TextEditor } from '../../components/topic/TextEditor';
 import { Dialog } from 'primereact/dialog';
 import { useFavoriteAction } from '../../hooks/useFavoriteAction';
 import { BannerAdversiting } from '../../components/items/BannerAdversiting';
-import Loader from '../../utils/Loader';
+import { Loader } from '../../components/items/Loader';
 
 export const Topic = () => {
   const { id } = useParams();

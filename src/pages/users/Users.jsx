@@ -5,7 +5,7 @@ import { InputText } from 'primereact/inputtext';
 import { useState } from 'react';
 import { FilterMatchMode } from 'primereact/api';
 import { Link } from 'react-router-dom';
-import Loader from '../../utils/Loader';
+import { Loader } from '../../components/items/Loader';
 
 export function Users() {
   const { users, status } = useUserAction();

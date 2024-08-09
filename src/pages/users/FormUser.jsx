@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import { useUserAction } from '../../hooks/useUserAction';
 import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks/store';
-import Loader from '../../utils/Loader';
+import { Loader } from '../../components/items/Loader';
 
 export function FormUser() {
   const { id } = useParams();
