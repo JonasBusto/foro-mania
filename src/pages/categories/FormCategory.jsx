@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { Formik } from 'formik';
 import { useEffect } from 'react';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
+import { Loader } from '../../components/items/Loader';
 
 export function FormCategory() {
   const { id } = useParams();
@@ -39,8 +40,8 @@ export function FormCategory() {
     };
   }
 
-  if (statusCategory === 'Cargando') {
-    return <h1>Cargando...</h1>;
+  if (statusCategory === 'Inactivo' || statusCategory === 'Cargando') {
+    return <Loader />;
   }
 
   return (

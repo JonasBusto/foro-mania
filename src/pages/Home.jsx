@@ -6,10 +6,17 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { WelcomeBanner } from '../components/home/WelcomeBanner';
 import { useState } from 'react';
+import { useLoad } from '../hooks/useLoad';
+import { Loader } from '../components/items/Loader';
 
 export const Home = () => {
   const { loggedUser } = useAuth();
+  const { isLoading } = useLoad();
   const [showWelcome, setShowWelcome] = useState(true);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <section className='bg-[#121212] text-[#e5e5e5]'>
