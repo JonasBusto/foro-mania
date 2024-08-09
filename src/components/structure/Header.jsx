@@ -63,15 +63,15 @@ export function Header() {
   return (
     <header className='relative bg-black text-white'>
       <section
-        className='flex items-center justify-center sm:justify-between flex-wrap flex-row p-4 mx-auto'
+        className='flex items-center justify-center sm:justify-between flex-wrap flex-row pb-5 sm:pb-0 px-4 mx-auto'
         style={{ maxWidth: '1300px' }}
       >
-        <div className='flex items-center'>
+        <div className='flex items-center justify-center'>
           <Link
             to='/'
-            className='text-white text-3xl font-bold hover:opacity-80 m-5 sm:mb-0'
+            className='text-white text-3xl font-bold hover:opacity-80 m-5'
           >
-            <img src='/img/FOROMANIA3.png' alt='' width={250} />
+            <img src='/img/header-logo.png' alt='' width={250} className='' />
           </Link>
         </div>
 
