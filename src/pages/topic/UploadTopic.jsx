@@ -8,7 +8,7 @@ import { TextEditor } from '../../components/topic/TextEditor';
 import { useParams } from 'react-router-dom';
 import Loader from '../../utils/Loader';
 
-const UploadTopic = () => {
+export const UploadTopic = () => {
   const { id } = useParams();
 
   const {
@@ -177,5 +177,3 @@ const UploadTopic = () => {
     </div>
   );
 };
-
-export default UploadTopic;

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTopicAction } from '../../hooks/useTopicAction';
-import TopicListTopic from '../../pages/topic/TopicListTopic';
+import { TopicListTopic } from '../../pages/topic/TopicListTopic';
 
 export const TagsList = () => {
   const { topics } = useTopicAction();

@@ -5,10 +5,10 @@ import { ReactionButton } from '../../components/buttons/ReactionButton';
 import { useUserAction } from '../../hooks/useUserAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 import { Dialog } from 'primereact/dialog';
-import UploadComentForm from './UploadComentForm';
+import { UploadComentForm } from './UploadComentForm';
 import { Link } from 'react-router-dom';
 
-const TopicComment = ({
+export const TopicComment = ({
   data,
   reactions,
   addReaction,
@@ -146,5 +146,3 @@ const TopicComment = ({
     </div>
   );
 };
-
-export default TopicComment;

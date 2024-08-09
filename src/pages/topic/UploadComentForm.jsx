@@ -4,7 +4,13 @@ import { useCommentAction } from '../../hooks/useCommentAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 import Loader from '../../utils/Loader';
 
-const UploadComentForm = ({ loggedUser, action, topic, data, setVisible }) => {
+export const UploadComentForm = ({
+  loggedUser,
+  action,
+  topic,
+  data,
+  setVisible,
+}) => {
   const {
     addComment,
     updateComment,
@@ -99,5 +105,3 @@ const UploadComentForm = ({ loggedUser, action, topic, data, setVisible }) => {
     </div>
   );
 };
-
-export default UploadComentForm;

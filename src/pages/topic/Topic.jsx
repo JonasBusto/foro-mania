@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import TopicComment from './TopicComment';
-import UploadComentForm from './UploadComentForm';
+import { TopicComment } from './TopicComment';
+import { UploadComentForm } from './UploadComentForm';
 import { ReactionButton } from '../../components/buttons/ReactionButton';
 import { Link, useParams } from 'react-router-dom';
 import { useTopicAction } from '../../hooks/useTopicAction';
@@ -17,7 +17,7 @@ import { useFavoriteAction } from '../../hooks/useFavoriteAction';
 import { BannerAdversiting } from '../../components/items/BannerAdversiting';
 import Loader from '../../utils/Loader';
 
-const Topic = () => {
+export const Topic = () => {
   const { id } = useParams();
   const { getTopic, topic, deleteTopic, statusDeleteTopic, statusTopic } =
     useTopicAction();
@@ -243,5 +243,3 @@ const Topic = () => {
     </div>
   );
 };
-
-export default Topic;

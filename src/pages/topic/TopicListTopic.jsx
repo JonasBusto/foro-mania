@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCommentAction } from '../../hooks/useCommentAction';
 import { formatDistanceToNow, parseISO } from 'date-fns';
@@ -6,7 +6,7 @@ import { es } from 'date-fns/locale';
 import { useUserAction } from '../../hooks/useUserAction';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 
-const TopicListTopic = ({ topic, type = '' }) => {
+export const TopicListTopic = ({ topic, type = '' }) => {
   const { allComments, fetchComments } = useCommentAction();
   const { users } = useUserAction();
   const { categories } = useCategoryAction();
@@ -173,5 +173,3 @@ const TopicListTopic = ({ topic, type = '' }) => {
     </>
   );
 };
-
-export default TopicListTopic;
