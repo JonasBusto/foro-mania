@@ -2,26 +2,26 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUserAction } from '../hooks/useUserAction';
 import { Banner } from '../components/home/Banner';
-import { PublicProfileCard } from '../components/users/user-public-profile-card';
+import { PublicProfileCard } from '../components/users/PublicProfileCard';
 import { UserTabs } from '../components/users/UserTabs';
-import { UserTopics } from '../components/users/user-topics';
+import { UserTopics } from '../components/users/UserTopics';
 import { useTopicAction } from '../hooks/useTopicAction';
-import { FavTopics } from '../components/users/fav-topics';
+import { FavTopics } from '../components/users/FavTopics';
 import Loader from '../utils/Loader';
 
 export const UsersSummary = () => {
   const { id } = useParams();
 
-  const { getUser, user, statusUser } = useUserAction();
+  const { getUser, user, userStatus } = useUserAction();
   const { topics } = useTopicAction();
 
   const [tab, setTab] = useState('TOPICS');
 
   useEffect(() => {
-    getUser({ id: id });
+    getUser({ id });
   }, []);
 
-  if (statusUser === 'Cargando') {
+  if (userStatus === 'Inactivo' || userStatus === 'Cargando') {
     return <Loader />;
   }
 

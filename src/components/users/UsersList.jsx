@@ -8,7 +8,7 @@ import { useReactionAction } from '../../hooks/useReactionAction';
 import { userFullDataExtract } from '../../helpers/Actions';
 import Loader from '../../utils/Loader';
 
-export const TablaDeUsuarios = ({
+export const UsersList = ({
   users,
   allUsersStatus,
   selectionChange,

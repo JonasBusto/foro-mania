@@ -1,11 +1,12 @@
+import { lastTopicExtract } from '../../helpers/Actions';
 import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 
-export const FavTopics = ({ userProps }) => {
-  const { email, fullName } = userProps;
+export const UserTopics = ({ userProps, topics }) => {
+  const { uid, email, fullName } = userProps;
 
-  const favTopics = false;
+  const topicsByUserId = lastTopicExtract(uid, topics, true);
 
   const fechaCreacion = (fecha) => {
     const date = parseISO(fecha);
@@ -14,9 +15,10 @@ export const FavTopics = ({ userProps }) => {
 
   return (
     <>
-      {favTopics ? (
-        favTopics.map((topic) => (
+      {topicsByUserId ? (
+        topicsByUserId.map((topic) => (
           <Link
+            key={topic.id}
             to={`/topic/${topic.id}`}
             className='flex items-start p-4 bg-[#1e1e1e] rounded-lg border-l-4 w-full'
             style={{ borderLeft: `10px solid white` }}
@@ -41,7 +43,7 @@ export const FavTopics = ({ userProps }) => {
           </Link>
         ))
       ) : (
-        <p className='text-center'>No hay favoritos en tu lista</p>
+        <p className='text-center'>Todavía no has creado ningún tópico</p>
       )}
     </>
   );

@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { lastTopicExtract, TimeToNow } from '../../helpers/Actions';
 import '../../styles/userCard.css';
 
-const UserCard = ({ currentUser, topics }) => {
+export const UserCard = ({ currentUser, topics }) => {
   const { photoProfile, email, uid, fullName } = currentUser;
   const username = fullName.split(' ')[0].toLowerCase();
 
   const navigate = useNavigate();
 
-  const navigateToUserSummary = (id: string) => {
+  const navigateToUserSummary = (id) => {
     navigate(`/users-view/${id}/summary`);
   };
-  const navigateToTopic = (id: string) => {
+  const navigateToTopic = (id) => {
     navigate(`/topic/${id}`);
   };
 
@@ -59,5 +59,3 @@ const UserCard = ({ currentUser, topics }) => {
     </div>
   );
 };
-
-export default UserCard;

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useUserAction } from '../hooks/useUserAction';
 import { useTopicAction } from '../hooks/useTopicAction';
-import UserCard from '../components/users/UserCard';
+import { UserCard } from '../components/users/UserCard';
 import { Link } from 'react-router-dom';
 import { Banner } from '../components/home/Banner';
-import { TablaDeUsuarios } from '../components/users/tabla-de-usuarios';
 import '../styles/usersView.css';
 import Loader from '../utils/Loader';
+import { UsersList } from '../components/users/UsersList';
 
 export const UsersView = () => {
   const { users, allUsersStatus } = useUserAction();
@@ -70,7 +70,7 @@ export const UsersView = () => {
       <Banner />
 
       <div className='p-6'>
-        <TablaDeUsuarios
+        <UsersList
           users={users}
           allUsersStatus={allUsersStatus}
           topics={topics}
