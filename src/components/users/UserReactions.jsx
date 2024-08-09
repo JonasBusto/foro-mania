@@ -1,22 +1,39 @@
-import { lastTopicExtract } from '../../helpers/Actions';
-import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { Link } from 'react-router-dom';
 
-export const UserTopics = ({ userProps, topics }) => {
-  const { uid, email, fullName } = userProps;
+export const UserReactions = ({ userProps, reactions, topics, users }) => {
+  const { email, fullName, uid } = userProps;
 
-  const topicsByUserId = lastTopicExtract(uid, topics, true);
+  const likeReactions = reactions.filter(
+    (reaction) => (reaction.type === 'like' && reaction.userId === uid)
+  );
+
+  const userLikeTopics = likeReactions.flatMap((reaction) => {
+    return topics.filter((topic) => topic.id === reaction.contentId)
+  });
+
+  console.log(users);
+  console.log(userLikeTopics);
+  
+  
+
+  const userWithLikedTopics = userLikeTopics.map((topic) => {
+    const user = users.find((user) => user.uid === topic.userId)
+    return { ...topic, user }    
+  });
 
   const fechaCreacion = (fecha) => {
     const date = parseISO(fecha);
     return format(date, "EEEE d 'de' MMMM 'de' yyyy", { locale: es });
   };
 
+  console.log(userWithLikedTopics);
+
   return (
     <>
-      {topicsByUserId ? (
-        topicsByUserId.map((topic) => (
+      {userWithLikedTopics ? (
+        userWithLikedTopics.map((topic) => (
           <Link
             key={topic.id}
             to={`/topic/${topic.id}`}
@@ -25,7 +42,7 @@ export const UserTopics = ({ userProps, topics }) => {
             <div className='flex items-center w-full'>
               <div className='flex flex-col flex-grow'>
                 <small className='text-gray-400 leading-tight'>
-                  {fullName}
+                  {topic.user.fullName}
                 </small>
                 <h3 className='m-0 text-xl font-semibold text-white'>
                   {topic.title}
