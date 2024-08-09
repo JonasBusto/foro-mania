@@ -4,7 +4,7 @@ import { Login } from '../header/Login';
 import { Register } from '../header/Register';
 import { useAuth } from '../../hooks/useAuth';
 import { useLoad } from '../../hooks/useLoad';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useChatAction } from '../../hooks/useChatAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { switchLogin, switchRegister } from '../../store/modals/slice';
@@ -18,21 +18,29 @@ export function Header() {
   const { loggedUser } = useAuth();
   const { isLoading } = useLoad();
   const menuRef = useRef();
+  const searchRef = useRef();
+
   const navigate = useNavigate();
+  const location = useLocation()
+
   const {} = useChatAction();
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setOpenMenu(false);
     }
+    if (searchRef.current && !searchRef.current.contains(event.target)) {
+      setOpenSearch(false);
+    }
   };
 
   useEffect(() => {
+    setOpenMenu(false)
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [location]);
 
   const registerModal = useSelector((state) => state.modal.registerModal);
   const loginModal = useSelector((state) => state.modal.loginModal);
@@ -129,7 +137,7 @@ export function Header() {
               )}
             </Link>
           )}
-          <div className='relative hidden sm:flex'>
+          <div ref={searchRef} className='relative hidden sm:flex'>
             <button
               onClick={handleSearch}
               className='text-white hover:bg-gray-700 p-2 rounded'
