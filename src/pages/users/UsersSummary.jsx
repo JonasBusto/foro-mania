@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useUserAction } from '../hooks/useUserAction';
-import { Banner } from '../components/home/Banner';
-import { PublicProfileCard } from '../components/users/PublicProfileCard';
-import { UserTabs } from '../components/users/UserTabs';
-import { UserTopics } from '../components/users/UserTopics';
-import { useTopicAction } from '../hooks/useTopicAction';
-import { FavTopics } from '../components/users/FavTopics';
-import { Loader } from '../components/items/Loader';
+import { useUserAction } from '../../hooks/useUserAction';
+import { Banner } from '../../components/home/Banner';
+import { PublicProfileCard } from '../../components/users/PublicProfileCard';
+import { UserTabs } from '../../components/users/UserTabs';
+import { UserTopics } from '../../components/users/UserTopics';
+import { useTopicAction } from '../../hooks/useTopicAction';
+import { useReactionAction } from '../../hooks/useReactionAction';
+import { UserReactions } from '../../components/users/UserReactions';
+import { Loader } from '../../components/items/Loader';
 
 export const UsersSummary = () => {
   const { id } = useParams();
 
-  const { getUser, user, userStatus } = useUserAction();
+  const { getUser, users, user, userStatus } = useUserAction();
   const { topics } = useTopicAction();
+  const { reactions, statusReactions } = useReactionAction();
+
 
   const [tab, setTab] = useState('TOPICS');
 
@@ -45,14 +48,14 @@ export const UsersSummary = () => {
         <section
           role='region'
           aria-label='Contenido de pestañas'
-          className='flex flex-col items-center p-4 w-full'
+          className='flex flex-col items-center w-full pb-10'
         >
           {tab === 'TOPICS' && (
             <div
               id='topicos-panel'
               role='tabpanel'
               aria-labelledby='topicos-tab'
-              className='w-full max-w-7xl flex flex-col gap-4'
+              className='w-full max-w-7xl flex flex-col gap-4 p-4'
             >
               <UserTopics userProps={user} topics={topics} />
             </div>
@@ -62,9 +65,9 @@ export const UsersSummary = () => {
               id='mensajes-panel'
               role='tabpanel'
               aria-labelledby='mensajes-tab'
-              className='w-full max-w-7xl flex flex-col gap-4'
+              className='w-full max-w-7xl flex flex-col gap-4 p-4'
             >
-              <FavTopics userProps={user} topics={topics} />
+              <UserReactions userProps={user} reactions={reactions} topics={topics} users={users}/>
             </div>
           )}
         </section>

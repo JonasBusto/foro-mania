@@ -92,7 +92,7 @@ export const UsersList = ({
       <DataTable
         value={fullUsersData}
         paginator
-        rows={10}
+        rows={7}
         paginatorClassName='bg-[#121212] text-white'
         header={header}
         globalFilterFields={['fullName']}

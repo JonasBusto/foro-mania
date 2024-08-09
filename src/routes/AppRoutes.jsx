@@ -8,13 +8,13 @@ import { EditProfile } from '../pages/auth/EditProfile';
 import { FormCategory } from '../pages/categories/FormCategory';
 import { Categories } from '../pages/categories/Categories';
 import { About } from '../pages/About';
-import { UsersView } from '../pages/UsersView';
 import { Topic } from '../pages/topic/Topic';
 import { UploadTopic } from '../pages/topic/UploadTopic';
-import { UsersSummary } from '../pages/UsersSummary';
 import { TopicList } from '../pages/topic/TopicList';
 import { Chats } from '../pages/chat/Chats';
 import { CategoriesView } from '../pages/CategoriesView';
+import { UsersView } from '../pages/users/UsersView';
+import { UsersSummary } from '../pages/users/UsersSummary';
 
 export function AppRoutes() {
   return (
