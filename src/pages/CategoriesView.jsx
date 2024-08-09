@@ -18,12 +18,12 @@ console.log(categories);
   // }
 
   return (
-    <div className='bg-neutral-900 h-full py-8'>
+    <div className='bg-neutral-900 h-full pb-10 pt-3'>
       <div className='max-w-[75rem] mx-auto '>
         <div>
           <BannerAdversiting />
         </div>
-        <h1 className='text-neutral-100 text-5xl font-bold text-center py-8'>
+        <h1 className='text-neutral-100 text-5xl font-bold text-center pt-16 pb-10'>
           Categorías
         </h1>
         <div className='flex flex-col gap-4'>

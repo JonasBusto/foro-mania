@@ -41,7 +41,7 @@ export const ReactionButton = ({
               className={`pi cursor-pointer transform transition-transform duration-200 ${
                 favoriteLoggedUser ? 'pi-bookmark-fill' : 'pi-bookmark'
               }`}
-              style={{ fontSize: '1.7rem' }}
+              style={{ fontSize: '1.4rem' }}
               onClick={
                 favoriteLoggedUser
                   ? () =>
