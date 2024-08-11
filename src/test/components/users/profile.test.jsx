@@ -1,7 +1,10 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect } from 'vitest';
-import { PublicProfileCard } from '../../../components/users/user-public-profile-card';
+import { PublicProfileCard } from '../../../components/users/PublicProfileCard';
+import { Provider } from 'react-redux';
+import { store } from '../../../store';
+import { MemoryRouter } from 'react-router-dom';
 
 
 describe('Test del componente detalles personalizados del usuario de la página de Perfil', () => {
@@ -13,7 +16,12 @@ describe('Test del componente detalles personalizados del usuario de la página 
     }
 
     beforeEach(() => {
-        render(<PublicProfileCard userProps={userProps}/>)
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                    <PublicProfileCard userProps={userProps}/>                  
+                </MemoryRouter>  
+            </Provider>)
     })
 
     test('Encabezado con el nombre de usuario', () => {
