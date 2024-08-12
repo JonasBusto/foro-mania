@@ -5,17 +5,10 @@ import { Loader } from '../components/items/Loader';
 
 export const CategoriesView = () => {
   const { categories } = useCategoryAction();
-console.log(categories);
-
 
   if (categories.length === 0) {
-    return <Loader />
+    return <Loader />;
   }
-
-
-  // if (categories.length > 0) {
-  //   return <Loader />
-  // }
 
   return (
     <div className='bg-neutral-900 h-full pb-10 pt-3'>
@@ -28,8 +21,8 @@ console.log(categories);
         </h1>
         <div className='flex flex-col gap-4'>
           {categories.map((category, index) => (
-              <CategoryBox category={category} key={index} showFull />
-            ))}
+            <CategoryBox category={category} key={index} showFull />
+          ))}
         </div>
       </div>
     </div>
