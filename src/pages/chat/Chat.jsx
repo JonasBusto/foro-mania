@@ -4,7 +4,7 @@ import { getDatabase } from 'firebase/database';
 import { useChatAction } from '../../hooks/useChatAction';
 import { useAuth } from '../../hooks/useAuth';
 import '../../styles/chat.css';
-import Picker from 'emoji-picker-react';
+import EmojiPicker from 'emoji-picker-react';
 
 export function Chat({ chatId }) {
   const [messages, setMessages] = useState([]);
@@ -81,9 +81,11 @@ export function Chat({ chatId }) {
     }
   };
 
-  const handleEmojiClick = (event, emojiObject) => {
-    setNewMessage((prevMessage) => prevMessage + emojiObject.emoji);
-    setShowEmojiPicker(false);
+  const handleEmojiClick = (emojiData) => {
+    if (emojiData) {
+      setNewMessage((prevMessage) => prevMessage + emojiData.emoji);
+      setShowEmojiPicker(false);
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -140,8 +142,8 @@ export function Chat({ chatId }) {
             <i className='pi pi-face-smile text-xl p-2'></i>
           </button>
           {showEmojiPicker && (
-            <div className='absolute z-10'>
-              <Picker onEmojiClick={handleEmojiClick} />
+            <div className='absolute z-10 emoji-picker-container'>
+              <EmojiPicker onEmojiClick={handleEmojiClick} />
             </div>
           )}
           <div className='flex flex-wrap items-center justify-center'>
