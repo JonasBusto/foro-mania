@@ -15,6 +15,7 @@ import { Chats } from '../pages/chat/Chats';
 import { CategoriesView } from '../pages/CategoriesView';
 import { UsersView } from '../pages/users/UsersView';
 import { UsersSummary } from '../pages/users/UsersSummary';
+import ChatView from '../pages/ChatView';
 
 export function AppRoutes() {
   return (
@@ -39,7 +40,7 @@ export function AppRoutes() {
         <Route path='/upload-topic' element={<UploadTopic />} />
         <Route path='/account' element={<MyAccount />} />
         <Route path='/account/edit' element={<EditProfile />} />{' '}
-        <Route path='/chats' element={<Chats />} />
+        <Route path='/chats' element={<ChatView />} />
       </Route>
     </Routes>
   );
