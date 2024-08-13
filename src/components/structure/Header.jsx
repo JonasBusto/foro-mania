@@ -127,7 +127,7 @@ export function Header() {
           {loggedUser && (
             <Link
               to='/account'
-              className='relative w-10 h-10 rounded-full ring-2 ring-[#61dafb] overflow-hidden'>
+              className='relative w-9 h-9 rounded-full ring-2 ring-[#61dafb] overflow-hidden'>
               <img
                 className='object-cover w-full h-full'
                 src={loggedUser.photoProfile}
