@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect } from 'vitest';
-import { PublicProfileCard } from '../../../components/users/PublicProfileCard';
+import { PublicProfileCard } from '../../../src/components/users/PublicProfileCard';
 import { Provider } from 'react-redux';
-import { store } from '../../../store';
+import { store } from '../../../src/store';
 import { MemoryRouter } from 'react-router-dom';
 
 
