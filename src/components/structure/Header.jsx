@@ -83,7 +83,7 @@ export function Header() {
     <header className='relative bg-black text-white'>
       <section
         className='flex items-center justify-center sm:justify-between flex-wrap flex-row pb-5 sm:pb-0 px-4 mx-auto'
-        style={{ maxWidth: '1300px' }}>
+        >
         <div className='flex items-center justify-center'>
           <Link
             to='/'
@@ -135,14 +135,14 @@ export function Header() {
               />
             </Link>
           )}
+
           <Link to="/">
-            <i className='pi pi-home text-2xl text-white hover:bg-gray-700 duration-200 p-2 rounded '></i>
+            <i className='pi pi-home text-2xl text-white hover:bg-gray-700 duration-200 p-2 rounded ml-2'></i>
           </Link>
+
           {loggedUser && (
-            <Link
-              to='/chats'
-              className='relative text-white hover:bg-gray-700 duration-200 p-2 rounded'>
-              <i className='pi pi-envelope text-xl'></i>
+            <Link to='/chats'>
+              <i className='pi pi-envelope text-xl text-white hover:bg-gray-700 duration-200 p-2 rounded'></i>
               {unreadMessagesCount > 0 && (
                 <span className='absolute top-0 right-0 bg-[#61dafb] text-black text-xs rounded-full flex items-center justify-center w-5 h-5'>
                   {unreadMessagesCount}
@@ -154,8 +154,8 @@ export function Header() {
           <div ref={searchRef} className='relative hidden sm:flex'>
             <button
               onClick={handleSearch}
-              className='text-white hover:bg-gray-700 duration-200 p-2 rounded'>
-              <i className='pi pi-search text-xl'></i>
+              >
+              <i className='pi pi-search text-xl text-white hover:bg-gray-700 duration-200 p-2 rounded'></i>
             </button>
 
             {openSearch && (
@@ -178,9 +178,8 @@ export function Header() {
 
           <div className='relative'>
             <button
-              onClick={handleMenu}
-              className='text-white hover:bg-gray-700 duration-200 p-2 rounded'>
-              <i className='pi pi-bars text-2xl'></i>
+              onClick={handleMenu}>
+              <i className='pi pi-bars text-2xl text-white hover:bg-gray-700 duration-200 p-2 rounded mr-2'></i>
             </button>
             {openMenu && (
               <div
@@ -190,6 +189,7 @@ export function Header() {
               </div>
             )}
           </div>
+
         </div>
       </section>
     </header>
