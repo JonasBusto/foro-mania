@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from "@testing-library/react"
 import { beforeEach, describe, expect } from "vitest"
-import { Header } from "../../../components/structure/Header"
+import { Header } from "../../../src/components/structure/Header"
 import { Provider } from 'react-redux';
-import { store } from '../../../store';
+import { store } from '../../../src/store';
 import { MemoryRouter } from 'react-router-dom';
 
 
@@ -19,11 +19,12 @@ describe('Renderizado de las acciones en el header para login y registro de usua
         )        
     })
 
-    vi.mock('../../../hooks/useAuth', () => ({
+
+    vi.mock('../../../src/hooks/useAuth.js', () => ({
         useAuth: () => ({ loggedUser: null })
     }))
       
-    vi.mock('../../../hooks/useLoad', () => ({
+    vi.mock('../../../src/hooks/useLoad', () => ({
         useLoad: () => ({ isLoading: false })
     }))
 
