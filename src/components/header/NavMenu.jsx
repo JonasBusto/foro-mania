@@ -22,7 +22,7 @@ export function NavMenu() {
 
   const itemTemplate = (item) => {
     return (
-      <div className='flex items-center p-2  cursor-pointer '>
+      <div className='flex items-center p-2  cursor-pointer'>
         <i className={`${item.icon} mr-2`}></i>
         <p>{item.label}</p>
       </div>
