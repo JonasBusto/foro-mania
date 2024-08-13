@@ -58,7 +58,7 @@ export const TopicComment = ({
           </div>
         </div>
         <div>
-          <p>{TimeToNow(data.createdAt)}</p>
+          <p className='text-gray-300 text-sm'>Hace {TimeToNow(data.createdAt)}</p>
         </div>
       </div>
       <div className='leading-loose'>
@@ -75,7 +75,7 @@ export const TopicComment = ({
       </div>
       <div className='flex flex-col md:flex-row justify-between border-b border-neutral-600 px-4 py-2 md:items-center my-8'>
         {(data.userId === loggedUser?.uid || loggedUser?.role === 'admin') && (
-          <div className='flex'>
+          <div className='flex gap-5'>
             <div>
               {visible ? (
                 <button
@@ -85,14 +85,14 @@ export const TopicComment = ({
                   Cancelar
                 </button>
               ) : (
-                <button className='mx-5' onClick={() => setVisible(true)}>
+                <button className='' onClick={() => setVisible(true)}>
                   <i className='pi pi-pencil text-blue-400'></i>
                 </button>
               )}
             </div>
             <div>
               <button
-                className='mx-5'
+                className=''
                 hidden={visible === true}
                 onClick={() => setVisibleDelete(true)}
               >

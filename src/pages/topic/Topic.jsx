@@ -16,6 +16,8 @@ import { Dialog } from 'primereact/dialog';
 import { useFavoriteAction } from '../../hooks/useFavoriteAction';
 import { BannerAdversiting } from '../../components/items/BannerAdversiting';
 import { Loader } from '../../components/items/Loader';
+import { useDispatch } from 'react-redux';
+import { switchLogin, switchRegister } from '../../store/modals/slice';
 
 export const Topic = () => {
   const { id } = useParams();
@@ -32,6 +34,7 @@ export const Topic = () => {
 
   const [showEditTopic, setShowEditTopic] = useState(false);
   const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const TimeToNow = (fecha) => {
     const fechaISO = parseISO(fecha);
@@ -75,63 +78,65 @@ export const Topic = () => {
   }
 
   return (
-    <div className=' text-white min-h-screen py-10 px-4'>
-      <div className='max-w-4xl mx-auto'>
-        <div className='bg-gray-800 rounded-lg overflow-hidden'>
+    <div className=' text-white min-h-screen pb-10 pt-3 px-4'>
+      <div className='max-w-[75rem] mx-auto'>
+        <div className='bg-gray-800'>
           <BannerAdversiting />
         </div>
-        <div className='mt-6'>
-          <div className='flex justify-between items-center border-b border-gray-700 pb-4'>
+        <div className='mt-16'>
+          <div className='flex justify-between items-center border-b border-gray-700'>
             <div>
               <h2 className='text-4xl font-bold'>{topic.title}</h2>
-              <p className='text-gray-400'>{category.title}</p>
+              <p className='text-gray-400 pb-4'>{category.title}</p>
             </div>
             {((showEditTopic && topic.userId === loggedUser?.uid) ||
               loggedUser?.role === 'admin') && (
-              <div>
-                <Link
-                  className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded me-10'
-                  to={'/upload-topic/' + topic.uid}
-                >
-                  <i className='pi pi-pencil'></i>
-                </Link>
-                <button
-                  className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
-                  onClick={() => setVisible(true)}
-                >
-                  <i className='pi pi-trash'></i>
-                </button>
-                <Dialog
-                  header='Eliminar publicación'
-                  visible={visible}
-                  style={{ width: '50vw' }}
-                  onHide={() => {
-                    if (!visible) return;
-                    setVisible(false);
-                  }}
-                >
-                  <p>Esta seguro que desea eliminar la publicación?</p>
-                  <div className='flex justify-between mt-10'>
-                    <button
-                      disabled={statusDeleteTopic === 'Cargando'}
-                      className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
-                      onClick={() => setVisible(false)}
-                    >
-                      Cancelar
-                    </button>
-                    <button
-                      disabled={statusDeleteTopic === 'Cargando'}
-                      className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
-                      onClick={() => deleteTopic({ id: topic.uid })}
-                    >
-                      {statusDeleteTopic === 'Cargando'
-                        ? 'Cargando'
-                        : 'Confirmar'}
-                    </button>
-                  </div>
-                </Dialog>
-              </div>
-            )}
+                <div className='mt-auto flex'>
+                  <Link
+                    className=' '
+                    to={'/upload-topic/' + topic.uid}
+                  >
+                    <div className='text-[#1b95d2] hover:bg-neutral-800 duration-200 h-10 w-10 rounded-sm flex items-center justify-center border border-gray-700'>
+                      <i className='pi pi-pencil'></i>
+                    </div>
+                  </Link>
+                  <button
+                    className=' text-[#db1818] hover:bg-neutral-800 duration-200 h-10 w-10 border border-gray-700'
+                    onClick={() => setVisible(true)}
+                  >
+                    <i className='pi pi-trash'></i>
+                  </button>
+                  <Dialog
+                    header='Eliminar publicación'
+                    visible={visible}
+                    style={{ width: '50vw' }}
+                    onHide={() => {
+                      if (!visible) return;
+                      setVisible(false);
+                    }}
+                  >
+                    <p>Esta seguro que desea eliminar la publicación?</p>
+                    <div className='flex justify-between mt-10'>
+                      <button
+                        disabled={statusDeleteTopic === 'Cargando'}
+                        className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
+                        onClick={() => setVisible(false)}
+                      >
+                        Cancelar
+                      </button>
+                      <button
+                        disabled={statusDeleteTopic === 'Cargando'}
+                        className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
+                        onClick={() => deleteTopic({ id: topic.uid })}
+                      >
+                        {statusDeleteTopic === 'Cargando'
+                          ? 'Cargando'
+                          : 'Confirmar'}
+                      </button>
+                    </div>
+                  </Dialog>
+                </div>
+              )}
           </div>
           <div className='mt-4 flex items-center justify-between'>
             <div className='flex items-center space-x-4'>
@@ -158,34 +163,33 @@ export const Topic = () => {
               </div>
             </div>
             <p className='text-sm text-gray-400'>
-              {TimeToNow(topic.createdAt)}
+             Hace {TimeToNow(topic.createdAt)}
             </p>
           </div>
           <div className='mt-4'>
             <TextEditor value={topic.content} readOnly={true} />
           </div>
-          <div className='mt-8 flex flex-col md:flex-row justify-between border border-gray-600 bg-gray-800 rounded-lg px-6 py-4'>
-            <div className='flex space-x-8'>
+          <div className='mt-8 flex flex-col md:flex-row justify-between border border-gray-600 bg-gray-800 rounded-md px-2 md:px-6 py-2 md:py-4'>
+            <div className='flex gap-4'>
               <div className='text-center'>
-                <p className='text-lg'>{TimeToNow(topic.createdAt)}</p>
-                <p className='text-sm'>creado</p>
+                <p className=''>Hace {TimeToNow(topic.createdAt)}</p>
               </div>
-              <div className='text-center'>
-                <p className='text-lg'>{allComments.length}</p>
-                <p className='text-sm'>respuestas</p>
+              <div className='flex items-center gap-1'>
+                <i className='pi pi-reply'></i>
+                <p className=''>{allComments.length}</p>
               </div>
-              <div className='text-center'>
-                <p className='text-lg'>
+              <div className=' flex items-center gap-1'>
+                <i className='pi pi-bookmark-fill'></i>
+                <p className=''>
                   {
                     favorites.filter(
                       (favorite) => favorite.contentId === topic.uid
                     ).length
                   }
                 </p>
-                <p className='text-sm'>Guardados</p>
               </div>
             </div>
-            <div className='flex space-x-4'>
+            <div className='flex space-x-4 ms-auto'>
               <ReactionButton
                 reactions={reactions.filter(
                   (reaction) => reaction.contentId === topic.uid
@@ -234,9 +238,12 @@ export const Topic = () => {
               topic={topic}
             />
           ) : (
-            <p className='mt-4 text-gray-400'>
-              Debes autenticarte para comentar
-            </p>
+            <div className='border border-neutral-400 p-6 rounded-md my-4'>
+              <p className='text-center text-neutral-400'>
+                Para comentar, por favor <button className='text-neutral-200 underline' onClick={() => dispatch(switchLogin())}>inicia sesión</button>. Si no tienes una cuenta, puedes registrarte <button className='text-neutral-200 underline' onClick={() => dispatch(switchRegister())}>aquí</button>."
+              </p>
+            </div>
+
           )}
         </div>
       </div>

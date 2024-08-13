@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/useAuth';
 import '../../styles/chat.css';
 import EmojiPicker from 'emoji-picker-react';
 
-export function Chat({ chatId }) {
+export function ChatDesktop({ chatId, selectedUser }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -95,12 +95,13 @@ export function Chat({ chatId }) {
     }
   };
 
+
   return (
-    <main className='text-neutral-200 flex flex-col'>
-      <div className='flex-1'>
-        <section
+    <main className='text-neutral-200 flex flex-col h-full'>   
+    {
+      selectedUser !== '' ? <>  <section
           ref={chatContainerRef}
-          className='border-2 border-[#61dafb] rounded-md bg-[#282828] overflow-y-auto p-1 h-[50vh]'
+          className=' overflow-y-auto p-2 bg-neutral-900 grow'
         >
           {messages.map((msg) => (
             <div
@@ -123,34 +124,31 @@ export function Chat({ chatId }) {
           ))}
           <div ref={messagesEndRef} />
         </section>
-        <section className='flex items-center justify-around my-3'>
+        <section className='flex items-center p-2 border-t border-neutral-700'>
           <button
             type='button'
-            className='text-[#61dafb] bg-[#282828] hover:bg-[#383838] h-10 focus:outline-none rounded-md border border-[#61dafb]'
+            className='text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-md border border-[#61dafb]'
             onClick={() => setShowEmojiPicker((prev) => !prev)}
           >
             <i className='pi pi-face-smile text-xl p-2'></i>
           </button>
           <input
             type='text'
-            className='text-black w-full mx-2 p-1 h-10 rounded flex items-center'
+            className='text-black w-full p-2 rounded-md flex items-center mx-2'
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder='Escribe tu mensaje...'
           />
-
-         
           <div className='flex flex-wrap items-center justify-center'>
             <button
-              className='w-30 flex justify-center items-center text-center p-2 h-10 text-md font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-md border border-[#61dafb]'
+              className='w-30 flex justify-center items-center text-center p-2 text-md font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb]'
               onClick={handleSendMessage}
             >
-              {/* <i className='pi pi-comment text-xl pr-2'></i> */}
               Enviar
             </button>
           </div>
-        </section>
+        </section> 
         {showEmojiPicker && (
             <div className=' emoji-picker-container'>
               <EmojiPicker
@@ -161,8 +159,15 @@ export function Chat({ chatId }) {
               allowExpandReactions={false}
               onEmojiClick={handleEmojiClick} />
             </div>
-          )}
-      </div>
+          )}</>
+
+          :
+          <div className='m-auto italic'>
+            <p>Selecciona un contacto para comenzar a chatear!</p>
+          </div>
+    }  
+  
+      
     </main>
   );
 }

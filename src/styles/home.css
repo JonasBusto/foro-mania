@@ -120,8 +120,13 @@
   color: white;
 }
 
-.p-menuitem {
+.p-menuitem-link {
   background-color: #404040;
+  color: white;
+}
+
+.p-menuitem-link .p-menuitem-text,
+.p-menuitem-link .p-menuitem-icon {
   color: white;
 }
 
@@ -130,19 +135,8 @@
   color: #404040;
 }
 
-.p-menuitem-text {
-  color: white;
-}
-
-.p-menuitem-text:hover {
-  color: #404040;
-}
-
-.p-menuitem-icon {
-  color: white;
-}
-
-.p-menuitem-icon:hover {
+.p-menuitem-link:hover .p-menuitem-text,
+.p-menuitem-link:hover .p-menuitem-icon {
   color: #404040;
 }
 

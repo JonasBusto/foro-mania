@@ -4,7 +4,7 @@ import { Login } from '../header/Login';
 import { Register } from '../header/Register';
 import { useAuth } from '../../hooks/useAuth';
 import { useLoad } from '../../hooks/useLoad';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useChatAction } from '../../hooks/useChatAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { switchLogin, switchRegister } from '../../store/modals/slice';
@@ -18,21 +18,40 @@ export function Header() {
   const { loggedUser } = useAuth();
   const { isLoading } = useLoad();
   const menuRef = useRef();
+  const searchRef = useRef();
+
   const navigate = useNavigate();
-  const {} = useChatAction();
+  const location = useLocation();
+
+  const { getTotalUnreadMessages } = useChatAction();
+
+  useEffect(() => {
+    if (loggedUser) {
+      const fetchUnreadMessagesCount = async () => {
+        const userId = loggedUser.uid
+        const totalUnread = await getTotalUnreadMessages(userId);
+        setUnreadMessagesCount(totalUnread);
+      };
+      fetchUnreadMessagesCount();
+    }
+  }, [getTotalUnreadMessages, loggedUser]);
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setOpenMenu(false);
     }
+    if (searchRef.current && !searchRef.current.contains(event.target)) {
+      setOpenSearch(false);
+    }
   };
 
   useEffect(() => {
+    setOpenMenu(false);
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [location]);
 
   const registerModal = useSelector((state) => state.modal.registerModal);
   const loginModal = useSelector((state) => state.modal.loginModal);
@@ -63,25 +82,27 @@ export function Header() {
   return (
     <header className='relative bg-black text-white'>
       <section
-        className='flex items-center justify-center sm:justify-between flex-wrap flex-row p-4 mx-auto'
-        style={{ maxWidth: '1300px' }}
-      >
-        <div className='flex items-center'>
+        className='flex items-center justify-center sm:justify-between flex-wrap flex-row pb-5 sm:pb-0 px-4 mx-auto'
+        >
+        <div className='flex items-center justify-center'>
           <Link
             to='/'
-            className='text-white text-3xl font-bold hover:opacity-80 m-5 sm:mb-0'
-          >
-            <img src='/img/FOROMANIA3.png' alt='' width={250} />
+            className='text-white text-3xl font-bold hover:opacity-80 duration-200 m-5'>
+            <img
+              src='/img/header-logo.png'
+              alt=''
+              width={250}
+              className=''
+            />
           </Link>
         </div>
 
-        <div className='flex items-center space-x-4'>
+        <div className='flex items-center space-x-2'>
           {!loggedUser && !isLoading && (
             <>
               <button
                 onClick={handleSignUp}
-                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
-              >
+                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-4 py-2 rounded'>
                 Registrarse
               </button>
               <Register
@@ -92,8 +113,7 @@ export function Header() {
 
               <button
                 onClick={handleSignIn}
-                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
-              >
+                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-4 py-2 rounded'>
                 Iniciar Sesión
               </button>
               <Login
@@ -107,8 +127,7 @@ export function Header() {
           {loggedUser && (
             <Link
               to='/account'
-              className='relative w-10 h-10 rounded-full ring-2 ring-[#61dafb] overflow-hidden'
-            >
+              className='relative w-9 h-9 rounded-full ring-2 ring-[#61dafb] overflow-hidden'>
               <img
                 className='object-cover w-full h-full'
                 src={loggedUser.photoProfile}
@@ -116,26 +135,29 @@ export function Header() {
               />
             </Link>
           )}
+
+          <Link to="/">
+            <i className='pi pi-home text-2xl text-white hover:bg-gray-700 duration-200 p-2 rounded ml-2'></i>
+          </Link>
+
           {loggedUser && (
-            <Link
-              to='/chats'
-              className='relative text-white hover:bg-gray-700 p-2 rounded'
-            >
-              <i className='pi pi-envelope text-2xl'></i>
+            <Link to='/chats'>
+              <i className='pi pi-envelope text-xl text-white hover:bg-gray-700 duration-200 p-2 rounded'></i>
               {unreadMessagesCount > 0 && (
-                <span className='absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1'>
+                <span className='absolute top-0 right-0 bg-[#61dafb] text-black text-xs rounded-full flex items-center justify-center w-5 h-5'>
                   {unreadMessagesCount}
                 </span>
               )}
             </Link>
           )}
-          <div className='relative hidden sm:flex'>
+          
+          <div ref={searchRef} className='relative hidden sm:flex'>
             <button
               onClick={handleSearch}
-              className='text-white hover:bg-gray-700 p-2 rounded'
-            >
-              <i className='pi pi-search text-xl'></i>
+              >
+              <i className='pi pi-search text-xl text-white hover:bg-gray-700 duration-200 p-2 rounded'></i>
             </button>
+
             {openSearch && (
               <div className='absolute bg-gray-800 right-0 top-full mt-2 p-3 border border-gray-700 rounded-md shadow-lg w-[400px] flex'>
                 <input
@@ -147,8 +169,7 @@ export function Header() {
                 />
                 <button
                   onClick={handleSearchSubmit}
-                  className='ml-2 bg-[#157ab8] hover:bg-[#106ba1] text-white px-4 py-2 rounded-md focus:outline-none'
-                >
+                  className='ml-2 bg-[#157ab8] hover:bg-[#106ba1] duration-200 text-white px-4 py-2 rounded-md focus:outline-none'>
                   <i className='pi pi-search'></i>
                 </button>
               </div>
@@ -157,20 +178,18 @@ export function Header() {
 
           <div className='relative'>
             <button
-              onClick={handleMenu}
-              className='text-white hover:bg-gray-700 p-2 rounded'
-            >
-              <i className='pi pi-bars text-2xl'></i>
+              onClick={handleMenu}>
+              <i className='pi pi-bars text-2xl text-white hover:bg-gray-700 duration-200 p-2 rounded mr-2'></i>
             </button>
             {openMenu && (
               <div
                 ref={menuRef}
-                className='absolute z-10 right-0 top-full mt-3 border-2 border-[#61dafb] rounded-md shadow-lg w-44 bg-gray-800'
-              >
+                className='absolute z-10 right-0 top-full mt-3 border-2 border-[#61dafb] rounded-md shadow-lg w-44 bg-gray-800'>
                 <NavMenu />
               </div>
             )}
           </div>
+
         </div>
       </section>
     </header>

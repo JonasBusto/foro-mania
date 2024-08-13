@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { useUserAction } from '../hooks/useUserAction';
-import { useTopicAction } from '../hooks/useTopicAction';
-import { UserCard } from '../components/users/UserCard';
+import { useUserAction } from '../../hooks/useUserAction';
+import { useTopicAction } from '../../hooks/useTopicAction';
+import { UserCard } from '../../components/users/UserCard';
 import { Link } from 'react-router-dom';
-import { Banner } from '../components/home/Banner';
-import '../styles/usersView.css';
-import { Loader } from '../components/items/Loader';
-import { UsersList } from '../components/users/UsersList';
+import { Banner } from '../../components/home/Banner';
+import { Loader } from '../../components/items/Loader';
+import { UsersList } from '../../components/users/UsersList';
+import '../../styles/usersView.css';
+
 
 export const UsersView = () => {
   const { users, allUsersStatus } = useUserAction();
