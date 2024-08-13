@@ -28,7 +28,7 @@ export function Header() {
   useEffect(() => {
     if (loggedUser) {
       const fetchUnreadMessagesCount = async () => {
-        const userId = loggedUser.uid
+        const userId = loggedUser.uid;
         const totalUnread = await getTotalUnreadMessages(userId);
         setUnreadMessagesCount(totalUnread);
       };
@@ -81,19 +81,13 @@ export function Header() {
 
   return (
     <header className='relative bg-black text-white'>
-      <section
-        className='flex items-center justify-center sm:justify-between flex-wrap flex-row pb-5 sm:pb-0 px-4 mx-auto'
-        >
+      <section className='flex items-center justify-center sm:justify-between flex-wrap flex-row pb-5 sm:pb-0 px-4 mx-auto'>
         <div className='flex items-center justify-center'>
           <Link
             to='/'
-            className='text-white text-3xl font-bold hover:opacity-80 duration-200 m-5'>
-            <img
-              src='/img/header-logo.png'
-              alt=''
-              width={250}
-              className=''
-            />
+            className='text-white text-3xl font-bold hover:opacity-80 duration-200 m-5'
+          >
+            <img src='/img/header-logo.png' alt='' width={250} className='' />
           </Link>
         </div>
 
@@ -102,7 +96,8 @@ export function Header() {
             <>
               <button
                 onClick={handleSignUp}
-                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-4 py-2 rounded'>
+                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-4 py-2 rounded'
+              >
                 Registrarse
               </button>
               <Register
@@ -113,7 +108,8 @@ export function Header() {
 
               <button
                 onClick={handleSignIn}
-                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-4 py-2 rounded'>
+                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-4 py-2 rounded'
+              >
                 Iniciar Sesión
               </button>
               <Login
@@ -127,7 +123,8 @@ export function Header() {
           {loggedUser && (
             <Link
               to='/account'
-              className='relative w-9 h-9 rounded-full ring-2 ring-[#61dafb] overflow-hidden'>
+              className='relative w-9 h-9 rounded-full ring-2 ring-[#61dafb] overflow-hidden'
+            >
               <img
                 className='object-cover w-full h-full'
                 src={loggedUser.photoProfile}
@@ -136,12 +133,12 @@ export function Header() {
             </Link>
           )}
 
-          <Link to="/">
+          <Link to='/'>
             <i className='pi pi-home text-2xl text-white hover:bg-gray-700 duration-200 p-2 rounded ml-2'></i>
           </Link>
 
           {loggedUser && (
-            <Link to='/chats'>
+            <Link to='/chats' className='relative'>
               <i className='pi pi-envelope text-xl text-white hover:bg-gray-700 duration-200 p-2 rounded'></i>
               {unreadMessagesCount > 0 && (
                 <span className='absolute top-0 right-0 bg-[#61dafb] text-black text-xs rounded-full flex items-center justify-center w-5 h-5'>
@@ -150,11 +147,9 @@ export function Header() {
               )}
             </Link>
           )}
-          
+
           <div ref={searchRef} className='relative hidden sm:flex'>
-            <button
-              onClick={handleSearch}
-              >
+            <button onClick={handleSearch}>
               <i className='pi pi-search text-xl text-white hover:bg-gray-700 duration-200 p-2 rounded'></i>
             </button>
 
@@ -169,7 +164,8 @@ export function Header() {
                 />
                 <button
                   onClick={handleSearchSubmit}
-                  className='ml-2 bg-[#157ab8] hover:bg-[#106ba1] duration-200 text-white px-4 py-2 rounded-md focus:outline-none'>
+                  className='ml-2 bg-[#157ab8] hover:bg-[#106ba1] duration-200 text-white px-4 py-2 rounded-md focus:outline-none'
+                >
                   <i className='pi pi-search'></i>
                 </button>
               </div>
@@ -177,19 +173,18 @@ export function Header() {
           </div>
 
           <div className='relative'>
-            <button
-              onClick={handleMenu}>
+            <button onClick={handleMenu}>
               <i className='pi pi-bars text-2xl text-white hover:bg-gray-700 duration-200 p-2 rounded mr-2'></i>
             </button>
             {openMenu && (
               <div
                 ref={menuRef}
-                className='absolute z-10 right-0 top-full mt-3 border-2 border-[#61dafb] rounded-md shadow-lg w-44 bg-gray-800'>
+                className='absolute z-10 right-0 top-full mt-3 border-2 border-[#61dafb] rounded-md shadow-lg w-44 bg-gray-800'
+              >
                 <NavMenu />
               </div>
             )}
           </div>
-
         </div>
       </section>
     </header>
