@@ -11,7 +11,6 @@ import { About } from '../pages/About';
 import { Topic } from '../pages/topic/Topic';
 import { UploadTopic } from '../pages/topic/UploadTopic';
 import { TopicList } from '../pages/topic/TopicList';
-import { Chats } from '../pages/chat/Chats';
 import { CategoriesView } from '../pages/CategoriesView';
 import { UsersView } from '../pages/users/UsersView';
 import { UsersSummary } from '../pages/users/UsersSummary';
@@ -38,6 +37,7 @@ export function AppRoutes() {
       </Route>
       <Route element={<PrivateRoute allowedRoles={['admin', 'user']} />}>
         <Route path='/upload-topic' element={<UploadTopic />} />
+        <Route path='/upload-topic/:id' element={<UploadTopic />} />
         <Route path='/account' element={<MyAccount />} />
         <Route path='/account/edit' element={<EditProfile />} />{' '}
         <Route path='/chats' element={<ChatView />} />
