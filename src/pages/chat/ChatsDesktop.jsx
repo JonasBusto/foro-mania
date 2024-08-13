@@ -19,7 +19,7 @@ export const ChatsDesktop = ({ user: initialUser, onClose }) => {
 				const user1Id = loggedUser.uid;
 				const chatId = await findOrCreateChat(user1Id, initialUser.uid);
 				setChatId(chatId);
-				setDisplayDialog(true);
+				// setDisplayDialog(true);
 			};
 			fetchChatId();
 		}
@@ -30,7 +30,7 @@ export const ChatsDesktop = ({ user: initialUser, onClose }) => {
 		const user1Id = loggedUser.uid;
 		const chatId = await findOrCreateChat(user1Id, user.uid);
 		setChatId(chatId);
-		setDisplayDialog(true);
+		// setDisplayDialog(true);
 	};
 
 
