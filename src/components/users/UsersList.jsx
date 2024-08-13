@@ -111,7 +111,7 @@ export const UsersList = ({
           body={representativeBodyTemplate}
           sortable
           sortField='fullName'
-          className='column-row hover:bg-[#1e1e1e]'
+          className='column-row hover:font-medium hover:text-white'
           style={{ width: '25%' }}
         ></Column>
         <Column
