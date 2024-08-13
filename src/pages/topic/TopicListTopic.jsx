@@ -97,6 +97,9 @@ export const TopicListTopic = ({ topic, type = '' }) => {
             <Link
               to={'/users-view/' + topicUser?.uid + '/summary'}
               className='me-2 flex items-center absolute left-[0rem]'
+              style={{
+                zIndex: 10,
+              }}
             >
               <img
                 className='w-10 h-10 object-cover rounded-full'
@@ -108,9 +111,12 @@ export const TopicListTopic = ({ topic, type = '' }) => {
               <Link
                 key={user.uid}
                 to={'/users-view/' + user?.uid + '/summary'}
-                className={`me-2 flex items-center absolute left-[${
-                  (index + 1) * 2
-                }rem]`}
+                className={`me-2 flex items-center `}
+                style={{
+                  position: 'absolute',
+                  left: (index + 1) * 2 + 'rem',
+                  zIndex: 10 - (index + 1),
+                }}
               >
                 <img
                   className='w-10 h-10 object-cover rounded-full'
