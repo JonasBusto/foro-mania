@@ -58,12 +58,12 @@ export const Chats = ({ user: initialUser, onClose }) => {
 					}}
 					visible={displayDialog}
 					style={{
-						width: '85vw',
+						width: '95vw',
 						maxHeight: '85vh',
 					}}
 					contentStyle={{
 						backgroundColor: '#282828',
-						padding: 20,
+						padding: 10,
 						overflowX: 'hidden',
 						overflowY: 'auto',
 					}}
@@ -73,7 +73,7 @@ export const Chats = ({ user: initialUser, onClose }) => {
 								label='Vaciar Chat'
 								icon='pi pi-trash'
 								onClick={handleClearChat}
-								className='p-button-danger p-button-text font-bold border-2 border-red-600 hover:bg-red-600 text-white m-4 p-2 rounded'
+								className='p-button-danger p-button-text font-semibold border-2 border-red-600 hover:bg-red-600 text-white m-2 p-2 rounded'
 							/>
 						</div>
 					}
