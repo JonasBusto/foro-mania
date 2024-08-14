@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { CategoryMenu } from '../../components/home/CategoryMenu';
 import { useTopicAction } from '../../hooks/useTopicAction';
 import { TopicListTopic } from './TopicListTopic';
 import { useLocation } from 'react-router-dom';

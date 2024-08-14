@@ -50,7 +50,6 @@ export const Topic = () => {
 
 	const handleConfirmEnable = async () => {
 		if (topicToModify) {
-			console.log(topicToModify);
 			await enableTopic({ id: topic.uid });
 			setVisible(false);
 		}
@@ -63,7 +62,6 @@ export const Topic = () => {
 
 	const handleConfirmDisable = () => {
 		if (topicToModify) {
-			console.log(topicToModify, topic);
 			disableTopic({ id: topic.uid });
 			setVisible(false);
 		}
@@ -123,12 +121,22 @@ export const Topic = () => {
 								<button
 									className={`${
 										topic.isActive ? 'text-red-500' : 'text-green-500'
-									} hover:bg-neutral-800 duration-200 h-10 w-10 border border-gray-700`}
+									} hover:bg-neutral-800 duration-200 h-10 px-2 my-3 border border-gray-700`}
 									onClick={() => handleOpenDialog(category)}>
 									{topic.isActive ? (
-										<i className='pi pi-pause'></i>
+										<>
+											<i className='pi pi-pause'></i>
+											<span className='ml-2'>
+												Suspender Publicacion
+											</span>
+										</>
 									) : (
-										<i className='pi pi-play'></i>
+										<>
+											<i className='pi pi-play'></i>
+											<span className='ml-2'>
+												Habilitar Publicacion
+											</span>
+										</>
 									)}
 								</button>
 							</div>
