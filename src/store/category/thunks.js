@@ -86,8 +86,6 @@ export const updateCategoryById = createAsyncThunk(
 export const disableCategoryById = createAsyncThunk(
   'category/disable',
   async ({ id }, { rejectWithValue }) => {
-    console.log(id)
-
     try {
       const categoryDoc = doc(db, 'categories', id);
       await updateDoc(categoryDoc, { isActive: false });
