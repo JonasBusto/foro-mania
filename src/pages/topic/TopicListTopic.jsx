@@ -59,7 +59,7 @@ export const TopicListTopic = ({ topic, type = '' }) => {
 				<Link
 					to={`/topic/${topic.id}`}
 					className='flex items-start p-4 bg-[#1e1e1e] h-24 rounded-lg border-l-4'
-					// style={{ borderLeft: `10px solid ${categorieFiltered.color}` }}
+					style={{ borderLeft: `10px solid ${categorieFiltered ? categorieFiltered.color : 'gray'}` }}
 				>
 					<div className='flex items-center w-full'>
 						<div className='flex flex-col flex-grow'>
