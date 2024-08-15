@@ -37,6 +37,7 @@ export function FormCategory() {
 			title: category.title,
 			description: category.description,
 			color: category.color,
+			isActive: true,
 		};
 	}
 

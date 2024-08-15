@@ -179,7 +179,7 @@ export const TopicComment = ({
 				style={{ width: '50vw' }}
 				onHide={() => {
 					if (!visibleDelete) return;
-					setVisibleDelete(false); // Cambié a setVisibleDelete para cerrar el diálogo correctamente
+					setVisibleDelete(false); 
 				}}>
 				<p>
 					{loggedUser.role === 'admin'

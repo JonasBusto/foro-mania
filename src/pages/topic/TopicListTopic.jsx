@@ -10,12 +10,11 @@ export const TopicListTopic = ({ topic, type = '' }) => {
 	const { allComments, fetchComments } = useCommentAction();
 	const { users } = useUserAction();
 	const { categories } = useCategoryAction();
-	console.log(topic);
 	const userFiltered = users.find((item) => item.uid === topic.userId);
-	const categorieFiltered = categories.find(
-		(item) => item.uid === topic.categoryId
-	);
-	console.log(topic);
+	const categorieFiltered = categories
+		.filter((category) => category.isActive === true)
+		.find((item) => item.uid === topic.categoryId);
+
 	useEffect(() => {
 		fetchComments();
 	}, []);
@@ -59,8 +58,7 @@ export const TopicListTopic = ({ topic, type = '' }) => {
 				<Link
 					to={`/topic/${topic.id}`}
 					className='flex items-start p-4 bg-[#1e1e1e] h-24 rounded-lg border-l-4'
-					style={{ borderLeft: `10px solid ${categorieFiltered?.color}` }}
-				>
+					style={{ borderLeft: `10px solid ${categorieFiltered?.color}` }}>
 					<div className='flex items-center w-full'>
 						<div className='flex flex-col flex-grow'>
 							<p className='text-gray-400 text-[9px] leading-tight'>
@@ -94,7 +92,7 @@ export const TopicListTopic = ({ topic, type = '' }) => {
 							{topic?.title}
 						</h2>
 						<h2 className='text-sm font-semibold text-gray-400 mb-1'>
-							{/* {categorieFiltered.title} */}
+							{categorieFiltered?.title}
 						</h2>
 					</Link>
 					<div className='md:w-3/12 flex items-center relative'>
