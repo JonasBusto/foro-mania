@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { Chat } from './Chat';
@@ -10,26 +10,15 @@ export const Chats = ({ user: initialUser, onClose }) => {
 	const [selectedUser, setSelectedUser] = useState(initialUser || null);
 	const [chatId, setChatId] = useState(null);
 	const [displayDialog, setDisplayDialog] = useState(false);
+	const [visibleDelete, setVisibleDelete] = useState(false);
 	const { loggedUser } = useAuth();
 	const { clearChatMessages, findOrCreateChat } = useChatAction();
-
-	useEffect(() => {
-		if (initialUser) {
-			setSelectedUser(initialUser);
-			const fetchChatId = async () => {
-				const user1Id = loggedUser.uid;
-				const chatId = await findOrCreateChat(user1Id, initialUser.uid);
-				setChatId(chatId);
-				setDisplayDialog(true);
-			};
-			fetchChatId();
-		}
-	}, [initialUser, findOrCreateChat]);
 
 	const handleSelectUser = async (user) => {
 		setSelectedUser(user);
 		const user1Id = loggedUser.uid;
-		const chatId = await findOrCreateChat(user1Id, user.uid);
+		const user2Id = user.uid;
+		const chatId = await findOrCreateChat(user1Id, user2Id);
 		setChatId(chatId);
 		setDisplayDialog(true);
 	};
@@ -39,9 +28,14 @@ export const Chats = ({ user: initialUser, onClose }) => {
 		setSelectedUser(null);
 	};
 
+	const handleOpenDialog = () => {
+		setVisibleDelete(true);
+	};
+
 	const handleClearChat = async () => {
 		if (chatId) {
 			await clearChatMessages(chatId);
+			setVisibleDelete(false);
 		}
 	};
 
@@ -72,7 +66,7 @@ export const Chats = ({ user: initialUser, onClose }) => {
 							<Button
 								label='Vaciar Chat'
 								icon='pi pi-trash'
-								onClick={handleClearChat}
+								onClick={() => handleOpenDialog()}
 								className='p-button-danger p-button-text font-semibold border-2 border-red-600 hover:bg-red-600 text-white m-2 p-2 rounded'
 							/>
 						</div>
@@ -81,6 +75,28 @@ export const Chats = ({ user: initialUser, onClose }) => {
 					<Chat user2={selectedUser} chatId={chatId} />
 				</Dialog>
 			)}
+			<Dialog
+				header='Vaciar Mensajes de Chat'
+				visible={visibleDelete}
+				style={{ width: '50vw' }}
+				onHide={() => {
+					if (!visibleDelete) return;
+					setVisibleDelete(false);
+				}}>
+				<p>¿Está seguro que desea vaciar el chat?</p>
+				<div className='flex justify-between mt-10'>
+					<button
+						className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
+						onClick={() => setVisibleDelete(false)}>
+						Cancelar
+					</button>
+					<button
+						className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
+						onClick={() => handleClearChat()}>
+						Confirmar
+					</button>
+				</div>
+			</Dialog>
 		</>
 	);
 };
