@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 export const CategoriesView = () => {
 	const { categories } = useCategoryAction();
 	const { loggedUser } = useAuth();
-  
+  console.log(loggedUser)
 	if (categories.length === 0) {
 		return <Loader />;
 	}
@@ -23,7 +23,7 @@ export const CategoriesView = () => {
 					Categorías
 				</h1>{' '}
 				<div className='flex mb-7 flex-row flex-wrap items-center justify-around'>
-					{loggedUser.role === 'admin' ? (
+					{loggedUser?.role === 'admin' ? (
 						<Link
 							to='/categories'
 							className='text-[#61dafb] p-3 bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-md border border-[#61dafb]'>

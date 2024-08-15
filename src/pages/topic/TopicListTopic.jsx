@@ -91,10 +91,10 @@ export const TopicListTopic = ({ topic, type = '' }) => {
 				<div className='flex flex-col md:flex-row text-center border-b border-neutral-500 pb-3 mb-3'>
 					<Link to={`/topic/${topic.id}`} className='md:w-9/12 text-start'>
 						<h2 className='text-lg font-semibold mb-1 text-white'>
-							{topic.title}
+							{topic?.title}
 						</h2>
 						<h2 className='text-sm font-semibold text-gray-400 mb-1'>
-							{categorieFiltered.title}
+							{/* {categorieFiltered.title} */}
 						</h2>
 					</Link>
 					<div className='md:w-3/12 flex items-center relative'>

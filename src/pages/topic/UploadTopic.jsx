@@ -34,6 +34,7 @@ export const UploadTopic = () => {
     content: '',
     userId: loggedUser.uid,
     createdAt: format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSX"),
+    updatedAt: format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSX"),
   };
 
   useEffect(() => {
@@ -51,6 +52,7 @@ export const UploadTopic = () => {
       content: topic.content,
       userId: topic.userId,
       createdAt: topic.createdAt,
+      updatedAt: topic.updatedAt
     };
   }
 

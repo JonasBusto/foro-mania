@@ -109,6 +109,45 @@ export const updateTopicById = createAsyncThunk(
   }
 );
 
+export const disableTopicById = createAsyncThunk(
+  'topic/disable',
+  async ({ id }, { rejectWithValue }) => {
+    console.log(id)
+    try {
+      const topicDoc = doc(db, 'topics', id);
+      await updateDoc(topicDoc, { isActive: false });
+      const updatedTopic = await getDoc(topicDoc);
+      if (updatedTopic.exists()) {
+        return { uid: updatedTopic.id, ...updatedTopic.data() };
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const enableTopicById = createAsyncThunk(
+  'topic/enable',
+  async ({ id }, { rejectWithValue }) => {
+    console.log(id)
+
+    try {
+      const topicDoc = doc(db, 'topics', id);
+      await updateDoc(topicDoc, { isActive: true });
+      const updatedTopic = await getDoc(topicDoc);
+      if (updatedTopic.exists()) {
+        return { uid: updatedTopic.id, ...updatedTopic.data() };
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const deleteTopicById = createAsyncThunk(
   'topic/delete',
   async ({ id }, { rejectWithValue }) => {
