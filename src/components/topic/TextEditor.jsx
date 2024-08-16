@@ -1,6 +1,9 @@
 import { useRef, useEffect } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
+import QuillResizeImage from 'quill-resize-image';
+
+Quill.register('modules/resize', QuillResizeImage);
 
 export const TextEditor = ({ value, onChange, readOnly = false }) => {
   const editorRef = useRef(null);
@@ -20,6 +23,11 @@ export const TextEditor = ({ value, onChange, readOnly = false }) => {
             [{ align: [] }],
             ['clean'],
           ],
+          ...(!readOnly && {
+            resize: {
+              locale: {},
+            },
+          }),
         },
         formats: [
           'header',
