@@ -60,7 +60,7 @@ export function UsersListDesktop({ onSelectUser, selectedUser }) {
 	});
 
 	return (
-		<div className=' h-full'>
+		<div className='h-[30rem]'>
 			<div className=' mt-2 p-3 flex justify-center items-center border-b border-neutral-600'>
 				<input
 					type='text'
@@ -76,7 +76,7 @@ export function UsersListDesktop({ onSelectUser, selectedUser }) {
 						<Loader />
 					</div>
 				)}
-				<div className='flex flex-col w-[20rem]'>
+				<div className='flex flex-col w-[20rem] '>
 					{sortedUsers.map((user) => (
 						<button
 							key={user.uid}

@@ -33,6 +33,7 @@ export const UploadTopic = () => {
 		categoryId: '',
 		content: '',
 		userId: loggedUser.uid,
+		isActive: true,
 		createdAt: format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSX"),
 	};
 
@@ -166,8 +167,8 @@ export const UploadTopic = () => {
 										? 'Cargando'
 										: 'Cargar'
 									: statusCreateTopic === 'Cargando'
-									? 'Cargando'
-									: 'Cargar'}
+										? 'Cargando'
+										: 'Cargar'}
 							</button>
 						</div>
 					</form>

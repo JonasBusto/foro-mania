@@ -25,7 +25,9 @@ export function ChatDesktop({ chatId, selectedUser }) {
         snapshot.forEach((childSnapshot) => {
           msgs.push({ id: childSnapshot.key, ...childSnapshot.val() });
         });
-        setMessages(msgs);
+        if (JSON.stringify(msgs) !== JSON.stringify(messages)) {
+          setMessages(msgs);
+        }
       });
 
       const markMessagesRead = async () => {
@@ -97,77 +99,73 @@ export function ChatDesktop({ chatId, selectedUser }) {
 
 
   return (
-    <main className='text-neutral-200 flex flex-col h-full'>   
-    {
-      selectedUser !== '' ? <>  <section
-          ref={chatContainerRef}
-          className=' overflow-y-auto p-2 bg-neutral-900 grow'
-        >
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`flex ${msg.senderId === user1Id ? 'justify-end' : 'justify-start'
-                }`}
-            >
-              <div
-                className={`relative break-words flex flex-col m-1 p-1 rounded-md ${msg.senderId === user1Id
-                    ? 'bg-blue-200 text-black  items-end pl-5'
-                    : 'bg-green-200 text-black pr-5'
-                  }`}
+    <main className='text-neutral-200 flex flex-col flex-1'>
+      {
+        selectedUser !== '' ?
+          <div>
+            <section ref={chatContainerRef} className=' overflow-y-auto p-2 bg-neutral-900 h-[28rem]'>
+              {messages.map((msg) => (
+                <div key={msg.id} className={`flex ${msg.senderId === user1Id ? 'justify-end' : 'justify-start'}`}                >
+                  <div
+                    className={`relative break-words flex flex-col m-1 p-1 rounded-md ${msg.senderId === user1Id
+                      ? 'bg-blue-200 text-black  items-end pl-5'
+                      : 'bg-green-200 text-black pr-5'
+                      }`}
+                  >
+                    <p className='m-0 p-0'>{msg.content}</p>
+                    <p className='text-xs text-[#828181] mt-1'>
+                      {formatTimestamp(msg.timestamp)}
+                    </p>
+                  </div>
+                </div>
+              ))}
+              <div ref={messagesEndRef} />
+            </section>
+            <section className='flex items-center p-2 border-t border-neutral-700'>
+              <button
+                type='button'
+                className='text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-md border border-[#61dafb]'
+                onClick={() => setShowEmojiPicker((prev) => !prev)}
               >
-                <p className='m-0 p-0'>{msg.content}</p>
-                <p className='text-xs text-[#828181] mt-1'>
-                  {formatTimestamp(msg.timestamp)}
-                </p>
+                <i className='pi pi-face-smile text-xl p-2'></i>
+              </button>
+              <input
+                type='text'
+                className='text-black w-full p-2 rounded-md flex items-center mx-2'
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder='Escribe tu mensaje...'
+              />
+              <div className='flex flex-wrap items-center justify-center'>
+                <button
+                  className='w-30 flex justify-center items-center text-center p-2 text-md font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb]'
+                  onClick={handleSendMessage}
+                >
+                  Enviar
+                </button>
               </div>
-            </div>
-          ))}
-          <div ref={messagesEndRef} />
-        </section>
-        <section className='flex items-center p-2 border-t border-neutral-700'>
-          <button
-            type='button'
-            className='text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-md border border-[#61dafb]'
-            onClick={() => setShowEmojiPicker((prev) => !prev)}
-          >
-            <i className='pi pi-face-smile text-xl p-2'></i>
-          </button>
-          <input
-            type='text'
-            className='text-black w-full p-2 rounded-md flex items-center mx-2'
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder='Escribe tu mensaje...'
-          />
-          <div className='flex flex-wrap items-center justify-center'>
-            <button
-              className='w-30 flex justify-center items-center text-center p-2 text-md font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb]'
-              onClick={handleSendMessage}
-            >
-              Enviar
-            </button>
+            </section>
+            {showEmojiPicker && (
+              <div className=' emoji-picker-container'>
+                <EmojiPicker
+                  theme='dark'
+                  searchDisabled={true}
+                  previewConfig={{ showPreview: false }}
+                  style={{ width: '100%', height: '15rem', fontSize: '0.8rem' }}
+                  allowExpandReactions={false}
+                  onEmojiClick={handleEmojiClick} />
+              </div>
+            )}
           </div>
-        </section> 
-        {showEmojiPicker && (
-            <div className=' emoji-picker-container'>
-              <EmojiPicker
-              theme='dark'
-              searchDisabled={true}
-              previewConfig={{showPreview: false}}
-              style={{width: '100%', height: '15rem', fontSize: '0.8rem'}}
-              allowExpandReactions={false}
-              onEmojiClick={handleEmojiClick} />
-            </div>
-          )}</>
 
           :
           <div className='m-auto italic'>
             <p>Selecciona un contacto para comenzar a chatear!</p>
           </div>
-    }  
-  
-      
+      }
+
+
     </main>
   );
 }
