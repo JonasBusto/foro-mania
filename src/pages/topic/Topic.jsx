@@ -28,6 +28,8 @@ export const Topic = () => {
     disableTopic,
     statusActiveTopic,
     statusTopic,
+    deleteTopic,
+    statusDeleteTopic,
   } = useTopicAction();
   const { user, getUser, userStatus } = useUserAction();
   const { loggedUser } = useAuth();
@@ -40,6 +42,7 @@ export const Topic = () => {
 
   const [showEditTopic, setShowEditTopic] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [visibleDialogDelete, setVisibleDialogDelete] = useState(false);
   const [topicToModify, setTopicToModify] = useState(null);
   const dispatch = useDispatch();
 
@@ -145,6 +148,41 @@ export const Topic = () => {
                     <i className='pi pi-pencil'></i>
                   </div>
                 </Link>
+                <button
+                  className=' ms-4 text-[#db1818] hover:bg-neutral-800 duration-200 h-10 w-10 border border-gray-700'
+                  onClick={() => setVisibleDialogDelete(true)}
+                >
+                  <i className='pi pi-trash'></i>
+                </button>
+                <Dialog
+                  header='Eliminar publicación'
+                  visible={visibleDialogDelete}
+                  style={{ width: '50vw' }}
+                  onHide={() => {
+                    if (!visibleDialogDelete) return;
+                    setVisibleDialogDelete(false);
+                  }}
+                >
+                  <p>Esta seguro que desea eliminar la publicación?</p>
+                  <div className='flex justify-between mt-10'>
+                    <button
+                      disabled={statusDeleteTopic === 'Cargando'}
+                      className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
+                      onClick={() => setVisibleDialogDelete(false)}
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      disabled={statusDeleteTopic === 'Cargando'}
+                      className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
+                      onClick={() => deleteTopic({ id: topic.uid })}
+                    >
+                      {statusDeleteTopic === 'Cargando'
+                        ? 'Cargando'
+                        : 'Confirmar'}
+                    </button>
+                  </div>
+                </Dialog>
               </div>
             )}
           </div>
