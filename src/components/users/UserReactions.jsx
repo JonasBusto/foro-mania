@@ -6,29 +6,22 @@ export const UserReactions = ({ userProps, reactions, topics, users }) => {
   const { email, fullName, uid } = userProps;
 
   const likeReactions = reactions.filter(
-    (reaction) => (reaction.type === 'like' && reaction.userId === uid)
+    (reaction) => reaction.type === 'like' && reaction.userId === uid
   );
 
   const userLikeTopics = likeReactions.flatMap((reaction) => {
-    return topics.filter((topic) => topic.uid === reaction.contentId)
+    return topics.filter((topic) => topic.uid === reaction.contentId);
   });
 
-  console.log(users);
-  console.log(userLikeTopics);
-  
-  
-
   const userWithLikedTopics = userLikeTopics.map((topic) => {
-    const user = users.find((user) => user.uid === topic.userId)
-    return { ...topic, user }    
+    const user = users.find((user) => user.uid === topic.userId);
+    return { ...topic, user };
   });
 
   const fechaCreacion = (fecha) => {
     const date = parseISO(fecha);
     return format(date, "EEEE d 'de' MMMM 'de' yyyy", { locale: es });
   };
-
-  console.log(userWithLikedTopics);
 
   return (
     <>

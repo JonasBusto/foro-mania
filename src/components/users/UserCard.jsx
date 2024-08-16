@@ -17,8 +17,6 @@ export const UserCard = ({ currentUser, topics }) => {
   };
 
   const lastTopic = lastTopicExtract(uid, topics);
-  console.log(lastTopic);
-  
 
   const topicDate = TimeToNow(lastTopic.createdAt);
 
