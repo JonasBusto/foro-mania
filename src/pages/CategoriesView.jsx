@@ -4,12 +4,14 @@ import { BannerAdversiting } from '../components/items/BannerAdversiting';
 import { Loader } from '../components/items/Loader';
 import { useAuth } from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
+import { useLoad } from '../hooks/useLoad';
 
 export const CategoriesView = () => {
 	const { categories } = useCategoryAction();
+	const { isLoading } = useLoad();
 	const { loggedUser } = useAuth();
-  console.log(loggedUser)
-	if (categories.length === 0) {
+	console.log(loggedUser)
+	if (isLoading) {
 		return <Loader />;
 	}
 

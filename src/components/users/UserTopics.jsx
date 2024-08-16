@@ -18,8 +18,8 @@ export const UserTopics = ({ userProps, topics }) => {
       {topicsByUserId ? (
         topicsByUserId.map((topic) => (
           <Link
-            key={topic.id}
-            to={`/topic/${topic.id}`}
+            key={topic.uid}
+            to={`/topic/${topic.uid}`}
             className='flex items-start p-4 bg-[#1e1e1e] rounded-lg border-l-4 w-full'
           >
             <div className='flex items-center w-full'>

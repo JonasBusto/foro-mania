@@ -13,7 +13,7 @@ export function MyAccount() {
     (favorite) => favorite.userId === loggedUser?.uid
   );
   const topicsFilteredByUser = topics.filter((topic) =>
-    favoritesFiltered.some((favorite) => favorite.contentId === topic.id)
+    favoritesFiltered.some((favorite) => favorite.contentId === topic.uid)
   );
 
   return (

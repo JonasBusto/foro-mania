@@ -17,7 +17,7 @@ export const getTopics = createAsyncThunk('topic/getAll', async () => {
   try {
     const querySnapshot = await getDocs(query(collection(db, 'topics')));
     const topicData = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
+      uid: doc.id,
       ...doc.data(),
     }));
     return topicData;
@@ -77,6 +77,8 @@ export const createTopic = createAsyncThunk(
       const res = await addDoc(collection(db, 'topics'), topicData);
 
       const createdTopic = await getDoc(doc(db, 'topics', res.id));
+      console.log({createdTopic});
+      
 
       if (createdTopic.exists()) {
         return { uid: createdTopic.id, ...createdTopic.data() };

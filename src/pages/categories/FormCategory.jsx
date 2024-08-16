@@ -41,9 +41,13 @@ export function FormCategory() {
 		};
 	}
 
-	if (statusCategory === 'Inactivo' || statusCategory === 'Cargando') {
-		return <Loader />;
+	if (id) {
+		if (statusCategory === 'Inactivo' || statusCategory === 'Cargando') {
+			return <Loader />;
+		}
 	}
+
+
 
 	return (
 		<div className='m-10'>
@@ -161,8 +165,8 @@ export function FormCategory() {
 											? 'Cargando'
 											: 'Cargar'
 										: statusCreateCategory === 'Cargando'
-										? 'Cargando'
-										: 'Cargar'}
+											? 'Cargando'
+											: 'Cargar'}
 								</button>
 								<Link
 									className='mb-2 bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline'
