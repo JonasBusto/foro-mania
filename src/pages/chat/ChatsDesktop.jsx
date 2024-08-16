@@ -61,7 +61,7 @@ export const ChatsDesktop = ({ user: initialUser, onClose }) => {
 					}
 
 
-					<div className='grow'>
+					<div className='flex '>
 						<ChatDesktop selectedUser={selectedUser} chatId={chatId} />
 					</div>
 				</div>
