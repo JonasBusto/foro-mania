@@ -17,7 +17,7 @@ export const getTopics = createAsyncThunk('topic/getAll', async () => {
   try {
     const querySnapshot = await getDocs(query(collection(db, 'topics')));
     const topicData = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
+      uid: doc.id,
       ...doc.data(),
     }));
     return topicData;
@@ -77,6 +77,8 @@ export const createTopic = createAsyncThunk(
       const res = await addDoc(collection(db, 'topics'), topicData);
 
       const createdTopic = await getDoc(doc(db, 'topics', res.id));
+      console.log({createdTopic});
+      
 
       if (createdTopic.exists()) {
         return { uid: createdTopic.id, ...createdTopic.data() };
@@ -98,6 +100,45 @@ export const updateTopicById = createAsyncThunk(
 
       const updatedTopic = await getDoc(topicDoc);
 
+      if (updatedTopic.exists()) {
+        return { uid: updatedTopic.id, ...updatedTopic.data() };
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const disableTopicById = createAsyncThunk(
+  'topic/disable',
+  async ({ id }, { rejectWithValue }) => {
+    console.log(id)
+    try {
+      const topicDoc = doc(db, 'topics', id);
+      await updateDoc(topicDoc, { isActive: false });
+      const updatedTopic = await getDoc(topicDoc);
+      if (updatedTopic.exists()) {
+        return { uid: updatedTopic.id, ...updatedTopic.data() };
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const enableTopicById = createAsyncThunk(
+  'topic/enable',
+  async ({ id }, { rejectWithValue }) => {
+    console.log(id)
+
+    try {
+      const topicDoc = doc(db, 'topics', id);
+      await updateDoc(topicDoc, { isActive: true });
+      const updatedTopic = await getDoc(topicDoc);
       if (updatedTopic.exists()) {
         return { uid: updatedTopic.id, ...updatedTopic.data() };
       } else {

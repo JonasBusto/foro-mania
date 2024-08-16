@@ -17,6 +17,8 @@ export const UserCard = ({ currentUser, topics }) => {
   };
 
   const lastTopic = lastTopicExtract(uid, topics);
+  console.log(lastTopic);
+  
 
   const topicDate = TimeToNow(lastTopic.createdAt);
 
@@ -45,7 +47,7 @@ export const UserCard = ({ currentUser, topics }) => {
               Ultimo tópico creado:{' '}
               <strong
                 className='cursor-pointer'
-                onClick={() => navigateToTopic(lastTopic.id)}
+                onClick={() => navigateToTopic(lastTopic.uid)}
               >
                 {lastTopic.title}
               </strong>

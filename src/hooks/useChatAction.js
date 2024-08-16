@@ -9,11 +9,18 @@ import {
 	get,
 	remove,
 	update,
+	onChildAdded,
 } from 'firebase/database';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUnreadMessagesCount } from '../store/chat/slice';
 
 export function useChatAction() {
+	const [newMessages, setNewMessages] = useState([]);
+	const dispatch = useDispatch();
+
 	// funcion para buscar chat entre usuarios 1 y 2. Si no lo encuentra crea uno
-	async function findOrCreateChat(user1Id, user2Id) {
+	const findOrCreateChat = async (user1Id, user2Id) => {
 		const db = getDatabase();
 		const chatKey = [user1Id, user2Id].sort().join('_');
 		const chatQuery = query(
@@ -39,10 +46,10 @@ export function useChatAction() {
 			});
 		}
 		return chatId;
-	}
+	};
 
 	// funcion para enviar mensajes entre usuarios
-	async function sendMessage(chatId, senderId, content) {
+	const sendMessage = async (chatId, senderId, content) => {
 		const db = getDatabase();
 		const messageRef = push(ref(db, `chats/${chatId}/messages`));
 		// envia los datos recibidos y la propiedad isRead en false
@@ -52,13 +59,14 @@ export function useChatAction() {
 			timestamp: Date.now(),
 			isRead: false,
 		});
-	}
+	};
 
 	// funcion para limpiar todos los mensajes del chat
 	const clearChatMessages = async (chatId) => {
 		try {
 			const messagesRef = ref(getDatabase(), `chats/${chatId}/messages`);
 			await remove(messagesRef);
+			alert('Historial de Chat eliminado');
 		} catch (error) {
 			console.error('Error al vaciar los mensajes del chat:', error);
 		}
@@ -85,6 +93,42 @@ export function useChatAction() {
 		return 0;
 	};
 
+	// función para escuchar nuevos mensajes en tiempo real
+	const listenForNewMessages = (user1Id) => {
+		const db = getDatabase();
+		const chatsRef = ref(db, 'chats');
+		onChildAdded(chatsRef, (snapshot) => {
+			const chatId = snapshot.key;
+			const chatData = snapshot.val();
+			if (
+				chatData &&
+				chatData.participants &&
+				chatData.participants.includes(user1Id)
+			) {
+				const messagesRef = ref(db, `chats/${chatId}/messages`);
+				onChildAdded(messagesRef, async (messageSnapshot) => {
+					const newMessage = messageSnapshot.val();
+					if (newMessage.senderId !== user1Id && !newMessage.isRead) {
+						setNewMessages((prevMessages) => [
+							...prevMessages,
+							{ chatId, ...newMessage },
+						]);
+						// Actualiza el estado global con el nuevo conteo
+						try {
+							const totalUnread = await getTotalUnreadMessages(user1Id);
+							dispatch(setUnreadMessagesCount(totalUnread));
+						} catch (error) {
+							console.error(
+								'Error al obtener mensajes no leídos:',
+								error
+							);
+						}
+					}
+				});
+			}
+		});
+	};
+
 	// funcion para marcar como leido los mensajes al ingresar al chat
 	const markMessagesAsRead = async (chatId, userId) => {
 		const db = getDatabase();
@@ -100,6 +144,12 @@ export function useChatAction() {
 				}
 			});
 			await update(messagesRef, updates);
+			try {
+				const totalUnread = await getTotalUnreadMessages(userId);
+				dispatch(setUnreadMessagesCount(totalUnread));
+			} catch (error) {
+				console.error('Error al obtener mensajes no leídos:', error);
+			}
 		}
 	};
 
@@ -141,8 +191,10 @@ export function useChatAction() {
 		findOrCreateChat,
 		sendMessage,
 		clearChatMessages,
-		checkUnreadMessages,
 		markMessagesAsRead,
+		checkUnreadMessages,
 		getTotalUnreadMessages,
+		listenForNewMessages,
+		newMessages,
 	};
 }

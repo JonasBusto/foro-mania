@@ -83,6 +83,42 @@ export const updateCategoryById = createAsyncThunk(
   }
 );
 
+export const disableCategoryById = createAsyncThunk(
+  'category/disable',
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const categoryDoc = doc(db, 'categories', id);
+      await updateDoc(categoryDoc, { isActive: false });
+      const updatedCategory = await getDoc(categoryDoc);
+      if (updatedCategory.exists()) {
+        return { uid: updatedCategory.id, ...updatedCategory.data() };
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const enableCategoryById = createAsyncThunk(
+  'category/enable',
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const categoryDoc = doc(db, 'categories', id);
+      await updateDoc(categoryDoc, { isActive: true });
+      const updatedCategory = await getDoc(categoryDoc);
+      if (updatedCategory.exists()) {
+        return { uid: updatedCategory.id, ...updatedCategory.data() };
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const deleteCategoryById = createAsyncThunk(
   'category/delete',
   async ({ id }, { rejectWithValue }) => {
