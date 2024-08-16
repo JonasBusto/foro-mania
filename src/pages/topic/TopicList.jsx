@@ -55,7 +55,7 @@ export const TopicList = () => {
 		if (queryOrder === 'top') {
 			filteredTopics = filteredTopics.map((topic) => ({
 				...topic,
-				likesCount: countLikes(topic.id),
+				likesCount: countLikes(topic.uid),
 			}));
 			filteredTopics.sort((a, b) => b.likesCount - a.likesCount);
 			filteredTopics = filteredTopics.map(({ likesCount, ...rest }) => rest);
