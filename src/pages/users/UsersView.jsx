@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Banner } from '../../components/home/Banner';
 import { Loader } from '../../components/items/Loader';
 import { UsersList } from '../../components/users/UsersList';
+import useDocTitle from '../../hooks/useDocTitle';
 import '../../styles/usersView.css';
 
 
@@ -21,6 +22,8 @@ export const UsersView = () => {
   });
 
   const modalRef = useRef(null);
+
+  useDocTitle('Usuarios')
 
   useEffect(() => {
     const handleClickOutside = (event) => {
