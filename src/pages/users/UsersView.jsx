@@ -23,7 +23,7 @@ export const UsersView = () => {
 
   const modalRef = useRef(null);
 
-  useDocTitle('Usuarios')
+  useDocTitle('Foromanía | Usuarios')
 
   useEffect(() => {
     const handleClickOutside = (event) => {
