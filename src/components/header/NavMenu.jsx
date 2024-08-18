@@ -1,7 +1,7 @@
 import { Menu } from 'primereact/menu';
 import { useNavigate } from 'react-router-dom';
 
-export function NavMenu() {
+export function NavMenu({ loggedUser }) {
   const navigate = useNavigate();
 
   const items = [
@@ -35,9 +35,31 @@ export function NavMenu() {
     },
   ];
 
+  const itemsAdmin = [
+    {
+      label: 'Gestionar Categorias',
+      icon: 'pi pi-fw pi-list',
+      command: () => {
+        navigate('/categories');
+      },
+    },
+    {
+      label: 'Gestionar Tags',
+      icon: 'pi pi-fw pi-list',
+      command: () => {
+        navigate('/tags');
+      },
+    },
+  ];
+
   return (
     <div className='flex justify-center items-center '>
-      <Menu model={items} className='w-full md:w-14rem custom-nav-menu ' />
+      <Menu
+        model={
+          loggedUser?.role === 'admin' ? [...items, ...itemsAdmin] : [...items]
+        }
+        className='w-full md:w-14rem custom-nav-menu '
+      />
     </div>
   );
 }

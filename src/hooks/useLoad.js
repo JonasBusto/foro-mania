@@ -7,6 +7,7 @@ export function useLoad() {
   const statusGetCategories = useAppSelector((state) => state.category.status);
   const statusGetReactions = useAppSelector((state) => state.reaction.status);
   const statusGetFavorites = useAppSelector((state) => state.favorite.status);
+  const statusGetTags = useAppSelector((state) => state.tag.status);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -17,7 +18,8 @@ export function useLoad() {
       (statusGetCategories === 'Fallido' ||
         statusGetCategories === 'Exitoso') &&
       (statusGetReactions === 'Fallido' || statusGetReactions === 'Exitoso') &&
-      (statusGetFavorites === 'Fallido' || statusGetFavorites === 'Exitoso')
+      (statusGetFavorites === 'Fallido' || statusGetFavorites === 'Exitoso') &&
+      (statusGetTags === 'Fallido' || statusGetTags === 'Exitoso')
     ) {
       setIsLoading(false);
     } else {
@@ -29,6 +31,7 @@ export function useLoad() {
     statusGetCategories,
     statusGetReactions,
     statusGetFavorites,
+    statusGetTags,
   ]);
 
   return { isLoading };

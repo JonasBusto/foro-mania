@@ -47,3 +47,15 @@ html {
 .form-comment .ql-snow {
   border: 2px solid #ffffff85 !important;
 }
+
+.tags-select .p-multiselect-item {
+  background-color: white !important;
+}
+
+.p-multiselect-items .p-focus {
+  color: white !important;
+}
+
+.p-multiselect-filter-container .p-inputtext {
+  color: white !important;
+}
