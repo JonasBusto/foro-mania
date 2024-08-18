@@ -5,26 +5,32 @@ import {
   getTagById,
   updateTagById,
 } from '../store/tag/thunks';
+import { clearTag } from '../store/tag/slice';
+import { useNavigate } from 'react-router-dom';
 
 export function useTagAction() {
   const tags = useAppSelector((state) => state.tag.tags);
-  const tag = useAppSelector((state) => state.tag.category);
+  const tag = useAppSelector((state) => state.tag.tag);
   const statusTag = useAppSelector((state) => state.tag.statusTag);
   const statusCreateTag = useAppSelector((state) => state.tag.statusCreate);
   const statusUpdateTag = useAppSelector((state) => state.tag.statusUpdate);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const getTag = async ({ id }) => {
     await dispatch(getTagById({ id }));
   };
 
-  const addTag = async (tag) => {
+  const addTag = async (tag, redirect = false) => {
     const res = await dispatch(createTag(tag));
     if (res.error) {
       alert('Error al cargar el tag');
     } else {
       alert('Tag creado');
+      if (redirect) {
+        navigate('/tags');
+      }
     }
   };
 
@@ -34,6 +40,7 @@ export function useTagAction() {
       alert('Error al cargar el tag');
     } else {
       alert('Tag actualizado');
+      navigate('/tags');
     }
   };
 
@@ -42,6 +49,10 @@ export function useTagAction() {
     if (res.error) {
       alert('Error al eliminar el tag');
     }
+  };
+
+  const clearStateTag = () => {
+    dispatch(clearTag());
   };
 
   return {
@@ -54,5 +65,6 @@ export function useTagAction() {
     addTag,
     updateTag,
     deleteTag,
+    clearStateTag,
   };
 }

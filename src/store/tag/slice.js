@@ -15,8 +15,13 @@ const initialState = {
 export const tagSlice = createSlice({
   name: 'tag',
   initialState,
-  reducers: {},
+  reducers: {
+    clearTag(state) {
+      state.tag = null;
+    },
+  },
   extraReducers: tagExtraReducers,
 });
 
 export default tagSlice.reducer;
+export const { clearTag } = tagSlice.actions;
