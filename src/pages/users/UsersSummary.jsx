@@ -20,7 +20,13 @@ export const UsersSummary = () => {
 
   const [tab, setTab] = useState('TOPICS');
 
-  useDocTitle('Perfil de usuario')
+  if (!user) {
+    useDocTitle('Foromanía | Perfil de Usuario')    
+  }
+
+  if (user) {
+    useDocTitle(`Foromanía | ${user.fullName}`)
+  }
 
   useEffect(() => {
     getUser({ id });

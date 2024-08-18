@@ -8,7 +8,7 @@ export const WelcomeBanner = ({ setShowWelcome }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className='border-2 border-neutral-300 py-3 px-6 rounded-md relative bg-neutral-800'>
+    <div data-testid='welcome-banner' className='border-2 border-neutral-300 py-3 px-6 rounded-md relative bg-neutral-800'>
       <button
         className='absolute top-0 right-2 text-xl'
         onClick={() => setShowWelcome(false)}
@@ -17,7 +17,7 @@ export const WelcomeBanner = ({ setShowWelcome }) => {
       </button>
       <h2 className='font-semibold text-xl mb-2'>¡Bienvenido a ForoMania!</h2>
       <div className='italic'>
-        <p className='mb-1'>
+        <p role='presentation' className='mb-1'>
           ¡Hola! Nos alegra verte en ForoMania, un espacio donde puedes
           compartir tus ideas, aprender de los demás y crecer junto a la
           comunidad. Queremos recordarte la importancia de ser respetuoso con

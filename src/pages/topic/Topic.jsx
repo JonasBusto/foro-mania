@@ -18,6 +18,7 @@ import { BannerAdversiting } from '../../components/items/BannerAdversiting';
 import { Loader } from '../../components/items/Loader';
 import { useDispatch } from 'react-redux';
 import { switchLogin, switchRegister } from '../../store/modals/slice';
+import useDocTitle from '../../hooks/useDocTitle';
 
 export const Topic = () => {
   const { id } = useParams();
@@ -45,6 +46,15 @@ export const Topic = () => {
   const [visibleDialogDelete, setVisibleDialogDelete] = useState(false);
   const [topicToModify, setTopicToModify] = useState(null);
   const dispatch = useDispatch();
+
+  if (!topic) {
+    useDocTitle('Foromanía | Tópicos');
+  }
+
+  if (topic) {
+    useDocTitle(`Foromanía | ${topic.title}`);
+  }
+
 
   const TimeToNow = (fecha) => {
     const fechaISO = parseISO(fecha);
