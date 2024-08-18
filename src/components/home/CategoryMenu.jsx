@@ -1,87 +1,103 @@
 import { useEffect, useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
-import { Tags } from '../../helpers/Tags';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTagAction } from '../../hooks/useTagAction';
 
 export const CategoryMenu = () => {
-	const { categories } = useCategoryAction();
-	const [selectedCategory, setSelectedCategory] = useState(null);
-	const [selectedTag, setSelectedTag] = useState(null);
-	const filteredCategories = categories.filter(
-		(categoryActive) => categoryActive.isActive === true
-	);
-	const navigate = useNavigate();
+  const { categories } = useCategoryAction();
+  const { tags } = useTagAction();
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedTag, setSelectedTag] = useState(null);
+  const filteredCategories = categories.filter(
+    (categoryActive) => categoryActive.isActive === true
+  );
+  const filteredTags = tags.map((tag) => {
+    return { uid: tag.uid, title: tag.value };
+  });
 
-	useEffect(() => {
-		const handleNavigate = () => {
-			navigate(`/topic-list?category=${filteredCategories.uid}`);
-		};
-		if (selectedCategory !== null) {
-			handleNavigate();
-		}
-	}, [filteredCategories]);
+  const navigate = useNavigate();
 
-	const categoryTemplate = (option) => (
-		<div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-60'>
-			<div
-				className='w-3 h-3 rounded-full'
-				style={{ backgroundColor: option.color }}></div>
-			<div className='ml-3 w-full'>
-				<div className='text-md font-medium text-white'>{option.title}</div>
-			</div>
-		</div>
-	);
+  useEffect(() => {
+    if (selectedTag || selectedCategory) {
+      console.log({ selectedTag });
+      const params = new URLSearchParams();
+      if (selectedCategory) {
+        params.append('category', selectedCategory.uid);
+      }
+      if (selectedTag) {
+        params.append('tag', selectedTag.uid);
+      }
+      navigate(`/topic-list?${params.toString()}`);
+    }
+  }, [selectedCategory, selectedTag, navigate]);
 
-	const tagTemplate = (option) => (
-		<div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-full'>
-			<div className='text-md font-medium text-white w-full'>
-				{option.tag}
-			</div>
-		</div>
-	);
+  const categoryTemplate = (option) => (
+    <div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-60'>
+      <div
+        className='w-3 h-3 rounded-full'
+        style={{ backgroundColor: option.color }}
+      ></div>
+      <div className='ml-3 w-full'>
+        <div className='text-md font-medium text-white'>{option.title}</div>
+      </div>
+    </div>
+  );
 
-	return (
-		<section className='w-full p-4 rounded-md'>
-			<div className='flex flex-col sm:flex-row sm:flex-wrap items-center justify-between w-full max-w-5xl mx-auto gap-4'>
-				<Dropdown
-					value={selectedCategory}
-					onChange={(e) => setSelectedCategory(e.value)}
-					options={filteredCategories}
-					optionLabel='title'
-					placeholder='Categorías'
-					filter
-					className='dropdown-category-select bg-[#282828] border-[#61dafb] text-white border-2 rounded-md w-full sm:w-1/4 flex-1'
-					itemTemplate={categoryTemplate}
-					filterInputAutoFocus
-				/>
-				<Dropdown
-					value={selectedTag}
-					onChange={(e) => setSelectedTag(e.value)}
-					options={Tags}
-					optionLabel='tag'
-					placeholder='Tags'
-					filter
-					className='bg-[#282828] border-[#61dafb] text-white border-2 rounded-md w-full sm:w-1/4 flex-1'
-					itemTemplate={tagTemplate}
-					filterInputAutoFocus
-				/>
-				<Link
-					to='/all-categories'
-					className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'>
-					Categorías
-				</Link>
-				<Link
-					to='/topic-list?orderBy=last'
-					className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'>
-					Últimos
-				</Link>
-				<Link
-					to='/topic-list?orderBy=top'
-					className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'>
-					Top
-				</Link>
-			</div>
-		</section>
-	);
+  const tagTemplate = (option) => {
+    return (
+      <div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-full'>
+        <div className='text-md font-medium text-white w-full'>
+          #{option.title}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <section className='w-full p-4 rounded-md'>
+      <div className='flex flex-col sm:flex-row sm:flex-wrap items-center justify-between w-full max-w-5xl mx-auto gap-4'>
+        <Dropdown
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.value)}
+          options={filteredCategories}
+          optionLabel='title'
+          placeholder='Categorías'
+          filter
+          className='dropdown-category-select bg-[#282828] border-[#61dafb] text-white border-2 rounded-md w-full sm:w-1/4 flex-1'
+          itemTemplate={categoryTemplate}
+          filterInputAutoFocus
+        />
+        <Dropdown
+          value={selectedTag}
+          onChange={(e) => setSelectedTag(e.value)}
+          options={filteredTags}
+          optionLabel='title'
+          placeholder='Tags'
+          filter
+          className='bg-[#282828] border-[#61dafb] text-white border-2 rounded-md w-full sm:w-1/4 flex-1'
+          itemTemplate={tagTemplate}
+          filterInputAutoFocus
+        />
+        <Link
+          to='/all-categories'
+          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+        >
+          Categorías
+        </Link>
+        <Link
+          to='/topic-list?orderBy=last'
+          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+        >
+          Últimos
+        </Link>
+        <Link
+          to='/topic-list?orderBy=top'
+          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+        >
+          Top
+        </Link>
+      </div>
+    </section>
+  );
 };
