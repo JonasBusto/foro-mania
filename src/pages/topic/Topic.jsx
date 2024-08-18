@@ -18,6 +18,8 @@ import { BannerAdversiting } from '../../components/items/BannerAdversiting';
 import { Loader } from '../../components/items/Loader';
 import { useDispatch } from 'react-redux';
 import { switchLogin, switchRegister } from '../../store/modals/slice';
+import { useTagAction } from '../../hooks/useTagAction';
+import { TopicTags } from '../../components/topic/TopicTags';
 
 export const Topic = () => {
   const { id } = useParams();
@@ -31,6 +33,7 @@ export const Topic = () => {
     deleteTopic,
     statusDeleteTopic,
   } = useTopicAction();
+  const { tags } = useTagAction();
   const { user, getUser, userStatus } = useUserAction();
   const { loggedUser } = useAuth();
   const { fetchComments, allComments, statusDeleteComment, deleteComment } =
@@ -214,6 +217,13 @@ export const Topic = () => {
               Hace {TimeToNow(topic.createdAt)}
             </p>
           </div>
+          {topic.tagsId && (
+            <div className='mt-5'>
+              <TopicTags
+                tags={tags.filter((tag) => topic.tagsId.includes(tag.uid))}
+              />
+            </div>
+          )}
           <div className='mt-4'>
             <TextEditor value={topic.content} readOnly={true} />
           </div>
