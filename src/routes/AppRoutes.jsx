@@ -15,6 +15,8 @@ import { CategoriesView } from '../pages/CategoriesView';
 import { UsersView } from '../pages/users/UsersView';
 import { UsersSummary } from '../pages/users/UsersSummary';
 import ChatView from '../pages/ChatView';
+import { Tags } from '../pages/tag/Tags';
+import { FormTag } from '../pages/tag/FormTag';
 
 export function AppRoutes() {
   return (
@@ -34,6 +36,9 @@ export function AppRoutes() {
         <Route path='/categories' element={<Categories />} />
         <Route path='/categories/upload/' element={<FormCategory />} />
         <Route path='/categories/upload/:id' element={<FormCategory />} />{' '}
+        <Route path='/tags' element={<Tags />} />
+        <Route path='/tags/upload/' element={<FormTag />} />
+        <Route path='/tags/upload/:id' element={<FormTag />} />
       </Route>
       <Route element={<PrivateRoute allowedRoles={['admin', 'user']} />}>
         <Route path='/upload-topic' element={<UploadTopic />} />
