@@ -9,6 +9,7 @@ import { useTopicAction } from '../../hooks/useTopicAction';
 import { useReactionAction } from '../../hooks/useReactionAction';
 import { UserReactions } from '../../components/users/UserReactions';
 import { Loader } from '../../components/items/Loader';
+import useDocTitle from '../../hooks/useDocTitle';
 
 export const UsersSummary = () => {
   const { id } = useParams();
@@ -17,8 +18,9 @@ export const UsersSummary = () => {
   const { topics } = useTopicAction();
   const { reactions, statusReactions } = useReactionAction();
 
-
   const [tab, setTab] = useState('TOPICS');
+
+  useDocTitle('Perfil de usuario')
 
   useEffect(() => {
     getUser({ id });

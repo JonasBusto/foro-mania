@@ -2,9 +2,16 @@ import { useEffect, useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTagAction } from '../../hooks/useTagAction';
 
-export const FilterTopic = ({ queryCategory, queryOrder, querySearch }) => {
+export const FilterTopic = ({
+  queryCategory,
+  queryTag,
+  queryOrder,
+  querySearch,
+}) => {
   const { categories } = useCategoryAction();
+  const { tags } = useTagAction();
   const [selectedCategory, setSelectedCategory] = useState(() => {
     if (querySearch) return null;
 
@@ -14,22 +21,39 @@ export const FilterTopic = ({ queryCategory, queryOrder, querySearch }) => {
 
     return categoryFromQuery || null;
   });
+  const [selectedTag, setSelectedTag] = useState(() => {
+    if (querySearch) return null;
+
+    const tagFromQuery = tags
+      .map((tag) => {
+        return { uid: tag.uid, title: tag.value };
+      })
+      .find((tag) => tag.uid === queryTag);
+
+    return tagFromQuery || null;
+  });
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if ((selectedCategory || queryOrder) && !querySearch) {
+    if ((selectedCategory || selectedTag || queryOrder) && !querySearch) {
       const params = new URLSearchParams();
+
       if (selectedCategory && selectedCategory.uid) {
         params.append('category', selectedCategory.uid);
       }
+
+      if (selectedTag && selectedTag.uid) {
+        params.append('tag', selectedTag.uid);
+      }
+
       if (queryOrder) {
         params.append('orderBy', queryOrder);
       }
 
       navigate(`/topic-list?${params.toString()}`);
     }
-  }, [selectedCategory, queryOrder]);
+  }, [selectedCategory, selectedTag, queryOrder]);
 
   const categoryTemplate = (option) => {
     return (
@@ -45,24 +69,49 @@ export const FilterTopic = ({ queryCategory, queryOrder, querySearch }) => {
     );
   };
 
+  const tagTemplate = (option) => {
+    return (
+      <div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-full'>
+        <div className='text-md font-medium text-white w-full'>
+          #{option.title}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <section className='w-full p-4 rounded-md'>
       <div className='flex flex-col sm:flex-row sm:flex-wrap items-center justify-between w-full max-w-5xl mx-auto gap-4'>
         {!querySearch && (
-          <Dropdown
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.value)}
-            options={categories}
-            optionLabel='title'
-            placeholder='Categorías'
-            filter
-            className='dropdown-category-select bg-[#282828] border-[#61dafb] text-white border-2 rounded-md w-full sm:w-1/4 flex-1'
-            itemTemplate={categoryTemplate}
-            filterInputAutoFocus
-          />
+          <>
+            <Dropdown
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.value)}
+              options={categories}
+              optionLabel='title'
+              placeholder='Categorías'
+              filter
+              className='dropdown-category-select bg-[#282828] border-[#61dafb] text-white border-2 rounded-md w-full sm:w-1/4 flex-1'
+              itemTemplate={categoryTemplate}
+              filterInputAutoFocus
+            />
+            <Dropdown
+              value={selectedTag}
+              onChange={(e) => setSelectedTag(e.value)}
+              options={tags.map((tag) => {
+                return { uid: tag.uid, title: tag.value };
+              })}
+              optionLabel='title'
+              placeholder='Tag'
+              filter
+              className='dropdown-category-select bg-[#282828] border-[#61dafb] text-white border-2 rounded-md w-full sm:w-1/4 flex-1'
+              itemTemplate={tagTemplate}
+              filterInputAutoFocus
+            />
+          </>
         )}
 
-        {(querySearch || queryCategory || queryOrder) && (
+        {(querySearch || queryCategory || queryTag || queryOrder) && (
           <div
             className={querySearch ? 'mx-auto flex justify-between w-max' : ''}
           >
@@ -79,6 +128,7 @@ export const FilterTopic = ({ queryCategory, queryOrder, querySearch }) => {
                 className='ms-3 flex items-center justify-center w-7 h-7'
                 onClick={() => {
                   setSelectedCategory(null);
+                  setSelectedTag(null);
                   navigate('/topic-list');
                 }}
               >

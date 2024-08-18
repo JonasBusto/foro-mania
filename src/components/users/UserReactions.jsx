@@ -25,7 +25,7 @@ export const UserReactions = ({ userProps, reactions, topics, users }) => {
 
   return (
     <>
-      {userWithLikedTopics ? (
+      {userWithLikedTopics.length > 0 ? (
         userWithLikedTopics.map((topic) => (
           <Link
             key={topic.uid}
@@ -48,7 +48,7 @@ export const UserReactions = ({ userProps, reactions, topics, users }) => {
           </Link>
         ))
       ) : (
-        <p className='text-center'>Todavía no has publicado ningún tópico</p>
+        <p className='text-center mt-6'>Todavía no has indicado a ningún tópico te gusta.</p>
       )}
     </>
   );
