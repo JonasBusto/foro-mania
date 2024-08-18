@@ -194,7 +194,7 @@ export const UploadTopic = () => {
                       >
                         {statusCreateTag === 'Cargando'
                           ? 'Cargando'
-                          : ` Añadir "${filterValue}"`}
+                          : ` Añadir tag "${filterValue}"`}
                       </button>
                     </div>
                   ) : (
