@@ -14,6 +14,7 @@ import {
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUnreadMessagesCount } from '../store/chat/slice';
+import { toast } from 'react-toastify';
 
 export function useChatAction() {
 	const [newMessages, setNewMessages] = useState([]);
@@ -66,7 +67,8 @@ export function useChatAction() {
 		try {
 			const messagesRef = ref(getDatabase(), `chats/${chatId}/messages`);
 			await remove(messagesRef);
-			alert('Historial de Chat eliminado');
+			// alert('Historial de Chat eliminado');
+			toast.info('Historial de Chat eliminado');
 		} catch (error) {
 			console.error('Error al vaciar los mensajes del chat:', error);
 		}

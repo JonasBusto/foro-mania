@@ -9,6 +9,7 @@ import {
 } from '../store/topic/thunks';
 import { useAppDispatch, useAppSelector } from './store';
 import { clearCategory } from '../store/category/slice';
+import { toast } from 'react-toastify';
 
 export function useTopicAction() {
 	const navigate = useNavigate();
@@ -34,9 +35,13 @@ export function useTopicAction() {
 	const addTopic = async (topic) => {
 		const res = await dispatch(createTopic(topic));
 		if (res.error) {
-			alert('Hubo un error al cargar');
+			// alert('Hubo un error al cargar');
+			toast.error('Hubo un error al cargar');
+
 		} else {
-			alert('Nuevo tema cargado!');
+			// alert('Nuevo tema cargado!');
+			toast.success('Nuevo tema cargado!');
+
 			navigate(`/topic/${res.payload.uid}`);
 		}
 	};
@@ -44,9 +49,11 @@ export function useTopicAction() {
 	const updateTopic = async ({ topic, id }) => {
 		const res = await dispatch(updateTopicById({ topic, id }));
 		if (res.error) {
-			alert('Error al cargar la publicación');
+			// alert('Error al cargar la publicación');
+			toast.error('Error al cargar la publicación');
 		} else {
-			alert('Publicación actualizada');
+			// alert('Publicación actualizada');
+			toast.success('Publicación actualizada!');
 			navigate(`/topic/${res.payload.uid}`);
 		}
 	};
@@ -54,18 +61,22 @@ export function useTopicAction() {
 	const disableTopic = async ({ id }) => {
 		console.log(id);
 		const res = await dispatch(disableTopicById({ id }));
-		alert('Publicacion suspendida correctamente');
+		// alert('Publicacion suspendida correctamente');
+		toast.success('Publicacion suspendida correctamente');
 
 		if (res.error) {
-			alert('Error al suspender la publiacion', res.error);
+			// alert('Error al suspender la publiacion', res.error);
+			toast.error('Error al suspender la publiacion');
 		}
 	};
 
 	const enableTopic = async ({ id }) => {
 		const res = await dispatch(enableTopicById({ id }));
-		alert('Publicacion habilitada correctamente');
+		// alert('Publicacion habilitada correctamente');
+		toast.success('Publicacion habilitada correctamente');
 		if (res.error) {
-			alert('Error al habilitar la publicacion');
+			// alert('Error al habilitar la publicacion');
+			toast.error('Error al habilitar la publicacion');
 		}
 	};
 
@@ -73,9 +84,11 @@ export function useTopicAction() {
 		const res = await dispatch(deleteTopicById({ id }));
 
 		if (res.error) {
-			alert('Error al eliminar la categoria');
+			// alert('Error al eliminar la categoria');
+			toast.error('Error al eliminar la categoria');
 		} else {
-			alert('Publicación eliminada correctamente');
+			// alert('Publicación eliminada correctamente');
+			toast.success('Publicación eliminada correctamente')
 			navigate('/topic-list');
 		}
 	};

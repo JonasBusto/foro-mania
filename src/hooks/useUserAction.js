@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from './store';
 import { getUserById, updateUser } from '../store/user/thunks';
 import { clearUser } from '../store/user/slice';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export function useUserAction() {
   const users = useAppSelector((state) => state.user.users);
@@ -25,7 +26,8 @@ export function useUserAction() {
     if (res.error) {
       alert(res.payload);
     } else {
-      alert('Datos guardados exitosamente');
+      // alert('Datos guardados exitosamente');
+      toast.info('Datos guardados exitosamente');
       navigate('/');
     }
   };

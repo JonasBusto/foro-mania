@@ -9,6 +9,7 @@ import {
 	enableCategoryById,
 } from '../store/category/thunks';
 import { useAppDispatch, useAppSelector } from './store';
+import { toast } from 'react-toastify';
 
 export function useCategoryAction() {
 	const categories = useAppSelector((state) => state.category.categories);
@@ -37,9 +38,11 @@ export function useCategoryAction() {
 	const addCategory = async (category) => {
 		const res = await dispatch(createCategory(category));
 		if (res.error) {
-			alert('Error al cargar la categoria');
+			// alert('Error al cargar la categoria');
+			toast.error('Error al cargar la categoria');
 		} else {
-			alert('Categoria creada');
+			// alert('Categoria creada');
+			toast.success('Categoria creada');
 			navigate('/categories');
 		}
 	};
@@ -47,9 +50,11 @@ export function useCategoryAction() {
 	const updateCategory = async ({ category, id }) => {
 		const res = await dispatch(updateCategoryById({ category, id }));
 		if (res.error) {
-			alert('Error al cargar la categoria');
+			// alert('Error al cargar la categoria');
+			toast.error('Error al cargar la categoria');
 		} else {
-			alert('Categoria actualizada');
+			// alert('Categoria actualizada');
+			toast.success('Categoria actualizada');
 			navigate('/categories');
 		}
 	};
@@ -57,21 +62,24 @@ export function useCategoryAction() {
 	const disableCategory = async ({ id }) => {
 		const res = await dispatch(disableCategoryById({ id }));
 		if (res.error) {
-			alert('Error al inhabilitar la categoria');
+			// alert('Error al inhabilitar la categoria');
+			toast.error('Error al inhabilitar la categoria');
 		}
 	};
 
 	const enableCategory = async ({ id }) => {
 		const res = await dispatch(enableCategoryById({ id }));
 		if (res.error) {
-			alert('Error al habilitar la categoria');
+			// alert('Error al habilitar la categoria');
+			toast.error('Error al habilitar la categoria');
 		}
 	};
 
 	const deleteCategory = async ({ id }) => {
 		const res = await dispatch(deleteCategoryById({ id }));
 		if (res.error) {
-			alert('Error al eliminar la categoria');
+			// alert('Error al eliminar la categoria');
+			toast.error('Error al eliminar la categoria')
 		}
 	};
 
