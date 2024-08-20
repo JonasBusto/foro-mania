@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { Loader } from '../../components/items/Loader';
 import { MultiSelect } from 'primereact/multiselect';
 import { useTagAction } from '../../hooks/useTagAction';
+import { BannerAdversiting } from '../../components/items/BannerAdversiting';
 
 export const UploadTopic = () => {
   const { id } = useParams();
@@ -69,7 +70,10 @@ export const UploadTopic = () => {
   }
 
   return (
-    <div className='bg-neutral-800 px-2 max-w-[80rem] mx-auto py-20'>
+    <div className='bg-neutral-800 px-2 lg:px-0 max-w-[80rem] mx-auto pb-20'>
+      <div className='pt-3 pb-10'>
+        <BannerAdversiting />
+      </div>
       <Formik
         initialValues={initialValues}
         validate={(values) => {
@@ -217,8 +221,8 @@ export const UploadTopic = () => {
                     ? 'Cargando'
                     : 'Cargar'
                   : statusCreateTopic === 'Cargando'
-                  ? 'Cargando'
-                  : 'Cargar'}
+                    ? 'Cargando'
+                    : 'Cargar'}
               </button>
             </div>
           </form>
