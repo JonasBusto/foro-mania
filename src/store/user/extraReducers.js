@@ -69,6 +69,7 @@ export const userExtraReducers = (builder) => {
     .addCase(registerUser.fulfilled, (state, action) => {
       state.statusSign = 'Exitoso';
       state.loggedUser = action.payload;
+      state.users = [...state.users, action.payload];
     })
     .addCase(registerUser.rejected, (state, action) => {
       state.statusSign = 'Fallido';
