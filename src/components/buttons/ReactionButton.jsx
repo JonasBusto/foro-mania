@@ -10,6 +10,7 @@ export const ReactionButton = ({
   favorites,
   addFavorite,
   deleteFavorite,
+  typeContent = 'comment',
 }) => {
   const [isLoadingReaction, setIsLoadingReaction] = useState(false);
 
@@ -27,21 +28,23 @@ export const ReactionButton = ({
   return (
     <div className='flex items-center space-x-4'>
       <div className='flex items-center space-x-2'>
-        {isLoadingReaction && (
-          <p className='text-gray-400'>
-            <i
-              className='pi pi-spin pi-spinner'
-              style={{ fontSize: '1rem' }}
-            ></i>
-          </p>
-        )}
+        <div className='w-[2rem]'>
+          {isLoadingReaction && (
+            <p className='text-gray-400'>
+              <i
+                className='pi pi-spin pi-spinner'
+                style={{ fontSize: '1rem' }}
+              ></i>
+            </p>
+          )}
+        </div>
         {loggedUser && favorites && (
           <div className='flex items-center space-x-2 me-2'>
             <i
-              className={`pi cursor-pointer transform transition-transform duration-200 ${
+              className={`me-2 pi cursor-pointer transform transition-transform duration-200 ${
                 favoriteLoggedUser ? 'pi-bookmark-fill' : 'pi-bookmark'
               }`}
-              style={{ fontSize: '1.4rem' }}
+              style={{ fontSize: '1.6rem', fontWeight: 400 }}
               onClick={
                 favoriteLoggedUser
                   ? () =>
@@ -63,9 +66,11 @@ export const ReactionButton = ({
             ></i>
           </div>
         )}
-        <p className='text-sm text-gray-200'>
-          {reactions.filter((reaction) => reaction.type === 'like').length}
-        </p>
+        {typeContent === 'comment' && (
+          <p className='text-sm text-gray-200'>
+            {reactions.filter((reaction) => reaction.type === 'like').length}
+          </p>
+        )}
         {loggedUser ? (
           <i
             onClick={
@@ -107,9 +112,14 @@ export const ReactionButton = ({
             } cursor-pointer transform transition-transform duration-200 ${
               isLoadingReaction ? 'pointer-events-none' : ''
             }`}
+            style={
+              typeContent === 'topic'
+                ? { fontSize: '1.6rem', fontWeight: 400 }
+                : {}
+            }
           ></i>
         ) : (
-          <p className='text-gray-400'>Like</p>
+          typeContent === 'comment' && <p className='text-gray-400'>Like</p>
         )}
       </div>
       <div className='flex items-center space-x-2'>
@@ -152,13 +162,20 @@ export const ReactionButton = ({
             } cursor-pointer transform transition-transform duration-200 ${
               isLoadingReaction ? 'pointer-events-none' : ''
             }`}
+            style={
+              typeContent === 'topic'
+                ? { fontSize: '1.6rem', fontWeight: 400 }
+                : {}
+            }
           ></i>
         ) : (
-          <p className='text-gray-400'>Dislike</p>
+          typeContent === 'comment' && <p className='text-gray-400'>Dislike</p>
         )}
-        <p className='text-sm text-gray-200'>
-          {reactions.filter((reaction) => reaction.type === 'unlike').length}
-        </p>
+        {typeContent === 'comment' && (
+          <p className='text-sm text-gray-200'>
+            {reactions.filter((reaction) => reaction.type === 'unlike').length}
+          </p>
+        )}
       </div>
     </div>
   );
