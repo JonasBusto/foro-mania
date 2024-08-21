@@ -52,7 +52,7 @@ export const TopicComment = ({
 
   return (
     <div className='relative'>
-      <div className='py-3 flex justify-between'>
+      <div className='py-3 flex flex-wrap justify-between'>
         <div className='flex gap-4'>
           <Link to={'/users-view/' + userFiltered?.uid + '/summary'}>
             <img
@@ -157,6 +157,7 @@ export const TopicComment = ({
                 deleteReaction={deleteReaction}
                 loggedUser={loggedUser}
                 content={data}
+                typeContent='comment'
               />
             </div>
           </div>
