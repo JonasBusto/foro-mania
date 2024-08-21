@@ -152,7 +152,12 @@ export const Topic = () => {
           <div className='flex flex-wrap justify-between items-center border-b border-gray-700'>
             <div>
               <h2 className='text-4xl font-bold'>{topic.title}</h2>
-              <p className='text-gray-400 pb-4'>{category.title}</p>
+              <p
+                className='text-black mt-1 mb-4 max-w-fit px-5 py-[3px] rounded-md uppercase font-bold text-sm'
+                style={{ backgroundColor: category.color }}
+              >
+                {category.title}
+              </p>
             </div>
             {((showEditTopic && topic.userId === loggedUser?.uid) ||
               loggedUser?.role === 'admin') && (
@@ -261,7 +266,7 @@ export const Topic = () => {
             <TextEditor value={topic.content} readOnly={true} />
           </div>
           <div className='mt-8 flex flex-wrap justify-between border border-gray-600 bg-[#202020]'>
-            <div className='flex gap-4 px-2 md:px-4 py-2 md:py-3'>
+            <div className='flex gap-4 px-2 md:px-4 py-2 md:py-3 info-topic-detail'>
               <CreatedBy user={user} topic={topic} />
               {lastCommentUser && (
                 <LastAnswer
@@ -286,35 +291,37 @@ export const Topic = () => {
                 />
               )}
             </div>
-            <div className='flex space-x-4 ms-auto'>
-              <ReactionButton
-                reactions={reactions.filter(
-                  (reaction) => reaction.contentId === topic.uid
-                )}
-                addReaction={addReaction}
-                updateReaction={updateReaction}
-                deleteReaction={deleteReaction}
-                loggedUser={loggedUser}
-                content={topic}
-                favorites={favorites.filter(
-                  (favorite) => favorite.contentId === topic.uid
-                )}
-                addFavorite={addFavorite}
-                deleteFavorite={deleteFavorite}
-                typeContent='topic'
-              />
-            </div>
-            <div className='ms-4 cursor-pointer border-l-2 border-gray-600 flex justify-center items-center'>
-              <button
-                onClick={() => setShowDetailTopic(!showDetailTopic)}
-                className='px-6 h-full hover:bg-[#2b2b2b]'
-              >
-                <i
-                  className={`pi ${
-                    showDetailTopic ? 'pi-angle-up' : 'pi-angle-down'
-                  } text-[32px]`}
-                ></i>
-              </button>
+            <div className='flex contain-btn-topic-detail'>
+              <div className='flex space-x-4 ms-auto contain-reactions'>
+                <ReactionButton
+                  reactions={reactions.filter(
+                    (reaction) => reaction.contentId === topic.uid
+                  )}
+                  addReaction={addReaction}
+                  updateReaction={updateReaction}
+                  deleteReaction={deleteReaction}
+                  loggedUser={loggedUser}
+                  content={topic}
+                  favorites={favorites.filter(
+                    (favorite) => favorite.contentId === topic.uid
+                  )}
+                  addFavorite={addFavorite}
+                  deleteFavorite={deleteFavorite}
+                  typeContent='topic'
+                />
+              </div>
+              <div className='ms-4 cursor-pointer border-l-2 border-gray-600 flex justify-center items-center contain-btn-detail-topic'>
+                <button
+                  onClick={() => setShowDetailTopic(!showDetailTopic)}
+                  className='px-6 h-full hover:bg-[#2b2b2b]'
+                >
+                  <i
+                    className={`pi ${
+                      showDetailTopic ? 'pi-angle-up' : 'pi-angle-down'
+                    } text-[32px]`}
+                  ></i>
+                </button>
+              </div>
             </div>
           </div>
           {showDetailTopic && (
