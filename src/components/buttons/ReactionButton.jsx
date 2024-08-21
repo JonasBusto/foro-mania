@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useModal } from '../../hooks/useModal';
 
 export const ReactionButton = ({
   reactions,
@@ -13,6 +14,7 @@ export const ReactionButton = ({
   typeContent = 'comment',
 }) => {
   const [isLoadingReaction, setIsLoadingReaction] = useState(false);
+  const { switchModalLogin } = useModal();
 
   const reactionLoggedUser = reactions.find(
     (reaction) => reaction.userId === loggedUser?.uid
@@ -119,7 +121,14 @@ export const ReactionButton = ({
             }
           ></i>
         ) : (
-          typeContent === 'comment' && <p className='text-gray-400'>Like</p>
+          typeContent === 'comment' && (
+            <p
+              className='text-gray-400 hover:text-gray-300'
+              onClick={switchModalLogin}
+            >
+              <i className='pi pi-thumbs-up cursor-pointer transform transition-transform duration-200'></i>
+            </p>
+          )
         )}
       </div>
       <div className='flex items-center space-x-2'>
@@ -169,7 +178,14 @@ export const ReactionButton = ({
             }
           ></i>
         ) : (
-          typeContent === 'comment' && <p className='text-gray-400'>Dislike</p>
+          typeContent === 'comment' && (
+            <p
+              className='text-gray-400 hover:text-gray-300'
+              onClick={switchModalLogin}
+            >
+              <i className='pi pi-thumbs-down cursor-pointer transform transition-transform duration-200'></i>
+            </p>
+          )
         )}
         {typeContent === 'comment' && (
           <p className='text-sm text-gray-200'>
