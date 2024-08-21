@@ -54,12 +54,17 @@ export function NavMenu({ loggedUser }) {
 
   return (
     <div className='flex justify-center items-center '>
-      <Menu
-        model={
-          loggedUser?.role === 'admin' ? [...items, ...itemsAdmin] : [...items]
-        }
-        className='w-full md:w-14rem custom-nav-menu '
-      />
+      {loggedUser && loggedUser.role === 'admin' ? (
+        <Menu
+          model={[...items, ...itemsAdmin]}
+          className='w-full md:w-14rem custom-nav-menu '
+        />
+      ) : (
+        <Menu
+          model={[...items]}
+          className='w-full md:w-14rem custom-nav-menu '
+        />
+      )}
     </div>
   );
 }

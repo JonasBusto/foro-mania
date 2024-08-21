@@ -60,10 +60,44 @@ html {
   background-color: white !important;
 }
 
-.p-multiselect-items .p-focus {
-  color: white !important;
+.p-multiselect-item span {
+  color: white;
+}
+
+.p-multiselect-header {
+  background-color: #000;
+}
+
+.p-multiselect-items .p-focus span {
+  color: black !important;
 }
 
 .p-multiselect-filter-container .p-inputtext {
   color: white !important;
+}
+
+@media (width<=430px) {
+  .info-topic-detail {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .created-by img {
+    width: 15vw;
+    height: 15vw;
+  }
+
+  .contain-btn-detail-topic {
+    border: 0;
+    margin: 0;
+  }
+
+  .contain-reactions {
+    margin: 1.5rem 0;
+  }
+
+  .contain-btn-topic-detail {
+    margin: 0 auto;
+  }
 }

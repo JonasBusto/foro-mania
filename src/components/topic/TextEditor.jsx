@@ -2,8 +2,10 @@ import { useRef, useEffect } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import QuillResizeImage from 'quill-resize-image';
+import QuillImageDropAndPaste from 'quill-image-drop-and-paste';
 
 Quill.register('modules/resize', QuillResizeImage);
+Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste);
 
 export const TextEditor = ({ value, onChange, readOnly = false }) => {
   const editorRef = useRef(null);
@@ -27,6 +29,7 @@ export const TextEditor = ({ value, onChange, readOnly = false }) => {
             resize: {
               locale: {},
             },
+            imageDropAndPaste: {},
           }),
         },
         formats: [
