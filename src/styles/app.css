@@ -60,8 +60,16 @@ html {
   background-color: white !important;
 }
 
-.p-multiselect-items .p-focus {
-  color: white !important;
+.p-multiselect-item span {
+  color: white;
+}
+
+.p-multiselect-header {
+  background-color: #000;
+}
+
+.p-multiselect-items .p-focus span {
+  color: black !important;
 }
 
 .p-multiselect-filter-container .p-inputtext {
