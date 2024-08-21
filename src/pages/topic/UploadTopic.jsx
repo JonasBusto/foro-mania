@@ -5,7 +5,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { format } from 'date-fns';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { TextEditor } from '../../components/topic/TextEditor';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Loader } from '../../components/items/Loader';
 import { MultiSelect } from 'primereact/multiselect';
 import { useTagAction } from '../../hooks/useTagAction';
@@ -31,6 +31,8 @@ export const UploadTopic = () => {
   const { categories } = useCategoryAction();
   const { loggedUser } = useAuth();
 
+  const navigate = useNavigate();
+
   const labelStyle = 'text-white font-semibold mb-2';
   const inputStyle = 'h-8 px-3 outline-none ';
   const errorStyle = 'text-red-300 italic text-sm mt-1';
@@ -52,6 +54,14 @@ export const UploadTopic = () => {
       clearStateCategory();
     }
   }, []);
+
+  useEffect(() => {
+    if (id && topic) {
+      if (topic.userId !== loggedUser.uid) {
+        navigate('/topic/' + topic.uid);
+      }
+    }
+  }, [topic, id]);
 
   if (id && topic) {
     initialValues = {
@@ -221,8 +231,8 @@ export const UploadTopic = () => {
                     ? 'Cargando'
                     : 'Cargar'
                   : statusCreateTopic === 'Cargando'
-                    ? 'Cargando'
-                    : 'Cargar'}
+                  ? 'Cargando'
+                  : 'Cargar'}
               </button>
             </div>
           </form>
