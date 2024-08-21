@@ -9,7 +9,7 @@ const TimeToNow = (fecha) => {
 
 export function CreatedBy({ topic, user }) {
   return (
-    <div className='text-center me-4 flex flex-col items-center justify-center'>
+    <div className='text-center me-4 flex flex-col items-center justify-center created-by'>
       <p className='text-gray-500 font-bold uppercase text-[12px]'>Creado</p>
       <div className='flex items-center justify-center'>
         <Link to={'/users-view/' + user?.uid + '/summary'}>

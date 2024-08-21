@@ -147,7 +147,7 @@ export function Header() {
             </button>
 
             {openSearch && (
-              <div className='absolute bg-gray-800 right-0 top-full mt-2 p-3 border border-gray-700 rounded-md shadow-lg w-[400px] flex'>
+              <div className='absolute bg-gray-800 right-0 top-full mt-2 p-3 border border-gray-700 rounded-md shadow-lg w-[80vw] xl:w-[800px] flex'>
                 <input
                   type='text'
                   placeholder='Buscar...'
