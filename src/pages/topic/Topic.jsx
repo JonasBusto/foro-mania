@@ -21,6 +21,15 @@ import { switchLogin, switchRegister } from '../../store/modals/slice';
 import useDocTitle from '../../hooks/useDocTitle';
 import { useTagAction } from '../../hooks/useTagAction';
 import { TopicTags } from '../../components/topic/TopicTags';
+import {
+  CountAllAnswers,
+  CountDislikesOfTopic,
+  CountFavoritesOfTopic,
+  CountLikesOfTopic,
+  CreatedBy,
+  LastAnswer,
+  UsersOfTopic,
+} from '../../components/topic/TopicDetail';
 
 export const Topic = () => {
   const { id } = useParams();
@@ -255,75 +264,28 @@ export const Topic = () => {
           </div>
           <div className='mt-8 flex flex-wrap justify-between border border-gray-600 bg-[#202020]'>
             <div className='flex gap-4 px-2 md:px-4 py-2 md:py-3'>
-              <div className='text-center me-4 flex flex-col items-center justify-center'>
-                <p className='text-gray-500 font-bold uppercase text-[12px]'>
-                  Creado
-                </p>
-                <div className='flex items-center justify-center'>
-                  <Link to={'/users-view/' + user?.uid + '/summary'}>
-                    <img
-                      src={user.photoProfile}
-                      alt='Imagen de usuario'
-                      className='w-8 h-8 me-2 object-cover rounded-full border-2 border-gray-600'
-                    />
-                  </Link>
-                  <p className='text-[15px] font-semibold'>
-                    {TimeToNow(topic.createdAt)}
-                  </p>
-                </div>
-              </div>
+              <CreatedBy user={user} topic={topic} />
               {lastCommentUser && (
-                <div className='text-center me-4 hidden sm:flex flex-col items-center justify-center'>
-                  <p className='text-gray-500 font-bold uppercase text-[12px]'>
-                    Ultima respuesta
-                  </p>
-                  <div className='flex items-center justify-center'>
-                    <Link
-                      to={'/users-view/' + lastCommentUser?.uid + '/summary'}
-                    >
-                      <img
-                        src={lastCommentUser?.photoProfile}
-                        alt='Imagen de usuario'
-                        className='w-8 h-8 me-2 object-cover rounded-full border-2 border-gray-600'
-                      />
-                    </Link>
-                    <p className='text-[15px] font-semibold'>
-                      {TimeToNow(allComments[0].createdAt)}
-                    </p>
-                  </div>
-                </div>
+                <LastAnswer
+                  lastCommentUser={lastCommentUser}
+                  lastComment={allComments[0]}
+                  query='hidden sm:flex'
+                />
               )}
-              <div className='hidden md:flex text-center me-4 flex-col items-center justify-center'>
-                <p className='text-[18px] font-bold'>{allComments.length}</p>
-                <p className='text-gray-500 font-bold uppercase text-[12px]'>
-                  Respuestas
-                </p>
-              </div>
-              <div className='hidden lg:flex text-center me-4 flex-col items-center justify-center'>
-                <p className='text-[18px] font-bold'>
-                  {
-                    favorites.filter(
-                      (favorite) => favorite.contentId === topic.uid
-                    ).length
-                  }
-                </p>
-                <p className='text-gray-500 font-bold uppercase text-[12px]'>
-                  Guardados
-                </p>
-              </div>
+              <CountAllAnswers
+                allComments={allComments}
+                query='hidden md:flex'
+              />
+              <CountFavoritesOfTopic
+                favorites={favorites}
+                topic={topic}
+                query='hidden lg:flex'
+              />
               {!loggedUser && !showDetailTopic && (
-                <div className='mb-2 sm:mb-0 text-center me-4 flex flex-col items-center justify-center'>
-                  <p className='text-[18px] font-bold'>
-                    {
-                      reactionsOfTopic.filter(
-                        (reaction) => reaction.type === 'like'
-                      ).length
-                    }
-                  </p>
-                  <p className='text-gray-500 font-bold uppercase text-[12px]'>
-                    Me gusta
-                  </p>
-                </div>
+                <CountLikesOfTopic
+                  content={reactionsOfTopic}
+                  query='mb-2 sm:mb-0'
+                />
               )}
             </div>
             <div className='flex space-x-4 ms-auto'>
@@ -360,107 +322,35 @@ export const Topic = () => {
           {showDetailTopic && (
             <>
               <div className='flex flex-col md:flex-row justify-between border border-t-0 border-gray-600 bg-[#202020]'>
-                <div className='px-2 md:px-4 py-2 md:py-3'>
-                  <p className='mb-2 text-gray-500 font-bold uppercase text-[12px]'>
-                    Usuarios Frecuentes
-                  </p>
-                  <div className='flex flex-wrap'>
-                    <Link
-                      to={'/users-view/' + user?.uid + '/summary'}
-                      className='me-2 flex items-center'
-                    >
-                      <img
-                        className='w-12 h-12 object-cover rounded-full'
-                        src={user?.photoProfile}
-                        alt={user?.fullName}
-                      />
-                    </Link>
-                    {commentsOfTopicUser.map((user) => (
-                      <Link
-                        key={user.uid}
-                        to={'/users-view/' + user?.uid + '/summary'}
-                        className='me-2 flex items-center'
-                      >
-                        <img
-                          className='w-12 h-12 object-cover rounded-full'
-                          src={user?.photoProfile}
-                          alt={user?.fullName}
-                        />
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+                <UsersOfTopic
+                  user={user}
+                  commentsOfTopicUser={commentsOfTopicUser}
+                />
               </div>
               <div className='flex flex-col md:flex-row justify-between border border-t-0 border-gray-600 bg-[#202020]'>
                 <div className='px-2 md:px-4 py-2 md:py-3 flex justify-center sm:justify-start flex-wrap'>
-                  <div className='mb-2 sm:mb-0 md:hidden text-center me-4 flex flex-col items-center justify-center'>
-                    <p className='text-[18px] font-bold'>
-                      {allComments.length}
-                    </p>
-                    <p className='text-gray-500 font-bold uppercase text-[12px]'>
-                      Respuestas
-                    </p>
-                  </div>
-                  <div className='mb-2 sm:mb-0 lg:hidden text-center me-4 flex flex-col items-center justify-center'>
-                    <p className='text-[18px] font-bold'>
-                      {
-                        favorites.filter(
-                          (favorite) => favorite.contentId === topic.uid
-                        ).length
-                      }
-                    </p>
-                    <p className='text-gray-500 font-bold uppercase text-[12px]'>
-                      Guardados
-                    </p>
-                  </div>
+                  <CountAllAnswers
+                    allComments={allComments}
+                    query='mb-2 sm:mb-0 md:hidden'
+                  />
+                  <CountFavoritesOfTopic
+                    favorites={favorites}
+                    topic={topic}
+                    query='mb-2 sm:mb-0 lg:hidden'
+                  />
                   {(loggedUser || showDetailTopic) && (
-                    <div className='mb-2 sm:mb-0 text-center me-4 flex flex-col items-center justify-center'>
-                      <p className='text-[18px] font-bold'>
-                        {
-                          reactionsOfTopic.filter(
-                            (reaction) => reaction.type === 'like'
-                          ).length
-                        }
-                      </p>
-                      <p className='text-gray-500 font-bold uppercase text-[12px]'>
-                        Me gusta
-                      </p>
-                    </div>
+                    <CountLikesOfTopic
+                      content={reactionsOfTopic}
+                      query='mb-2 sm:mb-0'
+                    />
                   )}
-                  <div className='mb-2 sm:mb-0 text-center me-4 flex flex-col items-center justify-center'>
-                    <p className='text-[18px] font-bold'>
-                      {
-                        reactionsOfTopic.filter(
-                          (reaction) => reaction.type === 'unlike'
-                        ).length
-                      }
-                    </p>
-                    <p className='text-gray-500 font-bold uppercase text-[12px]'>
-                      No Me gusta
-                    </p>
-                  </div>
+                  <CountDislikesOfTopic content={reactionsOfTopic} />
                   {lastCommentUser && (
-                    <div className='mb-2 sm:mb-0 text-center me-4 flex sm:hidden flex-col items-center justify-center'>
-                      <p className='text-gray-500 font-bold uppercase text-[12px]'>
-                        Ultima respuesta
-                      </p>
-                      <div className='flex items-center justify-center'>
-                        <Link
-                          to={
-                            '/users-view/' + lastCommentUser?.uid + '/summary'
-                          }
-                        >
-                          <img
-                            src={lastCommentUser?.photoProfile}
-                            alt='Imagen de usuario'
-                            className='w-8 h-8 me-2 object-cover rounded-full border-2 border-gray-600'
-                          />
-                        </Link>
-                        <p className='text-[15px] font-semibold'>
-                          {TimeToNow(allComments[0].createdAt)}
-                        </p>
-                      </div>
-                    </div>
+                    <LastAnswer
+                      lastCommentUser={lastCommentUser}
+                      lastComment={allComments[0]}
+                      query='mb-2 sm:mb-0 sm:hidden flex'
+                    />
                   )}
                 </div>
               </div>
