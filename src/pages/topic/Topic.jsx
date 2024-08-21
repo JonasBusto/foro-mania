@@ -16,8 +16,6 @@ import { Dialog } from 'primereact/dialog';
 import { useFavoriteAction } from '../../hooks/useFavoriteAction';
 import { BannerAdversiting } from '../../components/items/BannerAdversiting';
 import { Loader } from '../../components/items/Loader';
-import { useDispatch } from 'react-redux';
-import { switchLogin, switchRegister } from '../../store/modals/slice';
 import useDocTitle from '../../hooks/useDocTitle';
 import { useTagAction } from '../../hooks/useTagAction';
 import { TopicTags } from '../../components/topic/TopicTags';
@@ -30,6 +28,7 @@ import {
   LastAnswer,
   UsersOfTopic,
 } from '../../components/topic/TopicDetail';
+import { useModal } from '../../hooks/useModal';
 
 export const Topic = () => {
   const { id } = useParams();
@@ -52,6 +51,7 @@ export const Topic = () => {
     useReactionAction();
   const { getCategory, statusCategory, category } = useCategoryAction();
   const { favorites, addFavorite, deleteFavorite } = useFavoriteAction();
+  const { switchModalLogin, switchModalRegister } = useModal();
 
   const [showEditTopic, setShowEditTopic] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -59,14 +59,12 @@ export const Topic = () => {
   const [topicToModify, setTopicToModify] = useState(null);
   const [showDetailTopic, setShowDetailTopic] = useState(false);
 
-  const dispatch = useDispatch();
-
   if (!topic) {
-    useDocTitle('Foromanía | Tópicos');
+    useDocTitle('ForoManía | Tópicos');
   }
 
   if (topic) {
-    useDocTitle(`Foromanía | ${topic.title}`);
+    useDocTitle(`ForoManía | ${topic.title}`);
   }
 
   const TimeToNow = (fecha) => {
@@ -392,14 +390,14 @@ export const Topic = () => {
                 Para comentar, por favor{' '}
                 <button
                   className='text-neutral-200 underline'
-                  onClick={() => dispatch(switchLogin())}
+                  onClick={switchModalLogin}
                 >
                   inicia sesión
                 </button>
                 . Si no tienes una cuenta, puedes registrarte{' '}
                 <button
                   className='text-neutral-200 underline'
-                  onClick={() => dispatch(switchRegister())}
+                  onClick={switchModalRegister}
                 >
                   aquí
                 </button>
