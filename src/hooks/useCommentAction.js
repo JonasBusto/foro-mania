@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
 	createComment,
 	deleteCommentById,
@@ -29,9 +30,10 @@ export function useCommentAction() {
 	const addComment = async (comment, { resetForm }) => {
 		const res = await dispatch(createComment(comment));
 		if (res.error) {
-			alert('Hubo un error al cargar comentario');
+			// alert('Hubo un error al cargar comentario');
+			toast.error('Hubo un error al cargar comentario');
 		} else {
-			alert('Comentario Cargado');
+			// alert('Comentario Cargado');
 			resetForm();
 		}
 	};
@@ -39,9 +41,10 @@ export function useCommentAction() {
 	const updateComment = async ({ comment, id }, { resetForm, setVisible }) => {
 		const res = await dispatch(updateCommentById({ comment, id }));
 		if (res.error) {
-			alert('Hubo un error al cargar comentario');
+			// alert('Hubo un error al cargar comentario');
+			toast.error('Hubo un error al cargar comentario');
 		} else {
-			alert('Comentario Actualizado');
+			// alert('Comentario Actualizado');
 			resetForm();
 			setVisible(false);
 		}
@@ -49,26 +52,32 @@ export function useCommentAction() {
 
 	const disableComment = async ({ id }) => {
 		const res = await dispatch(disableCommentById({ id }));
-		alert('Comentario Suspendido');
+		// alert('Comentario Suspendido');
+		toast.info('Comentario Suspendido');
 		if (res.error) {
-			alert('Error al suspender el comentario');
+			// alert('Error al suspender el comentario');
+			toast.error('Error al suspender el comentario');
 		}
 	};
 
 	const enableComment = async ({ id }) => {
 		const res = await dispatch(enableCommentById({ id }));
-		alert('Comentario Habilitado');
+		// alert('Comentario Habilitado');
+		toast.info('Comentario Habilitado');
 		if (res.error) {
-			alert('Error al habilitar el comentario');
+			// alert('Error al habilitar el comentario');
+			toast.error('Error al habilitar el comentario');
 		}
 	};
 
 	const deleteComment = async ({ id }, { setVisibleDelete }) => {
 		const res = await dispatch(deleteCommentById({ id }));
 		if (res.error) {
-			alert('Error al eliminar el comentario');
+			// alert('Error al eliminar el comentario');
+			toast.error('Error al eliminar el comentario');
 		} else {
-			alert('Comentario eliminado');
+			// alert('Comentario eliminado');
+			// toast.info('Comentario eliminado');
 			setVisibleDelete(false);
 		}
 	};

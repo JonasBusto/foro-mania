@@ -42,3 +42,63 @@ export const Categories = [
     topics: '62',
   },
 ];
+
+
+export const CategoriesMock = [
+  {
+    uid: '1',
+    title: 'Tecnología',
+    description: 'Últimas novedades en tecnología',
+    topics: 10,
+    color: '#ff0000',
+    isActive: true
+  },
+  {
+    uid: '2',
+    title: 'Salud',
+    description: 'Consejos para una vida saludable',
+    topics: 8,
+    color: '#00ff00',
+    isActive: true
+  },
+  {
+    uid: '3',
+    title: 'Cine',
+    description: 'Lo mejor del séptimo arte',
+    topics: 5,
+    color: '#0000ff',
+    isActive: true
+  },
+  {
+    uid: '4',
+    title: 'Música',
+    description: 'Noticias y lanzamientos musicales',
+    topics: 12,
+    color: '#ff00ff',
+    isActive: true
+  },
+  {
+    uid: '5',
+    title: 'Deportes',
+    description: 'Resultados y noticias deportivas',
+    topics: 7,
+    color: '#ffff00',
+    isActive: true
+  },
+  {
+    uid: '6',
+    title: 'Ciencia',
+    description: 'Avances en la ciencia',
+    topics: 4,
+    color: '#00ffff',
+    isActive: true
+  },
+  {
+    uid: '7',
+    title: 'Viajes',
+    description: 'Los mejores destinos turísticos',
+    topics: 3,
+    color: '#ff6600',
+    isActive: true
+  }
+]

@@ -7,6 +7,7 @@ import {
 } from '../store/tag/thunks';
 import { clearTag } from '../store/tag/slice';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export function useTagAction() {
   const tags = useAppSelector((state) => state.tag.tags);
@@ -25,9 +26,11 @@ export function useTagAction() {
   const addTag = async (tag, redirect = false) => {
     const res = await dispatch(createTag(tag));
     if (res.error) {
-      alert('Error al cargar el tag');
+      // alert('Error al cargar el tag');
+      toast.error('Error al cargar el tag');
     } else {
-      alert('Tag creado');
+      // alert('Tag creado');
+      toast.info('Tag creado');
       if (redirect) {
         navigate('/tags');
       }
@@ -37,9 +40,13 @@ export function useTagAction() {
   const updateTag = async ({ tag, id }) => {
     const res = await dispatch(updateTagById({ tag, id }));
     if (res.error) {
-      alert('Error al cargar el tag');
+      // alert('Error al cargar el tag');
+      toast.error('Error al cargar el tag');
+
     } else {
-      alert('Tag actualizado');
+      // alert('Tag actualizado');
+      toast.info('Tag actualizado');
+
       navigate('/tags');
     }
   };
@@ -47,7 +54,9 @@ export function useTagAction() {
   const deleteTag = async ({ id }) => {
     const res = await dispatch(deleteTagById({ id }));
     if (res.error) {
-      alert('Error al eliminar el tag');
+      // alert('Error al eliminar el tag');
+      toast.error('Error al eliminar el tag');
+
     }
   };
 

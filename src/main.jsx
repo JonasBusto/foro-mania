@@ -9,6 +9,8 @@ import { PrimeReactProvider } from 'primereact/api';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -17,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <AppProvider>
           <BrowserRouter>
             <App />
+            <ToastContainer />
           </BrowserRouter>
         </AppProvider>
       </PrimeReactProvider>

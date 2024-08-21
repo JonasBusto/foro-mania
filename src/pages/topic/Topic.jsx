@@ -16,10 +16,19 @@ import { Dialog } from 'primereact/dialog';
 import { useFavoriteAction } from '../../hooks/useFavoriteAction';
 import { BannerAdversiting } from '../../components/items/BannerAdversiting';
 import { Loader } from '../../components/items/Loader';
-import { useDispatch } from 'react-redux';
-import { switchLogin, switchRegister } from '../../store/modals/slice';
+import useDocTitle from '../../hooks/useDocTitle';
 import { useTagAction } from '../../hooks/useTagAction';
 import { TopicTags } from '../../components/topic/TopicTags';
+import {
+  CountAllAnswers,
+  CountDislikesOfTopic,
+  CountFavoritesOfTopic,
+  CountLikesOfTopic,
+  CreatedBy,
+  LastAnswer,
+  UsersOfTopic,
+} from '../../components/topic/TopicDetail';
+import { useModal } from '../../hooks/useModal';
 
 export const Topic = () => {
   const { id } = useParams();
@@ -34,7 +43,7 @@ export const Topic = () => {
     statusDeleteTopic,
   } = useTopicAction();
   const { tags } = useTagAction();
-  const { user, getUser, userStatus } = useUserAction();
+  const { user, users, getUser, userStatus } = useUserAction();
   const { loggedUser } = useAuth();
   const { fetchComments, allComments, statusDeleteComment, deleteComment } =
     useCommentAction();
@@ -42,12 +51,21 @@ export const Topic = () => {
     useReactionAction();
   const { getCategory, statusCategory, category } = useCategoryAction();
   const { favorites, addFavorite, deleteFavorite } = useFavoriteAction();
+  const { switchModalLogin, switchModalRegister } = useModal();
 
   const [showEditTopic, setShowEditTopic] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visibleDialogDelete, setVisibleDialogDelete] = useState(false);
   const [topicToModify, setTopicToModify] = useState(null);
-  const dispatch = useDispatch();
+  const [showDetailTopic, setShowDetailTopic] = useState(false);
+
+  if (!topic) {
+    useDocTitle('ForoManía | Tópicos');
+  }
+
+  if (topic) {
+    useDocTitle(`ForoManía | ${topic.title}`);
+  }
 
   const TimeToNow = (fecha) => {
     const fechaISO = parseISO(fecha);
@@ -109,6 +127,21 @@ export const Topic = () => {
     return <Loader />;
   }
 
+  const lastCommentUser = users?.find(
+    (user) => user.uid === allComments[0]?.userId
+  );
+
+  const commentsOfTopicUser = users.filter((user) =>
+    allComments.some(
+      (comment) =>
+        comment.userId === user.uid && comment.userId !== topic.userId
+    )
+  );
+
+  const reactionsOfTopic = reactions.filter(
+    (reaction) => reaction.contentId === topic.uid
+  );
+
   return (
     <div className=' text-white min-h-screen pb-10 pt-3 px-4'>
       <div className='max-w-[75rem] mx-auto'>
@@ -116,7 +149,7 @@ export const Topic = () => {
           <BannerAdversiting />
         </div>
         <div className='mt-16'>
-          <div className='flex justify-between items-center border-b border-gray-700'>
+          <div className='flex flex-wrap justify-between items-center border-b border-gray-700'>
             <div>
               <h2 className='text-4xl font-bold'>{topic.title}</h2>
               <p className='text-gray-400 pb-4'>{category.title}</p>
@@ -227,25 +260,31 @@ export const Topic = () => {
           <div className='mt-4'>
             <TextEditor value={topic.content} readOnly={true} />
           </div>
-          <div className='mt-8 flex flex-col md:flex-row justify-between border border-gray-600 bg-gray-800 rounded-md px-2 md:px-6 py-2 md:py-4'>
-            <div className='flex gap-4'>
-              <div className='text-center'>
-                <p className=''>Hace {TimeToNow(topic.createdAt)}</p>
-              </div>
-              <div className='flex items-center gap-1'>
-                <i className='pi pi-reply'></i>
-                <p className=''>{allComments.length}</p>
-              </div>
-              <div className=' flex items-center gap-1'>
-                <i className='pi pi-bookmark-fill'></i>
-                <p className=''>
-                  {
-                    favorites.filter(
-                      (favorite) => favorite.contentId === topic.uid
-                    ).length
-                  }
-                </p>
-              </div>
+          <div className='mt-8 flex flex-wrap justify-between border border-gray-600 bg-[#202020]'>
+            <div className='flex gap-4 px-2 md:px-4 py-2 md:py-3'>
+              <CreatedBy user={user} topic={topic} />
+              {lastCommentUser && (
+                <LastAnswer
+                  lastCommentUser={lastCommentUser}
+                  lastComment={allComments[0]}
+                  query='hidden sm:flex'
+                />
+              )}
+              <CountAllAnswers
+                allComments={allComments}
+                query='hidden md:flex'
+              />
+              <CountFavoritesOfTopic
+                favorites={favorites}
+                topic={topic}
+                query='hidden lg:flex'
+              />
+              {!loggedUser && !showDetailTopic && (
+                <CountLikesOfTopic
+                  content={reactionsOfTopic}
+                  query='mb-2 sm:mb-0'
+                />
+              )}
             </div>
             <div className='flex space-x-4 ms-auto'>
               <ReactionButton
@@ -262,9 +301,59 @@ export const Topic = () => {
                 )}
                 addFavorite={addFavorite}
                 deleteFavorite={deleteFavorite}
+                typeContent='topic'
               />
             </div>
+            <div className='ms-4 cursor-pointer border-l-2 border-gray-600 flex justify-center items-center'>
+              <button
+                onClick={() => setShowDetailTopic(!showDetailTopic)}
+                className='px-6 h-full hover:bg-[#2b2b2b]'
+              >
+                <i
+                  className={`pi ${
+                    showDetailTopic ? 'pi-angle-up' : 'pi-angle-down'
+                  } text-[32px]`}
+                ></i>
+              </button>
+            </div>
           </div>
+          {showDetailTopic && (
+            <>
+              <div className='flex flex-col md:flex-row justify-between border border-t-0 border-gray-600 bg-[#202020]'>
+                <UsersOfTopic
+                  user={user}
+                  commentsOfTopicUser={commentsOfTopicUser}
+                />
+              </div>
+              <div className='flex flex-col md:flex-row justify-between border border-t-0 border-gray-600 bg-[#202020]'>
+                <div className='px-2 md:px-4 py-2 md:py-3 flex justify-center sm:justify-start flex-wrap'>
+                  <CountAllAnswers
+                    allComments={allComments}
+                    query='mb-2 sm:mb-0 md:hidden'
+                  />
+                  <CountFavoritesOfTopic
+                    favorites={favorites}
+                    topic={topic}
+                    query='mb-2 sm:mb-0 lg:hidden'
+                  />
+                  {(loggedUser || showDetailTopic) && (
+                    <CountLikesOfTopic
+                      content={reactionsOfTopic}
+                      query='mb-2 sm:mb-0'
+                    />
+                  )}
+                  <CountDislikesOfTopic content={reactionsOfTopic} />
+                  {lastCommentUser && (
+                    <LastAnswer
+                      lastCommentUser={lastCommentUser}
+                      lastComment={allComments[0]}
+                      query='mb-2 sm:mb-0 sm:hidden flex'
+                    />
+                  )}
+                </div>
+              </div>
+            </>
+          )}
           <div className='mt-6'>
             <h4 className='text-[2rem] font-bold mt-10'>Comentarios: </h4>
             {allComments.length > 0 ? (
@@ -301,14 +390,14 @@ export const Topic = () => {
                 Para comentar, por favor{' '}
                 <button
                   className='text-neutral-200 underline'
-                  onClick={() => dispatch(switchLogin())}
+                  onClick={switchModalLogin}
                 >
                   inicia sesión
                 </button>
                 . Si no tienes una cuenta, puedes registrarte{' '}
                 <button
                   className='text-neutral-200 underline'
-                  onClick={() => dispatch(switchRegister())}
+                  onClick={switchModalRegister}
                 >
                   aquí
                 </button>
