@@ -2,10 +2,8 @@ import { useRef, useEffect } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import QuillResizeImage from 'quill-resize-image';
-import QuillImageDropAndPaste from 'quill-image-drop-and-paste';
 
 Quill.register('modules/resize', QuillResizeImage);
-Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste);
 
 export const TextEditor = ({ value, onChange, readOnly = false }) => {
   const editorRef = useRef(null);
@@ -29,7 +27,6 @@ export const TextEditor = ({ value, onChange, readOnly = false }) => {
             resize: {
               locale: {},
             },
-            imageDropAndPaste: {},
           }),
         },
         formats: [
@@ -49,6 +46,28 @@ export const TextEditor = ({ value, onChange, readOnly = false }) => {
           'align',
         ],
         readOnly,
+      });
+
+      quillRef.current.root.addEventListener('drop', (e) => {
+        e.preventDefault();
+      });
+
+      editorRef.current.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const range = quillRef.current.getSelection();
+        const file = e.dataTransfer.files[0];
+
+        if (file && file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            quillRef.current.insertEmbed(
+              range.index,
+              'image',
+              event.target.result
+            );
+          };
+          reader.readAsDataURL(file);
+        }
       });
 
       quillRef.current.on('text-change', () => {
