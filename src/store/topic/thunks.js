@@ -93,8 +93,36 @@ export const updateTopicById = createAsyncThunk(
   'topic/update',
   async ({ topic, id }, { rejectWithValue }) => {
     try {
+      const imageRegex = /<img[^>]+src="([^">]+)"/g;
+      const imageUrls = [];
+      let match;
+
+      while ((match = imageRegex.exec(topic.content)) !== null) {
+        imageUrls.push(match[1]);
+      }
+
+      let updatedContent = topic.content;
+
+      for (const url of imageUrls) {
+        const response = await fetch(url);
+        const blob = await response.blob();
+
+        const imageRef = ref(
+          storage,
+          `images/${Date.now()}_${url.split('/').pop()}`
+        );
+        await uploadBytes(imageRef, blob);
+
+        const newUrl = await getDownloadURL(imageRef);
+
+        updatedContent = updatedContent.replace(url, newUrl);
+      }
+
       const topicDoc = doc(db, 'topics', id);
-      await updateDoc(topicDoc, topic);
+      await updateDoc(topicDoc, {
+        ...topic,
+        content: updatedContent,
+      });
 
       const updatedTopic = await getDoc(topicDoc);
 
