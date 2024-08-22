@@ -193,7 +193,7 @@ export const updateUser = createAsyncThunk(
 
       const userDoc = await getDoc(doc(db, 'users', auth.currentUser.uid));
 
-      return userDoc.data();
+      return { uid: userDoc.id, ...userDoc.data() };
     } catch (error) {
       return rejectWithValue(error.message);
     }
