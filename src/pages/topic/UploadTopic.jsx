@@ -197,11 +197,13 @@ export const UploadTopic = () => {
                 emptyFilterMessage={
                   filterValue ? (
                     <div>
-                      <p>No se encontraron resultados.</p>
+                      <p className='text-white'>
+                        No se encontraron resultados.
+                      </p>
                       <button
                         type='button'
                         disabled={statusCreateTag === 'Cargando'}
-                        className='bg-blue-900 hover:bg-blue-800 text-white font-semibold duration-200 py-2 px-3 w-40'
+                        className='bg-blue-900 hover:bg-blue-800 text-white font-semibold duration-200 py-2 px-3 w-auto'
                         onClick={() =>
                           addTag({ value: filterValue, label: filterValue })
                         }
