@@ -76,6 +76,13 @@ html {
   color: white !important;
 }
 
+@media (width <= 1200px) {
+  .ql-editor img {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
 @media (width<=430px) {
   .info-topic-detail {
     width: 100%;
