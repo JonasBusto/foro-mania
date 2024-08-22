@@ -31,7 +31,7 @@ export const PublicProfileCard = ({ userProps }) => {
           <span className='text-lg text-gray-300'>{email}</span>
         </section>
       </div>
-      {loggedUser && (
+      {loggedUser && loggedUser.uid !== userProps.uid && (
         <div>
           <button
             onClick={handleSelectUser}
@@ -41,7 +41,13 @@ export const PublicProfileCard = ({ userProps }) => {
           </button>
         </div>
       )}
-      {displayDialog && <Chats user={userProps} onClose={handleCloseDialog} />}
+      {displayDialog && (
+        <Chats
+          user={userProps}
+          onClose={handleCloseDialog}
+          activeFromDetailUser={true}
+        />
+      )}
     </div>
   );
 };

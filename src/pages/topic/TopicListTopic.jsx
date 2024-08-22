@@ -93,8 +93,8 @@ export const TopicListTopic = ({ topic, type = '' }) => {
             <div className='mt-2 flex items-center'>
               <TopicTags
                 tags={tags
-                  .slice(0, 5)
-                  .filter((tag) => topic.tagsId.includes(tag.uid))}
+                  .filter((tag) => topic.tagsId.includes(tag.uid))
+                  .slice(0, 5)}
               />
               {tags.filter((tag) => topic.tagsId.includes(tag.uid)).length >
                 5 && (
