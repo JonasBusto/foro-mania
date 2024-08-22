@@ -5,6 +5,22 @@ import QuillResizeImage from 'quill-resize-image';
 
 Quill.register('modules/resize', QuillResizeImage);
 
+const handleDrop = (e) => {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const range = quillRef.current.getSelection(true);
+      if (range) {
+        quillRef.current.deleteText(range.index, 1);
+        quillRef.current.insertEmbed(range.index, 'image', event.target.result);
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
 export const TextEditor = ({ value, onChange, readOnly = false }) => {
   const editorRef = useRef(null);
   const quillRef = useRef(null);
@@ -76,34 +92,7 @@ export const TextEditor = ({ value, onChange, readOnly = false }) => {
         readOnly,
       });
 
-      quillRef.current.root.addEventListener('drop', (e) => {
-        e.preventDefault();
-      });
-
-      editorRef.current.addEventListener('drop', (e) => {
-        e.preventDefault();
-        const range = quillRef.current.getSelection();
-        const file = e.dataTransfer.files[0];
-
-        if (file && file.type.startsWith('image/')) {
-          const reader = new FileReader();
-          reader.onload = function (event) {
-            if (range) {
-              quillRef.current.insertEmbed(
-                range.index,
-                'image',
-                event.target.result
-              );
-            } else {
-              quillRef.current.clipboard.dangerouslyPasteHTML(
-                quillRef.current.getLength(),
-                `<img src="${event.target.result}" />`
-              );
-            }
-          };
-          reader.readAsDataURL(file);
-        }
-      });
+      editorRef.current.addEventListener('drop', handleDrop);
 
       quillRef.current.on('text-change', () => {
         const content = quillRef.current.root.innerHTML;
@@ -114,6 +103,12 @@ export const TextEditor = ({ value, onChange, readOnly = false }) => {
     if (quillRef.current && value !== quillRef.current.root.innerHTML) {
       quillRef.current.root.innerHTML = value;
     }
+
+    return () => {
+      if (editorRef.current) {
+        editorRef.current.removeEventListener('drop', handleDrop);
+      }
+    };
   }, [value, onChange, readOnly]);
 
   return <div ref={editorRef} />;
