@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import { Chats } from '../../pages/chat/Chats';
 import { useAuth } from '../../hooks/useAuth';
+import { useChatAction } from '../../hooks/useChatAction';
 
 export const PublicProfileCard = ({ userProps }) => {
   const { loggedUser } = useAuth();
 
   const { photoProfile, email, fullName } = userProps;
+  const { findOrCreateChat } = useChatAction();
   const [displayDialog, setDisplayDialog] = useState(false);
+  const [chatId, setChatId] = useState(null);
 
   const handleSelectUser = async () => {
+    const chatId = await findOrCreateChat(loggedUser.uid, userProps.uid);
+    setChatId(chatId);
     setDisplayDialog(true);
   };
 
@@ -46,6 +51,7 @@ export const PublicProfileCard = ({ userProps }) => {
           user={userProps}
           onClose={handleCloseDialog}
           activeFromDetailUser={true}
+          chatIdProp={chatId}
         />
       )}
     </div>
