@@ -60,11 +60,18 @@ export const TextEditor = ({ value, onChange, readOnly = false }) => {
         if (file && file.type.startsWith('image/')) {
           const reader = new FileReader();
           reader.onload = function (event) {
-            quillRef.current.insertEmbed(
-              range.index,
-              'image',
-              event.target.result
-            );
+            if (range) {
+              quillRef.current.insertEmbed(
+                range.index,
+                'image',
+                event.target.result
+              );
+            } else {
+              quillRef.current.clipboard.dangerouslyPasteHTML(
+                quillRef.current.getLength(),
+                `<img src="${event.target.result}" />`
+              );
+            }
           };
           reader.readAsDataURL(file);
         }
