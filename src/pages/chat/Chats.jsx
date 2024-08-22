@@ -10,9 +10,10 @@ export const Chats = ({
   user: initialUser,
   onClose,
   activeFromDetailUser = false,
+  chatIdProp = null,
 }) => {
   const [selectedUser, setSelectedUser] = useState(initialUser || null);
-  const [chatId, setChatId] = useState(null);
+  const [chatId, setChatId] = useState(chatIdProp);
   const [displayDialog, setDisplayDialog] = useState(activeFromDetailUser);
   const [visibleDelete, setVisibleDelete] = useState(false);
   const { loggedUser } = useAuth();
