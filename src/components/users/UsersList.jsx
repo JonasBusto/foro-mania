@@ -112,7 +112,7 @@ export const UsersList = ({
           sortable
           sortField='fullName'
           className='column-row hover:font-medium hover:text-white'
-          style={{ width: '25%' }}
+          style={{ width: '25%', minWidth: 240 }}
         ></Column>
         <Column
           headerClassName='column-header'

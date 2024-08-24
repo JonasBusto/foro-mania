@@ -54,7 +54,9 @@ export const UsersView = () => {
     setCurrentUserSelected(user);
 
     if (window.innerWidth < 768) {
-      setModalPosition({ top: '10%', left: '10%' });
+      const adjustedTop = event.clientY + window.scrollY - 200;
+
+      setModalPosition({ top: `${adjustedTop}px`, left: '5%' });
       return setModalSwitch(true);
     }
 

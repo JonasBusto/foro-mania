@@ -48,7 +48,7 @@ export const UsersSummary = () => {
         <div
           role='tablist'
           aria-labelledby='Opciones de visualización'
-          className='flex justify-evenly mb-4 w-full'
+          className='flex justify-evenly mb-4 w-full px-4 gap-4'
         >
           <UserTabs tab={tab} setTab={setTab} />
         </div>
