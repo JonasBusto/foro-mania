@@ -6,7 +6,7 @@ import { InputText } from 'primereact/inputtext';
 import { FloatLabel } from 'primereact/floatlabel';
 import '../../styles/home.css';
 
-export function Login({ visible, onHide, setOpenSignIn }) {
+export function Login({ visible, onHide, setOpenSignIn, superSwitch }) {
   const { loginGoogle, loginEmail, statusSign } = useAuth();
 
   return (
@@ -148,12 +148,12 @@ export function Login({ visible, onHide, setOpenSignIn }) {
                 <div className='flex justify-center mt-4'>
                   <p className='text-sm font-semibold text-white'>
                     O registrate{' '}
-                    <Link
-                      className='text-[#1b95d2] hover:underline'
-                      to='/register'
+                    <span
+                      className='text-[#1b95d2] underline cursor-pointer'
+                      onClick={superSwitch}
                     >
                       aquí
-                    </Link>
+                    </span>
                   </p>
                 </div>
               </form>

@@ -72,6 +72,11 @@ export function Header() {
     navigate(`/topic-list?search=${searchQuery}`);
   };
 
+  const superSwitch = () => {
+    dispatch(switchRegister())
+    dispatch(switchLogin())
+  }
+
   return (
     <header className='relative bg-black text-white'>
       <section className='flex items-center justify-between flex-wrap flex-row py-2 px-3 xs:px-4 md:py-0 mx-auto'>
@@ -98,6 +103,7 @@ export function Header() {
                 visible={registerModal}
                 setOpenRegister={() => dispatch(switchRegister())}
                 onHide={() => dispatch(switchRegister())}
+                superSwitch={superSwitch}
               />
 
               <button
@@ -110,6 +116,7 @@ export function Header() {
                 visible={loginModal}
                 setOpenSignIn={() => dispatch(switchLogin())}
                 onHide={() => dispatch(switchLogin())}
+                superSwitch={superSwitch}
               />
             </>
           )}
