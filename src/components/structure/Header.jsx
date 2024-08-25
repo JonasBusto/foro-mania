@@ -74,22 +74,23 @@ export function Header() {
 
   return (
     <header className='relative bg-black text-white'>
-      <section className='flex items-center justify-center sm:justify-between flex-wrap flex-row pb-5 sm:pb-0 px-4 mx-auto'>
+      <section className='flex items-center justify-between flex-wrap flex-row py-2 px-3 xs:px-4 md:py-0 mx-auto'>
         <div className='flex items-center justify-center'>
           <Link
             to='/'
-            className='text-white text-3xl font-bold hover:opacity-80 duration-200 m-5'
+            className='text-white w-[110px] xs:w-[130px] text-3xl font-bold hover:opacity-80 duration-200 m-2 md:m-5 md:w-[250px]'
           >
-            <img src='/img/header-logo.png' alt='' width={250} className='' />
+            <img src='/img/header-logo.png' alt='Logo de Foromanía' className='hidden md:flex' />
+            <img src='/img/logo-foromania-footer.png' alt='Logo de Foromanía' className='md:hidden' />
           </Link>
         </div>
 
-        <div className='flex items-center space-x-2'>
+        <div className='flex items-center space-x-1 md:space-x-2'>
           {!loggedUser && !isLoading && (
             <>
               <button
                 onClick={handleSignUp}
-                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-4 py-2 rounded'
+                className='hidden md:inline text-white rounded text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 md:text-base'
               >
                 Registrarse
               </button>
@@ -101,7 +102,7 @@ export function Header() {
 
               <button
                 onClick={handleSignIn}
-                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-4 py-2 rounded'
+                className='text-white rounded text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 md:text-base'
               >
                 Iniciar Sesión
               </button>
@@ -116,7 +117,7 @@ export function Header() {
           {loggedUser && (
             <Link
               to='/account'
-              className='relative w-9 h-9 rounded-full ring-2 ring-[#61dafb] overflow-hidden'
+              className='relative mx-2 xs:mx-0 w-8 h-8 md:w-9 md:h-9 rounded-full ring-2 ring-[#61dafb] overflow-hidden'
             >
               <img
                 className='object-cover w-full h-full'
@@ -126,7 +127,7 @@ export function Header() {
             </Link>
           )}
 
-          <Link to='/'>
+          <Link to='/' className={`hidden xs:inline ${!loggedUser && 'xs:hidden md:inline'}`}>
             <i className='pi pi-home text-2xl text-white hover:bg-gray-700 duration-200 p-2 rounded ml-2'></i>
           </Link>
 
@@ -141,7 +142,7 @@ export function Header() {
             </Link>
           )}
 
-          <div ref={searchRef} className='relative hidden sm:flex'>
+          <div ref={searchRef} className='relative hidden md:flex'>
             <button onClick={handleSearch}>
               <i className='pi pi-search text-xl text-white hover:bg-gray-700 duration-200 p-2 rounded'></i>
             </button>
@@ -167,7 +168,7 @@ export function Header() {
 
           <div className='relative'>
             <button onClick={handleMenu}>
-              <i className='pi pi-bars text-2xl text-white hover:bg-gray-700 duration-200 p-2 rounded mr-2'></i>
+              <i className='pi pi-bars text-2xl text-white hover:bg-gray-700 duration-200 p-2 rounded md:mr-2'></i>
             </button>
             {openMenu && (
               <div

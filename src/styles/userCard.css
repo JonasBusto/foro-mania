@@ -10,7 +10,7 @@
     rgba(32, 32, 32) 80%
   );
   min-width: 450px;
-  border-radius: 25px 25px 25px 0;
+  border-radius: 5px 5px 5px 0;
   gap: 16px;
 }
 
@@ -97,7 +97,6 @@
 @media (max-width: 768px) {
   .userCardContainer {
     min-width: 260px;
-    border-radius: 25px 25px 25px 0;
   }
 
   .brandContainer {
