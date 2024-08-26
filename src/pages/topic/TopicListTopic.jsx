@@ -58,51 +58,75 @@ export const TopicListTopic = ({ topic, type = '' }) => {
   return (
     <>
       {type === 'home' ? (
-        <Link
-          to={`/topic/${topic.uid}`}
-          className='flex flex-col justify-center items-start p-4 bg-[#1e1e1e] h-24 rounded-lg border-l-4'
-          style={{
-            borderLeft: `10px solid ${
-              categorieFiltered ? categorieFiltered.color : 'gray'
-            }`,
-          }}
-        >
-          <div className='flex items-center w-full'>
+        <div className='flex justify-center items-start py-3 px-2 bg-[#1f1f1f] hover:bg-[#252525] min-h-24 sm:h-24'>
+          <Link
+            to={`/users-view/${userFiltered.uid}`}
+            className='flex items-center justify-center h-full w-12 my-auto'
+          >
+            <img
+              className='w-10 h-10 rounded-full object-cover'
+              src={userFiltered.photoProfile}
+              alt={`Foto de ${userFiltered.fullName}`}
+            />
+          </Link>
+          <Link
+            to={`/topic/${topic.uid}`}
+            className='flex ps-4 items-center h-full w-full'
+          >
             <div className='flex flex-col flex-grow'>
-              <p className='text-gray-400 text-[9px] leading-tight'>
-                {`${userFiltered.fullName} (${userFiltered.email})`}
-              </p>
-              <h3 className='m-0 text-lg lg:text-xl font-semibold max-w-[13rem] lg:max-w-max text-white'>
-                {topic.title}
+              <h3
+                className='m-0 leading-4 sm:leading-5 text-lg text-[3vw] md:text-[16.3px] text-white w-[95%] block xl:hidden'
+                style={{ fontWeight: '500' }}
+              >
+                {topic.title.length > 70
+                  ? topic.title.slice(0, 70) + '...'
+                  : topic.title}
               </h3>
-
-              <div className='flex items-center mt-2 text-gray-400'>
-                <p className='text-sm ml-2'>{topic.category}</p>
+              <h3
+                className='m-0 leading-4 sm:leading-5 text-lg text-[3vw] md:text-[16.3px] text-white w-[95%] hidden xl:block'
+                style={{ fontWeight: '500' }}
+              >
+                {topic.title.length > 100
+                  ? topic.title.slice(0, 100) + '...'
+                  : topic.title}
+              </h3>
+              <div className='flex items-center mt-2'>
+                <div
+                  className='w-3 h-3 me-1'
+                  style={{ backgroundColor: categorieFiltered.color }}
+                ></div>
+                <p className='text-[10px] uppercase font-bold text-gray-300'>
+                  {categorieFiltered.title}
+                </p>
               </div>
+              {topic.tagsId && (
+                <div className='mt-2 flex flex-wrap items-center'>
+                  {tags
+                    .filter((tag) => topic.tagsId.includes(tag.uid))
+                    .slice(0, 5)
+                    .map((tag) => (
+                      <p
+                        key={tag.uid}
+                        className='me-1 text-[10.5px] text-gray-400'
+                      >
+                        {'#' + tag.label}
+                      </p>
+                    ))}
+                </div>
+              )}
             </div>
-            <div className='flex flex-col text-right text-gray-300'>
-              <p className='text-sm'>{filteredComments.length} respuestas</p>
-              <p className='text-sm'>
+            <div className='flex flex-col text-right text-gray-300 w-30rem'>
+              <p className='text-[10px] text-gray-300 font-semibold'>
+                {filteredComments.length} respuestas
+              </p>
+              <p className='text-[10.5px] text-gray-400 font-semibold'>
                 <span className='hidden lg:inline'>Actualizado hace </span>
                 <span className='lg:hidden'>Hace </span>
                 {TimeToNow(mostRecentComment.createdAt)}
               </p>
             </div>
-          </div>
-          {topic.tagsId && (
-            <div className='mt-2 flex items-center'>
-              <TopicTags
-                tags={tags
-                  .filter((tag) => topic.tagsId.includes(tag.uid))
-                  .slice(0, 5)}
-              />
-              {tags.filter((tag) => topic.tagsId.includes(tag.uid)).length >
-                5 && (
-                <p className='mt-2 bg-slate-500 me-2 px-2 rounded-md'>+</p>
-              )}
-            </div>
-          )}
-        </Link>
+          </Link>
+        </div>
       ) : type === 'account' ? (
         <div className='flex flex-col md:flex-row text-center border-b border-neutral-500 pb-3 mb-3'>
           <Link to={`/topic/${topic.uid}`} className='md:w-9/12 text-start'>

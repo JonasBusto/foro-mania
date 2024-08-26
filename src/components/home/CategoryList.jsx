@@ -8,7 +8,7 @@ export const CategoryList = () => {
   const limitedCategories = categories.slice(0, 6);
 
   return (
-    <section className='w-full md:w-1/2 p-4'>
+    <section className='w-full lg:w-1/2 py-4 px-3'>
       <h1 className='text-3xl font-bold mb-5'>Categorías</h1>
       <div className='flex flex-col gap-1'>
         {categories &&
