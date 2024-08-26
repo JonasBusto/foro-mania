@@ -1,8 +1,18 @@
-import { formatDistanceToNow, parseISO } from 'date-fns';
+import { formatDistanceToNow, formatDistanceStrict, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Link } from 'react-router-dom';
 
 const TimeToNow = (fecha) => {
+  const fechaISO = parseISO(fecha);
+  const distance = formatDistanceStrict(fechaISO, new Date(), { locale: es });
+
+  const [value, unit] = distance.split(' ');
+  const unitShort = unit.charAt(0);
+
+  return `${value}${unitShort}`;
+};
+
+const TimeToNowResponsive = (fecha) => {
   const fechaISO = parseISO(fecha);
   return formatDistanceToNow(fechaISO, { locale: es });
 };
@@ -20,7 +30,7 @@ export function CreatedBy({ topic, user }) {
           />
         </Link>
         <p className='text-[15px] font-semibold'>
-          {TimeToNow(topic.createdAt)}
+          {TimeToNowResponsive(topic.createdAt)}
         </p>
       </div>
     </div>
@@ -44,7 +54,12 @@ export function LastAnswer({ lastCommentUser, lastComment, query = '' }) {
           />
         </Link>
         <p className='text-[15px] font-semibold'>
-          {TimeToNow(lastComment.createdAt)}
+          <span className='hidden sm:block'>
+            {TimeToNowResponsive(lastComment.createdAt)}
+          </span>
+          <span className='block sm:hidden'>
+            {TimeToNow(lastComment.createdAt)}
+          </span>
         </p>
       </div>
     </div>
