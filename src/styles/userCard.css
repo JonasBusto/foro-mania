@@ -9,9 +9,8 @@
     rgba(89, 89, 89) -20%,
     rgba(32, 32, 32) 80%
   );
-  filter: drop-shadow(0px 0px 4px rgb(255, 255, 255, 0.9));
   min-width: 450px;
-  border-radius: 45px 45px 45px 0;
+  border-radius: 5px 5px 5px 0;
   gap: 16px;
 }
 
@@ -31,8 +30,8 @@
 }
 
 .brandContainer figure img {
-  width: 120px;
-  height: 120px;
+  width: 90px;
+  height: 90px;
   position: relative;
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -47,27 +46,27 @@
   position: absolute;
   top: 16px;
   left: 16px;
-  width: 120px;
-  height: 120px;
+  width: 90px;
+  height: 90px;
   background: linear-gradient(90deg, #d4d4d4 25%, #e0e0e0 50%, #d4d4d4 75%);
   border-radius: 50%;
   animation: shine 2s linear forwards;
 }
 
-.brandContainer section {
+.personal-name {
   display: flex;
   flex-direction: column;
   margin-left: 16px;
 }
 
-.brandContainer section h2 {
+.personal-name h2 {
   color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 700;
 }
 
-.brandContainer section h2:hover {
+.personal-name h2:hover {
   color: white;
 }
 
@@ -97,20 +96,33 @@
 
 @media (max-width: 768px) {
   .userCardContainer {
-    min-width: 290px;
-    width: 100%;
+    min-width: 260px;
   }
 
   .brandContainer {
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .brandContainer figure img{
+    width: 75px;
+    height: 75px;
   }
 
   .brandContainer figure::before {
-    position: initial;
+    width: 75px;
+    height: 75px;
   }
 
-  .brandContainer section h2 {
-    font-size: 32px;
+  .personal-name section h2 {
+    font-size: 24px;
+  }
+
+  
+  .personal-name span{
+    font-size: 16px;
+  }
+
+  .userInfo strong{
+    flex-wrap: wrap;
   }
 }

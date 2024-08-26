@@ -38,7 +38,7 @@ export const Home = () => {
         )}
         <CategoryMenu />
       </div>
-      <div className='flex flex-col md:flex-row w-full pb-5'>
+      <div className='flex flex-col lg:flex-row w-full pb-5'>
         <CategoryList />
         <TagsList />
       </div>

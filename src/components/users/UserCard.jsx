@@ -32,7 +32,7 @@ export const UserCard = ({ currentUser, topics }) => {
           />
         </figure>
 
-        <section>
+        <section className='personal-name'>
           <h2 onClick={() => navigateToUserSummary(uid)}>@{username}</h2>
           <span className='text-white'>{email}</span>
         </section>
