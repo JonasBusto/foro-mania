@@ -7,6 +7,7 @@ import { InputIcon } from 'primereact/inputicon';
 import { useReactionAction } from '../../hooks/useReactionAction';
 import { userFullDataExtract } from '../../helpers/Actions';
 import { Loader } from '../items/Loader';
+import { SvgIconAdmin } from '../items/SvgIconAdmin';
 
 export const UsersList = ({
   users,
@@ -44,12 +45,21 @@ export const UsersList = ({
         className='flex items-center gap-2 cursor-pointer'
         onClick={(event) => selectionChange(rowData, event)}
       >
-        <img
-          alt={`imagen de perfil de usuario ${rowData.fullName}`}
-          src={rowData.photoProfile}
-          style={{ width: '56px', height: '56px' }}
-          className='rounded-full ring-2 object-cover'
-        />
+        <span className='relative flex flex-col justify-center'>
+          {rowData.role === 'admin' && (
+            <SvgIconAdmin
+              width='36px'
+              height='36px'
+              stylesCustom='absolute left-2.5 bottom-10'
+            />
+          )}
+          <img
+            alt={`imagen de perfil de usuario ${rowData.fullName}`}
+            src={rowData.photoProfile}
+            style={{ width: '56px', height: '56px' }}
+            className='rounded-full ring-2 object-cover'
+          />
+        </span>
         <span className='pl-3 text-[17px]'>{rowData.fullName}</span>
       </div>
     );
@@ -66,7 +76,7 @@ export const UsersList = ({
       <IconField iconPosition='left'>
         <InputIcon className='pi pi-search' />
         <InputText
-          className='p-2 pl-10 bg-[#282828] border-[#61dafb] border-2 text-neutral-200 rounded-md'
+          className='w-full p-2 pl-10 bg-[#282828] border-[#61dafb] border-2 text-neutral-200 rounded-md'
           type='search'
           value={globalFilter}
           onChange={onGlobalFilterChange}
@@ -104,6 +114,7 @@ export const UsersList = ({
         emptyMessage={emptyMessage ?? ' '}
         sortField={sortField}
         sortOrder={sortOrder}
+        className='datable-user-list'
       >
         <Column
           headerClassName='column-header'

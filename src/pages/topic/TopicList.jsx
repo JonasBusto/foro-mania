@@ -86,11 +86,11 @@ export const TopicList = () => {
             />
           </div>
           <div>
-            <div className='hidden md:flex text-center border-b-2 border-neutral-500 align-middle leading-4 pb-4 mb-6'>
+            <div className='hidden md:flex text-center border-b-2 border-neutral-500 align-middle leading-4 pb-4 mb-2'>
               <p className='w-7/12 text-start'>Titulo</p>
               <p className='w-3/12 text-start'>Usuarios</p>
               <p className='w-1/12'>Respuestas</p>
-              <p className='w-1/12'>Actividad reciente</p>
+              <p className='w-1/12'>Actividad</p>
             </div>
             {filteredTopics.length > 0 ? (
               filteredTopics.map((item, i) => (

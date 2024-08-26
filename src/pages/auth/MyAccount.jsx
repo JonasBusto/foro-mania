@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useFavoriteAction } from '../../hooks/useFavoriteAction';
 import { useTopicAction } from '../../hooks/useTopicAction';
-import {TopicListTopic} from '../topic/TopicListTopic';
+import { TopicListTopic } from '../topic/TopicListTopic';
 
 export function MyAccount() {
   const { loggedUser, logout } = useAuth();
@@ -28,8 +28,7 @@ export function MyAccount() {
             <i className='pi pi-pencil text-white'></i>
           </Link>
         </div>
-
-        <div className='mt-6 flex flex-col items-center sm:flex-row sm:items-start sm:space-x-8'>
+        <div className='mt-6 flex flex-wrap flex-row items-start space-x-8'>
           <img
             className='object-cover w-32 h-32 p-1 rounded-full ring-2 ring-[#61dafb]'
             src={loggedUser.photoProfile}
@@ -69,9 +68,9 @@ export function MyAccount() {
           </button>
         </div>
       </div>
-      <div className='w-full max-w-2xl mt-14 mx-auto bg-[#282828] rounded-lg shadow-lg p-6'>
+      <div className='w-full max-w-2xl mt-14 mx-auto p-6'>
         <div>
-          <h2 className='text-xl font-bold text-white'>
+          <h2 className='text-[6vw] mb-4 sm:mb-0 leading-8 sm:leading-none sm:text-[25px] font-bold text-white'>
             Mis publicaciones guardadas
           </h2>
         </div>
