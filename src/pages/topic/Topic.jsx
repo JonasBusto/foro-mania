@@ -5,7 +5,7 @@ import { ReactionButton } from '../../components/buttons/ReactionButton';
 import { Link, useParams } from 'react-router-dom';
 import { useTopicAction } from '../../hooks/useTopicAction';
 import { useAuth } from '../../hooks/useAuth';
-import { formatDistanceToNow, parseISO } from 'date-fns';
+import { formatDistanceToNow, formatDistanceStrict, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { useUserAction } from '../../hooks/useUserAction';
 import { useCommentAction } from '../../hooks/useCommentAction';
@@ -68,6 +68,16 @@ export const Topic = () => {
   }
 
   const TimeToNow = (fecha) => {
+    const fechaISO = parseISO(fecha);
+    const distance = formatDistanceStrict(fechaISO, new Date(), { locale: es });
+
+    const [value, unit] = distance.split(' ');
+    const unitShort = unit.charAt(0);
+
+    return `${value}${unitShort}`;
+  };
+
+  const TimeToNowResponsive = (fecha) => {
     const fechaISO = parseISO(fecha);
     return formatDistanceToNow(fechaISO, { locale: es });
   };
@@ -227,9 +237,12 @@ export const Topic = () => {
               </div>
             )}
           </div>
-          <div className='mt-4 flex items-center justify-between'>
+          <div className='mt-4 flex flex-wrap items-center justify-between'>
             <div className='flex items-center space-x-4'>
-              <Link to={'/users-view/' + user?.uid + '/summary'}>
+              <Link
+                to={'/users-view/' + user?.uid + '/summary'}
+                className='w-14 h-14'
+              >
                 <img
                   src={user.photoProfile}
                   alt='Imagen de usuario'
@@ -252,7 +265,12 @@ export const Topic = () => {
               </div>
             </div>
             <p className='text-sm text-gray-400'>
-              Hace {TimeToNow(topic.createdAt)}
+              <span className='hidden sm:block'>
+                Hace {TimeToNowResponsive(topic.createdAt)}
+              </span>
+              <span className='block sm:hidden'>
+                Hace {TimeToNow(topic.createdAt)}
+              </span>
             </p>
           </div>
           {topic.tagsId && (

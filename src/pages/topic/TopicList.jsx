@@ -73,7 +73,7 @@ export const TopicList = () => {
   }
 
   return (
-    <div className='bg-neutral-800 py-10 text-neutral-200 px-3'>
+    <div className='py-10 text-neutral-200 px-3'>
       <div className='max-w-[75rem] mx-auto'>
         <BannerAdversiting />
         <div>
