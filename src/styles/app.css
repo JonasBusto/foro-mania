@@ -80,6 +80,12 @@ html {
   display: none;
 }
 
+.datable-user-list td,
+.datable-user-list .p-datatable-header,
+.datable-user-list th {
+  background-color: #121212 !important;
+}
+
 @media (width <= 1200px) {
   .ql-editor img {
     width: 100% !important;
