@@ -7,7 +7,7 @@ export const TagsList = () => {
   const filteredTopics = topics.filter((topic) => topic.isActive).slice(0, 6);
 
   return (
-    <section className='w-full md:w-1/2 p-4'>
+    <section className='w-full lg:w-1/2 py-4 px-3'>
       <h1 className='text-3xl font-bold mb-5 text-white'>
         Últimas publicaciones
       </h1>
