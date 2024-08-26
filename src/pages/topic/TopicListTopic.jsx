@@ -45,14 +45,13 @@ export const TopicListTopic = ({ topic, type = '' }) => {
   };
 
   const topicUser = users.find((user) => user.uid === topic.userId);
-  const commentsOfTopicUser = users
-    .filter((user) =>
-      filteredComments.some(
-        (comment) =>
-          comment.userId === user.uid && comment.userId !== topicUser.uid
-      )
+  const commentsOfTopicUserFiltered = users.filter((user) =>
+    filteredComments.some(
+      (comment) =>
+        comment.userId === user.uid && comment.userId !== topicUser.uid
     )
-    .slice(0, 3);
+  );
+  const commentsOfTopicUser = commentsOfTopicUserFiltered.slice(0, 3);
 
   return (
     <>
@@ -234,7 +233,9 @@ export const TopicListTopic = ({ topic, type = '' }) => {
             <div className='w-8/12 md:w-6/12 flex mt-3 md:mt-0 leading-3'>
               <div className='w-1/2 flex flex-col items-center justify-end hidden-summary-list-user px-1'>
                 <p>
-                  {filteredComments.length > 9 ? '+9' : filteredComments.length}
+                  {commentsOfTopicUserFiltered.length + 1 > 9
+                    ? '+9'
+                    : commentsOfTopicUserFiltered.length + 1}
                 </p>
                 <p className='md:hidden text-sm'>Usuarios</p>
               </div>
