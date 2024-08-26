@@ -132,14 +132,20 @@ export const TopicListTopic = ({ topic, type = '' }) => {
             <h2 className='text-lg font-semibold mb-1 text-white'>
               {topic?.title}
             </h2>
-            <h2 className='text-sm font-semibold text-gray-400 mb-1'>
-              {categorieFiltered?.title}
-            </h2>
+            <div className='flex items-center mt-2'>
+              <div
+                className='w-3 h-3 me-1'
+                style={{ backgroundColor: categorieFiltered.color }}
+              ></div>
+              <p className='text-[10px] uppercase font-bold text-gray-300'>
+                {categorieFiltered.title}
+              </p>
+            </div>
           </Link>
-          <div className='md:w-3/12 flex items-center relative'>
+          <div className='md:w-3/12 flex items-center md:relative mt-4 md:mt-0'>
             <Link
               to={'/users-view/' + topicUser?.uid + '/summary'}
-              className='me-2 flex items-center absolute left-[0rem]'
+              className='me-2 flex items-center md:absolute left-[0rem]'
               style={{
                 zIndex: 10,
               }}
@@ -154,9 +160,8 @@ export const TopicListTopic = ({ topic, type = '' }) => {
               <Link
                 key={user.uid}
                 to={'/users-view/' + user?.uid + '/summary'}
-                className={`me-2 flex items-center `}
+                className={`me-2 flex items-center md:absolute`}
                 style={{
-                  position: 'absolute',
                   left: (index + 1) * 2 + 'rem',
                   zIndex: 10 - (index + 1),
                 }}
