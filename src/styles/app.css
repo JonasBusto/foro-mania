@@ -76,10 +76,24 @@ html {
   color: white !important;
 }
 
+.hidden-summary-list-user {
+  display: none;
+}
+
 @media (width <= 1200px) {
   .ql-editor img {
     width: 100% !important;
     height: auto !important;
+  }
+}
+
+@media (width <= 550px) {
+  .hidden-summary-list-user {
+    display: flex;
+  }
+
+  .hidden-list-user {
+    display: none;
   }
 }
 

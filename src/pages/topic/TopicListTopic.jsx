@@ -6,7 +6,6 @@ import { es } from 'date-fns/locale';
 import { useUserAction } from '../../hooks/useUserAction';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { useTagAction } from '../../hooks/useTagAction';
-import { TopicTags } from '../../components/topic/TopicTags';
 
 export const TopicListTopic = ({ topic, type = '' }) => {
   const { allComments, fetchComments } = useCommentAction();
@@ -173,49 +172,77 @@ export const TopicListTopic = ({ topic, type = '' }) => {
           <div className='md:w-1/12 flex mt-3 md:mt-0 leading-3'></div>
         </div>
       ) : (
-        <div className='flex flex-col md:flex-row text-center border-b border-neutral-500 pb-3 mb-3'>
-          <Link to={`/topic/${topic.uid}`} className='md:w-7/12 text-start'>
-            <h2 className='text-lg font-semibold mb-1'>{topic.title}</h2>
+        <div className='flex flex-col md:flex-row text-center border-b border-neutral-500 pb-3 mb-3 mt-5 sm:mt-0'>
+          <Link
+            to={`/topic/${topic.uid}`}
+            className='w-full md:w-7/12 text-start'
+          >
+            <h2 className='text-[20px] sm:text-lg leading-5 font-semibold mb-0 sm:mb-1 pe-4'>
+              {topic.title}
+            </h2>
+            <div className='flex items-center mt-1 mb-2 hidden-summary-list-user'>
+              <div
+                className='w-3 h-3 me-1'
+                style={{ backgroundColor: categorieFiltered.color }}
+              ></div>
+              <p className='text-[10px] uppercase font-bold text-gray-300'>
+                {categorieFiltered.title}
+              </p>
+            </div>
             <p className='leading-5 pe-7'>
-              {stripHtmlTags(topic.content.slice(0, 150))}{' '}
-              <span className='text-neutral-500'>...Leer Mas</span>{' '}
+              {stripHtmlTags(topic.content).length > 150 ? (
+                <>
+                  {stripHtmlTags(topic.content.slice(0, 150))}
+                  <span className='text-neutral-500'>...Leer Mas</span>
+                </>
+              ) : (
+                stripHtmlTags(topic.content)
+              )}
             </p>
           </Link>
-          <div className='md:w-3/12 flex'>
-            <Link
-              to={'/users-view/' + topicUser?.uid + '/summary'}
-              className='me-2 flex items-center'
-            >
-              <img
-                className='w-12 h-12 object-cover rounded-full'
-                src={topicUser?.photoProfile}
-                alt={topicUser?.fullName}
-              />
-            </Link>
-            {commentsOfTopicUser.map((user) => (
+          <div className='mt-2 md:mt-0 md:w-5/12 flex justify-center'>
+            <div className='w-4/12 md:w-6/12 flex justify-center md:justify-normal hidden-list-user'>
               <Link
-                key={user.uid}
-                to={'/users-view/' + user?.uid + '/summary'}
+                to={'/users-view/' + topicUser?.uid + '/summary'}
                 className='me-2 flex items-center'
               >
                 <img
                   className='w-12 h-12 object-cover rounded-full'
-                  src={user?.photoProfile}
-                  alt={user?.fullName}
+                  src={topicUser?.photoProfile}
+                  alt={topicUser?.fullName}
                 />
               </Link>
-            ))}
-          </div>
-          <div className='md:w-2/12 flex mt-3 md:mt-0 leading-3'>
-            <div className='w-1/2 flex items-center justify-center flex-col'>
-              <p>{filteredComments.length}</p>
-              <p className='md:hidden text-sm'>Comentarios</p>
+              {commentsOfTopicUser.map((user) => (
+                <Link
+                  key={user.uid}
+                  to={'/users-view/' + user?.uid + '/summary'}
+                  className='me-2 flex items-center'
+                >
+                  <img
+                    className='w-12 h-12 object-cover rounded-full'
+                    src={user?.photoProfile}
+                    alt={user?.fullName}
+                  />
+                </Link>
+              ))}
             </div>
-            <div className='w-1/2 flex items-center justify-center flex-col'>
-              <p className='text-sm'>
-                {TimeToNow(mostRecentComment.createdAt)}
-              </p>
-              <p className='md:hidden text-sm'>Actualizado</p>
+            <div className='w-8/12 md:w-6/12 flex mt-3 md:mt-0 leading-3'>
+              <div className='w-1/2 flex flex-col items-center justify-end hidden-summary-list-user px-1'>
+                <p>
+                  {filteredComments.length > 9 ? '+9' : filteredComments.length}
+                </p>
+                <p className='md:hidden text-sm'>Usuarios</p>
+              </div>
+              <div className='w-1/2 flex items-center justify-end md:justify-center flex-col px-1'>
+                <p>{filteredComments.length}</p>
+                <p className='md:hidden text-sm'>Comentarios</p>
+              </div>
+              <div className='w-1/2 flex items-center justify-end md:justify-center flex-col px-1'>
+                <p className='text-sm'>
+                  {TimeToNow(mostRecentComment.createdAt)}
+                </p>
+                <p className='md:hidden text-sm'>Actualizado</p>
+              </div>
             </div>
           </div>
         </div>
