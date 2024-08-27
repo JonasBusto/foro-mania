@@ -58,7 +58,7 @@ export const TopicListTopic = ({ topic, type = '' }) => {
       {type === 'home' ? (
         <div className='flex justify-center items-start py-3 px-2 bg-[#1f1f1f] hover:bg-[#252525] min-h-24 sm:h-24'>
           <Link
-            to={`/users-view/${userFiltered.uid}/summary`}
+            to={`/users-view/${userFiltered.uid}`}
             className='flex items-center justify-center h-full w-12 my-auto'
           >
             <img
