@@ -4,7 +4,13 @@ import { TopicListTopic } from '../../pages/topic/TopicListTopic';
 
 export const TagsList = () => {
   const { topics } = useTopicAction();
-  const filteredTopics = topics.filter((topic) => topic.isActive).slice(0, 6);
+  const filteredTopics = topics
+    .filter((topic) => topic.isActive)
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt.slice(0, 23)) - new Date(a.createdAt.slice(0, 23))
+    )
+    .slice(0, 6);
 
   return (
     <section className='w-full lg:w-1/2 py-4 px-3'>
