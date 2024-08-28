@@ -59,6 +59,7 @@ export const TopicComment = ({
               src={userFiltered.photoProfile}
               alt='Imagen de usuario'
               className='w-12 h-12 object-cover rounded-full'
+              draggable={false}
             />
           </Link>
           <div className='flex'>

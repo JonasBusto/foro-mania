@@ -84,6 +84,7 @@ export function UsersList({ onSelectUser }) {
                 src={user.photoProfile}
                 alt={user.fullName}
                 className='rounded-sm object-cover w-14 h-14'
+                draggable={false}
               />
               <span className='ms-4 font-semibold text-xl'>
                 {user.fullName}

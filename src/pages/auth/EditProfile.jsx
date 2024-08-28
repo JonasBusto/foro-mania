@@ -38,6 +38,7 @@ export const EditProfile = () => {
               className='object-cover w-40 h-40 p-1 rounded-full ring-2 ring-[#61dafb]'
               src={photoProfile}
               alt={'Foto de perfil de ' + loggedUser.fullName}
+              draggable={false}
             />
             <input
               type='file'
