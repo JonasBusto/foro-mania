@@ -24,9 +24,9 @@ export const CategoriesView = () => {
         <div>
           <BannerAdversiting />
         </div>
-        <h1 className='text-neutral-100 text-5xl font-bold text-center pt-16 pb-10'>
+        <h1 className='text-neutral-100 text-[10vw] sm:text-5xl font-bold text-center pt-16 pb-0 sm:pb-6'>
           Categorías
-        </h1>{' '}
+        </h1>
         <div className='flex mb-7 flex-row flex-wrap items-center justify-around'>
           {loggedUser?.role === 'admin' ? (
             <Link
