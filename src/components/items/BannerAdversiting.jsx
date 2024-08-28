@@ -17,7 +17,12 @@ export const BannerAdversiting = () => {
 
   return (
     <div className='bg-white w-full md:h-28 flex items-center justify-center'>
-      <img src={randomBanner} alt='img-adversiting' className='md:h-full' />
+      <img
+        src={randomBanner}
+        alt='img-adversiting'
+        className='md:h-full object-cover'
+        draggable={false}
+      />
     </div>
   );
 };

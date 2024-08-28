@@ -27,6 +27,7 @@ export function CreatedBy({ topic, user }) {
             src={user.photoProfile}
             alt='Imagen de usuario'
             className='w-8 h-8 me-2 object-cover rounded-full border-2 border-gray-600'
+            draggable={false}
           />
         </Link>
         <p className='text-[15px] font-semibold'>
@@ -51,6 +52,7 @@ export function LastAnswer({ lastCommentUser, lastComment, query = '' }) {
             src={lastCommentUser?.photoProfile}
             alt='Imagen de usuario'
             className='w-8 h-8 me-2 object-cover rounded-full border-2 border-gray-600'
+            draggable={false}
           />
         </Link>
         <p className='text-[15px] font-semibold'>
@@ -138,6 +140,7 @@ export function UsersOfTopic({ user, commentsOfTopicUser }) {
             className='w-12 h-12 object-cover rounded-full'
             src={user?.photoProfile}
             alt={user?.fullName}
+            draggable={false}
           />
         </Link>
         {commentsOfTopicUser.map((user) => (
@@ -150,6 +153,7 @@ export function UsersOfTopic({ user, commentsOfTopicUser }) {
               className='w-12 h-12 object-cover rounded-full'
               src={user?.photoProfile}
               alt={user?.fullName}
+              draggable={false}
             />
           </Link>
         ))}

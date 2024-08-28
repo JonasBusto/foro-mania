@@ -8,11 +8,14 @@ import { WelcomeBanner } from '../components/home/WelcomeBanner';
 import { useState } from 'react';
 import { useLoad } from '../hooks/useLoad';
 import { Loader } from '../components/items/Loader';
+import useDocTitle from '../hooks/useDocTitle';
 
 export const Home = () => {
   const { loggedUser } = useAuth();
   const { isLoading } = useLoad();
   const [showWelcome, setShowWelcome] = useState(true);
+
+  useDocTitle('ForoManía | Inicio');
 
   if (isLoading) {
     return <Loader />;

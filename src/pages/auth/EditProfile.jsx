@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useUserAction } from '../../hooks/useUserAction';
 import { Link } from 'react-router-dom';
+import useDocTitle from '../../hooks/useDocTitle';
 
 export const EditProfile = () => {
   const { loggedUser } = useAuth();
@@ -10,6 +11,8 @@ export const EditProfile = () => {
   const [fullName, setFullName] = useState(loggedUser.fullName);
   const [photoProfile, setPhotoProfile] = useState(loggedUser.photoProfile);
   const [fileImage, setFileImage] = useState(null);
+
+  useDocTitle('ForoManía | Editar perfil');
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -24,7 +27,7 @@ export const EditProfile = () => {
   };
 
   return (
-    <div className='bg-[#181818] p-4'>
+    <div className='p-4'>
       <div className='max-w-screen-sm mx-auto bg-[#2a2a2a] rounded-lg px-8 pt-6 pb-8 mb-4'>
         <h2 className='text-2xl font-bold text-white text-center'>
           Editar perfil
@@ -35,6 +38,7 @@ export const EditProfile = () => {
               className='object-cover w-40 h-40 p-1 rounded-full ring-2 ring-[#61dafb]'
               src={photoProfile}
               alt={'Foto de perfil de ' + loggedUser.fullName}
+              draggable={false}
             />
             <input
               type='file'

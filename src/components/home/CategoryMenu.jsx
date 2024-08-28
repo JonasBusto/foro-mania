@@ -20,7 +20,6 @@ export const CategoryMenu = () => {
 
   useEffect(() => {
     if (selectedTag || selectedCategory) {
-      console.log({ selectedTag });
       const params = new URLSearchParams();
       if (selectedCategory) {
         params.append('category', selectedCategory.uid);

@@ -29,6 +29,7 @@ export const PublicProfileCard = ({ userProps }) => {
             src={photoProfile}
             alt='foto de perfil del usuario'
             className='object-cover w-[120px] h-[120px] p-1 rounded-full ring-2 ring-[#61dafb]'
+            draggable={false}
           />
         </figure>
         <section>

@@ -247,6 +247,7 @@ export const Topic = () => {
                   src={user.photoProfile}
                   alt='Imagen de usuario'
                   className='w-14 h-14 object-cover rounded-full border-2 border-gray-600'
+                  draggable={false}
                 />
               </Link>
               <div className='flex flex-col'>

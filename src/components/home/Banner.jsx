@@ -5,6 +5,7 @@ export const Banner = () => {
         src='/img/banner.jpg'
         alt='Banner'
         className='w-full h-40 object-cover rounded-md'
+        draggable={false}
       />
     </div>
   );
