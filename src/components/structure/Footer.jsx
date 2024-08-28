@@ -38,7 +38,7 @@ export function Footer() {
           <p className='text-sm text-center  lg:w-1/3'>
             © {currentYear}. ForoMania - Todos los derechos reservados.
           </p>
-          <div className='flex items-center justify-end gap-2 text-sm lg:w-1/3'>
+          <div className='flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-end gap-2 text-sm lg:w-1/3'>
             <Link
               to='/users-view'
               className='hover:text-neutral-50 duration-100'
@@ -46,7 +46,10 @@ export function Footer() {
               Usuarios
             </Link>
             <p>•</p>
-            <Link to='/about' className='hover:text-neutral-50 duration-100'>
+            <Link
+              to='/all-categories'
+              className='hover:text-neutral-50 duration-100'
+            >
               Categorias
             </Link>
             <p>•</p>
