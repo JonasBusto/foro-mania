@@ -5,18 +5,21 @@ import { Loader } from '../components/items/Loader';
 import { useAuth } from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
 import { useLoad } from '../hooks/useLoad';
+import useDocTitle from '../hooks/useDocTitle';
 
 export const CategoriesView = () => {
   const { categories } = useCategoryAction();
   const { isLoading } = useLoad();
   const { loggedUser } = useAuth();
 
+  useDocTitle('ForoManía | Categorias');
+
   if (isLoading) {
     return <Loader />;
   }
 
   return (
-    <div className='bg-neutral-900 h-full pb-10 pt-3'>
+    <div className='h-full pb-10 pt-3'>
       <div className='max-w-[75rem] mx-auto '>
         <div>
           <BannerAdversiting />
