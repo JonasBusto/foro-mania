@@ -37,6 +37,7 @@ export function MyAccount() {
             className='object-cover w-32 h-32 p-1 rounded-full ring-2 ring-[#61dafb]'
             src={loggedUser.photoProfile}
             alt='Foto perfil'
+            draggable={false}
           />
 
           <div className='mt-4 sm:mt-0 sm:ml-8 space-y-4'>

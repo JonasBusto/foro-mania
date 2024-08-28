@@ -65,6 +65,7 @@ export const TopicListTopic = ({ topic, type = '' }) => {
               className='w-10 h-10 rounded-full object-cover'
               src={userFiltered.photoProfile}
               alt={`Foto de ${userFiltered.fullName}`}
+              draggable={false}
             />
           </Link>
           <Link
@@ -153,6 +154,7 @@ export const TopicListTopic = ({ topic, type = '' }) => {
                 className='w-10 h-10 object-cover rounded-full'
                 src={topicUser?.photoProfile}
                 alt={topicUser?.fullName}
+                draggable={false}
               />
             </Link>
             {commentsOfTopicUser.map((user, index) => (
@@ -169,6 +171,7 @@ export const TopicListTopic = ({ topic, type = '' }) => {
                   className='w-10 h-10 object-cover rounded-full'
                   src={user?.photoProfile}
                   alt={user?.fullName}
+                  draggable={false}
                 />
               </Link>
             ))}
@@ -214,6 +217,7 @@ export const TopicListTopic = ({ topic, type = '' }) => {
                   className='w-12 h-12 object-cover rounded-full'
                   src={topicUser?.photoProfile}
                   alt={topicUser?.fullName}
+                  draggable={false}
                 />
               </Link>
               {commentsOfTopicUser.map((user) => (
@@ -226,6 +230,7 @@ export const TopicListTopic = ({ topic, type = '' }) => {
                     className='w-12 h-12 object-cover rounded-full'
                     src={user?.photoProfile}
                     alt={user?.fullName}
+                    draggable={false}
                   />
                 </Link>
               ))}
