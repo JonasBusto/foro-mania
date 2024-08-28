@@ -9,7 +9,6 @@ import { UsersList } from '../../components/users/UsersList';
 import useDocTitle from '../../hooks/useDocTitle';
 import '../../styles/usersView.css';
 
-
 export const UsersView = () => {
   const { users, allUsersStatus } = useUserAction();
   const { TopicsGlobalStatus, topics } = useTopicAction();
@@ -23,7 +22,7 @@ export const UsersView = () => {
 
   const modalRef = useRef(null);
 
-  useDocTitle('Foromanía | Usuarios')
+  useDocTitle('ForoManía | Usuarios');
 
   useEffect(() => {
     const handleClickOutside = (event) => {

@@ -3,6 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useFavoriteAction } from '../../hooks/useFavoriteAction';
 import { useTopicAction } from '../../hooks/useTopicAction';
 import { TopicListTopic } from '../topic/TopicListTopic';
+import useDocTitle from '../../hooks/useDocTitle';
 
 export function MyAccount() {
   const { loggedUser, logout } = useAuth();
@@ -12,9 +13,12 @@ export function MyAccount() {
   const favoritesFiltered = favorites.filter(
     (favorite) => favorite.userId === loggedUser?.uid
   );
+
   const topicsFilteredByUser = topics.filter((topic) =>
     favoritesFiltered.some((favorite) => favorite.contentId === topic.uid)
   );
+
+  useDocTitle('ForoManía | Mi cuenta');
 
   return (
     <div className='p-4 md:p-8 bg-[#121212]'>
