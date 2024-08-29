@@ -144,7 +144,6 @@ export function Chat({ chatId }) {
 						<button
 							className='w-30 flex justify-center items-center text-center p-2 h-10 text-md font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-md border border-[#61dafb]'
 							onClick={handleSendMessage}>
-							{/* <i className='pi pi-comment text-xl pr-2'></i> */}
 							Enviar
 						</button>
 					</div>

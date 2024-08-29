@@ -88,14 +88,14 @@ export function FormCategory() {
           }) => (
             <form
               onSubmit={handleSubmit}
-              className='bg-white rounded px-8 pt-6 pb-8 mb-4'
+              className='rounded px-8 pt-6 pb-8 mb-4'
             >
-              <p className='font-bold text-center uppercase text-xl mb-7'>
+              <p className='font-bold text-center uppercase text-xl mb-7 text-white'>
                 {id ? 'Modificar Categoria' : 'Cargar Categoria'}
               </p>
               <div className='mb-4'>
                 <label
-                  className='block text-gray-700 text-sm font-bold mb-2'
+                  className='block text-gray-300 text-sm font-bold mb-2'
                   htmlFor='title'
                 >
                   Titulo
@@ -116,7 +116,7 @@ export function FormCategory() {
               </div>
               <div className='mb-4'>
                 <label
-                  className='block text-gray-700 text-sm font-bold mb-2'
+                  className='block text-gray-300 text-sm font-bold mb-2'
                   htmlFor='description'
                 >
                   Descripción
@@ -136,7 +136,7 @@ export function FormCategory() {
               </div>
               <div className='mb-4'>
                 <label
-                  className='block text-gray-700 text-sm font-bold mb-2'
+                  className='block text-gray-300 text-sm font-bold mb-2'
                   htmlFor='color'
                 >
                   Color
