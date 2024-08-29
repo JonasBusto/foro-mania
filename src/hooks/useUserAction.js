@@ -26,7 +26,6 @@ export function useUserAction() {
     if (res.error) {
       alert(res.payload);
     } else {
-      // alert('Datos guardados exitosamente');
       toast.info('Datos guardados exitosamente');
       navigate('/');
     }

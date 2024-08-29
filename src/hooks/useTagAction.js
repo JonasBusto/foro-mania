@@ -26,10 +26,8 @@ export function useTagAction() {
   const addTag = async (tag, redirect = false) => {
     const res = await dispatch(createTag(tag));
     if (res.error) {
-      // alert('Error al cargar el tag');
       toast.error('Error al cargar el tag');
     } else {
-      // alert('Tag creado');
       toast.info('Tag creado');
       if (redirect) {
         navigate('/tags');
@@ -40,11 +38,8 @@ export function useTagAction() {
   const updateTag = async ({ tag, id }) => {
     const res = await dispatch(updateTagById({ tag, id }));
     if (res.error) {
-      // alert('Error al cargar el tag');
       toast.error('Error al cargar el tag');
-
     } else {
-      // alert('Tag actualizado');
       toast.info('Tag actualizado');
 
       navigate('/tags');
@@ -54,9 +49,7 @@ export function useTagAction() {
   const deleteTag = async ({ id }) => {
     const res = await dispatch(deleteTagById({ id }));
     if (res.error) {
-      // alert('Error al eliminar el tag');
       toast.error('Error al eliminar el tag');
-
     }
   };
 
