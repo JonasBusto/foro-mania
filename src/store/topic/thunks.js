@@ -104,18 +104,20 @@ export const updateTopicById = createAsyncThunk(
       let updatedContent = topic.content;
 
       for (const url of imageUrls) {
-        const response = await fetch(url);
-        const blob = await response.blob();
+        if (!url.startsWith('https://firebasestorage.googleapis.com/')) {
+          const response = await fetch(url);
+          const blob = await response.blob();
 
-        const imageRef = ref(
-          storage,
-          `images/${Date.now()}_${url.split('/').pop()}`
-        );
-        await uploadBytes(imageRef, blob);
+          const imageRef = ref(
+            storage,
+            `images/${Date.now()}_${url.split('/').pop()}`
+          );
+          await uploadBytes(imageRef, blob);
 
-        const newUrl = await getDownloadURL(imageRef);
+          const newUrl = await getDownloadURL(imageRef);
 
-        updatedContent = updatedContent.replace(url, newUrl);
+          updatedContent = updatedContent.replace(url, newUrl);
+        }
       }
 
       const topicDoc = doc(db, 'topics', id);

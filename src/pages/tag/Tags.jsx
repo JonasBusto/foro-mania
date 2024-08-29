@@ -24,11 +24,11 @@ export function Tags() {
     );
 
     return (
-      <span>
+      <span className='flex justify-between'>
         <div className='flex flex-wrap items-center gap-3'>
           <Link
             to={`/tags/upload/${tag.uid}`}
-            className='shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
+            className='bg-[#1b95d2] hover:bg-[#157ab8] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4'
           >
             <i className='pi pi-pen-to-square'></i>
           </Link>
@@ -36,9 +36,9 @@ export function Tags() {
         <>
           <button
             onClick={() => setVisible(true)}
-            className='shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
+            className='bg-[#1b95d2] hover:bg-[#157ab8] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4'
           >
-            Eliminar
+            <i className='pi pi-trash'></i>
           </button>
           <Dialog
             header='Eliminar tag'
@@ -69,7 +69,7 @@ export function Tags() {
                 </div>
                 <div className='mt-5'>
                   <button
-                    className='shadow me-5 bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
+                    className='bg-[#1b95d2] hover:bg-[#157ab8] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4'
                     onClick={() => setVisible(false)}
                   >
                     Cancelar
@@ -85,7 +85,7 @@ export function Tags() {
                 </p>
                 <div className='mt-5 flex justify-between'>
                   <button
-                    className='shadow me-5 bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
+                    className='bg-[#1b95d2] hover:bg-[#157ab8] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4'
                     onClick={() => setVisible(false)}
                   >
                     Cancelar
@@ -110,30 +110,30 @@ export function Tags() {
 
   return (
     <section className='max-w-screen-xl mx-auto px-7 mt-5'>
-      <div className='bg-blue-500 flex flex-col items-center justify-between p-3 rounded-t-md'>
-        <h1 className='text-2xl font-bold w-full text-center mb-4'>
-          Lista de Tags
-        </h1>
-        <div className='flex items-center flex-wrap flex-row justify-around w-full'>
+      <div className='bg-black flex px-6 flex-col items-center justify-between p-3 rounded-t-md'>
+        <div className='flex items-center flex-wrap flex-row justify-between w-full'>
+          <h1 className='text-[30px] uppercase font-semibold text-white'>
+            Lista de Tags
+          </h1>
           <Link
             to={`/tags/upload`}
-            className='shadow me-5  bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
+            className='bg-[#1b95d2] hover:bg-[#157ab8] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4'
           >
             Agregar Tag
           </Link>
-          <InputText
-            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-            placeholder='Buscar Tag'
-            onInput={(e) => {
-              setFilters({
-                global: {
-                  value: e.target.value,
-                  matchMode: FilterMatchMode.CONTAINS,
-                },
-              });
-            }}
-          />
         </div>
+        <InputText
+          className='bg-gray-50 w-full mt-3 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+          placeholder='Buscar Tag'
+          onInput={(e) => {
+            setFilters({
+              global: {
+                value: e.target.value,
+                matchMode: FilterMatchMode.CONTAINS,
+              },
+            });
+          }}
+        />
       </div>
       <DataTable
         paginator
@@ -141,6 +141,8 @@ export function Tags() {
         removableSort
         selectionMode='single'
         scrollable
+        paginatorClassName='bg-[#121212] text-white'
+        className='mb-5'
         filters={filters}
         rows={5}
         emptyMessage='Sin resultados'
@@ -151,9 +153,13 @@ export function Tags() {
           sortable
           field='value'
           header='Nombre'
-          style={{ minWidth: '200px' }}
+          style={{ minWidth: '100px' }}
         ></Column>
-        <Column header='Acciones' body={tagAction}></Column>
+        <Column
+          header='Acciones'
+          body={tagAction}
+          style={{ width: '150px' }}
+        ></Column>
       </DataTable>
     </section>
   );

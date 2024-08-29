@@ -9,7 +9,6 @@ const chatSlice = createSlice({
 		setUnreadMessagesCount(state, action) {
 			state.unreadMessagesCount = action.payload;
 		},
-		// Otros reducers si es necesario
 	},
 });
 
