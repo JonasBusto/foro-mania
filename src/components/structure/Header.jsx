@@ -90,7 +90,7 @@ export function Header() {
           </Link>
         </div>
 
-        <div className='flex items-center space-x-1 md:space-x-2'>
+        <div className='flex items-center md:space-x-3'>
           {!loggedUser && !isLoading && (
             <>
               <button
@@ -108,7 +108,7 @@ export function Header() {
 
               <button
                 onClick={handleSignIn}
-                className='text-white rounded text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 md:text-base'
+                className='text-white rounded text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 mr-3 xs:mr-4 md:mr-0 md:text-base'
               >
                 Iniciar Sesión
               </button>
@@ -124,7 +124,7 @@ export function Header() {
           {loggedUser && (
             <Link
               to='/account'
-              className='relative mx-2 xs:mx-0 w-8 h-8 md:w-9 md:h-9 rounded-full ring-2 ring-[#61dafb] overflow-hidden'
+              className='relative mx-2 md:mx-0 w-8 h-8 md:w-9 md:h-9 rounded-full ring-2 ring-[#61dafb] overflow-hidden'
             >
               <img
                 className='object-cover w-full h-full'
@@ -134,12 +134,12 @@ export function Header() {
             </Link>
           )}
 
-          <Link to='/' className={`hidden xs:inline ${!loggedUser && 'xs:hidden md:inline'}`}>
+          <Link to='/' className='hidden md:block'>
             <i className='pi pi-home text-2xl text-white hover:bg-gray-700 duration-200 p-2 rounded ml-2'></i>
           </Link>
 
           {loggedUser && (
-            <Link to='/chats' className='relative'>
+            <Link to='/chats' className='relative mx-1 md:mx-0'>
               <i className='pi pi-envelope text-xl text-white hover:bg-gray-700 duration-200 p-2 rounded'></i>
               {unreadMessagesCount > 0 && (
                 <span className='absolute top-0 right-0 bg-[#61dafb] text-black text-xs rounded-full flex items-center justify-center w-5 h-5'>
