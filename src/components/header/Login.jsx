@@ -24,10 +24,10 @@ export function Login({ visible, onHide, setOpenSignIn, superSwitch }) {
         }}
         style={{
           maxHeight: '80vh',
-        }}
+        }} 
       >
-        <div className='flex flex-col items-center mb-4'>
-          <h1 className='text-white font-bold text-4xl mb-2'>Foromania</h1>
+        <div className='flex flex-col items-center mb-4 gap-2'>
+          <img data-testid='logo-img' src="/img/header-logo.png" alt="Logo de Foromanía" width={250}/>
           <h2 className='text-gray-400 text-2xl'>Iniciar Sesión</h2>
         </div>
         <div className='w-full max-w-xs mx-auto'>

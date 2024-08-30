@@ -89,7 +89,7 @@ export function MyAccount() {
               <TopicListTopic topic={item} key={i} type='account' />
             ))
           ) : (
-            <p>No guardaste ninguna publicación</p>
+            <p className='text-white'>No guardaste ninguna publicación</p>
           )}
         </div>
       </div>

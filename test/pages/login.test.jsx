@@ -19,11 +19,11 @@ describe('Test del componente de página de Login', () => {
         )
     })
 
-    test('Encabezado nivel 1', () => {
+    test('Logo visible', () => {
 
-        const title = screen.getByRole('heading', {level: 1})
-        expect(title).toBeInTheDocument()
-        expect(title.textContent).toEqual('Foromania')
+        const logo = screen.getByTestId('logo-img')
+        expect(logo).toBeInTheDocument()
+        expect(logo.alt).toEqual('Logo de Foromanía')
     })
 
     test('Encabezado nivel 2', () => {
