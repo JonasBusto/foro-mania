@@ -102,8 +102,8 @@ export function ChatDesktop({ chatId, selectedUser }) {
     <main className='text-neutral-200 flex flex-col flex-1'>
       {
         selectedUser !== '' ?
-          <div>
-            <section ref={chatContainerRef} className=' overflow-y-auto p-2 bg-neutral-900 h-[28rem]'>
+          <div className='h-[31.5rem] flex flex-col'>
+            <section ref={chatContainerRef} className=' overflow-y-auto p-2 bg-neutral-900 grow'>
               {messages.map((msg) => (
                 <div key={msg.id} className={`flex ${msg.senderId === user1Id ? 'justify-end' : 'justify-start'}`}                >
                   <div
@@ -131,7 +131,7 @@ export function ChatDesktop({ chatId, selectedUser }) {
               </button>
               <input
                 type='text'
-                className='text-black w-full p-2 rounded-md flex items-center mx-2'
+                className='text-neutral-100 w-full bg-neutral-800 p-2 rounded-md flex items-center mx-2 outline-none'
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 onKeyDown={handleKeyDown}
@@ -160,8 +160,8 @@ export function ChatDesktop({ chatId, selectedUser }) {
           </div>
 
           :
-          <div className='m-auto italic'>
-            <p>Selecciona un contacto para comenzar a chatear!</p>
+          <div className='m-auto mt-40 '>
+            <p className='italic'>Selecciona un contacto para comenzar a chatear!</p>
           </div>
       }
 
