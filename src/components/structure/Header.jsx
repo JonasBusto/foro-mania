@@ -6,7 +6,6 @@ import { useAuth } from '../../hooks/useAuth';
 import { useLoad } from '../../hooks/useLoad';
 import { Link, useNavigate } from 'react-router-dom';
 import { useChatAction } from '../../hooks/useChatAction';
-import { useSelector } from 'react-redux';
 import { useModal } from '../../hooks/useModal';
 
 export function Header() {
@@ -21,18 +20,20 @@ export function Header() {
     showRegisterModal,
   } = useModal();
   const { isLoading } = useLoad();
+  const { clearCountMessagesByUser, unreadMessagesCount } = useChatAction();
   const menuRef = useRef();
   const searchRef = useRef();
   const navigate = useNavigate();
 
   const { listenForNewMessages } = useChatAction();
-  const unreadMessagesCount = useSelector(
-    (state) => state.chat.unreadMessagesCount
-  );
 
   useEffect(() => {
-    listenForNewMessages(loggedUser?.uid, unreadMessagesCount);
-  }, [unreadMessagesCount]);
+    if (loggedUser) {
+      listenForNewMessages(loggedUser?.uid, unreadMessagesCount);
+    } else {
+      clearCountMessagesByUser();
+    }
+  }, [unreadMessagesCount, loggedUser]);
 
   const handleSearch = () => {
     setOpenSearch((prevState) => !prevState);

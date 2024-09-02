@@ -57,7 +57,7 @@ export const ChatsDesktop = ({ user: initialUser, onClose }) => {
                 label='Vaciar Chat'
                 icon='pi pi-trash'
                 onClick={handleClearChat}
-                className='p-button-danger p-button-text font-semibold border-2 border-red-600 hover:bg-red-600 text-white p-2 text-xs rounded'
+                className='p-button-danger p-button-text font-semibold bg-red-600 text-white p-2 text-xs rounded-sm'
               />
             </div>
           )}

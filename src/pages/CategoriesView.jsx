@@ -31,7 +31,7 @@ export const CategoriesView = () => {
           {loggedUser?.role === 'admin' ? (
             <Link
               to='/categories'
-              className='text-[#61dafb] p-3 bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-md border border-[#61dafb]'
+              className='text-[#61dafb] p-3 bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-sm border border-[#61dafb]'
             >
               Administrar categorias
             </Link>
