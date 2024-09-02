@@ -22,7 +22,7 @@ export const PublicProfileCard = ({ userProps }) => {
   };
 
   return (
-    <div className='flex flex-row items-center justify-between'>
+    <div className='flex flex-wrap sm:flex-nowrap flex-row items-center justify-between'>
       <div className='flex flex-col flex-wrap'>
         <figure>
           <img
@@ -38,7 +38,7 @@ export const PublicProfileCard = ({ userProps }) => {
         </section>
       </div>
       {loggedUser && loggedUser.uid !== userProps.uid && (
-        <div>
+        <div className='mx-auto mt-4 sm:mt-0 sm:mx-0'>
           <button
             onClick={handleSelectUser}
             className='bg-[#1b95d2] text-center text-white rounded-sm m-2 p-2 font-semibold hover:bg-[#157ab8] w-full'

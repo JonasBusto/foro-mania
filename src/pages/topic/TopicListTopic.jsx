@@ -13,9 +13,9 @@ export const TopicListTopic = ({ topic, type = '' }) => {
   const { tags } = useTagAction();
   const { categories } = useCategoryAction();
   const userFiltered = users.find((item) => item.uid === topic.userId);
-  const categorieFiltered = categories
-    .filter((category) => category.isActive === true)
-    .find((item) => item.uid === topic.categoryId);
+  const categorieFiltered = categories.find(
+    (item) => item.uid === topic.categoryId
+  );
 
   useEffect(() => {
     fetchComments();
@@ -92,10 +92,10 @@ export const TopicListTopic = ({ topic, type = '' }) => {
               <div className='flex items-center mt-2'>
                 <div
                   className='w-3 h-3 me-1'
-                  style={{ backgroundColor: categorieFiltered.color }}
+                  style={{ backgroundColor: categorieFiltered?.color }}
                 ></div>
                 <p className='text-[10px] uppercase font-bold text-gray-300'>
-                  {categorieFiltered.title}
+                  {categorieFiltered?.title}
                 </p>
               </div>
               {topic.tagsId && (

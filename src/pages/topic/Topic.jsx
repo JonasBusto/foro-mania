@@ -162,7 +162,10 @@ export const Topic = () => {
           <div className='flex flex-wrap justify-between items-center border-b border-gray-700'>
             <div>
               <h2 className='text-4xl font-bold'>{topic.title}</h2>
-              <div className='flex items-center mt-1 mb-4'>
+              <Link
+                to={'/topic-list?category=' + category.uid}
+                className='flex items-center mt-1 mb-4 hover:opacity-85'
+              >
                 <div
                   className='w-4 h-4'
                   style={{ backgroundColor: category.color }}
@@ -170,7 +173,7 @@ export const Topic = () => {
                 <p className='text-gray-400 leading-6 max-w-fit ps-1 uppercase font-bold text-sm'>
                   {category.title}
                 </p>
-              </div>
+              </Link>
             </div>
             {((showEditTopic && topic.userId === loggedUser?.uid) ||
               loggedUser?.role === 'admin') && (
