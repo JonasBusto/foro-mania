@@ -48,6 +48,23 @@ export function Header() {
     navigate(`/topic-list?search=${searchQuery}`);
   };
 
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setOpenMenu(false);
+    }
+    if (searchRef.current && !searchRef.current.contains(event.target)) {
+      setOpenSearch(false);
+    }
+  };
+
+  useEffect(() => {
+    setOpenMenu(false);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [location]);
+
   return (
     <header className='relative bg-black text-white'>
       <section className='flex items-center justify-between flex-wrap flex-row py-2 px-3 xs:px-4 md:py-0 mx-auto'>
@@ -163,7 +180,7 @@ export function Header() {
             {openMenu && (
               <div
                 ref={menuRef}
-                className='absolute z-10 right-0 top-full mt-3 border-2 border-[#61dafb] rounded-md shadow-lg w-44 bg-gray-800'
+                className='absolute z-10 right-0 border-2 border-[#157ab8] top-full mt-3 rounded-sm shadow-lg'
               >
                 <NavMenu loggedUser={loggedUser} handleMenu={handleMenu} />
               </div>
