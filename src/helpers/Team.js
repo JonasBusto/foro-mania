@@ -22,9 +22,9 @@ export const Team = [
   },
   {
     name: 'Nassahel Elias',
-    img: '',
+    img: 'img/team/nassa.jpg',
     rol: 'Frontend',
     github: 'https://github.com/nassahel',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/nassahel/',
   },
 ];
