@@ -72,7 +72,7 @@ export const Chats = ({
                 label='Vaciar Chat'
                 icon='pi pi-trash'
                 onClick={() => handleOpenDialog()}
-                className='p-button-danger p-button-text font-semibold border-2 border-red-600 hover:bg-red-600 text-white m-2 p-2 rounded'
+                className='p-button-danger p-button-text font-semibold bg-red-600 text-white m-2 p-2 rounded-sm'
               />
             </div>
           }
@@ -93,13 +93,13 @@ export const Chats = ({
         <p>¿Está seguro que desea vaciar el chat?</p>
         <div className='flex justify-between mt-10'>
           <button
-            className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
+            className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded-sm'
             onClick={() => setVisibleDelete(false)}
           >
             Cancelar
           </button>
           <button
-            className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
+            className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded-sm'
             onClick={() => handleClearChat()}
           >
             Confirmar

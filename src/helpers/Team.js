@@ -8,10 +8,10 @@ export const Team = [
   },
   {
     name: 'Kevin Jonas Busto',
-    img: '',
+    img: 'img/team/jonas.jpeg',
     rol: 'Frontend / Backend',
     github: 'https://github.com/JonasBusto',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/kevinjonasbusto/',
   },
   {
     name: 'Oscar Frias Viñals',

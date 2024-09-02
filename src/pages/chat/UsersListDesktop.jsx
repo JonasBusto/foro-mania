@@ -61,7 +61,7 @@ export function UsersListDesktop({ onSelectUser, selectedUser }) {
         <input
           type='text'
           placeholder='Buscar usuario...'
-          className=' px-2 py-2 bg-[#1b1b1b] text-white placeholder-gray-500 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
+          className=' px-2 py-2 bg-[#1b1b1b] text-white placeholder-gray-500 w-full rounded-sm focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -76,7 +76,10 @@ export function UsersListDesktop({ onSelectUser, selectedUser }) {
           {sortedUsers.map((user) => (
             <button
               key={user.uid}
-              onClick={() => onSelectUser(user)}
+              onClick={() => {
+                onSelectUser(user);
+                unreadMessagesCount[user.uid] = 0;
+              }}
               className={` ${
                 selectedUser === user ? 'bg-neutral-700' : ''
               } hover:bg-neutral-800 border-b border-neutral-600 duration-200 flex items-center p-1`}
