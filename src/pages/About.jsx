@@ -15,7 +15,11 @@ export const About = () => {
           <div className='flip-container' key={index}>
             <div className='flipper'>
               <div className='front'>
-                <img className='flip-image' src={colab.img} alt={colab.name} />
+                <img
+                  className='flip-image object-cover'
+                  src={colab.img}
+                  alt={colab.name}
+                />
                 <h4 className='tit-img'>{colab.name}</h4>
               </div>
               <div className='back'>
