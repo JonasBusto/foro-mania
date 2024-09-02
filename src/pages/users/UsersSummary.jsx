@@ -21,16 +21,16 @@ export const UsersSummary = () => {
   const [tab, setTab] = useState('TOPICS');
 
   if (!user) {
-    useDocTitle('Foromanía | Perfil de Usuario')    
+    useDocTitle('Foromanía | Perfil de Usuario');
   }
 
   if (user) {
-    useDocTitle(`Foromanía | ${user.fullName}`)
+    useDocTitle(`Foromanía | ${user.fullName}`);
   }
 
   useEffect(() => {
     getUser({ id });
-  }, []);
+  }, [id]);
 
   if (userStatus === 'Inactivo' || userStatus === 'Cargando') {
     return <Loader />;
@@ -75,7 +75,12 @@ export const UsersSummary = () => {
               aria-labelledby='mensajes-tab'
               className='w-full max-w-7xl flex flex-col gap-4 p-4'
             >
-              <UserReactions userProps={user} reactions={reactions} topics={topics} users={users}/>
+              <UserReactions
+                userProps={user}
+                reactions={reactions}
+                topics={topics}
+                users={users}
+              />
             </div>
           )}
         </section>

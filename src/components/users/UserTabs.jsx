@@ -12,7 +12,7 @@ export const UserTabs = ({ setTab, tab }) => {
           tab === 'TOPICS' && 'text-white border-b-4 border-[#61dafb]'
         }`}
       >
-        Tópicos Publicados
+        Publicaciones realizadas
       </span>
       <span
         role='tab'
@@ -25,7 +25,7 @@ export const UserTabs = ({ setTab, tab }) => {
           tab === 'MESSAGES' && 'text-white border-b-4 border-[#61dafb]'
         }`}
       >
-        Tópicos que me gustan
+        Publicaciones reaccionadas
       </span>
     </>
   );

@@ -41,7 +41,7 @@ export const PublicProfileCard = ({ userProps }) => {
         <div>
           <button
             onClick={handleSelectUser}
-            className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full'
+            className='bg-[#1b95d2] text-center text-white rounded-sm m-2 p-2 font-semibold hover:bg-[#157ab8] w-full'
           >
             <i className='pi pi-comments mr-2'></i>Enviar mensaje
           </button>
