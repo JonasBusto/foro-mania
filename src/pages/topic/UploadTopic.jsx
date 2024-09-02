@@ -155,11 +155,21 @@ export const UploadTopic = () => {
                 onBlur={handleBlur}
               >
                 <option value=''>Seleccionar</option>
-                {categories.map((category) => (
-                  <option key={category.uid} value={category.uid}>
-                    {category.title}
-                  </option>
-                ))}
+                {id && topic
+                  ? categories.map((category) => (
+                      <option key={category.uid} value={category.uid}>
+                        {category.title}
+                      </option>
+                    ))
+                  : categories
+                      .filter(
+                        (categoryActive) => categoryActive.isActive === true
+                      )
+                      .map((category) => (
+                        <option key={category.uid} value={category.uid}>
+                          {category.title}
+                        </option>
+                      ))}
               </select>
               {touched.categoryId && errors.categoryId && (
                 <p className={errorStyle}>{errors.categoryId}</p>

@@ -8,7 +8,7 @@ export const UserTabs = ({ setTab, tab }) => {
         id='topicos-tab'
         aria-label='Ver tópicos'
         onClick={() => setTab('TOPICS')}
-        className={`cursor-pointer text-xl font-semibold text-gray-400 ${
+        className={`cursor-pointer text-[3vw] sm:text-xl font-semibold text-gray-400 ${
           tab === 'TOPICS' && 'text-white border-b-4 border-[#61dafb]'
         }`}
       >
@@ -21,7 +21,7 @@ export const UserTabs = ({ setTab, tab }) => {
         id='mensajes-tab'
         aria-label='Ver mensajes'
         onClick={() => setTab('MESSAGES')}
-        className={`cursor-pointer text-xl font-semibold text-gray-400 ${
+        className={`cursor-pointer text-[3vw] sm:text-xl font-semibold text-gray-400 ${
           tab === 'MESSAGES' && 'text-white border-b-4 border-[#61dafb]'
         }`}
       >
