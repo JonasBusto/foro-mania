@@ -32,7 +32,7 @@ export const CategoryMenu = () => {
   }, [selectedCategory, selectedTag, navigate]);
 
   const categoryTemplate = (option) => (
-    <div className='flex items-center p-3 bg-[#1e1e1e] rounded-sm w-60'>
+    <div className='flex items-center p-3 bg-[#1e1e1e] rounded-sm w-full'>
       <div
         className='w-3 h-3 rounded-full'
         style={{ backgroundColor: option.color }}

@@ -4,7 +4,7 @@ import { Login } from '../header/Login';
 import { Register } from '../header/Register';
 import { useAuth } from '../../hooks/useAuth';
 import { useLoad } from '../../hooks/useLoad';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useChatAction } from '../../hooks/useChatAction';
 import { useSelector } from 'react-redux';
 import { useModal } from '../../hooks/useModal';
@@ -24,7 +24,6 @@ export function Header() {
   const menuRef = useRef();
   const searchRef = useRef();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const { listenForNewMessages } = useChatAction();
   const unreadMessagesCount = useSelector(
@@ -34,23 +33,6 @@ export function Header() {
   useEffect(() => {
     listenForNewMessages(loggedUser?.uid, unreadMessagesCount);
   }, [unreadMessagesCount]);
-
-  const handleClickOutside = (event) => {
-    if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setOpenMenu(false);
-    }
-    if (searchRef.current && !searchRef.current.contains(event.target)) {
-      setOpenSearch(false);
-    }
-  };
-
-  useEffect(() => {
-    setOpenMenu(false);
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [location]);
 
   const handleSearch = () => {
     setOpenSearch((prevState) => !prevState);
@@ -153,17 +135,20 @@ export function Header() {
             </button>
 
             {openSearch && (
-              <div className='absolute bg-gray-800 right-0 top-full mt-2 p-3 border border-gray-700 rounded-md shadow-lg w-[80vw] xl:w-[800px] flex'>
+              <div className='absolute bg-[#000000] right-0 top-full mt-2 p-3  shadow-lg w-[80vw] xl:w-[800px] flex'>
                 <input
                   type='text'
                   placeholder='Buscar...'
-                  className='w-full px-2 py-1 bg-[#1b1b1b] text-white placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
+                  className='w-full px-2 py-1 bg-[#1b1b1b] text-white placeholder-gray-500 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button
-                  onClick={handleSearchSubmit}
-                  className='ml-2 bg-[#157ab8] hover:bg-[#106ba1] duration-200 text-white px-4 py-2 rounded-md focus:outline-none'
+                  onClick={() => {
+                    handleSearchSubmit();
+                    handleSearch();
+                  }}
+                  className='ml-2 bg-[#157ab8] hover:bg-[#106ba1] duration-200 text-white px-4 py-2 rounded-sm focus:outline-none'
                 >
                   <i className='pi pi-search'></i>
                 </button>
@@ -180,7 +165,7 @@ export function Header() {
                 ref={menuRef}
                 className='absolute z-10 right-0 top-full mt-3 border-2 border-[#61dafb] rounded-md shadow-lg w-44 bg-gray-800'
               >
-                <NavMenu loggedUser={loggedUser} />
+                <NavMenu loggedUser={loggedUser} handleMenu={handleMenu} />
               </div>
             )}
           </div>

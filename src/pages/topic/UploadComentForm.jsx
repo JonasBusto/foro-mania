@@ -89,7 +89,7 @@ export const UploadComentForm = ({
                     : statusCreateComment === 'Cargando'
                 }
                 type='submit'
-                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-10 py-2 duration-200 rounded'
+                className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-10 py-2 duration-200 rounded-sm'
               >
                 {action === 'update'
                   ? statusUpdateComment === 'Cargando'
