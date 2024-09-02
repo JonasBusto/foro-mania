@@ -34,82 +34,76 @@ Backend desarrollado en FireBase
 ### Developers
 
 <div align="center">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-  <td >
-   <table align="center">
-      <tr>
-        <td align="center">
-          <strong>Facundo Elorz</strong>
-        </td>
-      </tr>
-      <tr>
-        <td align="center">
-          <a href="https://github.com/githubfacu" target="_blank">
-            <img style="margin: 10px" src="https://img.shields.io/badge/github-%23007ACC.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" />
-          </a>
-        </td>
-      </tr>
-    </table>
-  </td>
-  <td>
-   <table align="center">
-      <tr>
-        <td align="center">
-          <strong>Oscar Frias Viñals</strong>
-        </td>
-      </tr>
-      <tr>
-        <td align="center">
-          <a href="https://github.com/ofvinals" target="_blank">
-            <img style="margin: 10px" src="https://img.shields.io/badge/github-%23339933.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" />
-          </a>
-        </td>
-      </tr>
-    </table>
-  </td>
-   
-  </tr>
-
-</table>
-<table>
-<tr>
-  <td>
-   <table align="center">
-      <tr>
-        <td align="center">
-          <strong>Kevin Jonas Busto</strong>
-        </td>
-      </tr>
-      <tr>
-        <td align="center">
-          <a href="https://github.com/jonasbusto" target="_blank">
-            <img style="margin: 10px" src="https://img.shields.io/badge/github-%23E34F26.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" />
-          </a>
-        </td>
-      </tr>
-    </table>
-  </td>
-  <td>
-   <table align="center">
-      <tr>
-        <td align="center">
-          <strong>Nassahel Elias</strong>
-        </td>
-      </tr>
-      <tr>
-        <td align="center">
-          <a href="https://github.com/nassahel" target="_blank">
-            <img style="margin: 10px" src="https://img.shields.io/badge/github-%23F7DF1E.svg?style=for-the-badge&logo=github&logoColor=black" alt="GitHub" height="30" />
-          </a>
-        </td>
-      </tr>
-    </table>
-  </td>
-   
-  </tr></table>
-  
-  
+  <table border="0" cellspacing="10" cellpadding="0">
+    <tr>
+      <td>
+        <table align="center" style="width: 200px; height: 100px; margin: 10px;">
+          <tr>
+            <td align="center">
+              <strong>Facundo Elorz</strong>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <a href="https://github.com/githubfacu" target="_blank">
+                <img style="margin: 10px" src="https://img.shields.io/badge/github-%23007ACC.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <table align="center" style="width: 200px; height: 100px; margin: 10px;">
+          <tr>
+            <td align="center">
+              <strong>Oscar Frias Viñals</strong>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <a href="https://github.com/ofvinals" target="_blank">
+                <img style="margin: 10px" src="https://img.shields.io/badge/github-%23339933.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <table align="center" style="width: 200px; height: 100px; margin: 10px;">
+          <tr>
+            <td align="center">
+              <strong>Kevin Jonas Busto</strong>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <a href="https://github.com/jonasbusto" target="_blank">
+                <img style="margin: 10px" src="https://img.shields.io/badge/github-%23E34F26.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" height="30" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <table align="center" style="width: 200px; height: 100px; margin: 10px;">
+          <tr>
+            <td align="center">
+              <strong>Nassahel Elias</strong>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <a href="https://github.com/nassahel" target="_blank">
+                <img style="margin: 10px" src="https://img.shields.io/badge/github-%23F7DF1E.svg?style=for-the-badge&logo=github&logoColor=black" alt="GitHub" height="30" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 </div>
 
 ## Team Leader
