@@ -6,9 +6,12 @@ import { FilterMatchMode } from 'primereact/api';
 import { Link } from 'react-router-dom';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { Dialog } from 'primereact/dialog';
+import { useTopicAction } from '../../hooks/useTopicAction';
 
 export function Categories() {
-  const { categories, enableCategory, disableCategory } = useCategoryAction();
+  const { topics } = useTopicAction();
+  const { categories, enableCategory, disableCategory, deleteCategory } =
+    useCategoryAction();
   const [visible, setVisible] = useState(false);
   const [categoryToModify, setCategoryToModify] = useState(null);
   const [filters, setFilters] = useState({
@@ -45,6 +48,11 @@ export function Categories() {
   };
 
   const categoryAction = (category) => {
+    const [visibleModalDelete, setVisibleModalDelete] = useState(false);
+    const topicsWithCategory = topics?.filter((topic) =>
+      topic.categoryId?.includes(category.uid)
+    );
+
     return (
       <span>
         <div className='flex flex-wrap items-center gap-3'>
@@ -65,6 +73,56 @@ export function Categories() {
               <i className='pi pi-play'></i>
             )}
           </button>
+          {topicsWithCategory && topicsWithCategory.length === 0 ? (
+            <>
+              <button
+                onClick={() => setVisibleModalDelete(true)}
+                className='bg-[#1b95d2] hover:bg-[#157ab8] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4'
+              >
+                <i className='pi pi-trash'></i>
+              </button>
+              <Dialog
+                header='Eliminar categoria'
+                visible={visibleModalDelete}
+                style={{ width: '50vw' }}
+                onHide={() => {
+                  if (!visibleModalDelete) return;
+                  setVisibleModalDelete(false);
+                }}
+              >
+                <p>¿Esta seguro que desea eliminar esta categoria?</p>
+                <p className='text-gray-300'>
+                  <strong>Categoria: </strong>
+                  {category.title}
+                </p>
+                <p className='text-gray-300'>
+                  <strong>Estado: </strong>
+                  Sin usar
+                </p>
+                <div className='mt-5 flex justify-between'>
+                  <button
+                    className='bg-[#1b95d2] hover:bg-[#157ab8] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4'
+                    onClick={() => setVisibleModalDelete(false)}
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    className='shadow bg-red-600 hover:bg-red-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-sm'
+                    onClick={() => {
+                      deleteCategory({ id: category.uid });
+                      setVisibleModalDelete(false);
+                    }}
+                  >
+                    Confirmar
+                  </button>
+                </div>
+              </Dialog>
+            </>
+          ) : (
+            <button className='bg-[#5d8aa0] cursor-default focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4'>
+              <i className='pi pi-trash'></i>
+            </button>
+          )}
         </div>
       </span>
     );
@@ -131,7 +189,7 @@ export function Categories() {
         <Column
           header='Acciones'
           body={categoryAction}
-          style={{ minWidth: '150px' }}
+          style={{ minWidth: '200px' }}
         ></Column>
       </DataTable>
       <Dialog
@@ -148,6 +206,9 @@ export function Categories() {
               la categoría
               <strong> {categoryToModify.title} </strong>?
             </p>
+            <strong className='text-red-400'>
+              Si desea eliminarla, debe quitarla antes de las publicaciones
+            </strong>
             <div className='flex flex-row items-center justify-around gap-3 mt-5'>
               <button
                 onClick={
@@ -155,13 +216,13 @@ export function Categories() {
                     ? handleConfirmDisable
                     : handleConfirmEnable
                 }
-                className='shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
+                className='shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-sm'
               >
                 {categoryToModify.isActive ? 'Inhabilitar' : 'Habilitar'}
               </button>
               <button
                 onClick={() => setVisible(false)}
-                className='shadow bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
+                className='shadow bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-sm'
               >
                 Cancelar
               </button>

@@ -83,9 +83,21 @@ export const EditProfile = () => {
               </Link>
               <button
                 type='button'
-                disabled={userStatusUpdate === 'Cargando'}
-                className='bg-[#1b95d2] px-4 py-2 text-white hover:bg-[#157ab8] focus:outline-none rounded-sm leading-6'
-                onClick={() => updateProfile({ fullName, fileImage })}
+                disabled={
+                  userStatusUpdate === 'Cargando' || fullName.trim() === ''
+                }
+                className={
+                  'px-4 py-2 text-white focus:outline-none rounded-sm leading-6 ' +
+                  (fullName.trim() === ''
+                    ? 'bg-[#4286a8]'
+                    : 'bg-[#1b95d2] hover:bg-[#157ab8]')
+                }
+                onClick={
+                  fullName.trim() === ''
+                    ? () => {}
+                    : () =>
+                        updateProfile({ fullName: fullName.trim(), fileImage })
+                }
               >
                 {userStatusUpdate === 'Cargando' ? (
                   'Cargando'
