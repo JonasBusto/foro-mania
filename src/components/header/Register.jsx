@@ -4,10 +4,17 @@ import { Formik } from 'formik';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { FloatLabel } from 'primereact/floatlabel';
+import { useModal } from '../../hooks/useModal';
 import '../../styles/home.css';
 
-export function Register({ visible, onHide, setOpenRegister, superSwitch }) {
+export function Register({ visible, onHide, setOpenRegister }) {
   const { loginGoogle, register, statusSign } = useAuth();
+  const { switchModalLogin, switchModalRegister } = useModal();
+
+  const superSwitch = () => {
+    switchModalLogin();
+    switchModalRegister();
+  };
 
   return (
     <div>
@@ -26,8 +33,8 @@ export function Register({ visible, onHide, setOpenRegister, superSwitch }) {
           maxHeight: '80vh',
         }}
       >
-        <div className='flex flex-col items-center mb-4'>
-          <h1 className='text-white font-bold text-4xl mb-2'>Foromania</h1>
+        <div className='flex flex-col items-center mb-4 gap-2'>
+          <img src='/img/header-logo.png' alt='Logo de Foromanía' width={250} />
           <h2 className='text-gray-400 text-2xl'>Registrarse</h2>
         </div>
         <div className='w-full max-w-xs mx-auto'>
@@ -106,7 +113,7 @@ export function Register({ visible, onHide, setOpenRegister, superSwitch }) {
                       Nombre completo
                     </label>
                     <InputText
-                      className='border p-2 w-full bg-[#1b1b1b] text-white placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
+                      className='border p-2 w-full bg-[#1b1b1b] text-white placeholder-gray-500 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
                       type='text'
                       id='fullName'
                       name='fullName'
@@ -129,7 +136,7 @@ export function Register({ visible, onHide, setOpenRegister, superSwitch }) {
                       Email
                     </label>
                     <InputText
-                      className='border p-2 w-full bg-[#1b1b1b] text-white placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
+                      className='border p-2 w-full bg-[#1b1b1b] text-white placeholder-gray-500 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
                       type='text'
                       id='email'
                       name='email'
@@ -152,7 +159,7 @@ export function Register({ visible, onHide, setOpenRegister, superSwitch }) {
                       Contraseña
                     </label>
                     <InputText
-                      className='border p-2 w-full bg-[#1b1b1b] text-white placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
+                      className='border p-2 w-full bg-[#1b1b1b] text-white placeholder-gray-500 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
                       type='password'
                       id='password'
                       name='password'
@@ -175,7 +182,7 @@ export function Register({ visible, onHide, setOpenRegister, superSwitch }) {
                       Confirmar contraseña
                     </label>
                     <InputText
-                      className='border p-2 w-full bg-[#1b1b1b] text-white placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
+                      className='border p-2 w-full bg-[#1b1b1b] text-white placeholder-gray-500 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
                       type='password'
                       id='checkPassword'
                       name='checkPassword'
@@ -194,7 +201,7 @@ export function Register({ visible, onHide, setOpenRegister, superSwitch }) {
                 </div>
                 <div className='flex flex-col items-center justify-between'>
                   <button
-                    className='w-full mb-2 bg-[#1b95d2] hover:bg-[#157ab8] text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                    className='w-full mb-2 bg-[#1b95d2] hover:bg-[#157ab8] text-white py-2 px-4 rounded-sm focus:outline-none focus:shadow-outline'
                     type='submit'
                     disabled={statusSign === 'Cargando'}
                   >
@@ -202,7 +209,7 @@ export function Register({ visible, onHide, setOpenRegister, superSwitch }) {
                   </button>
                   <p className='mb-2 text-white'>o</p>
                   <button
-                    className='w-full px-4 py-2 border flex gap-2 border-gray-700 rounded-lg text-white hover:border-gray-500 hover:text-gray-300 hover:shadow transition duration-150'
+                    className='w-full px-4 py-2 border flex justify-center gap-2 border-gray-700 rounded-sm text-white hover:border-gray-500 hover:text-gray-300 hover:shadow transition duration-150'
                     onClick={loginGoogle}
                     type='button'
                     disabled={statusSign === 'Cargando'}

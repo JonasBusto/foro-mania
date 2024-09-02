@@ -66,6 +66,10 @@
   color: transparent;
 }
 
+.custom-nav-menu {
+  padding: 0;
+}
+
 .custom-nav-menu .p-menu {
   position: relative;
   z-index: 1000;
@@ -121,7 +125,9 @@
 }
 
 .p-menuitem-link {
-  background-color: #404040;
+  background-color: #000;
+  max-width: 300px;
+  width: 40vw;
   color: white;
 }
 
@@ -131,8 +137,7 @@
 }
 
 .p-menuitem-link:hover {
-  background-color: white;
-  color: #404040;
+  background-color: #1a1919;
 }
 
 .p-menuitem-link:hover .p-menuitem-text,
@@ -146,4 +151,10 @@
 
 .form-contact .p-float-label {
   width: 100%;
+}
+
+@media (width <= 500px) {
+  .p-menuitem-link {
+    width: 60vw;
+  }
 }

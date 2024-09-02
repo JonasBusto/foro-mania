@@ -1,7 +1,12 @@
 import { switchLogin, switchRegister } from '../store/modals/slice';
-import { useAppDispatch } from './store';
+import { useAppDispatch, useAppSelector } from './store';
 
 export function useModal() {
+  const showRegisterModal = useAppSelector(
+    (state) => state.modal.registerModal
+  );
+  const showLoginModal = useAppSelector((state) => state.modal.loginModal);
+
   const dispatch = useAppDispatch();
 
   const switchModalLogin = () => {
@@ -12,5 +17,10 @@ export function useModal() {
     dispatch(switchRegister());
   };
 
-  return { switchModalLogin, switchModalRegister };
+  return {
+    switchModalLogin,
+    switchModalRegister,
+    showLoginModal,
+    showRegisterModal,
+  };
 }

@@ -77,7 +77,7 @@ export const UsersList = ({
       <IconField iconPosition='left'>
         <InputIcon className='pi pi-search' />
         <InputText
-          className='w-full p-2 pl-10 bg-[#282828] border-[#61dafb] border-2 text-neutral-200 rounded-md'
+          className='w-full p-2 pl-10 bg-[#282828] border-[#61dafb] text-neutral-200 rounded-sm leading-6 shadow-none'
           type='search'
           value={globalFilter}
           onChange={onGlobalFilterChange}

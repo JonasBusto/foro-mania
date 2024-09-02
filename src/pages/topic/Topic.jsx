@@ -162,12 +162,15 @@ export const Topic = () => {
           <div className='flex flex-wrap justify-between items-center border-b border-gray-700'>
             <div>
               <h2 className='text-4xl font-bold'>{topic.title}</h2>
-              <p
-                className='text-black mt-1 mb-4 max-w-fit px-5 py-[3px] rounded-md uppercase font-bold text-sm'
-                style={{ backgroundColor: category.color }}
-              >
-                {category.title}
-              </p>
+              <div className='flex items-center mt-1 mb-4'>
+                <div
+                  className='w-4 h-4'
+                  style={{ backgroundColor: category.color }}
+                ></div>
+                <p className='text-gray-400 leading-6 max-w-fit ps-1 uppercase font-bold text-sm'>
+                  {category.title}
+                </p>
+              </div>
             </div>
             {((showEditTopic && topic.userId === loggedUser?.uid) ||
               loggedUser?.role === 'admin') && (
@@ -399,7 +402,7 @@ export const Topic = () => {
                 />
               ))
             ) : (
-              <div className='italic border rounded-md py-6 px-4 text-center'>
+              <div className='italic border border-gray-400 rounded-sm py-6 px-4 text-center'>
                 <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
               </div>
             )}

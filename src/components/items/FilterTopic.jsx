@@ -57,7 +57,7 @@ export const FilterTopic = ({
 
   const categoryTemplate = (option) => {
     return (
-      <div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-60'>
+      <div className='flex items-center p-3 bg-[#1e1e1e] rounded-sm w-full'>
         <div
           className='w-3 h-3 rounded-full'
           style={{ backgroundColor: option.color }}
@@ -71,9 +71,10 @@ export const FilterTopic = ({
 
   const tagTemplate = (option) => {
     return (
-      <div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-full'>
+      <div className='flex items-center p-3 bg-[#1e1e1e] rounded-sm w-full'>
         <div className='text-md font-medium text-white w-full'>
-          #{option.title}
+          <span className='text-gray-400'>#</span>
+          {option.title}
         </div>
       </div>
     );
@@ -91,7 +92,7 @@ export const FilterTopic = ({
               optionLabel='title'
               placeholder='Categorías'
               filter
-              className='dropdown-category-select bg-[#282828] border-[#61dafb] text-white border-2 rounded-md w-full sm:w-1/4 flex-1'
+              className='dropdown-category-select bg-[#282828] border-[#61dafb] text-white rounded-sm w-full sm:w-1/4 flex-1'
               itemTemplate={categoryTemplate}
               filterInputAutoFocus
             />
@@ -104,7 +105,7 @@ export const FilterTopic = ({
               optionLabel='title'
               placeholder='Tag'
               filter
-              className='dropdown-category-select bg-[#282828] border-[#61dafb] text-white border-2 rounded-md w-full sm:w-1/4 flex-1'
+              className='dropdown-category-select bg-[#282828] border-[#61dafb] text-white rounded-sm w-full sm:w-1/4 flex-1'
               itemTemplate={tagTemplate}
               filterInputAutoFocus
             />
@@ -118,8 +119,10 @@ export const FilterTopic = ({
             {querySearch && (
               <div>
                 <p>
-                  <strong className='me-2'>Tu busqueda:</strong>
-                  {querySearch}
+                  <strong className='me-2 text-gray-300 uppercase text-[12px]'>
+                    Tu busqueda:
+                  </strong>
+                  <span className='text-white'>{querySearch}</span>
                 </p>
               </div>
             )}
@@ -146,7 +149,7 @@ export const FilterTopic = ({
                 queryOrder === 'last'
                   ? 'bg-[#557e92] pointer-events-none'
                   : 'bg-[#1b95d2] hover:bg-[#157ab8]'
-              } text-center text-white rounded-md m-2 p-2 font-semibold  w-full sm:w-28`}
+              } text-center text-white rounded-sm m-2 p-2 font-semibold  w-full sm:w-28`}
             >
               Últimos
             </Link>
@@ -156,7 +159,7 @@ export const FilterTopic = ({
                 queryOrder === 'top'
                   ? 'bg-[#557e92] pointer-events-none'
                   : 'bg-[#1b95d2] hover:bg-[#157ab8]'
-              }  text-center text-white rounded-md m-2 p-2 font-semibold w-full sm:w-28`}
+              }  text-center text-white rounded-sm m-2 p-2 font-semibold w-full sm:w-28`}
             >
               Top
             </Link>
