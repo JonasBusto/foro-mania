@@ -4,10 +4,17 @@ import { Formik } from 'formik';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { FloatLabel } from 'primereact/floatlabel';
+import { useModal } from '../../hooks/useModal';
 import '../../styles/home.css';
 
-export function Login({ visible, onHide, setOpenSignIn, superSwitch }) {
+export function Login({ visible, onHide, setOpenSignIn }) {
   const { loginGoogle, loginEmail, statusSign } = useAuth();
+  const { switchModalLogin, switchModalRegister } = useModal();
+
+  const superSwitch = () => {
+    switchModalLogin();
+    switchModalRegister();
+  };
 
   return (
     <div>
@@ -24,10 +31,15 @@ export function Login({ visible, onHide, setOpenSignIn, superSwitch }) {
         }}
         style={{
           maxHeight: '80vh',
-        }} 
+        }}
       >
         <div className='flex flex-col items-center mb-4 gap-2'>
-          <img data-testid='logo-img' src="/img/header-logo.png" alt="Logo de Foromanía" width={250}/>
+          <img
+            data-testid='logo-img'
+            src='/img/header-logo.png'
+            alt='Logo de Foromanía'
+            width={250}
+          />
           <h2 className='text-gray-400 text-2xl'>Iniciar Sesión</h2>
         </div>
         <div className='w-full max-w-xs mx-auto'>
