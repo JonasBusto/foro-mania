@@ -1,10 +1,10 @@
 export const Team = [
   {
     name: 'Facundo',
-    img: '',
+    img: 'img/team/facu.jpg',
     rol: 'Frontend - Scrum Master',
     github: 'https://github.com/githubfacu',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/facundo-elorz/',
   },
   {
     name: 'Kevin Jonas Busto',
