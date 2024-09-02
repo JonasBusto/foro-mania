@@ -91,7 +91,7 @@ export function NavMenu({ loggedUser }) {
   ];
 
   return (
-    <div className='flex justify-center items-center '>
+    <div className='flex justify-center items-center'>
       {loggedUser && loggedUser.role === 'admin' ? (
         <>
           <Menu
@@ -101,7 +101,7 @@ export function NavMenu({ loggedUser }) {
           <Menu
             model={[...mobileItems, ...itemsAdmin]}
             className='w-full md:w-14rem md:hidden custom-nav-menu '
-          />        
+          />
         </>
       ) : (
         <>

@@ -31,7 +31,7 @@ export const TagsList = () => {
       <div className='mt-6 flex justify-end'>
         <Link
           to='/topic-list'
-          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+          className='bg-[#1b95d2] text-center text-white rounded-sm m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
         >
           Ver mas
         </Link>

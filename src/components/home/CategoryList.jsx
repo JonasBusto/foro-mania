@@ -21,7 +21,7 @@ export const CategoryList = () => {
       <div className='mt-6 flex'>
         <Link
           to='/all-categories'
-          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+          className='bg-[#1b95d2] text-center text-white rounded-sm m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
         >
           Ver mas
         </Link>

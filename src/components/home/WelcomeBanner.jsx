@@ -8,7 +8,10 @@ export const WelcomeBanner = ({ setShowWelcome }) => {
   const dispatch = useDispatch();
 
   return (
-    <div data-testid='welcome-banner' className='border-2 border-neutral-300 py-3 px-6 rounded-md relative bg-neutral-800'>
+    <div
+      data-testid='welcome-banner'
+      className='border-2 border-neutral-300 py-3 px-6 rounded-sm relative bg-neutral-800'
+    >
       <button
         className='absolute top-0 right-2 text-xl'
         onClick={() => setShowWelcome(false)}

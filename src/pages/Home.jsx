@@ -34,7 +34,7 @@ export const Home = () => {
         {loggedUser !== null && (
           <Link
             to='/upload-topic'
-            className='bg-red-600 text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-red-700 duration-200 w-[94%] sm:w-52 '
+            className='bg-red-600 text-center text-white rounded-sm m-2 p-2 font-semibold hover:bg-red-700 duration-200 w-[94%] sm:w-52 '
           >
             Nueva Publicación
           </Link>

@@ -67,7 +67,7 @@ export const EditProfile = () => {
                 id='fullName'
                 type='text'
                 disabled={userStatusUpdate === 'Cargando'}
-                className='w-full p-2 border rounded-md bg-[#121212] text-white border-[#61dafb]'
+                className='w-full p-2 border bg-[#121212] text-white border-[#61dafb] rounded-sm'
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
               />
@@ -77,21 +77,21 @@ export const EditProfile = () => {
               <Link
                 disabled={userStatusUpdate === 'Cargando'}
                 to='/account'
-                className='py-2 px-5 text-sm font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-lg border border-[#61dafb] focus:ring-4 focus:ring-[#61dafb]'
+                className='py-2 px-5 text-sm font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-sm border border-[#61dafb] focus:ring-4 focus:ring-[#61dafb] leading-6'
               >
                 Cancelar
               </Link>
               <button
                 type='button'
                 disabled={userStatusUpdate === 'Cargando'}
-                className='rounded-lg bg-[#1b95d2] px-4 py-2 text-white hover:bg-[#157ab8] focus:outline-none'
+                className='bg-[#1b95d2] px-4 py-2 text-white hover:bg-[#157ab8] focus:outline-none rounded-sm leading-6'
                 onClick={() => updateProfile({ fullName, fileImage })}
               >
                 {userStatusUpdate === 'Cargando' ? (
                   'Cargando'
                 ) : (
                   <>
-                    <i className='pi pi-check'></i>
+                    <i className='pi pi-check me-1'></i>
                     Guardar
                   </>
                 )}

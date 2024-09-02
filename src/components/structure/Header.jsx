@@ -94,7 +94,7 @@ export function Header() {
             <>
               <button
                 onClick={switchModalRegister}
-                className='hidden md:inline text-white rounded text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 md:text-base'
+                className='hidden md:inline text-white rounded-sm text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 md:text-base'
               >
                 Registrarse
               </button>
@@ -106,7 +106,7 @@ export function Header() {
 
               <button
                 onClick={switchModalLogin}
-                className='text-white rounded text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 mr-3 xs:mr-4 md:mr-0 md:text-base'
+                className='text-white rounded-sm text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 mr-3 xs:mr-4 md:mr-0 md:text-base'
               >
                 Iniciar Sesión
               </button>

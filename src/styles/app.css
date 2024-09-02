@@ -86,6 +86,13 @@ html {
   background-color: #121212 !important;
 }
 
+.p-dropdown,
+.p-dropdown :focus {
+  outline: none !important;
+  border: 0 !important;
+  box-shadow: none;
+}
+
 @media (width <= 1200px) {
   .ql-editor img {
     width: 100% !important;
