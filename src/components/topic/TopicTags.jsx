@@ -7,9 +7,9 @@ export function TopicTags({ tags }) {
         <Link
           to={`/topic-list?tag=${tag.uid}`}
           key={tag.uid}
-          className='mt-2 bg-slate-500 hover:bg-slate-600 me-2 px-3 rounded-[4px]'
+          className='mt-2 bg-[#252525] hover:bg-[#313131] me-2 px-3 rounded-sm'
         >
-          <p>{'#' + tag.label}</p>
+          <p className='text-[15px]'>{'#' + tag.label}</p>
         </Link>
       ))}
     </div>

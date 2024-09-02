@@ -32,7 +32,7 @@ export const CategoryMenu = () => {
   }, [selectedCategory, selectedTag, navigate]);
 
   const categoryTemplate = (option) => (
-    <div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-60'>
+    <div className='flex items-center p-3 bg-[#1e1e1e] rounded-sm w-full'>
       <div
         className='w-3 h-3 rounded-full'
         style={{ backgroundColor: option.color }}
@@ -45,9 +45,10 @@ export const CategoryMenu = () => {
 
   const tagTemplate = (option) => {
     return (
-      <div className='flex items-center p-3 bg-[#1e1e1e] rounded-md w-full'>
+      <div className='flex items-center p-3 bg-[#1e1e1e] rounded-sm w-full'>
         <div className='text-md font-medium text-white w-full'>
-          #{option.title}
+          <span className='text-gray-400'>#</span>
+          {option.title}
         </div>
       </div>
     );
@@ -63,7 +64,7 @@ export const CategoryMenu = () => {
           optionLabel='title'
           placeholder='Categorías'
           filter
-          className='dropdown-category-select bg-[#282828] border-[#61dafb] text-white border-2 rounded-md w-full sm:w-1/4 flex-1'
+          className='dropdown-category-select bg-[#282828] text-white border-0 w-full sm:w-1/4 flex-1'
           itemTemplate={categoryTemplate}
           filterInputAutoFocus
         />
@@ -74,25 +75,25 @@ export const CategoryMenu = () => {
           optionLabel='title'
           placeholder='Tags'
           filter
-          className='bg-[#282828] border-[#61dafb] text-white border-2 rounded-md w-full sm:w-1/4 flex-1'
+          className='bg-[#282828] text-white border-0 w-full font-semibold sm:w-1/4 flex-1'
           itemTemplate={tagTemplate}
           filterInputAutoFocus
         />
         <Link
           to='/all-categories'
-          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+          className='bg-[#1b95d2] text-center text-white rounded-sm m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
         >
           Categorías
         </Link>
         <Link
           to='/topic-list?orderBy=last'
-          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+          className='bg-[#1b95d2] text-center text-white rounded-sm m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
         >
           Últimos
         </Link>
         <Link
           to='/topic-list?orderBy=top'
-          className='bg-[#1b95d2] text-center text-white rounded-md m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+          className='bg-[#1b95d2] text-center text-white rounded-sm m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
         >
           Top
         </Link>

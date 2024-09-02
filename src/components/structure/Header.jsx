@@ -4,21 +4,26 @@ import { Login } from '../header/Login';
 import { Register } from '../header/Register';
 import { useAuth } from '../../hooks/useAuth';
 import { useLoad } from '../../hooks/useLoad';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useChatAction } from '../../hooks/useChatAction';
-import { useDispatch, useSelector } from 'react-redux';
-import { switchLogin, switchRegister } from '../../store/modals/slice';
+import { useSelector } from 'react-redux';
+import { useModal } from '../../hooks/useModal';
 
 export function Header() {
   const [openSearch, setOpenSearch] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { loggedUser } = useAuth();
+  const {
+    switchModalLogin,
+    switchModalRegister,
+    showLoginModal,
+    showRegisterModal,
+  } = useModal();
   const { isLoading } = useLoad();
   const menuRef = useRef();
   const searchRef = useRef();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const { listenForNewMessages } = useChatAction();
   const unreadMessagesCount = useSelector(
@@ -28,6 +33,20 @@ export function Header() {
   useEffect(() => {
     listenForNewMessages(loggedUser?.uid, unreadMessagesCount);
   }, [unreadMessagesCount]);
+
+  const handleSearch = () => {
+    setOpenSearch((prevState) => !prevState);
+    setOpenMenu(false);
+  };
+
+  const handleMenu = () => {
+    setOpenMenu((prevState) => !prevState);
+    setOpenSearch(false);
+  };
+
+  const handleSearchSubmit = () => {
+    navigate(`/topic-list?search=${searchQuery}`);
+  };
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -46,37 +65,6 @@ export function Header() {
     };
   }, [location]);
 
-  const registerModal = useSelector((state) => state.modal.registerModal);
-  const loginModal = useSelector((state) => state.modal.loginModal);
-  const dispatch = useDispatch();
-
-  const handleSignUp = () => {
-    dispatch(switchRegister());
-  };
-
-  const handleSignIn = () => {
-    dispatch(switchLogin());
-  };
-
-  const handleSearch = () => {
-    setOpenSearch((prevState) => !prevState);
-    setOpenMenu(false);
-  };
-
-  const handleMenu = () => {
-    setOpenMenu((prevState) => !prevState);
-    setOpenSearch(false);
-  };
-
-  const handleSearchSubmit = () => {
-    navigate(`/topic-list?search=${searchQuery}`);
-  };
-
-  const superSwitch = () => {
-    dispatch(switchRegister())
-    dispatch(switchLogin())
-  }
-
   return (
     <header className='relative bg-black text-white'>
       <section className='flex items-center justify-between flex-wrap flex-row py-2 px-3 xs:px-4 md:py-0 mx-auto'>
@@ -85,8 +73,18 @@ export function Header() {
             to='/'
             className='text-white w-[110px] xs:w-[130px] text-3xl font-bold hover:opacity-80 duration-200 m-2 md:m-5 md:w-[250px]'
           >
-            <img src='/img/header-logo.png' alt='Logo de Foromanía' className='hidden md:flex' />
-            <img src='/img/logo-foromania-footer.png' alt='Logo de Foromanía' className='md:hidden' />
+            <img
+              src='/img/header-logo.png'
+              alt='Logo de Foromanía'
+              className='hidden md:flex'
+              draggable={false}
+            />
+            <img
+              src='/img/logo-foromania-footer.png'
+              alt='Logo de Foromanía'
+              className='md:hidden'
+              draggable={false}
+            />
           </Link>
         </div>
 
@@ -94,29 +92,27 @@ export function Header() {
           {!loggedUser && !isLoading && (
             <>
               <button
-                onClick={handleSignUp}
-                className='hidden md:inline text-white rounded text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 md:text-base'
+                onClick={switchModalRegister}
+                className='hidden md:inline text-white rounded-sm text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 md:text-base'
               >
                 Registrarse
               </button>
               <Register
-                visible={registerModal}
-                setOpenRegister={() => dispatch(switchRegister())}
-                onHide={() => dispatch(switchRegister())}
-                superSwitch={superSwitch}
+                visible={showRegisterModal}
+                setOpenRegister={switchModalRegister}
+                onHide={switchModalRegister}
               />
 
               <button
-                onClick={handleSignIn}
-                className='text-white rounded text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 mr-3 xs:mr-4 md:mr-0 md:text-base'
+                onClick={switchModalLogin}
+                className='text-white rounded-sm text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 mr-3 xs:mr-4 md:mr-0 md:text-base'
               >
                 Iniciar Sesión
               </button>
               <Login
-                visible={loginModal}
-                setOpenSignIn={() => dispatch(switchLogin())}
-                onHide={() => dispatch(switchLogin())}
-                superSwitch={superSwitch}
+                visible={showLoginModal}
+                setOpenSignIn={switchModalLogin}
+                onHide={switchModalLogin}
               />
             </>
           )}
@@ -130,6 +126,7 @@ export function Header() {
                 className='object-cover w-full h-full'
                 src={loggedUser.photoProfile}
                 alt='Foto de perfil'
+                draggable={false}
               />
             </Link>
           )}
@@ -155,17 +152,20 @@ export function Header() {
             </button>
 
             {openSearch && (
-              <div className='absolute bg-gray-800 right-0 top-full mt-2 p-3 border border-gray-700 rounded-md shadow-lg w-[80vw] xl:w-[800px] flex'>
+              <div className='absolute bg-[#000000] right-0 top-full mt-2 p-3  shadow-lg w-[80vw] xl:w-[800px] flex'>
                 <input
                   type='text'
                   placeholder='Buscar...'
-                  className='w-full px-2 py-1 bg-[#1b1b1b] text-white placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
+                  className='w-full px-2 py-1 bg-[#1b1b1b] text-white placeholder-gray-500 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#61dafb]'
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button
-                  onClick={handleSearchSubmit}
-                  className='ml-2 bg-[#157ab8] hover:bg-[#106ba1] duration-200 text-white px-4 py-2 rounded-md focus:outline-none'
+                  onClick={() => {
+                    handleSearchSubmit();
+                    handleSearch();
+                  }}
+                  className='ml-2 bg-[#157ab8] hover:bg-[#106ba1] duration-200 text-white px-4 py-2 rounded-sm focus:outline-none'
                 >
                   <i className='pi pi-search'></i>
                 </button>
@@ -180,9 +180,9 @@ export function Header() {
             {openMenu && (
               <div
                 ref={menuRef}
-                className='absolute z-10 right-0 top-full mt-3 border-2 border-[#61dafb] rounded-md shadow-lg w-44 bg-gray-800'
+                className='absolute z-10 right-0 border-2 border-[#157ab8] top-full mt-3 rounded-sm shadow-lg'
               >
-                <NavMenu loggedUser={loggedUser} />
+                <NavMenu loggedUser={loggedUser} handleMenu={handleMenu} />
               </div>
             )}
           </div>
