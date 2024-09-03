@@ -1,6 +1,6 @@
 export const Team = [
   {
-    name: 'Facundo',
+    name: 'Facundo Elorz',
     img: 'img/team/facu.jpg',
     rol: 'Frontend - Scrum Master',
     github: 'https://github.com/githubfacu',
@@ -15,7 +15,7 @@ export const Team = [
   },
   {
     name: 'Oscar Frias Viñals',
-    img: '',
+    img: 'img/team/ofv.jpg',
     rol: 'Frontend',
     github: 'https://github.com/ofvinals',
     linkedin: 'https://www.linkedin.com/in/ofvinals/',
