@@ -17,11 +17,13 @@ import { UsersSummary } from '../pages/users/UsersSummary';
 import ChatView from '../pages/ChatView';
 import { Tags } from '../pages/tag/Tags';
 import { FormTag } from '../pages/tag/FormTag';
+import { Error404 } from '../pages/Error404';
 
 export function AppRoutes() {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
+      <Route path='*' element={<Error404 />} />
       <Route path='/topic/:id' element={<Topic />} />
       <Route path='/topic' element={<Topic />} />
       <Route path='/all-categories' element={<CategoriesView />} />

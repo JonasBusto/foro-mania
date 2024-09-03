@@ -12,13 +12,20 @@ import {
   onChildAdded,
 } from 'firebase/database';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setUnreadMessagesCount } from '../store/chat/slice';
+import {
+  clearUnreadMessagesCount,
+  setUnreadMessagesCount,
+} from '../store/chat/slice';
 import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from './store';
 
 export function useChatAction() {
+  const unreadMessagesCount = useAppSelector(
+    (state) => state.chat.unreadMessagesCount
+  );
+
   const [newMessages, setNewMessages] = useState([]);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const findOrCreateChat = async (user1Id, user2Id) => {
     const db = getDatabase();
@@ -166,6 +173,10 @@ export function useChatAction() {
     }
   };
 
+  const clearCountMessagesByUser = () => {
+    dispatch(clearUnreadMessagesCount());
+  };
+
   return {
     findOrCreateChat,
     sendMessage,
@@ -175,5 +186,7 @@ export function useChatAction() {
     getTotalUnreadMessages,
     listenForNewMessages,
     newMessages,
+    clearCountMessagesByUser,
+    unreadMessagesCount,
   };
 }

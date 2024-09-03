@@ -1,30 +1,30 @@
 export const Team = [
   {
-    name: 'Facundo',
-    img: '',
+    name: 'Facundo Elorz',
+    img: 'img/team/facu.jpg',
     rol: 'Frontend - Scrum Master',
     github: 'https://github.com/githubfacu',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/facundo-elorz/',
   },
   {
     name: 'Kevin Jonas Busto',
-    img: '',
+    img: 'img/team/jonas.jpeg',
     rol: 'Frontend / Backend',
     github: 'https://github.com/JonasBusto',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/kevinjonasbusto/',
   },
   {
     name: 'Oscar Frias Viñals',
-    img: '',
+    img: 'img/team/ofv.jpg',
     rol: 'Frontend',
     github: 'https://github.com/ofvinals',
     linkedin: 'https://www.linkedin.com/in/ofvinals/',
   },
   {
     name: 'Nassahel Elias',
-    img: '',
+    img: 'img/team/nassa.jpg',
     rol: 'Frontend',
     github: 'https://github.com/nassahel',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/nassahel/',
   },
 ];

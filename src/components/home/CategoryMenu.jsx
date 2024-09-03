@@ -64,7 +64,7 @@ export const CategoryMenu = () => {
           optionLabel='title'
           placeholder='Categorías'
           filter
-          className='dropdown-category-select bg-[#282828] text-white border-0 w-full sm:w-1/4 flex-1'
+          className='dropdown-category-select bg-[#282828] text-white font-semibold border-0 w-full sm:w-1/4 flex-1'
           itemTemplate={categoryTemplate}
           filterInputAutoFocus
         />
