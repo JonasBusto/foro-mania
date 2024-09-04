@@ -52,7 +52,7 @@ export const TopicComment = ({
 
   return (
     <div className='relative'>
-      <div className='py-3 flex flex-wrap justify-between'>
+      <div className='py-3 flex  justify-between'>
         <div className='flex gap-4'>
           <Link to={'/users-view/' + userFiltered?.uid + '/summary'}>
             <img
@@ -79,9 +79,9 @@ export const TopicComment = ({
             </div>
           </div>
         </div>
-        <div>
-          <p className='text-gray-300 text-sm'>
-            Hace {TimeToNow(data.createdAt)}
+        <div >
+          <p className='text-gray-300 text-xs  lg:text-sm'>
+           <span className='hidden lg:inline'>Hace</span>  {TimeToNow(data.createdAt)}
           </p>
         </div>
       </div>

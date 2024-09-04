@@ -74,7 +74,7 @@ export const TopicListTopic = ({ topic, type = '' }) => {
           >
             <div className='flex flex-col flex-grow'>
               <h3
-                className='m-0 leading-4 sm:leading-5 text-lg text-[3vw] md:text-[16.3px] text-white w-[95%] block xl:hidden'
+                className='m-0 leading-4 sm:leading-5 text-sm  md:text-[16.3px] text-white w-[95%] block xl:hidden'
                 style={{ fontWeight: '500' }}
               >
                 {topic.title.length > 70
@@ -184,7 +184,7 @@ export const TopicListTopic = ({ topic, type = '' }) => {
             to={`/topic/${topic.uid}`}
             className='w-full md:w-7/12 text-start'
           >
-            <h2 className='text-[20px] sm:text-lg leading-5 font-semibold mb-0 sm:mb-1 pe-4'>
+            <h2 className='text-lg lg:text-xl sm:text-lg leading-5 font-semibold mb-0 sm:mb-1 pe-4'>
               {topic.title}
             </h2>
             <div className='flex items-center mt-1 mb-2 hidden-summary-list-user'>
@@ -196,7 +196,7 @@ export const TopicListTopic = ({ topic, type = '' }) => {
                 {categorieFiltered.title}
               </p>
             </div>
-            <p className='leading-5 pe-7'>
+            <p className='leading-5 pe-7 text-sm lg:text-base text-neutral-400'>
               {stripHtmlTags(topic.content).length > 150 ? (
                 <>
                   {stripHtmlTags(topic.content.slice(0, 150))}
@@ -235,24 +235,24 @@ export const TopicListTopic = ({ topic, type = '' }) => {
                 </Link>
               ))}
             </div>
-            <div className='w-8/12 md:w-6/12 flex mt-3 md:mt-0 leading-3'>
+            <div className='w-8/12 md:w-6/12 flex mt-3 md:mt-0 ms-auto leading-3'>
               <div className='w-1/2 flex flex-col items-center justify-end hidden-summary-list-user px-1'>
-                <p>
+                <p className='text-xs lg:text-base'>
                   {commentsOfTopicUserFiltered.length + 1 > 9
                     ? '+9'
                     : commentsOfTopicUserFiltered.length + 1}
                 </p>
-                <p className='md:hidden text-sm'>Usuarios</p>
+                <p className='md:hidden text-xs lg:text-sm'>Usuarios</p>
               </div>
               <div className='w-1/2 flex items-center justify-end md:justify-center flex-col px-1'>
-                <p>{filteredComments.length}</p>
-                <p className='md:hidden text-sm'>Comentarios</p>
+                <p className='text-xs lg:text-base'>{filteredComments.length}</p>
+                <p className='md:hidden text-xs lg:text-sm'>Comentarios</p>
               </div>
               <div className='w-1/2 flex items-center justify-end md:justify-center flex-col px-1'>
-                <p className='text-sm'>
+                <p className='text-xs lg:text-sm'>
                   {TimeToNow(mostRecentComment.createdAt)}
                 </p>
-                <p className='md:hidden text-sm'>Actualizado</p>
+                <p className='md:hidden text-xs lg:text-sm'>Actualizado</p>
               </div>
             </div>
           </div>
