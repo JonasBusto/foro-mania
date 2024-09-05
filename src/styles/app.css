@@ -132,14 +132,10 @@ html {
   .info-topic-detail {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
   }
 
-  .created-by img {
-    width: 15vw;
-    height: 15vw;
-  }
-
+  
   .contain-btn-detail-topic {
     border: 0;
     margin: 0;
