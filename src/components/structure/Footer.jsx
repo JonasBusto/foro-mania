@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FormContact } from '../home/FormContact';
+import { FormContact } from '../footer/FormContact';
 import { format } from 'date-fns';
 
 export function Footer() {

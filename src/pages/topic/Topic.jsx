@@ -161,16 +161,16 @@ export const Topic = () => {
         <div className='mt-16'>
           <div className='flex flex-wrap justify-between items-center border-b border-gray-700'>
             <div>
-              <h2 className='text-4xl font-bold'>{topic.title}</h2>
+              <h2 className='text-xl lg:text-4xl font-bold'>{topic.title}</h2>
               <Link
                 to={'/topic-list?category=' + category.uid}
-                className='flex items-center mt-1 mb-4 hover:opacity-85'
+                className='flex mt-1 mb-4 hover:opacity-85'
               >
                 <div
                   className='w-4 h-4'
                   style={{ backgroundColor: category.color }}
                 ></div>
-                <p className='text-gray-400 leading-6 max-w-fit ps-1 uppercase font-bold text-sm'>
+                <p className='text-gray-400 max-w-fit ps-1 uppercase font-bold text-xs lg:text-sm'>
                   {category.title}
                 </p>
               </Link>
@@ -259,7 +259,7 @@ export const Topic = () => {
               <div className='flex flex-col'>
                 <Link
                   to={'/users-view/' + user?.uid + '/summary'}
-                  className='text-xl font-semibold'
+                  className='text-lg lg:text-xl font-semibold'
                 >
                   {user.fullName}
                 </Link>
@@ -290,7 +290,7 @@ export const Topic = () => {
           <div className='mt-4'>
             <TextEditor value={topic.content} readOnly={true} />
           </div>
-          <div className='mt-8 flex flex-wrap justify-between border border-gray-600 bg-[#202020]'>
+          <div className='mt-8 flex justify-between border border-gray-600 bg-[#202020]'>
             <div className='flex gap-4 px-2 md:px-4 py-2 md:py-3 info-topic-detail'>
               <CreatedBy user={user} topic={topic} />
               {lastCommentUser && (
@@ -312,7 +312,7 @@ export const Topic = () => {
               {!loggedUser && !showDetailTopic && (
                 <CountLikesOfTopic
                   content={reactionsOfTopic}
-                  query='mb-2 sm:mb-0'
+                  query=''
                 />
               )}
             </div>
@@ -343,7 +343,7 @@ export const Topic = () => {
                   <i
                     className={`pi ${
                       showDetailTopic ? 'pi-angle-up' : 'pi-angle-down'
-                    } text-[32px]`}
+                    } text-[25px]`}
                   ></i>
                 </button>
               </div>
@@ -358,20 +358,20 @@ export const Topic = () => {
                 />
               </div>
               <div className='flex flex-col md:flex-row justify-between border border-t-0 border-gray-600 bg-[#202020]'>
-                <div className='px-2 md:px-4 py-2 md:py-3 flex justify-center sm:justify-start flex-wrap'>
+                <div className='px-2 md:px-4 py-2 md:py-3 flex justify-center sm:justify-start'>
                   <CountAllAnswers
                     allComments={allComments}
-                    query='mb-2 sm:mb-0 md:hidden'
+                    query=' md:hidden'
                   />
                   <CountFavoritesOfTopic
                     favorites={favorites}
                     topic={topic}
-                    query='mb-2 sm:mb-0 lg:hidden'
+                    query=' lg:hidden'
                   />
                   {(loggedUser || showDetailTopic) && (
                     <CountLikesOfTopic
                       content={reactionsOfTopic}
-                      query='mb-2 sm:mb-0'
+                      query=''
                     />
                   )}
                   <CountDislikesOfTopic content={reactionsOfTopic} />
@@ -379,7 +379,7 @@ export const Topic = () => {
                     <LastAnswer
                       lastCommentUser={lastCommentUser}
                       lastComment={allComments[0]}
-                      query='mb-2 sm:mb-0 sm:hidden flex'
+                      query='sm:hidden flex'
                     />
                   )}
                 </div>
@@ -387,7 +387,7 @@ export const Topic = () => {
             </>
           )}
           <div className='mt-6'>
-            <h4 className='text-[2rem] font-bold mt-10'>Comentarios: </h4>
+            <h4 className='text-2xl lg:text-3xl font-bold mt-10'>Comentarios: </h4>
             {allComments.length > 0 ? (
               allComments.map((item, i) => (
                 <TopicComment
@@ -417,7 +417,7 @@ export const Topic = () => {
               topic={topic}
             />
           ) : (
-            <div className='border border-neutral-400 p-6 rounded-md my-4'>
+            <div className='border border-neutral-400 py-6 lg:px-6 rounded-md my-4'>
               <p className='text-center text-neutral-400'>
                 Para comentar, por favor{' '}
                 <button

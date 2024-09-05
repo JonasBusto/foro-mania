@@ -81,19 +81,19 @@ export const CategoryMenu = () => {
         />
         <Link
           to='/all-categories'
-          className='bg-[#1b95d2] text-center text-white rounded-sm m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+          className='bg-[#1b95d2] text-center text-white rounded-sm mx-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
         >
           Categorías
         </Link>
         <Link
           to='/topic-list?orderBy=last'
-          className='bg-[#1b95d2] text-center text-white rounded-sm m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+          className='bg-[#1b95d2] text-center text-white rounded-sm mx-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
         >
           Últimos
         </Link>
         <Link
           to='/topic-list?orderBy=top'
-          className='bg-[#1b95d2] text-center text-white rounded-sm m-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
+          className='bg-[#1b95d2] text-center text-white rounded-sm mx-2 p-2 font-semibold hover:bg-[#157ab8] w-full sm:w-28'
         >
           Top
         </Link>
