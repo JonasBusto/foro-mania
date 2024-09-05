@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { useCommentAction } from '../../hooks/useCommentAction';
 import { TextEditor } from '../../components/topic/TextEditor';
 import { Loader } from '../../components/items/Loader';
+import { STATUS_SLICE_STORE } from '../../helpers/constants.js';
 
 export const UploadComentForm = ({
   loggedUser,
@@ -40,7 +41,10 @@ export const UploadComentForm = ({
     };
   }
 
-  if (statusComment === 'Cargando' || statusComments === 'Cargando') {
+  if (
+    statusComment === STATUS_SLICE_STORE.LOADING ||
+    statusComments === STATUS_SLICE_STORE.LOADING
+  ) {
     return <Loader />;
   }
 
@@ -85,17 +89,17 @@ export const UploadComentForm = ({
               <button
                 disabled={
                   action === 'update'
-                    ? statusUpdateComment === 'Cargando'
-                    : statusCreateComment === 'Cargando'
+                    ? statusUpdateComment === STATUS_SLICE_STORE.LOADING
+                    : statusCreateComment === STATUS_SLICE_STORE.LOADING
                 }
                 type='submit'
                 className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-10 py-2 duration-200 rounded-sm'
               >
                 {action === 'update'
-                  ? statusUpdateComment === 'Cargando'
+                  ? statusUpdateComment === STATUS_SLICE_STORE.LOADING
                     ? 'Cargando'
                     : 'Cargar'
-                  : statusCreateComment === 'Cargando'
+                  : statusCreateComment === STATUS_SLICE_STORE.LOADING
                   ? 'Cargando'
                   : 'Cargar'}
               </button>

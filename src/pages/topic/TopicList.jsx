@@ -7,6 +7,7 @@ import { useLoad } from '../../hooks/useLoad';
 import { BannerAdversiting } from '../../components/items/BannerAdversiting';
 import { Loader } from '../../components/items/Loader';
 import { FilterTopic } from '../../components/items/FilterTopic';
+import { USER_REACTION } from '../../helpers/constants';
 
 export const TopicList = () => {
   const { topics, clearStateCategory } = useTopicAction();
@@ -24,7 +25,8 @@ export const TopicList = () => {
 
   const countLikes = (topicId) => {
     return reactions.filter(
-      (reaction) => reaction.contentId === topicId && reaction.type === 'like'
+      (reaction) =>
+        reaction.contentId === topicId && reaction.type === USER_REACTION.LIKE
     ).length;
   };
 

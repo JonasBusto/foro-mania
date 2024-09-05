@@ -1,5 +1,6 @@
 import { Menu } from 'primereact/menu';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { USER_ROLE } from '../../helpers/constants';
 
 export function NavMenu({ loggedUser, handleMenu }) {
   const navigate = useNavigate();
@@ -122,7 +123,7 @@ export function NavMenu({ loggedUser, handleMenu }) {
 
   return (
     <div className='flex justify-center items-center'>
-      {loggedUser && loggedUser.role === 'admin' ? (
+      {loggedUser && loggedUser.role === USER_ROLE.ADMINISTRATOR ? (
         <>
           <Menu
             model={[...items, ...itemsAdmin]}

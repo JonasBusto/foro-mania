@@ -10,6 +10,7 @@ import { useReactionAction } from '../../hooks/useReactionAction';
 import { UserReactions } from '../../components/users/UserReactions';
 import { Loader } from '../../components/items/Loader';
 import useDocTitle from '../../hooks/useDocTitle';
+import { STATUS_SLICE_STORE } from '../../helpers/constants';
 
 export const UsersSummary = () => {
   const { id } = useParams();
@@ -32,7 +33,10 @@ export const UsersSummary = () => {
     getUser({ id });
   }, [id]);
 
-  if (userStatus === 'Inactivo' || userStatus === 'Cargando') {
+  if (
+    userStatus === STATUS_SLICE_STORE.IDLE ||
+    userStatus === STATUS_SLICE_STORE.LOADING
+  ) {
     return <Loader />;
   }
 
