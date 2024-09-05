@@ -29,7 +29,11 @@ import {
   UsersOfTopic,
 } from '../../components/topic/TopicDetail';
 import { useModal } from '../../hooks/useModal';
-import { STATUS_SLICE_STORE, USER_ROLE } from '../../helpers/constants';
+import {
+  STATUS_SLICE_STORE,
+  TYPE_CONTENT,
+  USER_ROLE,
+} from '../../helpers/constants';
 
 export const Topic = () => {
   const { id } = useParams();
@@ -334,7 +338,7 @@ export const Topic = () => {
                   )}
                   addFavorite={addFavorite}
                   deleteFavorite={deleteFavorite}
-                  typeContent='topic'
+                  typeContent={TYPE_CONTENT.TOPIC}
                 />
               </div>
               <div className='ms-4 cursor-pointer border-l-2 border-gray-600 flex justify-center items-center contain-btn-detail-topic'>

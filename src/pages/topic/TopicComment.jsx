@@ -8,7 +8,11 @@ import { Dialog } from 'primereact/dialog';
 import { UploadComentForm } from './UploadComentForm';
 import { Link } from 'react-router-dom';
 import { useCommentAction } from '../../hooks/useCommentAction';
-import { STATUS_SLICE_STORE, USER_ROLE } from '../../helpers/constants';
+import {
+  STATUS_SLICE_STORE,
+  TYPE_CONTENT,
+  USER_ROLE,
+} from '../../helpers/constants';
 
 export const TopicComment = ({
   data,
@@ -161,7 +165,7 @@ export const TopicComment = ({
                 deleteReaction={deleteReaction}
                 loggedUser={loggedUser}
                 content={data}
-                typeContent='comment'
+                typeContent={TYPE_CONTENT.COMMENT}
               />
             </div>
           </div>

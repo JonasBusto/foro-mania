@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useModal } from '../../hooks/useModal';
-import { USER_REACTION } from '../../helpers/constants';
+import { TYPE_CONTENT, USER_REACTION } from '../../helpers/constants';
 
 export const ReactionButton = ({
   reactions,
@@ -12,7 +12,7 @@ export const ReactionButton = ({
   favorites,
   addFavorite,
   deleteFavorite,
-  typeContent = 'comment',
+  typeContent = TYPE_CONTENT.COMMENT,
 }) => {
   const [isLoadingReaction, setIsLoadingReaction] = useState(false);
   const { switchModalLogin } = useModal();
@@ -69,7 +69,7 @@ export const ReactionButton = ({
             ></i>
           </div>
         )}
-        {typeContent === 'comment' && (
+        {typeContent === TYPE_CONTENT.COMMENT && (
           <p className='text-sm text-gray-200'>
             {
               reactions.filter(
@@ -120,13 +120,13 @@ export const ReactionButton = ({
               isLoadingReaction ? 'pointer-events-none' : ''
             }`}
             style={
-              typeContent === 'topic'
+              typeContent === TYPE_CONTENT.TOPIC
                 ? { fontSize: '1.6rem', fontWeight: 400 }
                 : {}
             }
           ></i>
         ) : (
-          typeContent === 'comment' && (
+          typeContent === TYPE_CONTENT.COMMENT && (
             <p
               className='text-gray-400 hover:text-gray-300'
               onClick={switchModalLogin}
@@ -177,13 +177,13 @@ export const ReactionButton = ({
               isLoadingReaction ? 'pointer-events-none' : ''
             }`}
             style={
-              typeContent === 'topic'
+              typeContent === TYPE_CONTENT.TOPIC
                 ? { fontSize: '1.6rem', fontWeight: 400 }
                 : {}
             }
           ></i>
         ) : (
-          typeContent === 'comment' && (
+          typeContent === TYPE_CONTENT.COMMENT && (
             <p
               className='text-gray-400 hover:text-gray-300'
               onClick={switchModalLogin}
@@ -192,7 +192,7 @@ export const ReactionButton = ({
             </p>
           )
         )}
-        {typeContent === 'comment' && (
+        {typeContent === TYPE_CONTENT.COMMENT && (
           <p className='text-sm text-gray-200'>
             {
               reactions.filter(
