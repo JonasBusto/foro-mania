@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useModal } from '../../hooks/useModal';
+import { USER_REACTION } from '../../helpers/constants';
 
 export const ReactionButton = ({
   reactions,
@@ -70,14 +71,18 @@ export const ReactionButton = ({
         )}
         {typeContent === 'comment' && (
           <p className='text-sm text-gray-200'>
-            {reactions.filter((reaction) => reaction.type === 'like').length}
+            {
+              reactions.filter(
+                (reaction) => reaction.type === USER_REACTION.LIKE
+              ).length
+            }
           </p>
         )}
         {loggedUser ? (
           <i
             onClick={
               reactionLoggedUser && reactionLoggedUser.userId === loggedUser.uid
-                ? reactionLoggedUser.type === 'like'
+                ? reactionLoggedUser.type === USER_REACTION.LIKE
                   ? () =>
                       deleteReaction(
                         { id: reactionLoggedUser.uid },
@@ -87,7 +92,7 @@ export const ReactionButton = ({
                       updateReaction(
                         {
                           reaction: {
-                            type: 'like',
+                            type: USER_REACTION.LIKE,
                           },
                           id: reactionLoggedUser.uid,
                         },
@@ -97,7 +102,7 @@ export const ReactionButton = ({
                     addReaction(
                       {
                         userId: loggedUser.uid,
-                        type: 'like',
+                        type: USER_REACTION.LIKE,
                         contentId: content.uid,
                       },
                       {
@@ -107,7 +112,7 @@ export const ReactionButton = ({
             }
             className={`pi ${
               reactionLoggedUser &&
-              reactionLoggedUser.type === 'like' &&
+              reactionLoggedUser.type === USER_REACTION.LIKE &&
               reactionLoggedUser.userId === loggedUser.uid
                 ? 'pi-thumbs-up-fill text-[#1b95d2]'
                 : 'pi-thumbs-up text-gray-400'
@@ -136,7 +141,7 @@ export const ReactionButton = ({
           <i
             onClick={
               reactionLoggedUser && reactionLoggedUser.userId === loggedUser.uid
-                ? reactionLoggedUser.type === 'unlike'
+                ? reactionLoggedUser.type === USER_REACTION.DISLIKE
                   ? () =>
                       deleteReaction(
                         { id: reactionLoggedUser.uid },
@@ -146,7 +151,7 @@ export const ReactionButton = ({
                       updateReaction(
                         {
                           reaction: {
-                            type: 'unlike',
+                            type: USER_REACTION.DISLIKE,
                           },
                           id: reactionLoggedUser.uid,
                         },
@@ -156,7 +161,7 @@ export const ReactionButton = ({
                     addReaction(
                       {
                         userId: loggedUser.uid,
-                        type: 'unlike',
+                        type: USER_REACTION.DISLIKE,
                         contentId: content.uid,
                       },
                       { handleChangeLoadingReaction }
@@ -164,7 +169,7 @@ export const ReactionButton = ({
             }
             className={`pi ${
               reactionLoggedUser &&
-              reactionLoggedUser.type === 'unlike' &&
+              reactionLoggedUser.type === USER_REACTION.DISLIKE &&
               reactionLoggedUser.userId === loggedUser.uid
                 ? 'pi-thumbs-down-fill text-red-500'
                 : 'pi-thumbs-down text-gray-400'
@@ -189,7 +194,11 @@ export const ReactionButton = ({
         )}
         {typeContent === 'comment' && (
           <p className='text-sm text-gray-200'>
-            {reactions.filter((reaction) => reaction.type === 'unlike').length}
+            {
+              reactions.filter(
+                (reaction) => reaction.type === USER_REACTION.DISLIKE
+              ).length
+            }
           </p>
         )}
       </div>

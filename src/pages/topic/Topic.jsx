@@ -29,6 +29,7 @@ import {
   UsersOfTopic,
 } from '../../components/topic/TopicDetail';
 import { useModal } from '../../hooks/useModal';
+import { STATUS_SLICE_STORE } from '../../helpers/constants';
 
 export const Topic = () => {
   const { id } = useParams();
@@ -125,12 +126,12 @@ export const Topic = () => {
   }, [loggedUser]);
 
   if (
-    statusTopic === 'Inactivo' ||
-    statusTopic === 'Cargando' ||
-    userStatus === 'Inactivo' ||
-    userStatus === 'Cargando' ||
-    statusCategory === 'Inactivo' ||
-    statusCategory === 'Cargando' ||
+    statusTopic === STATUS_SLICE_STORE.IDLE ||
+    statusTopic === STATUS_SLICE_STORE.LOADING ||
+    userStatus === STATUS_SLICE_STORE.IDLE ||
+    userStatus === STATUS_SLICE_STORE.LOADING ||
+    statusCategory === STATUS_SLICE_STORE.IDLE ||
+    statusCategory === STATUS_SLICE_STORE.LOADING ||
     !topic ||
     !category
   ) {
@@ -223,18 +224,22 @@ export const Topic = () => {
                   <p>Esta seguro que desea eliminar la publicación?</p>
                   <div className='flex justify-between mt-10'>
                     <button
-                      disabled={statusDeleteTopic === 'Cargando'}
+                      disabled={
+                        statusDeleteTopic === STATUS_SLICE_STORE.LOADING
+                      }
                       className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
                       onClick={() => setVisibleDialogDelete(false)}
                     >
                       Cancelar
                     </button>
                     <button
-                      disabled={statusDeleteTopic === 'Cargando'}
+                      disabled={
+                        statusDeleteTopic === STATUS_SLICE_STORE.LOADING
+                      }
                       className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
                       onClick={() => deleteTopic({ id: topic.uid })}
                     >
-                      {statusDeleteTopic === 'Cargando'
+                      {statusDeleteTopic === STATUS_SLICE_STORE.LOADING
                         ? 'Cargando'
                         : 'Confirmar'}
                     </button>
@@ -310,10 +315,7 @@ export const Topic = () => {
                 query='hidden lg:flex'
               />
               {!loggedUser && !showDetailTopic && (
-                <CountLikesOfTopic
-                  content={reactionsOfTopic}
-                  query=''
-                />
+                <CountLikesOfTopic content={reactionsOfTopic} query='' />
               )}
             </div>
             <div className='flex contain-btn-topic-detail'>
@@ -369,10 +371,7 @@ export const Topic = () => {
                     query=' lg:hidden'
                   />
                   {(loggedUser || showDetailTopic) && (
-                    <CountLikesOfTopic
-                      content={reactionsOfTopic}
-                      query=''
-                    />
+                    <CountLikesOfTopic content={reactionsOfTopic} query='' />
                   )}
                   <CountDislikesOfTopic content={reactionsOfTopic} />
                   {lastCommentUser && (
@@ -387,7 +386,9 @@ export const Topic = () => {
             </>
           )}
           <div className='mt-6'>
-            <h4 className='text-2xl lg:text-3xl font-bold mt-10'>Comentarios: </h4>
+            <h4 className='text-2xl lg:text-3xl font-bold mt-10'>
+              Comentarios:{' '}
+            </h4>
             {allComments.length > 0 ? (
               allComments.map((item, i) => (
                 <TopicComment
@@ -455,20 +456,20 @@ export const Topic = () => {
         </p>
         <div className='flex justify-between mt-10'>
           <button
-            disabled={statusActiveTopic === 'Cargando'}
+            disabled={statusActiveTopic === STATUS_SLICE_STORE.LOADING}
             className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
             onClick={() => setVisible(false)}
           >
             Cancelar
           </button>
           <button
-            disabled={statusActiveTopic === 'Cargando'}
+            disabled={statusActiveTopic === STATUS_SLICE_STORE.LOADING}
             className={`text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded`}
             onClick={
               topic?.isActive ? handleConfirmDisable : handleConfirmEnable
             }
           >
-            {statusActiveTopic === 'Cargando'
+            {statusActiveTopic === STATUS_SLICE_STORE.LOADING
               ? 'Cargando'
               : topic?.isActive
               ? 'Suspendar'

@@ -6,6 +6,7 @@ import { InputText } from 'primereact/inputtext';
 import { FloatLabel } from 'primereact/floatlabel';
 import { useModal } from '../../hooks/useModal';
 import '../../styles/home.css';
+import { STATUS_SLICE_STORE } from '../../helpers/constants';
 
 export function Register({ visible, onHide, setOpenRegister }) {
   const { loginGoogle, register, statusSign } = useAuth();
@@ -203,16 +204,18 @@ export function Register({ visible, onHide, setOpenRegister }) {
                   <button
                     className='w-full mb-2 bg-[#1b95d2] hover:bg-[#157ab8] text-white py-2 px-4 rounded-sm focus:outline-none focus:shadow-outline'
                     type='submit'
-                    disabled={statusSign === 'Cargando'}
+                    disabled={statusSign === STATUS_SLICE_STORE.LOADING}
                   >
-                    {statusSign === 'Cargando' ? 'Cargando' : 'Registrarse'}
+                    {statusSign === STATUS_SLICE_STORE.LOADING
+                      ? 'Cargando'
+                      : 'Registrarse'}
                   </button>
                   <p className='mb-2 text-white'>o</p>
                   <button
                     className='w-full px-4 py-2 border flex justify-center gap-2 border-gray-700 rounded-sm text-white hover:border-gray-500 hover:text-gray-300 hover:shadow transition duration-150'
                     onClick={loginGoogle}
                     type='button'
-                    disabled={statusSign === 'Cargando'}
+                    disabled={statusSign === STATUS_SLICE_STORE.LOADING}
                   >
                     <img
                       className='w-6 h-6'

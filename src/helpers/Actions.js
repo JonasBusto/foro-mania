@@ -1,5 +1,6 @@
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { STATUS_SLICE_STORE, USER_REACTION } from './constants';
 
 export const TimeToNow = (fecha) => {
   if (fecha) {
@@ -18,17 +19,20 @@ export function userFullDataExtract(
   TopicsGlobalStatus
 ) {
   return users.map((user) => {
-    if (statusReactions === 'Exitoso' && TopicsGlobalStatus === 'Exitoso') {
+    if (
+      statusReactions === STATUS_SLICE_STORE.FULLFILLED &&
+      TopicsGlobalStatus === STATUS_SLICE_STORE.FULLFILLED
+    ) {
       const userReactions = reactions.filter(
         (reaction) => reaction.userId === user.uid
       );
       const userTopics = topics.filter((topic) => topic.userId === user.uid);
 
       const likesCount = userReactions.filter(
-        (reaction) => reaction.type === 'like'
+        (reaction) => reaction.type === USER_REACTION.LIKE
       ).length;
       const unlikesCount = userReactions.filter(
-        (reaction) => reaction.type === 'unlike'
+        (reaction) => reaction.type === USER_REACTION.DISLIKE
       ).length;
       const topicsCount = userTopics.length;
 

@@ -8,6 +8,7 @@ import { Dialog } from 'primereact/dialog';
 import { UploadComentForm } from './UploadComentForm';
 import { Link } from 'react-router-dom';
 import { useCommentAction } from '../../hooks/useCommentAction';
+import { STATUS_SLICE_STORE } from '../../helpers/constants';
 
 export const TopicComment = ({
   data,
@@ -79,9 +80,10 @@ export const TopicComment = ({
             </div>
           </div>
         </div>
-        <div >
+        <div>
           <p className='text-gray-300 text-xs  lg:text-sm'>
-           <span className='hidden lg:inline'>Hace</span>  {TimeToNow(data.createdAt)}
+            <span className='hidden lg:inline'>Hace</span>{' '}
+            {TimeToNow(data.createdAt)}
           </p>
         </div>
       </div>
@@ -189,8 +191,8 @@ export const TopicComment = ({
         <div className='flex justify-between mt-10'>
           <button
             disabled={
-              statusDeleteComment === 'Cargando' ||
-              statusActiveComment === 'Cargando'
+              statusDeleteComment === STATUS_SLICE_STORE.LOADING ||
+              statusActiveComment === STATUS_SLICE_STORE.LOADING
             }
             className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
             onClick={() => setVisibleDelete(false)}
@@ -199,13 +201,13 @@ export const TopicComment = ({
           </button>
           {loggedUser?.role === 'admin' ? (
             <button
-              disabled={statusActiveComment === 'Cargando'}
+              disabled={statusActiveComment === STATUS_SLICE_STORE.LOADING}
               className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
               onClick={
                 data?.isActive ? handleConfirmDisable : handleConfirmEnable
               }
             >
-              {statusActiveComment === 'Cargando'
+              {statusActiveComment === STATUS_SLICE_STORE.LOADING
                 ? 'Cargando'
                 : data?.isActive
                 ? 'Suspender'
@@ -213,13 +215,15 @@ export const TopicComment = ({
             </button>
           ) : (
             <button
-              disabled={statusDeleteComment === 'Cargando'}
+              disabled={statusDeleteComment === STATUS_SLICE_STORE.LOADING}
               className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
               onClick={() =>
                 deleteComment({ id: data.uid }, { setVisibleDelete })
               }
             >
-              {statusDeleteComment === 'Cargando' ? 'Cargando' : 'Confirmar'}
+              {statusDeleteComment === STATUS_SLICE_STORE.LOADING
+                ? 'Cargando'
+                : 'Confirmar'}
             </button>
           )}
         </div>

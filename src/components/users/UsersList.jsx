@@ -8,6 +8,7 @@ import { useReactionAction } from '../../hooks/useReactionAction';
 import { userFullDataExtract } from '../../helpers/Actions';
 import { Loader } from '../items/Loader';
 import { SvgIconAdmin } from '../items/SvgIconAdmin';
+import { STATUS_SLICE_STORE } from '../../helpers/constants';
 
 export const UsersList = ({
   users,
@@ -32,7 +33,7 @@ export const UsersList = ({
   );
 
   useEffect(() => {
-    if (allUsersStatus !== 'Cargando') {
+    if (allUsersStatus !== STATUS_SLICE_STORE.LOADING) {
       setEmptyMessage('No se encontraron resultados');
     } else {
       <Loader />;

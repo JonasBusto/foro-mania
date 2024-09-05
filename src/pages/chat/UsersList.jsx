@@ -3,6 +3,7 @@ import { useUserAction } from '../../hooks/useUserAction';
 import { useAuth } from '../../hooks/useAuth';
 import { useChatAction } from '../../hooks/useChatAction';
 import { Loader } from '../../components/items/Loader';
+import { STATUS_SLICE_STORE } from '../../helpers/constants';
 
 export function UsersList({ onSelectUser }) {
   const { users, allUsersStatus } = useUserAction();
@@ -67,7 +68,7 @@ export function UsersList({ onSelectUser }) {
         />
       </div>
       <div className=' text-white  h-full overflow-auto mx-2 border border-neutral-600'>
-        {allUsersStatus === 'Cargando' && (
+        {allUsersStatus === STATUS_SLICE_STORE.LOADING && (
           <div className='min-h-[50vh] flex items-center justify-center'>
             <Loader />
           </div>

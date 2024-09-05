@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import { useEffect } from 'react';
 import { useCategoryAction } from '../../hooks/useCategoryAction';
 import { Loader } from '../../components/items/Loader';
+import { STATUS_SLICE_STORE } from '../../helpers/constants';
 
 export function FormCategory() {
   const { id } = useParams();
@@ -43,7 +44,10 @@ export function FormCategory() {
   }
 
   if (id) {
-    if (statusCategory === 'Inactivo' || statusCategory === 'Cargando') {
+    if (
+      statusCategory === STATUS_SLICE_STORE.IDLE ||
+      statusCategory === STATUS_SLICE_STORE.LOADING
+    ) {
       return <Loader />;
     }
   }
@@ -161,15 +165,15 @@ export function FormCategory() {
                   type='submit'
                   disabled={
                     id
-                      ? statusUpdateCategory === 'Cargando'
-                      : statusCreateCategory === 'Cargando'
+                      ? statusUpdateCategory === STATUS_SLICE_STORE.LOADING
+                      : statusCreateCategory === STATUS_SLICE_STORE.LOADING
                   }
                 >
                   {id
-                    ? statusUpdateCategory === 'Cargando'
+                    ? statusUpdateCategory === STATUS_SLICE_STORE.LOADING
                       ? 'Cargando'
                       : 'Cargar'
-                    : statusCreateCategory === 'Cargando'
+                    : statusCreateCategory === STATUS_SLICE_STORE.LOADING
                     ? 'Cargando'
                     : 'Cargar'}
                 </button>

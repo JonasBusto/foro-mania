@@ -3,6 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useUserAction } from '../../hooks/useUserAction';
 import { Link } from 'react-router-dom';
 import useDocTitle from '../../hooks/useDocTitle';
+import { STATUS_SLICE_STORE } from '../../helpers/constants';
 
 export const EditProfile = () => {
   const { loggedUser } = useAuth();
@@ -45,7 +46,7 @@ export const EditProfile = () => {
               accept='image/*'
               id='profilePic'
               className='hidden'
-              disabled={userStatusUpdate === 'Cargando'}
+              disabled={userStatusUpdate === STATUS_SLICE_STORE.LOADING}
               onChange={handleFileChange}
             />
             <label
@@ -66,7 +67,7 @@ export const EditProfile = () => {
               <input
                 id='fullName'
                 type='text'
-                disabled={userStatusUpdate === 'Cargando'}
+                disabled={userStatusUpdate === STATUS_SLICE_STORE.LOADING}
                 className='w-full p-2 border bg-[#121212] text-white border-[#61dafb] rounded-sm'
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
@@ -75,7 +76,7 @@ export const EditProfile = () => {
 
             <div className='flex justify-between'>
               <Link
-                disabled={userStatusUpdate === 'Cargando'}
+                disabled={userStatusUpdate === STATUS_SLICE_STORE.LOADING}
                 to='/account'
                 className='py-2 px-5 text-sm font-medium text-[#61dafb] bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-sm border border-[#61dafb] focus:ring-4 focus:ring-[#61dafb] leading-6'
               >
@@ -84,7 +85,8 @@ export const EditProfile = () => {
               <button
                 type='button'
                 disabled={
-                  userStatusUpdate === 'Cargando' || fullName.trim() === ''
+                  userStatusUpdate === STATUS_SLICE_STORE.LOADING ||
+                  fullName.trim() === ''
                 }
                 className={
                   'px-4 py-2 text-white focus:outline-none rounded-sm leading-6 ' +
@@ -99,7 +101,7 @@ export const EditProfile = () => {
                         updateProfile({ fullName: fullName.trim(), fileImage })
                 }
               >
-                {userStatusUpdate === 'Cargando' ? (
+                {userStatusUpdate === STATUS_SLICE_STORE.LOADING ? (
                   'Cargando'
                 ) : (
                   <>
