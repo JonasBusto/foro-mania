@@ -8,7 +8,7 @@ import { Dialog } from 'primereact/dialog';
 import { UploadComentForm } from './UploadComentForm';
 import { Link } from 'react-router-dom';
 import { useCommentAction } from '../../hooks/useCommentAction';
-import { STATUS_SLICE_STORE } from '../../helpers/constants';
+import { STATUS_SLICE_STORE, USER_ROLE } from '../../helpers/constants';
 
 export const TopicComment = ({
   data,
@@ -29,7 +29,8 @@ export const TopicComment = ({
     return formatDistanceToNow(fechaISO, { locale: es });
   };
   const [dataToModify, setTopicToModify] = useState(null);
-  const showSuspendedMessage = !data.isActive && loggedUser?.role === 'user';
+  const showSuspendedMessage =
+    !data.isActive && loggedUser?.role === USER_ROLE.USER;
   const userFiltered = users.find((item) => item.uid === data.userId);
 
   const handleConfirmEnable = async () => {
@@ -129,7 +130,7 @@ export const TopicComment = ({
                   </button>
                 </>
               ) : (
-                loggedUser?.role === 'admin' && (
+                loggedUser?.role === USER_ROLE.ADMINISTRATOR && (
                   <button
                     type='button'
                     onClick={() => handleOpenDialog(data)}
@@ -168,7 +169,7 @@ export const TopicComment = ({
       )}
       <Dialog
         header={
-          loggedUser?.role === 'admin'
+          loggedUser?.role === USER_ROLE.ADMINISTRATOR
             ? data?.isActive
               ? 'Suspender Comentario'
               : 'Habilitar Comentario'
@@ -182,7 +183,7 @@ export const TopicComment = ({
         }}
       >
         <p>
-          {loggedUser?.role === 'admin'
+          {loggedUser?.role === USER_ROLE.ADMINISTRATOR
             ? `¿Está seguro que desea ${
                 data?.isActive ? 'suspender' : 'habilitar'
               } el comentario?`
@@ -199,7 +200,7 @@ export const TopicComment = ({
           >
             Cancelar
           </button>
-          {loggedUser?.role === 'admin' ? (
+          {loggedUser?.role === USER_ROLE.ADMINISTRATOR ? (
             <button
               disabled={statusActiveComment === STATUS_SLICE_STORE.LOADING}
               className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'

@@ -8,7 +8,7 @@ import { useReactionAction } from '../../hooks/useReactionAction';
 import { userFullDataExtract } from '../../helpers/Actions';
 import { Loader } from '../items/Loader';
 import { SvgIconAdmin } from '../items/SvgIconAdmin';
-import { STATUS_SLICE_STORE } from '../../helpers/constants';
+import { STATUS_SLICE_STORE, USER_ROLE } from '../../helpers/constants';
 
 export const UsersList = ({
   users,
@@ -47,7 +47,7 @@ export const UsersList = ({
         onClick={(event) => selectionChange(rowData, event)}
       >
         <span className='relative flex flex-col justify-center'>
-          {rowData.role === 'admin' && (
+          {rowData.role === USER_ROLE.ADMINISTRATOR && (
             <SvgIconAdmin
               width='36px'
               height='36px'

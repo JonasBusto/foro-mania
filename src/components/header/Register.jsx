@@ -6,7 +6,7 @@ import { InputText } from 'primereact/inputtext';
 import { FloatLabel } from 'primereact/floatlabel';
 import { useModal } from '../../hooks/useModal';
 import '../../styles/home.css';
-import { STATUS_SLICE_STORE } from '../../helpers/constants';
+import { STATUS_SLICE_STORE, USER_ROLE } from '../../helpers/constants';
 
 export function Register({ visible, onHide, setOpenRegister }) {
   const { loginGoogle, register, statusSign } = useAuth();
@@ -47,7 +47,7 @@ export function Register({ visible, onHide, setOpenRegister }) {
               email: '',
               password: '',
               checkPassword: '',
-              role: 'user',
+              role: USER_ROLE.USER,
             }}
             validate={(values) => {
               let errors = {};

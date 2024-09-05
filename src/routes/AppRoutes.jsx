@@ -16,6 +16,7 @@ import ChatView from '../pages/ChatView';
 import { Tags } from '../pages/tag/Tags';
 import { FormTag } from '../pages/tag/FormTag';
 import { Error404 } from '../pages/Error404';
+import { USER_ROLE } from '../helpers/constants';
 
 export function AppRoutes() {
   return (
@@ -28,7 +29,9 @@ export function AppRoutes() {
       <Route path='/about' element={<About />} />
       <Route path='/users-view' element={<UsersView />} />
       <Route path='/users-view/:id/summary' element={<UsersSummary />} />
-      <Route element={<PrivateRoute allowedRoles={['admin']} />}>
+      <Route
+        element={<PrivateRoute allowedRoles={[USER_ROLE.ADMINISTRATOR]} />}
+      >
         <Route path='/categories' element={<Categories />} />
         <Route path='/categories/upload/' element={<FormCategory />} />
         <Route path='/categories/upload/:id' element={<FormCategory />} />{' '}
@@ -36,7 +39,13 @@ export function AppRoutes() {
         <Route path='/tags/upload/' element={<FormTag />} />
         <Route path='/tags/upload/:id' element={<FormTag />} />
       </Route>
-      <Route element={<PrivateRoute allowedRoles={['admin', 'user']} />}>
+      <Route
+        element={
+          <PrivateRoute
+            allowedRoles={[USER_ROLE.ADMINISTRATOR, USER_ROLE.USER]}
+          />
+        }
+      >
         <Route path='/upload-topic' element={<UploadTopic />} />
         <Route path='/upload-topic/:id' element={<UploadTopic />} />
         <Route path='/account' element={<MyAccount />} />

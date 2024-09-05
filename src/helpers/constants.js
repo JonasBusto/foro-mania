@@ -9,3 +9,8 @@ export const USER_REACTION = {
   LIKE: 'like',
   DISLIKE: 'unlike',
 };
+
+export const USER_ROLE = {
+  ADMINISTRATOR: 'admin',
+  USER: 'user',
+};

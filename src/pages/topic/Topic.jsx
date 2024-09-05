@@ -29,7 +29,7 @@ import {
   UsersOfTopic,
 } from '../../components/topic/TopicDetail';
 import { useModal } from '../../hooks/useModal';
-import { STATUS_SLICE_STORE } from '../../helpers/constants';
+import { STATUS_SLICE_STORE, USER_ROLE } from '../../helpers/constants';
 
 export const Topic = () => {
   const { id } = useParams();
@@ -177,7 +177,7 @@ export const Topic = () => {
               </Link>
             </div>
             {((showEditTopic && topic.userId === loggedUser?.uid) ||
-              loggedUser?.role === 'admin') && (
+              loggedUser?.role === USER_ROLE.ADMINISTRATOR) && (
               <div className='flex'>
                 <button
                   className={`${
