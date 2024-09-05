@@ -20,19 +20,22 @@ const TimeToNowResponsive = (fecha) => {
 export function CreatedBy({ topic, user }) {
   return (
     <div className='text-center me-4 flex flex-col items-center justify-center created-by'>
-      <p className='text-gray-500 font-bold uppercase text-[12px]'>Creado</p>
       <div className='flex items-center justify-center'>
         <Link to={'/users-view/' + user?.uid + '/summary'}>
           <img
             src={user.photoProfile}
             alt='Imagen de usuario'
-            className='w-8 h-8 me-2 object-cover rounded-full border-2 border-gray-600'
+            className=' w-14 h-14 me-2 object-cover rounded-full border-2 border-gray-600'
             draggable={false}
           />
         </Link>
-        <p className='text-[15px] font-semibold'>
-          {TimeToNowResponsive(topic.createdAt)}
-        </p>
+        <div>
+          <p className='text-[15px] font-semibold'>
+            {TimeToNowResponsive(topic.createdAt)}
+          </p>
+          <p className='text-gray-500 font-bold uppercase text-[10px] lg:text-[12px]'>Creado</p>
+        </div>
+
       </div>
     </div>
   );
@@ -73,8 +76,8 @@ export function CountAllAnswers({ allComments, query = '' }) {
     <div
       className={`${query} text-center me-4 flex-col items-center justify-center`}
     >
-      <p className='text-[18px] font-bold'>{allComments.length}</p>
-      <p className='text-gray-500 font-bold uppercase text-[12px]'>
+      <p className='text-[16px] font-bold'>{allComments.length}</p>
+      <p className='text-gray-500 font-bold uppercase text-[10px] lg:text-[12px]'>
         Respuestas
       </p>
     </div>
@@ -86,13 +89,13 @@ export function CountFavoritesOfTopic({ favorites, topic, query = '' }) {
     <div
       className={`${query} text-center me-4 flex-col items-center justify-center`}
     >
-      <p className='text-[18px] font-bold'>
+      <p className='text-[16px] font-bold'>
         {
           favorites.filter((favorite) => favorite.contentId === topic.uid)
             .length
         }
       </p>
-      <p className='text-gray-500 font-bold uppercase text-[12px]'>Guardados</p>
+      <p className='text-gray-500 font-bold uppercase text-[10px] lg:text-[12px]'>Guardados</p>
     </div>
   );
 }
@@ -102,10 +105,10 @@ export function CountLikesOfTopic({ content, query = '' }) {
     <div
       className={`${query} text-center me-4 flex flex-col items-center justify-center`}
     >
-      <p className='text-[18px] font-bold'>
+      <p className='text-[16px] font-bold'>
         {content.filter((reaction) => reaction.type === 'like').length}
       </p>
-      <p className='text-gray-500 font-bold uppercase text-[12px]'>Me gusta</p>
+      <p className='text-gray-500 font-bold uppercase text-[10px] lg:text-[12px]'>Me gusta</p>
     </div>
   );
 }
@@ -115,10 +118,10 @@ export function CountDislikesOfTopic({ content, query = '' }) {
     <div
       className={`${query} text-center me-4 flex flex-col items-center justify-center`}
     >
-      <p className='text-[18px] font-bold'>
+      <p className='text-[16px] font-bold'>
         {content.filter((reaction) => reaction.type === 'unlike').length}
       </p>
-      <p className='text-gray-500 font-bold uppercase text-[12px]'>
+      <p className='text-gray-500 font-bold uppercase text-[10px] lg:text-[12px]'>
         No Me gusta
       </p>
     </div>
@@ -128,7 +131,7 @@ export function CountDislikesOfTopic({ content, query = '' }) {
 export function UsersOfTopic({ user, commentsOfTopicUser }) {
   return (
     <div className='px-2 md:px-4 py-2 md:py-3'>
-      <p className='mb-2 text-gray-500 font-bold uppercase text-[12px]'>
+      <p className='mb-2 text-gray-500 font-bold uppercase text-[10px] lg:text-[12px]'>
         Usuarios Frecuentes
       </p>
       <div className='flex flex-wrap'>
