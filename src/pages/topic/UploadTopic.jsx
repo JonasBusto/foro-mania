@@ -81,7 +81,7 @@ export const UploadTopic = () => {
   }
 
   return (
-    <div className='bg-neutral-800 px-2 lg:px-0 max-w-[80rem] mx-auto pb-20'>
+    <div className='px-2 lg:px-0 max-w-[80rem] mx-auto pb-20'>
       <div className='pt-3 pb-10'>
         <BannerAdversiting />
       </div>
