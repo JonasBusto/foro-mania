@@ -8,6 +8,7 @@ import { Loader } from '../../components/items/Loader';
 import { UsersList } from '../../components/users/UsersList';
 import useDocTitle from '../../hooks/useDocTitle';
 import '../../styles/usersView.css';
+import { STATUS_SLICE_STORE } from '../../helpers/constants';
 
 export const UsersView = () => {
   const { users, allUsersStatus } = useUserAction();
@@ -66,7 +67,7 @@ export const UsersView = () => {
     return setModalSwitch(true);
   };
 
-  if (allUsersStatus === 'Cargando') {
+  if (allUsersStatus === STATUS_SLICE_STORE.LOADING) {
     return <Loader />;
   }
 
@@ -97,7 +98,7 @@ export const UsersView = () => {
         </article>
       )}
 
-      {allUsersStatus === 'Fallido' && (
+      {allUsersStatus === STATUS_SLICE_STORE.FAILED && (
         <div className='card flex justify-content-center'>
           <p>Parece que algo nos falta.</p>
           <Link to={'/'}>Volver a home</Link>

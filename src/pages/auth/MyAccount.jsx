@@ -4,6 +4,7 @@ import { useFavoriteAction } from '../../hooks/useFavoriteAction';
 import { useTopicAction } from '../../hooks/useTopicAction';
 import { TopicListTopic } from '../topic/TopicListTopic';
 import useDocTitle from '../../hooks/useDocTitle';
+import { USER_ROLE } from '../../helpers/constants';
 
 export function MyAccount() {
   const { loggedUser, logout } = useAuth();
@@ -55,7 +56,9 @@ export function MyAccount() {
                 <div>
                   <p className='text-sm font-medium'>Rol</p>
                   <p className='text-gray-400'>
-                    {loggedUser.role === 'user' ? 'Usuario' : 'Administrador'}
+                    {loggedUser.role === USER_ROLE.USER
+                      ? 'Usuario'
+                      : 'Administrador'}
                   </p>
                 </div>
               </div>

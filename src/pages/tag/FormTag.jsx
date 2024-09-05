@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import { useEffect } from 'react';
 import { Loader } from '../../components/items/Loader';
 import { useTagAction } from '../../hooks/useTagAction';
+import { STATUS_SLICE_STORE } from '../../helpers/constants';
 
 export function FormTag() {
   const { id } = useParams();
@@ -39,7 +40,10 @@ export function FormTag() {
   }
 
   if (id) {
-    if (statusTag === 'Inactivo' || statusTag === 'Cargando') {
+    if (
+      statusTag === STATUS_SLICE_STORE.IDLE ||
+      statusTag === STATUS_SLICE_STORE.LOADING
+    ) {
       return <Loader />;
     }
   }
@@ -109,15 +113,15 @@ export function FormTag() {
                   type='submit'
                   disabled={
                     id
-                      ? statusUpdateTag === 'Cargando'
-                      : statusCreateTag === 'Cargando'
+                      ? statusUpdateTag === STATUS_SLICE_STORE.LOADING
+                      : statusCreateTag === STATUS_SLICE_STORE.LOADING
                   }
                 >
                   {id
-                    ? statusUpdateTag === 'Cargando'
+                    ? statusUpdateTag === STATUS_SLICE_STORE.LOADING
                       ? 'Cargando'
                       : 'Cargar'
-                    : statusCreateTag === 'Cargando'
+                    : statusCreateTag === STATUS_SLICE_STORE.LOADING
                     ? 'Cargando'
                     : 'Cargar'}
                 </button>

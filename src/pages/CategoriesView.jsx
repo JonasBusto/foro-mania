@@ -6,6 +6,7 @@ import { useAuth } from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
 import { useLoad } from '../hooks/useLoad';
 import useDocTitle from '../hooks/useDocTitle';
+import { USER_ROLE } from '../helpers/constants';
 
 export const CategoriesView = () => {
   const { categories } = useCategoryAction();
@@ -28,7 +29,7 @@ export const CategoriesView = () => {
           Categorías
         </h1>
         <div className='flex mb-7 flex-row flex-wrap items-center justify-around'>
-          {loggedUser?.role === 'admin' ? (
+          {loggedUser?.role === USER_ROLE.ADMINISTRATOR ? (
             <Link
               to='/categories'
               className='text-[#61dafb] p-3 bg-[#282828] hover:bg-[#383838] focus:outline-none rounded-sm border border-[#61dafb]'

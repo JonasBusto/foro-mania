@@ -10,6 +10,7 @@ import { Loader } from '../../components/items/Loader';
 import { MultiSelect } from 'primereact/multiselect';
 import { useTagAction } from '../../hooks/useTagAction';
 import { BannerAdversiting } from '../../components/items/BannerAdversiting';
+import { STATUS_SLICE_STORE } from '../../helpers/constants';
 
 export const UploadTopic = () => {
   const { id } = useParams();
@@ -75,7 +76,7 @@ export const UploadTopic = () => {
     };
   }
 
-  if (statusTopic === 'Cargando') {
+  if (statusTopic === STATUS_SLICE_STORE.LOADING) {
     return <Loader />;
   }
 
@@ -212,13 +213,15 @@ export const UploadTopic = () => {
                       </p>
                       <button
                         type='button'
-                        disabled={statusCreateTag === 'Cargando'}
+                        disabled={
+                          statusCreateTag === STATUS_SLICE_STORE.LOADING
+                        }
                         className='bg-blue-900 hover:bg-blue-800 text-white font-semibold duration-200 py-2 px-3 w-auto'
                         onClick={() =>
                           addTag({ value: filterValue, label: filterValue })
                         }
                       >
-                        {statusCreateTag === 'Cargando'
+                        {statusCreateTag === STATUS_SLICE_STORE.LOADING
                           ? 'Cargando'
                           : ` Añadir tag "${filterValue}"`}
                       </button>
@@ -233,16 +236,16 @@ export const UploadTopic = () => {
               <button
                 type='submit'
                 disabled={
-                  statusCreateTopic === 'Cargando' ||
-                  statusUpdateTopic === 'Cargando'
+                  statusCreateTopic === STATUS_SLICE_STORE.LOADING ||
+                  statusUpdateTopic === STATUS_SLICE_STORE.LOADING
                 }
                 className='bg-blue-900 hover:bg-blue-800 text-white font-semibold duration-200 py-2 px-3 w-40'
               >
                 {id
-                  ? statusUpdateTopic === 'Cargando'
+                  ? statusUpdateTopic === STATUS_SLICE_STORE.LOADING
                     ? 'Cargando'
                     : 'Cargar'
-                  : statusCreateTopic === 'Cargando'
+                  : statusCreateTopic === STATUS_SLICE_STORE.LOADING
                   ? 'Cargando'
                   : 'Cargar'}
               </button>

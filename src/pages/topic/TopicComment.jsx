@@ -8,6 +8,11 @@ import { Dialog } from 'primereact/dialog';
 import { UploadComentForm } from './UploadComentForm';
 import { Link } from 'react-router-dom';
 import { useCommentAction } from '../../hooks/useCommentAction';
+import {
+  STATUS_SLICE_STORE,
+  TYPE_CONTENT,
+  USER_ROLE,
+} from '../../helpers/constants';
 
 export const TopicComment = ({
   data,
@@ -28,7 +33,8 @@ export const TopicComment = ({
     return formatDistanceToNow(fechaISO, { locale: es });
   };
   const [dataToModify, setTopicToModify] = useState(null);
-  const showSuspendedMessage = !data.isActive && loggedUser?.role === 'user';
+  const showSuspendedMessage =
+    !data.isActive && loggedUser?.role === USER_ROLE.USER;
   const userFiltered = users.find((item) => item.uid === data.userId);
 
   const handleConfirmEnable = async () => {
@@ -79,9 +85,10 @@ export const TopicComment = ({
             </div>
           </div>
         </div>
-        <div >
+        <div>
           <p className='text-gray-300 text-xs  lg:text-sm'>
-           <span className='hidden lg:inline'>Hace</span>  {TimeToNow(data.createdAt)}
+            <span className='hidden lg:inline'>Hace</span>{' '}
+            {TimeToNow(data.createdAt)}
           </p>
         </div>
       </div>
@@ -127,7 +134,7 @@ export const TopicComment = ({
                   </button>
                 </>
               ) : (
-                loggedUser?.role === 'admin' && (
+                loggedUser?.role === USER_ROLE.ADMINISTRATOR && (
                   <button
                     type='button'
                     onClick={() => handleOpenDialog(data)}
@@ -158,7 +165,7 @@ export const TopicComment = ({
                 deleteReaction={deleteReaction}
                 loggedUser={loggedUser}
                 content={data}
-                typeContent='comment'
+                typeContent={TYPE_CONTENT.COMMENT}
               />
             </div>
           </div>
@@ -166,7 +173,7 @@ export const TopicComment = ({
       )}
       <Dialog
         header={
-          loggedUser?.role === 'admin'
+          loggedUser?.role === USER_ROLE.ADMINISTRATOR
             ? data?.isActive
               ? 'Suspender Comentario'
               : 'Habilitar Comentario'
@@ -180,7 +187,7 @@ export const TopicComment = ({
         }}
       >
         <p>
-          {loggedUser?.role === 'admin'
+          {loggedUser?.role === USER_ROLE.ADMINISTRATOR
             ? `¿Está seguro que desea ${
                 data?.isActive ? 'suspender' : 'habilitar'
               } el comentario?`
@@ -189,23 +196,23 @@ export const TopicComment = ({
         <div className='flex justify-between mt-10'>
           <button
             disabled={
-              statusDeleteComment === 'Cargando' ||
-              statusActiveComment === 'Cargando'
+              statusDeleteComment === STATUS_SLICE_STORE.LOADING ||
+              statusActiveComment === STATUS_SLICE_STORE.LOADING
             }
             className='text-white bg-[#1b95d2] hover:bg-[#157ab8] px-4 py-2 rounded'
             onClick={() => setVisibleDelete(false)}
           >
             Cancelar
           </button>
-          {loggedUser?.role === 'admin' ? (
+          {loggedUser?.role === USER_ROLE.ADMINISTRATOR ? (
             <button
-              disabled={statusActiveComment === 'Cargando'}
+              disabled={statusActiveComment === STATUS_SLICE_STORE.LOADING}
               className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
               onClick={
                 data?.isActive ? handleConfirmDisable : handleConfirmEnable
               }
             >
-              {statusActiveComment === 'Cargando'
+              {statusActiveComment === STATUS_SLICE_STORE.LOADING
                 ? 'Cargando'
                 : data?.isActive
                 ? 'Suspender'
@@ -213,13 +220,15 @@ export const TopicComment = ({
             </button>
           ) : (
             <button
-              disabled={statusDeleteComment === 'Cargando'}
+              disabled={statusDeleteComment === STATUS_SLICE_STORE.LOADING}
               className='text-white bg-[#db1818] hover:bg-[#db1818c4] px-4 py-2 rounded'
               onClick={() =>
                 deleteComment({ id: data.uid }, { setVisibleDelete })
               }
             >
-              {statusDeleteComment === 'Cargando' ? 'Cargando' : 'Confirmar'}
+              {statusDeleteComment === STATUS_SLICE_STORE.LOADING
+                ? 'Cargando'
+                : 'Confirmar'}
             </button>
           )}
         </div>
