@@ -142,6 +142,20 @@ export const Topic = () => {
     return <Loader />;
   }
 
+  if (!topic.isActive && topic.userId !== loggedUser?.uid) {
+    return (
+      <div className='text-white flex flex-col w-full items-center my-20'>
+        <p>Ocurrio un error</p>
+        <Link
+          to='/'
+          className='text-white rounded-sm text-sm bg-[#1b95d2] hover:bg-[#157ab8] duration-200 px-2 py-2 md:px-4 md:text-base'
+        >
+          Volver al inicio
+        </Link>
+      </div>
+    );
+  }
+
   const lastCommentUser = users?.find(
     (user) => user.uid === allComments[0]?.userId
   );

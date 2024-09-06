@@ -160,8 +160,6 @@ export const disableTopicById = createAsyncThunk(
 export const enableTopicById = createAsyncThunk(
   'topic/enable',
   async ({ id }, { rejectWithValue }) => {
-    console.log(id);
-
     try {
       const topicDoc = doc(db, 'topics', id);
       await updateDoc(topicDoc, { isActive: true });
