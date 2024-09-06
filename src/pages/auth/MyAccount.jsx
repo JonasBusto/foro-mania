@@ -15,6 +15,8 @@ export function MyAccount() {
     (favorite) => favorite.userId === loggedUser?.uid
   );
 
+  const topicsSuspendendByUser = topics.filter((topic) => !topic.isActive);
+
   const topicsFilteredByUser = topics.filter((topic) =>
     favoritesFiltered.some((favorite) => favorite.contentId === topic.uid)
   );
@@ -78,8 +80,8 @@ export function MyAccount() {
       </div>
       <div className='w-full max-w-2xl mt-14 mx-auto p-6'>
         <div>
-          <h2 className='text-[6vw] mb-4 sm:mb-0 leading-8 sm:leading-none sm:text-[25px] font-bold text-white'>
-            Mis publicaciones guardadas
+          <h2 className='text-[6vw] underline mb-4 sm:mb-0 leading-8 sm:leading-none sm:text-[25px] font-bold text-white'>
+            Mis publicaciones guardadas:
           </h2>
         </div>
         <div>
@@ -96,6 +98,24 @@ export function MyAccount() {
           )}
         </div>
       </div>
+      {topicsSuspendendByUser && topicsSuspendendByUser.length > 0 && (
+        <div className='w-full max-w-2xl mt-8 mx-auto p-6'>
+          <div>
+            <h2 className='text-[6vw] underline mb-4 sm:mb-0 leading-8 sm:leading-none sm:text-[25px] font-bold text-white'>
+              Mis publicaciones pausadas:
+            </h2>
+          </div>
+          <div>
+            <div className='hidden md:flex text-center mt-5 border-b-2 border-neutral-500 align-middle leading-4 pb-4 mb-6'>
+              <p className='md:w-9/12 text-start text-white'>Titulo</p>
+              <p className='md:w-4/12 text-start text-white'>Usuarios</p>
+            </div>
+            {topicsSuspendendByUser.map((item, i) => (
+              <TopicListTopic topic={item} key={i} type='account' />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
