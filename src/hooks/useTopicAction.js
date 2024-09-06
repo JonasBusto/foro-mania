@@ -46,7 +46,6 @@ export function useTopicAction() {
   };
 
   const disableTopic = async ({ id }) => {
-    console.log(id);
     const res = await dispatch(disableTopicById({ id }));
     toast.success('Publicacion suspendida correctamente');
 
