@@ -15,7 +15,9 @@ export function MyAccount() {
     (favorite) => favorite.userId === loggedUser?.uid
   );
 
-  const topicsSuspendendByUser = topics.filter((topic) => !topic.isActive);
+  const topicsSuspendendByUser = topics.filter(
+    (topic) => !topic?.isActive && topic?.userId === loggedUser?.uid
+  );
 
   const topicsFilteredByUser = topics.filter((topic) =>
     favoritesFiltered.some((favorite) => favorite.contentId === topic.uid)
