@@ -17,9 +17,9 @@ export const UserTopics = ({ userProps, topics }) => {
   return (
     <>
       {topicsByUserId ? (
-        topicsByUserId.map((topic) => (
-          <TopicListTopic key={topic.uid} topic={topic} />
-        ))
+        topicsByUserId
+          .filter((topic) => topic.isActive)
+          .map((topic) => <TopicListTopic key={topic.uid} topic={topic} />)
       ) : (
         <p className='text-center'>Sin publicaciones realizadas</p>
       )}

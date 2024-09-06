@@ -19,3 +19,8 @@ export const TYPE_CONTENT = {
   TOPIC: 'topic',
   COMMENT: 'comment',
 };
+
+export const TABS_USER = {
+  TOPICS: 'TOPICS',
+  MESSAGES: 'MESSAGES',
+};

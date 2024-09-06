@@ -10,7 +10,7 @@ import { useReactionAction } from '../../hooks/useReactionAction';
 import { UserReactions } from '../../components/users/UserReactions';
 import { Loader } from '../../components/items/Loader';
 import useDocTitle from '../../hooks/useDocTitle';
-import { STATUS_SLICE_STORE } from '../../helpers/constants';
+import { STATUS_SLICE_STORE, TABS_USER } from '../../helpers/constants';
 
 export const UsersSummary = () => {
   const { id } = useParams();
@@ -19,7 +19,7 @@ export const UsersSummary = () => {
   const { topics } = useTopicAction();
   const { reactions, statusReactions } = useReactionAction();
 
-  const [tab, setTab] = useState('TOPICS');
+  const [tab, setTab] = useState(TABS_USER.TOPICS);
 
   if (!user) {
     useDocTitle('Foromanía | Perfil de Usuario');
@@ -62,7 +62,7 @@ export const UsersSummary = () => {
           aria-label='Contenido de pestañas'
           className='flex flex-col items-center w-full pb-10'
         >
-          {tab === 'TOPICS' && (
+          {tab === TABS_USER.TOPICS && (
             <div
               id='topicos-panel'
               role='tabpanel'
@@ -72,7 +72,7 @@ export const UsersSummary = () => {
               <UserTopics userProps={user} topics={topics} />
             </div>
           )}
-          {tab === 'MESSAGES' && (
+          {tab === TABS_USER.MESSAGES && (
             <div
               id='mensajes-panel'
               role='tabpanel'
