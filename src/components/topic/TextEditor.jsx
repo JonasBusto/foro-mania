@@ -94,6 +94,12 @@ export const TextEditor = ({ value, onChange, readOnly = false }) => {
 
       editorRef.current.addEventListener('drop', handleDrop);
 
+      if (!readOnly) {
+        quillRef.current.container.classList.add('ql-upload-topic');
+      } else {
+        quillRef.current.container.classList.remove('ql-upload-topic');
+      }
+
       quillRef.current.on('text-change', () => {
         const content = quillRef.current.root.innerHTML;
         onChange(content);
